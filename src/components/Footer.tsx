@@ -120,8 +120,29 @@ export function Footer() {
             <Link href="/confidentialite/" className="focus-ring hover:text-accent">
               Confidentialité
             </Link>
-            <span>Photos/vidéos : {company.photoCredit}</span>
+            <span>
+              Photos/vidéos :{" "}
+              <a
+                href="https://dronevalais-production.ch/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring hover:text-accent"
+              >
+                {company.photoCredit}
+              </a>
+            </span>
           </div>
+        </div>
+        <div className="container-wide border-t border-white/10 py-4 text-center text-xs text-concrete">
+          Réalisé avec ❤️ par{" "}
+          <a
+            href="https://webalp.ch/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="focus-ring hover:text-accent"
+          >
+            WebAlp.ch
+          </a>
         </div>
       </div>
     </footer>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Service } from "@/data/services";
 import { PhotoPlaceholder } from "./PhotoPlaceholder";
+import { Reveal } from "./Reveal";
 
 export function ServiceCard({ service }: { service: Service }) {
   return (
@@ -25,8 +26,10 @@ export function ServiceCard({ service }: { service: Service }) {
 export function ServiceGrid({ services }: { services: Service[] }) {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {services.map((service) => (
-        <ServiceCard key={service.slug} service={service} />
+      {services.map((service, index) => (
+        <Reveal key={service.slug} delay={(index % 3) * 80}>
+          <ServiceCard service={service} />
+        </Reveal>
       ))}
     </div>
   );

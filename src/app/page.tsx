@@ -5,6 +5,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceGrid } from "@/components/ServiceCard";
 import { ProjectGrid } from "@/components/ProjectCard";
 import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
+import { Reveal } from "@/components/Reveal";
 import { services } from "@/data/services";
 import { projects } from "@/data/projects";
 import { buildMetadata } from "@/lib/seo";
@@ -23,7 +24,7 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative flex min-h-[560px] items-end overflow-hidden">
+      <section className="relative flex min-h-[420px] items-end overflow-hidden sm:min-h-[560px]">
         <div className="absolute inset-0">
           <PhotoPlaceholder
             label="Vue drone d'un chantier Guy Monnet & Fils en Valais"
@@ -33,26 +34,32 @@ export default function HomePage() {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
-        <Container className="relative w-full pb-14 pt-24 text-paper">
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.25em] text-accent">
-            Construire. Transporter. Aménager.
-          </p>
-          <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
-            Génie civil, terrassement et transport en Valais
-          </h1>
-          <p className="mt-6 max-w-content text-base leading-relaxed text-concrete-light sm:text-lg">
-            Depuis 1980, Guy Monnet &amp; Fils SA accompagne particuliers, entreprises et
-            collectivités dans leurs projets de construction, d&apos;infrastructures, de
-            transport et d&apos;aménagement en Valais.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Button href="/services/" variant="primary">
-              Nos services
-            </Button>
-            <Button href="/contact/" variant="secondary" className="border-paper text-paper hover:bg-paper hover:text-ink">
-              Contactez-nous
-            </Button>
-          </div>
+        <Container className="relative w-full pb-8 pt-16 text-paper sm:pb-14 sm:pt-24">
+          <Reveal delay={0}>
+            <p className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-accent sm:text-sm sm:tracking-[0.25em]">
+              Construire. Transporter. Aménager.
+            </p>
+            <h1 className="mt-3 max-w-3xl font-display text-3xl font-bold leading-[1.1] sm:mt-4 sm:text-5xl sm:leading-[1.05] lg:text-6xl">
+              Génie civil, terrassement et transport en Valais
+            </h1>
+            <p className="mt-3 max-w-content text-sm leading-relaxed text-concrete-light sm:mt-6 sm:text-base sm:leading-relaxed sm:text-lg">
+              Depuis 1980, Guy Monnet &amp; Fils SA accompagne particuliers, entreprises et
+              collectivités dans leurs projets de construction, d&apos;infrastructures, de
+              transport et d&apos;aménagement en Valais.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3 sm:mt-8 sm:gap-4">
+              <Button href="/services/" variant="primary" className="px-5 py-3 text-xs sm:px-6 sm:py-3.5 sm:text-sm">
+                Nos services
+              </Button>
+              <Button
+                href="/contact/"
+                variant="secondary"
+                className="border-paper px-5 py-3 text-xs text-paper hover:bg-paper hover:text-ink sm:px-6 sm:py-3.5 sm:text-sm"
+              >
+                Contactez-nous
+              </Button>
+            </div>
+          </Reveal>
         </Container>
       </section>
 

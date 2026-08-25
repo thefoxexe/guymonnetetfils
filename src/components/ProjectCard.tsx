@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Project } from "@/data/projects";
 import { projectCategoryLabels } from "@/data/projects";
 import { PhotoPlaceholder } from "./PhotoPlaceholder";
+import { Reveal } from "./Reveal";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
@@ -32,8 +33,10 @@ export function ProjectCard({ project }: { project: Project }) {
 export function ProjectGrid({ projects }: { projects: Project[] }) {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {projects.map((project) => (
-        <ProjectCard key={project.slug} project={project} />
+      {projects.map((project, index) => (
+        <Reveal key={project.slug} delay={(index % 3) * 80}>
+          <ProjectCard project={project} />
+        </Reveal>
       ))}
     </div>
   );

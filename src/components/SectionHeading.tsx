@@ -1,3 +1,5 @@
+import { Reveal } from "./Reveal";
+
 export function SectionHeading({
   eyebrow,
   title,
@@ -14,7 +16,7 @@ export function SectionHeading({
 }) {
   const isDark = tone === "dark";
   return (
-    <div className={align === "center" ? "mx-auto max-w-content text-center" : "max-w-content"}>
+    <Reveal className={align === "center" ? "mx-auto max-w-content text-center" : "max-w-content"}>
       {eyebrow ? (
         <p
           className={`font-body text-xs font-semibold uppercase tracking-[0.18em] ${
@@ -36,6 +38,6 @@ export function SectionHeading({
           {description}
         </p>
       ) : null}
-    </div>
+    </Reveal>
   );
 }
