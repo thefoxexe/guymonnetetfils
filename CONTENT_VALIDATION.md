@@ -123,19 +123,14 @@ Repris tels quels de l'ancien site :
 
 - **Question client : ces coordonnées sont-elles toujours correctes ?**
 
-## 8. Réseaux sociaux
+## 8. Réseaux sociaux — résolu
 
 **Facebook a été retiré du site à la demande du client.**
 
-Instagram : le lien réel n'a pas pu être vérifié (impossible de crawler
-l'ancien site, voir §0). Plutôt que d'afficher un lien générique ou
-inventé, l'icône Instagram est **masquée dans le footer** tant que l'URL
-réelle n'est pas fournie (`company.social.instagram` vaut `null` dans
-`src/data/company.ts` — dès qu'une valeur y est renseignée, l'icône
-apparaît automatiquement).
-
-- **Question client : merci de transmettre le lien exact du compte
-  Instagram de l'entreprise.**
+Instagram : lien réel transmis par le client dans la conversation
+(`https://www.instagram.com/guy_monnet_fils_sa`), renseigné dans
+`company.social.instagram` (`src/data/company.ts`) et affiché dans le
+footer.
 
 ## 9. Photos, vidéos et logo
 

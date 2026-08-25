@@ -42,12 +42,9 @@ export const company = {
     label: "Lundi – vendredi",
   },
 
-  // Facebook retiré à la demande du client. Instagram : lien réel à
-  // transmettre (aucune URL inventée) — tant qu'il n'est pas fourni, l'icône
-  // n'est pas affichée dans le footer plutôt que de pointer vers une URL
-  // incorrecte.
+  // Facebook retiré à la demande du client.
   social: {
-    instagram: null as string | null,
+    instagram: "https://www.instagram.com/guy_monnet_fils_sa" as string | null,
   },
 
   photoCredit: "Drone Valais Production",

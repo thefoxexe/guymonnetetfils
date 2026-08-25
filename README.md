@@ -160,10 +160,9 @@ numéro de téléphone (header + footer + page contact) et la page
   recommandés par le cahier des charges (`phone_click`, `email_click`,
   `quote_start`, `quote_submit`, `directions_click`, `project_view`) sont
   prêts à être branchés sur l'outil choisi par le client.
-- **Instagram** : l'icône n'est affichée dans le footer que si
-  `company.social.instagram` (`src/data/company.ts`) contient une vraie
-  URL — actuellement `null`, faute de lien confirmé. Facebook a été retiré
-  du site à la demande du client.
+- **Instagram** : lien réel transmis par le client, renseigné dans
+  `company.social.instagram` (`src/data/company.ts`) et affiché dans le
+  footer. Facebook a été retiré du site à la demande du client.
 - **Nombre de collaborateurs** : retiré de toutes les pages visibles à la
   demande du client (donnée non confirmée) ; conservé uniquement en
   mémoire dans `src/data/company.ts` (`employeesApprox`, non utilisé).
