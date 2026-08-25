@@ -12,7 +12,7 @@ export function StickyMobileActions() {
       </a>
       <Link
         href="/contact/"
-        className="focus-ring flex items-center justify-center gap-2 bg-accent py-4 text-sm font-semibold uppercase tracking-wide text-paper"
+        className="focus-ring flex items-center justify-center gap-2 bg-accent py-4 text-sm font-semibold uppercase tracking-wide text-ink"
       >
         Devis
       </Link>

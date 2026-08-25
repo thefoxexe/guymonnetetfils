@@ -10,11 +10,11 @@ export function ServiceCard({ service }: { service: Service }) {
     >
       <PhotoPlaceholder label={service.heroImageLabel} aspect="video" />
       <div className="p-6">
-        <h3 className="font-display text-xl font-semibold text-ink group-hover:text-accent">
+        <h3 className="font-display text-xl font-semibold text-ink group-hover:text-accent-ink">
           {service.name}
         </h3>
         <p className="mt-2 text-sm leading-relaxed text-concrete">{service.shortDescription}</p>
-        <span className="mt-4 inline-block text-xs font-semibold uppercase tracking-wide text-accent">
+        <span className="mt-4 inline-block text-xs font-semibold uppercase tracking-wide text-accent-ink">
           Découvrir →
         </span>
       </div>

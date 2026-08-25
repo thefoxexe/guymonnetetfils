@@ -12,9 +12,9 @@ const base =
   "focus-ring inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold uppercase tracking-wide transition-colors duration-200 ease-editorial";
 
 const variants: Record<NonNullable<ButtonProps["variant"]>, string> = {
-  primary: "bg-accent text-paper hover:bg-[#a83e19]",
+  primary: "bg-accent text-ink hover:bg-accent-dark",
   secondary: "border border-ink text-ink hover:bg-ink hover:text-paper",
-  ghost: "text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent",
+  ghost: "text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-ink",
 };
 
 export function Button({ href, children, variant = "primary", className = "", external }: ButtonProps) {

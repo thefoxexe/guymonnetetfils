@@ -40,7 +40,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       <section className="py-16">
         <Container className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-accent">Service</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-accent-ink">Service</p>
             <h1 className="mt-3 font-display text-4xl font-bold leading-[1.05] text-ink sm:text-5xl">
               {service.name} en Valais
             </h1>
@@ -82,7 +82,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       {service.savoirFaire ? (
         <section className="bg-anthracite py-16 text-paper">
           <Container>
-            <SectionHeading eyebrow="Savoir-faire & équipements" title="Nos moyens" />
+            <SectionHeading eyebrow="Savoir-faire & équipements" title="Nos moyens" tone="dark" />
             <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {service.savoirFaire.map((item) => (
                 <li key={item} className="border border-white/15 p-5 text-sm text-concrete-light">
@@ -110,7 +110,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 return (
                   <li key={`${ref.label}-${ref.location}`} className="border border-line bg-paper p-5">
                     {ref.projectSlug ? (
-                      <Link href={`/realisations/${ref.projectSlug}/`} className="focus-ring block hover:text-accent">
+                      <Link href={`/realisations/${ref.projectSlug}/`} className="focus-ring block hover:text-accent-ink">
                         {content}
                       </Link>
                     ) : (
@@ -150,7 +150,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 <li key={related.slug}>
                   <Link
                     href={`/services/${related.slug}/`}
-                    className="focus-ring inline-block border-b border-transparent text-sm font-semibold text-ink hover:border-accent hover:text-accent"
+                    className="focus-ring inline-block border-b border-transparent text-sm font-semibold text-ink hover:border-accent hover:text-accent-ink"
                   >
                     {related.name}
                   </Link>

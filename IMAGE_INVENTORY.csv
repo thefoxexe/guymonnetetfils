@@ -18,4 +18,4 @@ TODO: VALIDATION CLIENT,TODO,terrassement-skatepark-riddes-01.avif,,skatepark-ri
 TODO: VALIDATION CLIENT,TODO,entreprise-guy-monnet-premier-camion-archives-01.avif,,,"Guy Monnet et son premier camion, archives de l'entreprise",hero /entreprise/
 TODO: VALIDATION CLIENT,TODO,entreprise-equipe-depot-riddes-01.avif,,,Équipe Guy Monnet & Fils sur le dépôt de Riddes,section intro entreprise (home + /entreprise/)
 TODO: VALIDATION CLIENT,TODO,equipe-photo-groupe-guy-monnet-fils-01.avif,,,Photo de groupe de l'équipe Guy Monnet & Fils,hero /equipe/
-TODO: VALIDATION CLIENT,TODO,logo-guy-monnet-fils.svg,,,Logo Guy Monnet & Fils SA,header + footer + favicon (actuellement placeholder texte, a remplacer par le logo officiel)
+FOURNI PAR LE CLIENT (chat),logo-guy-monnet-fils.jpg,logo-guy-monnet.png + favicon-32.png + favicon-64.png + apple-touch-icon.png,,,Logo Guy Monnet & Fils SA,header + footer + favicon (integre ; fichier source original dans brand-assets/logo-source.jpg, TODO: remplacer par un fichier vectoriel/haute-resolution du client si disponible pour un meilleur rendu au-dela de 560px de large)

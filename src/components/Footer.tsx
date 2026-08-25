@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { company } from "@/data/company";
 import { services } from "@/data/services";
@@ -7,9 +8,15 @@ export function Footer() {
     <footer className="border-t border-line bg-ink text-concrete-light">
       <div className="container-wide grid grid-cols-1 gap-10 py-16 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <p className="font-display text-lg font-bold uppercase tracking-tight text-paper">
-            Guy Monnet &amp; Fils SA
-          </p>
+          <div className="inline-block bg-paper p-3">
+            <Image
+              src="/logo-guy-monnet.png"
+              alt="Guy Monnet & Fils SA"
+              width={560}
+              height={162}
+              className="h-9 w-auto"
+            />
+          </div>
           <p className="mt-4 text-sm leading-relaxed">
             Entreprise familiale valaisanne active depuis 1980 en génie civil, terrassement,
             transport et construction.

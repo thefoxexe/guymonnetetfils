@@ -106,10 +106,30 @@ dans le contenu du site et listée dans `CONTENT_VALIDATION.md`.
 - `IMAGE_INVENTORY.csv` — inventaire des emplacements photo à compléter
   avec les images réelles migrées depuis l'ancien site.
 
+## Marque et couleurs
+
+Le header, le footer et le favicon utilisent le logo officiel transmis par
+le client (`public/logo-guy-monnet.png`, recadré depuis
+`brand-assets/logo-source.jpg`). La palette (`tailwind.config.ts`) est
+calculée par échantillonnage réel des couleurs du logo : jaune de marque
+`accent` (#EAB308) pour les fonds/boutons/bordures, et un dérivé foncé
+`accent-ink` (#8A5A0A) pour tout texte coloré — le jaune de marque n'est
+jamais utilisé comme couleur de texte seule car son contraste sur fond
+clair est insuffisant (WCAG). Sur fond sombre (footer, sections
+anthracite), le jaune de marque est utilisé directement en texte : son
+contraste y est excellent. Voir `CONTENT_VALIDATION.md`, section 9, pour
+la marche à suivre si un fichier de logo vectoriel/haute résolution est
+disponible.
+
 ## Limites connues de cette itération
 
-- **Photographies** : aucune image réelle n'a pu être récupérée
-  automatiquement depuis l'ancien site dans le cadre de cette refonte ;
+- **Crawl de l'ancien site** : cet environnement de développement n'a pas
+  d'accès réseau sortant vers `guy-monnet-transports.ch` (bloqué par le
+  proxy réseau). Le contenu de ce site a donc été rédigé à partir du texte
+  détaillé du brief de refonte, pas d'un crawl direct — voir
+  `CONTENT_VALIDATION.md`, section 0.
+- **Photographies** : aucune image de chantier/équipe n'a pu être
+  récupérée automatiquement depuis l'ancien site pour la raison ci-dessus ;
   tous les emplacements photo affichent un placeholder identifié (voir
   `IMAGE_INVENTORY.csv`). Le rendu visuel final dépend de la migration de
   ces images.

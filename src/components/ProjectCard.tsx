@@ -11,10 +11,10 @@ export function ProjectCard({ project }: { project: Project }) {
     >
       <PhotoPlaceholder label={project.heroImageLabel} aspect="video" />
       <div className="p-6">
-        <p className="text-xs font-semibold uppercase tracking-wide text-accent">
+        <p className="text-xs font-semibold uppercase tracking-wide text-accent-ink">
           {project.categories.map((c) => projectCategoryLabels[c]).join(" · ")}
         </p>
-        <h3 className="mt-2 font-display text-xl font-semibold text-ink group-hover:text-accent">
+        <h3 className="mt-2 font-display text-xl font-semibold text-ink group-hover:text-accent-ink">
           {project.title}
         </h3>
         <p className="mt-1 text-sm text-concrete">

@@ -11,11 +11,20 @@ const config: Config = {
       colors: {
         ink: "#181a1b",
         anthracite: "#23262b",
-        concrete: "#8b8f94",
+        concrete: "#7c7c7c",
         "concrete-light": "#d9dade",
         offwhite: "#f4f3f0",
         paper: "#faf9f7",
-        accent: "#c34a1f",
+        // Jaune de la marque Guy Monnet & Fils, échantillonné depuis le logo
+        // officiel (excavateur). Utilisé pour les fonds, bordures et accents
+        // graphiques — jamais comme couleur de texte seule (contraste
+        // insuffisant sur fond clair), voir `accent-ink` ci-dessous.
+        accent: "#EAB308",
+        "accent-dark": "#C88A06",
+        // Dérivé bronze/doré du jaune de marque, utilisé pour tout texte
+        // (labels, liens, survols) afin de rester lisible (contraste AA+)
+        // tout en conservant la teinte de marque.
+        "accent-ink": "#8A5A0A",
         line: "#e2e1dd",
       },
       fontFamily: {

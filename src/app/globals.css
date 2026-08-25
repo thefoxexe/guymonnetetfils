@@ -21,8 +21,8 @@ body {
 }
 
 ::selection {
-  background-color: #c34a1f;
-  color: #faf9f7;
+  background-color: #eab308;
+  color: #181a1b;
 }
 
 .container-wide {
@@ -43,9 +43,17 @@ body {
 .focus-ring {
   outline: none;
 }
+/*
+ * Double anneau (clair + foncé) : le composant est utilisé aussi bien sur
+ * fond clair (paper) que sur fond sombre (ink/anthracite). Un seul anneau
+ * de couleur ne peut pas garantir un contraste suffisant (3:1, WCAG 2.4.11)
+ * sur les deux types de fond ; l'anneau clair reste visible sur fond sombre,
+ * l'anneau foncé (box-shadow) reste visible sur fond clair.
+ */
 .focus-ring:focus-visible {
-  outline: 2px solid #c34a1f;
-  outline-offset: 3px;
+  outline: 2px solid #faf9f7;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px #181a1b;
 }
 
 /* Motif graphique discret inspiré des lignes topographiques */

@@ -43,7 +43,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
       <section className="py-16">
         <Container>
-          <p className="text-xs font-semibold uppercase tracking-wide text-accent">
+          <p className="text-xs font-semibold uppercase tracking-wide text-accent-ink">
             {project.categories.map((c) => projectCategoryLabels[c]).join(" · ")}
           </p>
           <h1 className="mt-3 font-display text-4xl font-bold leading-[1.05] text-ink sm:text-5xl">
@@ -80,7 +80,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             ))}
           </ul>
           {project.todo ? (
-            <p className="mt-6 border border-accent/40 bg-accent/5 p-4 text-xs text-accent">
+            <p className="mt-6 border border-accent-ink/30 bg-accent/10 p-4 text-xs text-accent-ink">
               {project.todo}
             </p>
           ) : null}
@@ -127,13 +127,13 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         <Container className="flex flex-col justify-between gap-6 border-t border-line pt-10 sm:flex-row">
           <Link href={`/realisations/${previous!.slug}/`} className="focus-ring group max-w-xs">
             <p className="text-xs font-semibold uppercase tracking-wide text-concrete">Projet précédent</p>
-            <p className="mt-1 font-display text-lg font-semibold text-ink group-hover:text-accent">
+            <p className="mt-1 font-display text-lg font-semibold text-ink group-hover:text-accent-ink">
               {previous!.title}
             </p>
           </Link>
           <Link href={`/realisations/${next!.slug}/`} className="focus-ring group max-w-xs text-right">
             <p className="text-xs font-semibold uppercase tracking-wide text-concrete">Projet suivant</p>
-            <p className="mt-1 font-display text-lg font-semibold text-ink group-hover:text-accent">
+            <p className="mt-1 font-display text-lg font-semibold text-ink group-hover:text-accent-ink">
               {next!.title}
             </p>
           </Link>

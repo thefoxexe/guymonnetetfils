@@ -18,7 +18,7 @@ export function Breadcrumb({ items }: { items: Crumb[] }) {
                   {crumb.name}
                 </span>
               ) : (
-                <Link href={crumb.path} className="focus-ring hover:text-accent">
+                <Link href={crumb.path} className="focus-ring hover:text-accent-ink">
                   {crumb.name}
                 </Link>
               )}

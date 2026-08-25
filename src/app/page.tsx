@@ -116,7 +116,7 @@ export default function HomePage() {
           <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
             <PhotoPlaceholder label={featuredProject.heroImageLabel} aspect="wide" />
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-accent">
+              <p className="text-xs font-semibold uppercase tracking-wide text-accent-ink">
                 {featuredProject.location} · {featuredProject.year}
               </p>
               <h3 className="mt-2 font-display text-3xl font-bold text-ink">
@@ -162,7 +162,7 @@ export default function HomePage() {
             </p>
             <Link
               href="/realisations/"
-              className="focus-ring mt-6 inline-block text-xs font-semibold uppercase tracking-wide text-accent underline underline-offset-4"
+              className="focus-ring mt-6 inline-block text-xs font-semibold uppercase tracking-wide text-accent-ink underline underline-offset-4"
             >
               Voir nos réalisations
             </Link>

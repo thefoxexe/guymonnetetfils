@@ -39,7 +39,7 @@ export default function EquipePage() {
       <section className="bg-offwhite py-16">
         <Container>
           <SectionHeading eyebrow="Direction" title={direction.name} />
-          <p className="mt-2 text-sm font-semibold uppercase tracking-wide text-accent">
+          <p className="mt-2 text-sm font-semibold uppercase tracking-wide text-accent-ink">
             {direction.role}
           </p>
           <p className="mt-4 max-w-content text-base leading-relaxed text-concrete">

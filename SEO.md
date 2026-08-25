@@ -114,6 +114,28 @@ Une fois les vraies photos disponibles, remplacer `PhotoPlaceholder` par
 `sizes`/`srcset` responsive, dimensions explicites et lazy loading (sauf
 image hero/LCP, à charger en priorité via `priority`).
 
+## Accessibilité des couleurs
+
+La palette de marque (jaune `#EAB308`, échantillonné depuis le logo
+officiel) est claire : utilisée comme couleur de **texte** sur fond clair,
+son contraste tombe sous le seuil WCAG AA (~1.9:1). Le design system
+distingue donc deux tokens (`tailwind.config.ts`) :
+
+- `accent` (jaune de marque) : fonds de boutons/badges, bordures,
+  soulignements décoratifs, et texte **uniquement sur fond sombre** (footer,
+  sections anthracite) où son contraste est excellent (~9:1).
+- `accent-ink` (dérivé bronze/doré, `#8A5A0A`) : tout texte coloré sur fond
+  clair (labels, liens, survols) — contraste ~5.9:1, conforme AA.
+
+Le composant `SectionHeading` expose une prop `tone` (`"light"` par défaut,
+`"dark"` pour les sections à fond sombre) qui bascule automatiquement entre
+les deux tokens.
+
+L'anneau de focus clavier (`.focus-ring` dans `globals.css`) utilise un
+double anneau clair + foncé plutôt qu'une couleur unique, pour rester
+visible (≥3:1, WCAG 2.4.11) aussi bien sur les sections claires que sur les
+sections sombres du site.
+
 ## E-E-A-T
 
 La crédibilité du site repose uniquement sur des preuves vérifiables :

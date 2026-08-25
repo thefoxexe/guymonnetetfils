@@ -29,7 +29,7 @@ export default function MentionsLegalesPage() {
                 <br />
                 {company.address.country}
               </p>
-              <p className="mt-2 text-xs text-accent">
+              <p className="mt-2 text-xs text-accent-ink">
                 TODO: vérifier adresse officielle avant mise en production — les anciennes mentions
                 légales indiquaient « {company.address.streetAlternative} » alors que le reste du
                 site indiquait « {company.address.street} ». Une seule version doit être retenue.

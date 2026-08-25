@@ -32,7 +32,7 @@ export default function ContactPage() {
 
           <aside className="h-fit space-y-8 border border-line bg-offwhite p-8">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-accent">
+              <p className="text-xs font-semibold uppercase tracking-wide text-accent-ink">
                 Guy Monnet &amp; Fils SA
               </p>
               <address className="mt-3 space-y-1 text-sm not-italic text-ink">
@@ -49,7 +49,7 @@ export default function ContactPage() {
 
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-ink">Bureau</p>
-              <a href={company.phone.officeHref} className="focus-ring mt-1 block text-sm text-ink hover:text-accent">
+              <a href={company.phone.officeHref} className="focus-ring mt-1 block text-sm text-ink hover:text-accent-ink">
                 {company.phone.office}
               </a>
             </div>
@@ -58,14 +58,14 @@ export default function ContactPage() {
               <p className="text-xs font-semibold uppercase tracking-wide text-ink">
                 Frédéric Monnet
               </p>
-              <a href={company.phone.fredericHref} className="focus-ring mt-1 block text-sm text-ink hover:text-accent">
+              <a href={company.phone.fredericHref} className="focus-ring mt-1 block text-sm text-ink hover:text-accent-ink">
                 {company.phone.frederic}
               </a>
             </div>
 
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-ink">E-mail</p>
-              <a href={`mailto:${company.email}`} className="focus-ring mt-1 block text-sm text-ink hover:text-accent">
+              <a href={`mailto:${company.email}`} className="focus-ring mt-1 block text-sm text-ink hover:text-accent-ink">
                 {company.email}
               </a>
             </div>

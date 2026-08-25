@@ -5,7 +5,7 @@ export default function NotFound() {
   return (
     <section className="flex min-h-[60vh] items-center py-20">
       <Container className="max-w-content">
-        <p className="text-xs font-semibold uppercase tracking-wide text-accent">404</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-accent-ink">404</p>
         <h1 className="mt-4 font-display text-4xl font-bold text-ink sm:text-5xl">
           Cette route ne mène nulle part.
         </h1>

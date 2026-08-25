@@ -54,7 +54,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="projectType" className="block text-sm font-semibold text-ink">
-          Type de projet <span className="text-accent">*</span>
+          Type de projet <span className="text-accent-ink">*</span>
         </label>
         <select
           id="projectType"
@@ -74,7 +74,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="message" className="block text-sm font-semibold text-ink">
-          Message <span className="text-accent">*</span>
+          Message <span className="text-accent-ink">*</span>
         </label>
         <textarea
           id="message"
@@ -109,7 +109,7 @@ export function ContactForm() {
         <span>
           J&apos;accepte que mes données soient utilisées pour traiter ma demande, conformément à
           la{" "}
-          <a href="/confidentialite/" className="underline hover:text-accent">
+          <a href="/confidentialite/" className="underline hover:text-accent-ink">
             politique de confidentialité
           </a>
           .
@@ -118,7 +118,7 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className="focus-ring inline-flex items-center justify-center bg-accent px-8 py-4 text-sm font-semibold uppercase tracking-wide text-paper hover:bg-[#a83e19]"
+        className="focus-ring inline-flex items-center justify-center bg-accent px-8 py-4 text-sm font-semibold uppercase tracking-wide text-ink hover:bg-accent-dark"
       >
         Envoyer ma demande
       </button>
@@ -127,7 +127,7 @@ export function ContactForm() {
         <p role="status" className="text-sm text-concrete">
           Votre messagerie va s&apos;ouvrir avec les informations pré-remplies. Vous pouvez aussi
           nous joindre directement à{" "}
-          <a href={`mailto:${company.email}`} className="underline hover:text-accent">
+          <a href={`mailto:${company.email}`} className="underline hover:text-accent-ink">
             {company.email}
           </a>
           .
@@ -153,7 +153,7 @@ function Field({
   return (
     <div>
       <label htmlFor={name} className="block text-sm font-semibold text-ink">
-        {label} {required ? <span className="text-accent">*</span> : null}
+        {label} {required ? <span className="text-accent-ink">*</span> : null}
       </label>
       <input
         id={name}

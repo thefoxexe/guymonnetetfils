@@ -10,6 +10,23 @@ production sans que le client ait validé chaque point ci-dessous.
 Chaque TODO est également présent directement dans le code / le contenu du
 site (recherche `TODO:` dans le dépôt), pour rester visible à chaque étape.
 
+## 0. Important — accès au site existant
+
+L'environnement dans lequel ce site a été développé n'a **pas d'accès réseau
+sortant vers `guy-monnet-transports.ch`** (bloqué par le proxy réseau de
+l'environnement, aussi bien en `curl` qu'en outil de crawl). Il n'a donc pas
+été possible de crawler automatiquement l'ancien site pour en extraire les
+textes et photos directement.
+
+Tout le contenu de ce nouveau site provient du texte détaillé fourni dans le
+brief de refonte (qui décrit précisément le contenu de chaque ancienne page).
+**Aucun texte n'a été inventé** au-delà de ce qui a été fourni. Si le client
+dispose d'un accès direct à l'ancien site ou à son export Squarespace, il est
+recommandé de repasser en revue chaque page une dernière fois avant la mise
+en production pour vérifier qu'aucun contenu mineur n'a été oublié dans le
+brief d'origine (voir aussi §9 sur les photos, qui n'ont pas pu être migrées
+pour la même raison).
+
 ## 1. Adresse
 
 Les mentions légales de l'ancien site indiquaient **« Route de l'Avenir 7 »**,
@@ -100,12 +117,25 @@ attendant les liens réels.
 - **Question client : merci de transmettre les liens exacts des comptes
   Instagram et Facebook de l'entreprise.**
 
-## 9. Photos et vidéos
+## 9. Photos, vidéos et logo
 
-Aucune photo réelle n'a pu être migrée automatiquement (pas d'accès direct
-au CDN Squarespace de l'ancien site dans le cadre de cette refonte). Toutes
-les zones photo du nouveau site affichent un **placeholder identifié**
-(fond anthracite avec légende « Photo à intégrer — [description] »).
+**Logo — résolu.** Le logo officiel a été transmis directement dans la
+conversation et est intégré au site (header, footer, favicon), avec une
+palette de couleurs recalculée par échantillonnage réel des couleurs du
+logo (jaune de marque `#EAB308`, dérivé foncé `#8A5A0A` pour le texte —
+voir `tailwind.config.ts`). Le fichier source original est conservé dans
+`brand-assets/logo-source.jpg` (hors dossier `public/`, non servi par le
+site). **Action client : si un fichier vectoriel (SVG/AI/EPS) ou une version
+haute résolution du logo existe, le transmettre** — il remplacerait
+avantageusement le fichier `public/logo-guy-monnet.png` actuel (recadré et
+compressé à partir de la photo du logo) pour un rendu plus net sur très
+grands écrans.
+
+Aucune photo de chantier/équipe réelle n'a en revanche pu être migrée
+(pas d'accès réseau à l'ancien site depuis cet environnement, voir §0).
+Toutes les zones photo du nouveau site affichent un **placeholder
+identifié** (fond anthracite avec légende « Photo à intégrer —
+[description] »).
 
 - Voir `IMAGE_INVENTORY.csv` pour la liste complète des emplacements et des
   légendes attendues.
