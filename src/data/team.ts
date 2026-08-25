@@ -36,7 +36,7 @@ export const teamGroups: TeamGroup[] = [
   },
   {
     id: "genie-civil",
-    label: "Génie civil / main-d'œuvre",
+    label: "Main-d'œuvre génie civil",
     members: ["Leandro", "Sergio", "Fémi", "Manuelle"],
   },
 ];

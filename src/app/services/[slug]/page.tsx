@@ -77,7 +77,11 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       {service.savoirFaire ? (
         <section className="bg-anthracite py-16 text-paper">
           <Container>
-            <SectionHeading eyebrow="Savoir-faire & équipements" title="Nos moyens" tone="dark" />
+            <SectionHeading
+              eyebrow="Savoir-faire & équipements"
+              title={service.savoirFaireTitle ?? "Nos moyens"}
+              tone="dark"
+            />
             <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {service.savoirFaire.map((item) => (
                 <li key={item} className="border border-white/15 p-5 text-sm text-concrete-light">

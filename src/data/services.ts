@@ -15,6 +15,7 @@ export type Service = {
   intro: string[];
   prestations: string[];
   savoirFaire?: string[];
+  savoirFaireTitle?: string;
   references?: ServiceReference[];
   referencesNote?: string;
   relatedServices: string[];
@@ -48,8 +49,8 @@ export const services: Service[] = [
       "Transport de matériaux de chantier en Valais : camions tout-terrain, camions-grues jusqu'à 24 m de portée et bennes multi-lift. Entreprise basée à Riddes.",
     heroImageLabel: "Camion de chantier Guy Monnet & Fils sur route valaisanne",
     intro: [
-      "Guy Monnet & Fils dispose d'un parc de véhicules dédié au transport de matériaux de chantier, adapté aux besoins des entreprises, des collectivités et des particuliers en Valais.",
-      "Camions tout-terrain, camions-grues et bennes multi-lift permettent de couvrir des besoins variés, du transport simple de matériaux à la manutention sur chantier.",
+      "Le transport est à l'origine de Guy Monnet & Fils SA : c'est en achetant son premier camion en 1980 que Guy Monnet lance l'activité de l'entreprise. Depuis, le parc de véhicules a évolué pour répondre aux besoins des chantiers de génie civil, de terrassement et de construction.",
+      "L'entreprise dispose de véhicules adaptés au transport de matériaux, d'engins et d'équipements, y compris pour les travaux nécessitant des moyens spécifiques, pour les entreprises, les collectivités et les particuliers en Valais.",
     ],
     prestations: [
       "Transport de matériaux de chantier (terre, gravier, béton, déblais)",
@@ -57,6 +58,7 @@ export const services: Service[] = [
       "Transport de charges avec remorque surbaissée",
       "Location de bennes multi-lift (10 à 40 m³)",
     ],
+    savoirFaireTitle: "Notre parc de véhicules",
     savoirFaire: [
       "7 camions tout-terrain pour le transport de matériaux de chantier",
       "2 camions-grues, portée maximale annoncée : 24 mètres",
@@ -112,14 +114,19 @@ export const services: Service[] = [
     heroImageLabel: "Chantier de génie civil : pose de conduites en tranchée",
     intro: [
       "Guy Monnet & Fils intervient pour le secteur privé et public dans la construction et la rénovation d'infrastructures.",
-      "L'entreprise réalise des travaux de routes, de réseaux et de conduites, ainsi que des travaux en sous-sol nécessitant une bonne connaissance du terrain valaisan.",
+      "L'entreprise prend en charge différents travaux liés aux routes, aux infrastructures et aux réseaux enterrés : fouilles, conduites, ouvrages en béton, ainsi que des travaux en sous-sol nécessitant une bonne connaissance du terrain valaisan.",
     ],
     prestations: [
-      "Construction et réfection de routes",
-      "Pose et réfection de conduites",
+      "Routes et infrastructures",
+      "Réfection de chaussées",
       "Réseaux enterrés",
-      "Travaux en sous-sol",
-      "Infrastructures publiques et privées",
+      "Fouilles",
+      "Conduites d'eau",
+      "Égouts et eaux de surface",
+      "Réseaux électriques",
+      "Chambres de captage",
+      "Ouvrages en béton",
+      "Travaux pour communes et collectivités",
     ],
     references: [
       {
@@ -207,13 +214,16 @@ export const services: Service[] = [
       "Aménagements extérieurs en Valais : murs, enrochements, pavage, bordures et goudronnage, avec fourniture de terre végétale par Guy Monnet & Fils.",
     heroImageLabel: "Aménagement extérieur avec enrochement et pavage",
     intro: [
-      "Guy Monnet & Fils réalise des aménagements extérieurs pour compléter des chantiers de construction ou de terrassement : murs, enrochements, pavage, bordures et goudronnage.",
-      "L'entreprise fournit et pose également de la terre végétale, notamment issue de son propre centre de revalorisation des matériaux à Riddes.",
+      "Guy Monnet & Fils accompagne particuliers, entreprises et collectivités dans la réalisation de leurs aménagements extérieurs, pour compléter des chantiers de construction ou de terrassement.",
+      "Grâce à son expérience en terrassement, maçonnerie et génie civil, l'entreprise prend en charge différentes étapes d'un projet et propose des solutions adaptées aux contraintes du terrain.",
     ],
     prestations: [
+      "Préparation des terrains",
       "Construction de murs",
+      "Murs en pierre",
       "Enrochements",
-      "Pose de pavés et bordures",
+      "Pose de pavés",
+      "Pose de bordures",
       "Goudronnage",
       "Fourniture et pose de terre végétale",
     ],
@@ -230,8 +240,9 @@ export const services: Service[] = [
       "Démolition, tri et évacuation de matériaux en Valais. Les matériaux valorisables sont dirigés vers le centre de revalorisation de Guy Monnet & Fils à Riddes.",
     heroImageLabel: "Pelle mécanique lors d'une démolition contrôlée",
     intro: [
-      "Guy Monnet & Fils réalise des travaux de démolition pour des bâtiments et ouvrages de tailles variées, suivis du tri, du chargement, du transport et de la revalorisation ou du recyclage des matériaux.",
-      "Les matériaux pouvant être revalorisés, comme certaines terres ou pierres, peuvent être acheminés vers le centre de l'entreprise à Riddes ; les autres matériaux sont dirigés vers des centres autorisés.",
+      "Guy Monnet & Fils réalise des travaux de démolition et prend en charge l'évacuation des matériaux issus des chantiers, pour des bâtiments et ouvrages de tailles variées.",
+      "Après la démolition, les matériaux sont triés afin d'être dirigés vers les filières adaptées : certains rejoignent des centres de recyclage autorisés, tandis que la terre et la pierre pouvant être revalorisées peuvent être acheminées vers le centre de valorisation de l'entreprise à Riddes.",
+      "Cette organisation permet de combiner démolition, transport et gestion des matériaux au sein d'une même prestation.",
     ],
     prestations: [
       "Démolition de bâtiments et ouvrages",
@@ -262,11 +273,12 @@ export const services: Service[] = [
       "Guy Monnet & Fils exploite un centre de tri, criblage et revalorisation des matériaux de chantier à Riddes, dans une logique d'économie circulaire.",
     heroImageLabel: "Criblage de matériaux au centre de revalorisation de Riddes",
     intro: [
-      "Guy Monnet & Fils possède son propre centre de revalorisation des matériaux à Riddes, où sont triés, criblés et transformés les matériaux issus des chantiers de l'entreprise.",
-      "Certains matériaux sont ensuite réutilisés au sein de l'entreprise, notamment pour des travaux de terrassement ou d'aménagement extérieur, d'autres sont revendus.",
+      "Guy Monnet & Fils exploite son propre centre de revalorisation des matériaux à Riddes. Les matériaux adaptés peuvent y être triés, criblés et transformés afin d'être réutilisés dans les activités de l'entreprise ou proposés à nouveau comme matériaux de construction.",
+      "Cette démarche s'inscrit dans une logique d'économie circulaire, en limitant l'utilisation de nouvelles ressources lorsque des matériaux existants peuvent être correctement revalorisés.",
     ],
     prestations: ["Tri des matériaux", "Criblage", "Revalorisation et réutilisation", "Revente de matériaux"],
-    savoirFaire: ["Réception → Tri → Criblage → Valorisation → Réemploi"],
+    savoirFaireTitle: "Donner une seconde vie aux matériaux de construction",
+    savoirFaire: ["Réception → Tri → Criblage → Contrôle → Réutilisation ou revente"],
     relatedServices: ["demolition", "amenagements-exterieurs", "terrassement"],
     zoneIntervention: "Centre situé à Riddes, au service des chantiers du Valais.",
   },
@@ -327,9 +339,12 @@ export const services: Service[] = [
       "Ces chantiers sont menés en collaboration avec des entreprises spécialisées et des bureaux d'ingénieurs.",
     ],
     prestations: [
-      "Aménagement de cours d'eau",
-      "Sécurisation de berges",
-      "Travaux de protection contre les dangers naturels",
+      "Terrassement en bordure de cours d'eau",
+      "Aménagement de berges",
+      "Ouvrages de protection contre les dangers naturels",
+      "Interventions en rivière",
+      "Infrastructures associées aux cours d'eau",
+      "Travaux avec engins spécialisés (pelles araignées)",
     ],
     relatedServices: ["genie-civil", "pelles-araignees"],
     relatedProjects: ["torrent-du-lue", "les-larmes-du-fou"],

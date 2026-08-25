@@ -60,13 +60,19 @@ export default function HomePage() {
       <section className="py-16">
         <Container className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <div>
-            <SectionHeading eyebrow="Depuis 1980" title="Plus de 40 ans sur le terrain." />
+            <SectionHeading eyebrow="Depuis 1980" title="Une entreprise familiale au service de vos projets" />
             <p className="mt-6 max-w-content text-base leading-relaxed text-concrete">
               De l&apos;achat d&apos;un premier camion par Guy Monnet en 1980 à une entreprise
-              familiale reconnue dans le génie civil, le terrassement, le transport et la
-              construction, Guy Monnet &amp; Fils SA a grandi au rythme des chantiers valaisans.
-              Aujourd&apos;hui dirigée par Frédéric Monnet, l&apos;entreprise reste fidèle à son
-              ancrage local et à sa connaissance du terrain.
+              familiale active dans le transport, le génie civil et la construction, Guy Monnet
+              &amp; Fils SA a grandi au rythme des chantiers valaisans. Basée à Riddes et
+              historiquement implantée à Isérables, l&apos;entreprise intervient sur des projets
+              privés et publics dans toute la région.
+            </p>
+            <p className="mt-4 max-w-content text-base leading-relaxed text-concrete">
+              Grâce à une équipe expérimentée et à un parc de machines et véhicules adaptés aux
+              travaux les plus variés, elle est en mesure d&apos;intervenir aussi bien sur des
+              chantiers traditionnels que sur des terrains complexes. Disponibilité, efficacité
+              et proximité restent au centre de sa manière de travailler.
             </p>
             <Button href="/entreprise/" variant="ghost" className="mt-6 px-0">
               Découvrir l&apos;entreprise
