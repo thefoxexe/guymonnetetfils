@@ -70,10 +70,13 @@ direction (Frédéric Monnet).
 
 ## 3. Nombre de collaborateurs
 
-L'ancien site indiquait environ **40 employés**. Cette donnée est utilisée
-dans plusieurs sections (accueil, page Entreprise).
+L'ancien site indiquait environ **40 employés**. À la demande du client,
+ce chiffre n'est plus affiché nulle part sur le site tant qu'il n'est pas
+confirmé (il reste toutefois conservé, marqué TODO, dans
+`src/data/company.ts` pour mémoire — non utilisé dans aucune page).
 
-- **Question client : ce chiffre est-il toujours d'actualité ?**
+- **Question client : ce chiffre est-il toujours d'actualité ? S'il est
+  confirmé, où souhaitez-vous qu'il apparaisse (page Entreprise, accueil...) ?**
 
 ## 4. Horaires
 
@@ -122,13 +125,17 @@ Repris tels quels de l'ancien site :
 
 ## 8. Réseaux sociaux
 
-Les liens Instagram et Facebook n'ont pas pu être vérifiés lors de la
-refonte (`src/data/company.ts` contient un TODO). Actuellement, le footer
-pointe vers des URLs génériques (`instagram.com`, `facebook.com`) en
-attendant les liens réels.
+**Facebook a été retiré du site à la demande du client.**
 
-- **Question client : merci de transmettre les liens exacts des comptes
-  Instagram et Facebook de l'entreprise.**
+Instagram : le lien réel n'a pas pu être vérifié (impossible de crawler
+l'ancien site, voir §0). Plutôt que d'afficher un lien générique ou
+inventé, l'icône Instagram est **masquée dans le footer** tant que l'URL
+réelle n'est pas fournie (`company.social.instagram` vaut `null` dans
+`src/data/company.ts` — dès qu'une valeur y est renseignée, l'icône
+apparaît automatiquement).
+
+- **Question client : merci de transmettre le lien exact du compte
+  Instagram de l'entreprise.**
 
 ## 9. Photos, vidéos et logo
 

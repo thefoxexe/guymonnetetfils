@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  background-color: #faf9f7;
+  background-color: #ffffff;
   color: #181a1b;
 }
 
@@ -51,7 +51,7 @@ body {
  * l'anneau foncé (box-shadow) reste visible sur fond clair.
  */
 .focus-ring:focus-visible {
-  outline: 2px solid #faf9f7;
+  outline: 2px solid #ffffff;
   outline-offset: 2px;
   box-shadow: 0 0 0 4px #181a1b;
 }

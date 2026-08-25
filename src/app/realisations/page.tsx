@@ -1,7 +1,6 @@
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { CTASection } from "@/components/CTASection";
 import { ProjectFilter } from "@/components/ProjectFilter";
 import { projects, futureProjects } from "@/data/projects";
 import { buildMetadata } from "@/lib/seo";
@@ -47,7 +46,6 @@ export default function RealisationsPage() {
         </Container>
       </section>
 
-      <CTASection />
     </>
   );
 }

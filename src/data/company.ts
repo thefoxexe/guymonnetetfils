@@ -42,9 +42,12 @@ export const company = {
     label: "Lundi – vendredi",
   },
 
+  // Facebook retiré à la demande du client. Instagram : lien réel à
+  // transmettre (aucune URL inventée) — tant qu'il n'est pas fourni, l'icône
+  // n'est pas affichée dans le footer plutôt que de pointer vers une URL
+  // incorrecte.
   social: {
-    instagram: "TODO: VALIDATION CLIENT", // lien à récupérer sur l'ancien site
-    facebook: "TODO: VALIDATION CLIENT",
+    instagram: null as string | null,
   },
 
   photoCredit: "Drone Valais Production",

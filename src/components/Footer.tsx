@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { company } from "@/data/company";
 import { services } from "@/data/services";
+import { IconInstagram, IconMail } from "./icons";
 
 export function Footer() {
   return (
@@ -21,12 +22,24 @@ export function Footer() {
             Entreprise familiale valaisanne active depuis 1980 en génie civil, terrassement,
             transport et construction.
           </p>
-          <div className="mt-6 flex gap-4 text-xs uppercase tracking-wide">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="focus-ring hover:text-accent">
-              Instagram
-            </a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="focus-ring hover:text-accent">
-              Facebook
+          <div className="mt-6 flex items-center gap-3">
+            {company.social.instagram ? (
+              <a
+                href={company.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Guy Monnet & Fils SA sur Instagram"
+                className="focus-ring flex h-9 w-9 items-center justify-center border border-white/20 text-concrete-light hover:border-accent hover:text-accent"
+              >
+                <IconInstagram className="h-4 w-4" />
+              </a>
+            ) : null}
+            <a
+              href={`mailto:${company.email}`}
+              aria-label={`Envoyer un e-mail à ${company.email}`}
+              className="focus-ring flex h-9 w-9 items-center justify-center border border-white/20 text-concrete-light hover:border-accent hover:text-accent"
+            >
+              <IconMail className="h-4 w-4" />
             </a>
           </div>
         </div>

@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { CTASection } from "@/components/CTASection";
 import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
 import { projects, getProjectBySlug, projectCategoryLabels } from "@/data/projects";
 import { services } from "@/data/services";
@@ -140,7 +139,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         </Container>
       </section>
 
-      <CTASection />
     </>
   );
 }

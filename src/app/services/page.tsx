@@ -2,7 +2,6 @@ import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceGrid } from "@/components/ServiceCard";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { CTASection } from "@/components/CTASection";
 import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/seo";
 
@@ -29,7 +28,6 @@ export default function ServicesPage() {
           </div>
         </Container>
       </section>
-      <CTASection />
     </>
   );
 }

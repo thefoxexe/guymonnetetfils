@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { company } from "@/data/company";
 import { services } from "@/data/services";
+import { IconMail, IconPhone } from "./icons";
 
 const navLinks = [
   { label: "Entreprise", href: "/entreprise/" },
@@ -52,8 +53,8 @@ export function Header() {
 
   return (
     <>
-    <header className="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur">
-      <div className="container-wide flex h-16 items-center justify-between gap-2 md:h-24 xl:gap-4">
+    <header className="sticky top-0 z-50 border-b border-line bg-paper">
+      <div className="container-wide flex h-20 items-center justify-between gap-2 md:h-24 xl:gap-4">
         <Link href="/" className="focus-ring shrink-0">
           <Image
             src="/logo-guy-monnet-full.png"
@@ -61,7 +62,7 @@ export function Header() {
             width={900}
             height={310}
             priority
-            className="h-12 w-auto md:h-16 xl:h-20"
+            className="h-14 w-auto md:h-16 xl:h-20"
           />
         </Link>
 
@@ -122,19 +123,14 @@ export function Header() {
           ) : null}
         </div>
 
-        <div className="hidden shrink-0 items-center gap-3 lg:flex">
+        <div className="hidden shrink-0 lg:flex">
           <a
             href={company.phone.officeHref}
-            className="focus-ring hidden whitespace-nowrap text-sm font-semibold text-ink hover:text-accent-ink xl:inline"
+            className="focus-ring flex items-center gap-2 whitespace-nowrap text-sm font-semibold text-ink hover:text-accent-ink"
           >
+            <IconPhone className="h-4 w-4" />
             {company.phone.office}
           </a>
-          <Link
-            href="/contact/"
-            className="focus-ring whitespace-nowrap bg-accent px-4 py-3 text-sm font-semibold uppercase tracking-wide text-ink hover:bg-accent-dark xl:px-5"
-          >
-            Demander un devis
-          </Link>
         </div>
 
         <button
@@ -167,15 +163,14 @@ export function Header() {
     </header>
 
     {/*
-      Rendu en dehors de <header> : le header a "backdrop-blur" (backdrop-filter),
-      qui crée un containing block pour ses descendants en position fixed. Un
-      panneau "fixed" placé à l'intérieur se retrouverait alors positionné par
-      rapport au header (haut de ~64px) plutôt que par rapport au viewport,
-      et se retrouverait avec une hauteur nulle. En le sortant du header, le
-      panneau se positionne correctement par rapport au viewport.
+      Rendu en dehors de <header> par précaution : un ancêtre avec un filtre
+      (backdrop-blur, transform...) crée un containing block pour les
+      descendants en position fixed, ce qui casserait le positionnement de ce
+      panneau par rapport au viewport (déjà rencontré avec l'ancien header en
+      backdrop-blur). Le garder hors du header évite ce piège durablement.
     */}
     {mobileOpen ? (
-      <div id="mobile-nav" className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto bg-paper md:top-24 lg:hidden">
+      <div id="mobile-nav" className="fixed inset-x-0 top-20 bottom-0 z-40 overflow-y-auto bg-paper md:top-24 lg:hidden">
         <nav aria-label="Navigation mobile" className="animate-drawer-in container-wide flex flex-col py-4">
           {navLinks.map((link) => (
             <Link
@@ -187,19 +182,15 @@ export function Header() {
               {link.label}
             </Link>
           ))}
-          <div className="mt-6 grid grid-cols-2 gap-3">
-            <a
-              href={company.phone.officeHref}
-              className="focus-ring border border-ink px-4 py-3 text-center text-sm font-semibold uppercase tracking-wide text-ink"
-            >
-              Appeler
+          <div className="mt-6 flex flex-col gap-4">
+            <a href={company.phone.officeHref} className="focus-ring flex items-center gap-3 text-base font-semibold text-ink">
+              <IconPhone className="h-5 w-5 shrink-0 text-accent-ink" />
+              {company.phone.office}
             </a>
-            <Link
-              href="/contact/"
-              className="focus-ring bg-accent px-4 py-3 text-center text-sm font-semibold uppercase tracking-wide text-ink"
-            >
-              Devis
-            </Link>
+            <a href={`mailto:${company.email}`} className="focus-ring flex items-center gap-3 text-base font-semibold text-ink">
+              <IconMail className="h-5 w-5 shrink-0 text-accent-ink" />
+              {company.email}
+            </a>
           </div>
         </nav>
       </div>

@@ -14,7 +14,10 @@ const config: Config = {
         concrete: "#7c7c7c",
         "concrete-light": "#d9dade",
         offwhite: "#f4f3f0",
-        paper: "#faf9f7",
+        // Blanc pur, identique au fond du logo officiel (échantillonné dans
+        // le fichier source) pour qu'aucune bordure/teinte ne se voie autour
+        // du logo dans le header et le footer.
+        paper: "#ffffff",
         // Jaune de la marque Guy Monnet & Fils, échantillonné depuis le logo
         // officiel (excavateur). Utilisé pour les fonds, bordures et accents
         // graphiques — jamais comme couleur de texte seule (contraste

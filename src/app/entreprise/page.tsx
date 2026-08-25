@@ -1,7 +1,6 @@
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { CTASection } from "@/components/CTASection";
 import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
 import { Timeline } from "@/components/Timeline";
 import { company } from "@/data/company";
@@ -87,7 +86,7 @@ export default function EntreprisePage() {
                 },
                 {
                   year: "Aujourd'hui",
-                  title: `Environ ${company.employeesApprox} collaborateurs et ${company.domainsCount} domaines d'activité`,
+                  title: `${company.domainsCount} domaines d'activité`,
                   description:
                     "Guy Monnet reste actif dans l'entreprise ; son fils Frédéric Monnet en assure aujourd'hui la direction générale.",
                 },
@@ -123,7 +122,6 @@ export default function EntreprisePage() {
         </Container>
       </section>
 
-      <CTASection />
     </>
   );
 }

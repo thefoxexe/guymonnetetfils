@@ -1,7 +1,6 @@
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { CTASection } from "@/components/CTASection";
 import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
 import { TeamGroupSection } from "@/components/TeamGrid";
 import { direction, teamGroups } from "@/data/team";
@@ -57,7 +56,6 @@ export default function EquipePage() {
         </Container>
       </section>
 
-      <CTASection />
     </>
   );
 }

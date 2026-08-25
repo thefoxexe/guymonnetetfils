@@ -125,6 +125,20 @@ contraste y est excellent. Voir `CONTENT_VALIDATION.md`, section 9, pour
 la marche à suivre si un fichier de logo vectoriel/haute résolution est
 disponible.
 
+Le fond du site (`paper`, `tailwind.config.ts`) est un blanc pur (#FFFFFF),
+identique au fond du logo, pour qu'aucune bordure ne se voie autour du
+logo dans le header (header en fond plein, sans transparence).
+
+## Navigation et appels à l'action
+
+À la demande du client, la navigation reste volontairement sobre pour une
+entreprise de chantier : pas de bouton « Demander un devis » dans le
+header (le numéro de téléphone suffit, avec une icône), pas de barre
+d'actions fixe en bas d'écran mobile, pas de section « CTA » répétée en
+bas de chaque page. Le seul chemin de conversion mis en avant est le
+numéro de téléphone (header + footer + page contact) et la page
+`/contact/` elle-même, accessible depuis la navigation.
+
 ## Limites connues de cette itération
 
 - **Crawl de l'ancien site** : cet environnement de développement n'a pas
@@ -146,3 +160,10 @@ disponible.
   recommandés par le cahier des charges (`phone_click`, `email_click`,
   `quote_start`, `quote_submit`, `directions_click`, `project_view`) sont
   prêts à être branchés sur l'outil choisi par le client.
+- **Instagram** : l'icône n'est affichée dans le footer que si
+  `company.social.instagram` (`src/data/company.ts`) contient une vraie
+  URL — actuellement `null`, faute de lien confirmé. Facebook a été retiré
+  du site à la demande du client.
+- **Nombre de collaborateurs** : retiré de toutes les pages visibles à la
+  demande du client (donnée non confirmée) ; conservé uniquement en
+  mémoire dans `src/data/company.ts` (`employeesApprox`, non utilisé).

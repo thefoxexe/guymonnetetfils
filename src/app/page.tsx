@@ -5,7 +5,6 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { Stats } from "@/components/Stats";
 import { ServiceGrid } from "@/components/ServiceCard";
 import { ProjectGrid } from "@/components/ProjectCard";
-import { CTASection } from "@/components/CTASection";
 import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
 import { services } from "@/data/services";
 import { projects } from "@/data/projects";
@@ -67,7 +66,6 @@ export default function HomePage() {
           <Stats
             items={[
               { value: "1980", label: "Année de création" },
-              { value: `≈ ${company.employeesApprox}`, label: "Collaborateurs", note: "TODO: à confirmer" },
               { value: `${company.domainsCount}`, label: "Domaines d'activité" },
               { value: "Riddes", label: "Implantation actuelle" },
             ]}
@@ -170,9 +168,8 @@ export default function HomePage() {
           <div>
             <p className="text-sm font-semibold uppercase tracking-wide text-ink">Équipe</p>
             <p className="mt-3 max-w-content text-base leading-relaxed text-concrete">
-              Direction, machinistes, chauffeurs, chefs d&apos;équipe, maçons : une équipe
-              d&apos;environ {company.employeesApprox} collaborateurs réunit les métiers
-              nécessaires à la réalisation de chantiers complets.
+              Direction, machinistes, chauffeurs, chefs d&apos;équipe, maçons : une équipe qui
+              réunit les métiers nécessaires à la réalisation de chantiers complets.
             </p>
             <Button href="/equipe/" variant="ghost" className="mt-4 px-0">
               Rencontrer l&apos;équipe
@@ -181,7 +178,6 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <CTASection />
     </>
   );
 }

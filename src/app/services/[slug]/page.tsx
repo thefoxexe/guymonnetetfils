@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { CTASection } from "@/components/CTASection";
 import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
 import { ProjectGrid } from "@/components/ProjectCard";
 import { JsonLd } from "@/components/JsonLd";
@@ -157,7 +156,6 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         </Container>
       </section>
 
-      <CTASection />
 
       <JsonLd
         data={serviceJsonLd({
