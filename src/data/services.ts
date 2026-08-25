@@ -12,6 +12,12 @@ export type Service = {
   seoTitle: string;
   seoDescription: string;
   heroImageLabel: string;
+  /** Chemin de la photo réelle (public/), si disponible. */
+  heroImage?: string;
+  heroImageWidth?: number;
+  heroImageHeight?: number;
+  /** Classe Tailwind object-position pour cadrer le bon point de la photo une fois recadrée. */
+  imagePosition?: string;
   intro: string[];
   prestations: string[];
   savoirFaire?: string[];
@@ -47,7 +53,10 @@ export const services: Service[] = [
     seoTitle: "Transport de matériaux & camion-grue en Valais | Guy Monnet",
     seoDescription:
       "Transport de matériaux de chantier en Valais : camions tout-terrain, camions-grues jusqu'à 24 m de portée et bennes multi-lift. Entreprise basée à Riddes.",
-    heroImageLabel: "Camion de chantier Guy Monnet & Fils sur route valaisanne",
+    heroImageLabel: "Camions Guy Monnet & Fils SA stationnés sous le hangar du dépôt de Riddes",
+    heroImage: "/images/services/transport-camions-guy-monnet-riddes-01.webp",
+    heroImageWidth: 1400,
+    heroImageHeight: 933,
     intro: [
       "Le transport est à l'origine de Guy Monnet & Fils SA : c'est en achetant son premier camion en 1980 que Guy Monnet lance l'activité de l'entreprise. Depuis, le parc de véhicules a évolué pour répondre aux besoins des chantiers de génie civil, de terrassement et de construction.",
       "L'entreprise dispose de véhicules adaptés au transport de matériaux, d'engins et d'équipements, y compris pour les travaux nécessitant des moyens spécifiques, pour les entreprises, les collectivités et les particuliers en Valais.",
@@ -76,7 +85,10 @@ export const services: Service[] = [
     seoTitle: "Terrassement en Valais | Guy Monnet & Fils SA",
     seoDescription:
       "Entreprise de terrassement en Valais depuis 1980 : préparation de terrains pour bâtiments et infrastructures, clients privés et collectivités publiques.",
-    heroImageLabel: "Pelle mécanique sur un chantier de terrassement en Valais",
+    heroImageLabel: "Pelles mécaniques Guy Monnet & Fils sur un chantier de terrassement en Valais",
+    heroImage: "/images/services/terrassement-chantier-valais-01.webp",
+    heroImageWidth: 1204,
+    heroImageHeight: 903,
     intro: [
       "Guy Monnet & Fils réalise des travaux de terrassement pour des clients privés et des collectivités publiques.",
       "L'entreprise prépare les terrains nécessaires aux bâtiments et infrastructures et dispose des équipements et du savoir-faire nécessaires pour intervenir sur différents types de terrains.",
@@ -111,7 +123,10 @@ export const services: Service[] = [
     seoTitle: "Entreprise de génie civil en Valais | Guy Monnet & Fils",
     seoDescription:
       "Entreprise de génie civil à Riddes : routes, réseaux, conduites et infrastructures pour collectivités et maîtres d'ouvrage privés en Valais.",
-    heroImageLabel: "Chantier de génie civil : pose de conduites en tranchée",
+    heroImageLabel: "Pose d'une conduite en tranchée sur un chantier de génie civil à La Tzoumaz",
+    heroImage: "/images/services/genie-civil-pose-conduite-tzoumaz-01.webp",
+    heroImageWidth: 1400,
+    heroImageHeight: 1050,
     intro: [
       "Guy Monnet & Fils intervient pour le secteur privé et public dans la construction et la rénovation d'infrastructures.",
       "L'entreprise prend en charge différents travaux liés aux routes, aux infrastructures et aux réseaux enterrés : fouilles, conduites, ouvrages en béton, ainsi que des travaux en sous-sol nécessitant une bonne connaissance du terrain valaisan.",
@@ -157,7 +172,10 @@ export const services: Service[] = [
     seoTitle: "Maçonnerie & béton armé en Valais | Guy Monnet & Fils",
     seoDescription:
       "Maçonnerie et construction béton armé en Valais : chalets, rénovations, annexes, garages et ouvrages spécifiques réalisés par Guy Monnet & Fils.",
-    heroImageLabel: "Coffrage et coulage de béton armé sur un chantier valaisan",
+    heroImageLabel: "Ouvrage en béton armé coffré sur un chantier de maçonnerie en Valais",
+    heroImage: "/images/services/maconnerie-beton-arme-valais-01.webp",
+    heroImageWidth: 1320,
+    heroImageHeight: 990,
     intro: [
       "Guy Monnet & Fils construit des chalets, réalise des rénovations, des annexes, des garages et des ouvrages en béton pour des clients privés et des maîtres d'ouvrage publics.",
       "Ces réalisations démontrent la capacité de l'entreprise à mener des ouvrages en béton armé techniques, y compris dans des conditions d'accès ou d'exécution particulières.",
@@ -212,7 +230,10 @@ export const services: Service[] = [
     seoTitle: "Aménagements extérieurs en Valais | Guy Monnet & Fils",
     seoDescription:
       "Aménagements extérieurs en Valais : murs, enrochements, pavage, bordures et goudronnage, avec fourniture de terre végétale par Guy Monnet & Fils.",
-    heroImageLabel: "Aménagement extérieur avec enrochement et pavage",
+    heroImageLabel: "Mur en pierre et aménagement paysager réalisés par Guy Monnet & Fils",
+    heroImage: "/images/services/amenagement-exterieur-mur-pierre-valais-01.webp",
+    heroImageWidth: 1400,
+    heroImageHeight: 1050,
     intro: [
       "Guy Monnet & Fils accompagne particuliers, entreprises et collectivités dans la réalisation de leurs aménagements extérieurs, pour compléter des chantiers de construction ou de terrassement.",
       "Grâce à son expérience en terrassement, maçonnerie et génie civil, l'entreprise prend en charge différentes étapes d'un projet et propose des solutions adaptées aux contraintes du terrain.",
@@ -238,7 +259,10 @@ export const services: Service[] = [
     seoTitle: "Entreprise de démolition en Valais | Guy Monnet & Fils",
     seoDescription:
       "Démolition, tri et évacuation de matériaux en Valais. Les matériaux valorisables sont dirigés vers le centre de revalorisation de Guy Monnet & Fils à Riddes.",
-    heroImageLabel: "Pelle mécanique lors d'une démolition contrôlée",
+    heroImageLabel: "Pelle mécanique équipée d'une pince de démolition sur un chantier en Valais",
+    heroImage: "/images/services/demolition-pelle-mecanique-valais-01.webp",
+    heroImageWidth: 1319,
+    heroImageHeight: 989,
     intro: [
       "Guy Monnet & Fils réalise des travaux de démolition et prend en charge l'évacuation des matériaux issus des chantiers, pour des bâtiments et ouvrages de tailles variées.",
       "Après la démolition, les matériaux sont triés afin d'être dirigés vers les filières adaptées : certains rejoignent des centres de recyclage autorisés, tandis que la terre et la pierre pouvant être revalorisées peuvent être acheminées vers le centre de valorisation de l'entreprise à Riddes.",
@@ -271,7 +295,10 @@ export const services: Service[] = [
     seoTitle: "Revalorisation des matériaux à Riddes | Guy Monnet & Fils",
     seoDescription:
       "Guy Monnet & Fils exploite un centre de tri, criblage et revalorisation des matériaux de chantier à Riddes, dans une logique d'économie circulaire.",
-    heroImageLabel: "Criblage de matériaux au centre de revalorisation de Riddes",
+    heroImageLabel: "Installation de criblage et concassage au centre de revalorisation de Riddes",
+    heroImage: "/images/services/revalorisation-materiaux-criblage-riddes-01.webp",
+    heroImageWidth: 1400,
+    heroImageHeight: 933,
     intro: [
       "Guy Monnet & Fils exploite son propre centre de revalorisation des matériaux à Riddes. Les matériaux adaptés peuvent y être triés, criblés et transformés afin d'être réutilisés dans les activités de l'entreprise ou proposés à nouveau comme matériaux de construction.",
       "Cette démarche s'inscrit dans une logique d'économie circulaire, en limitant l'utilisation de nouvelles ressources lorsque des matériaux existants peuvent être correctement revalorisés.",
@@ -290,7 +317,10 @@ export const services: Service[] = [
     seoTitle: "Déneigement à Riddes & La Tzoumaz | Guy Monnet & Fils",
     seoDescription:
       "Guy Monnet & Fils assure le déneigement des communes de Riddes, La Tzoumaz et Isérables ainsi que des interventions pour les particuliers en Valais.",
-    heroImageLabel: "Chasse-neige Guy Monnet & Fils sur une route enneigée en Valais",
+    heroImageLabel: "Fraise à neige Guy Monnet & Fils SA en intervention à La Tzoumaz",
+    heroImage: "/images/services/deneigement-chasse-neige-la-tzoumaz-01.webp",
+    heroImageWidth: 1400,
+    heroImageHeight: 1049,
     intro: [
       "Guy Monnet & Fils intervient comme prestataire pour le déneigement des communes de Riddes, La Tzoumaz et Isérables, ainsi que pour la route cantonale Riddes – La Tzoumaz pour le compte de l'État du Valais.",
       "TODO: confirmer contrats actuels avant publication.",
@@ -311,7 +341,10 @@ export const services: Service[] = [
     seoTitle: "Travaux avec pelle araignée en Valais | Guy Monnet & Fils",
     seoDescription:
       "Guy Monnet & Fils utilise des pelles araignées pour intervenir en terrain difficile, en forte pente ou sur des zones d'accès compliqué en Valais.",
-    heroImageLabel: "Pelle araignée en intervention sur un terrain en pente",
+    heroImageLabel: "Pelle araignée Guy Monnet & Fils en intervention sur un terrain rocheux en forte pente",
+    heroImage: "/images/services/pelle-araignee-terrain-pente-valais-01.webp",
+    heroImageWidth: 1401,
+    heroImageHeight: 1121,
     intro: [
       "Guy Monnet & Fils utilise des pelles araignées depuis de nombreuses années pour travailler dans des terrains difficiles, en forte pente ou sur des zones à l'accès compliqué.",
       "Ce type de machine permet d'intervenir sur des chantiers inaccessibles aux engins de terrassement classiques, notamment en montagne.",
@@ -333,7 +366,11 @@ export const services: Service[] = [
     seoTitle: "Travaux et aménagement de cours d'eau en Valais | Guy Monnet",
     seoDescription:
       "Guy Monnet & Fils participe à des projets pluridisciplinaires d'aménagement de cours d'eau en Valais, entre protection contre les dangers naturels et ingénierie.",
-    heroImageLabel: "Chantier d'aménagement d'un cours d'eau en Valais",
+    heroImageLabel: "Aménagement en pierre des berges d'un cours d'eau en Valais",
+    heroImage: "/images/services/cours-eau-amenagement-berges-valais-01.webp",
+    heroImageWidth: 1100,
+    heroImageHeight: 1467,
+    imagePosition: "object-[center_65%]",
     intro: [
       "Guy Monnet & Fils participe à des projets pluridisciplinaires concernant les cours d'eau, en combinant enjeux naturels, protection contre les dangers naturels et ingénierie.",
       "Ces chantiers sont menés en collaboration avec des entreprises spécialisées et des bureaux d'ingénieurs.",
@@ -357,7 +394,11 @@ export const services: Service[] = [
     seoTitle: "Création & rénovation de sentiers en Valais | Guy Monnet",
     seoDescription:
       "Guy Monnet & Fils crée, rénove et sécurise des sentiers pédestres en Valais, notamment le Sentier des Sens à La Tzoumaz.",
-    heroImageLabel: "Sentier pédestre aménagé en Valais",
+    heroImageLabel: "Sentier pédestre aménagé en balcon sur les hauteurs du Valais",
+    heroImage: "/images/services/sentier-pedestre-valais-01.webp",
+    heroImageWidth: 1100,
+    heroImageHeight: 1467,
+    imagePosition: "object-top",
     intro: [
       "Guy Monnet & Fils crée de nouveaux sentiers et améliore ou sécurise des sentiers existants, en Valais.",
       "Le Sentier des Sens, réalisé pour la commune de La Tzoumaz, illustre cette activité, avec des travaux de génie civil et de maçonnerie associés, dont un pont en béton apparent.",

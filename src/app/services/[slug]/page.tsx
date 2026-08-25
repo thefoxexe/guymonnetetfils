@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
+import { ServiceImage } from "@/components/ServiceImage";
 import { ProjectGrid } from "@/components/ProjectCard";
 import { JsonLd } from "@/components/JsonLd";
 import { services, getServiceBySlug } from "@/data/services";
@@ -46,7 +46,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               {service.intro[0]}
             </p>
           </div>
-          <PhotoPlaceholder label={service.heroImageLabel} aspect="wide" priority />
+          <ServiceImage service={service} aspect="wide" priority />
         </Container>
       </section>
 

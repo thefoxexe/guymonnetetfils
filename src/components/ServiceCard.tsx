@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Service } from "@/data/services";
-import { PhotoPlaceholder } from "./PhotoPlaceholder";
+import { ServiceImage } from "./ServiceImage";
 import { Reveal } from "./Reveal";
 
 export function ServiceCard({ service }: { service: Service }) {
@@ -9,7 +9,7 @@ export function ServiceCard({ service }: { service: Service }) {
       href={`/services/${service.slug}/`}
       className="focus-ring group block border border-line bg-paper transition-colors duration-200 ease-editorial hover:border-ink"
     >
-      <PhotoPlaceholder label={service.heroImageLabel} aspect="video" />
+      <ServiceImage service={service} aspect="video" />
       <div className="p-6">
         <h3 className="font-display text-xl font-semibold text-ink group-hover:text-accent-ink">
           {service.name}

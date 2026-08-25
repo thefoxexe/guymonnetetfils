@@ -212,11 +212,12 @@ pour **Netlify Forms** : pas de backend à héberger ni de clé API à gérer.
   proxy réseau). Le contenu de ce site a donc été rédigé à partir du texte
   détaillé du brief de refonte, pas d'un crawl direct — voir
   `CONTENT_VALIDATION.md`, section 0.
-- **Photographies** : aucune image de chantier/équipe n'a pu être
-  récupérée automatiquement depuis l'ancien site pour la raison ci-dessus ;
-  tous les emplacements photo affichent un placeholder identifié (voir
-  `IMAGE_INVENTORY.csv`). Le rendu visuel final dépend de la migration de
-  ces images.
+- **Photographies** : les 11 pages services utilisent désormais de vraies
+  photos (transmises par le client), voir `public/images/services/` et
+  `IMAGE_INVENTORY.csv`. Les autres emplacements (hero d'accueil, pages
+  Entreprise, Équipe, Réalisations) affichent encore un placeholder
+  identifié, faute d'images récupérées automatiquement depuis l'ancien
+  site (pour la raison ci-dessus).
 - **Formulaire de contact** : branché sur Netlify Forms (voir section
   dédiée ci-dessous) — ne peut être testé de bout en bout qu'une fois le
   site déployé sur Netlify, voir `CONTENT_VALIDATION.md`, point 11.

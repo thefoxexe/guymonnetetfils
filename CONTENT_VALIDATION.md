@@ -150,11 +150,22 @@ existe, le transmettre** — il remplacerait avantageusement
 et compressé à partir de la photo du logo) pour un rendu plus net sur très
 grands écrans.
 
-Aucune photo de chantier/équipe réelle n'a en revanche pu être migrée
-(pas d'accès réseau à l'ancien site depuis cet environnement, voir §0).
-Toutes les zones photo du nouveau site affichent un **placeholder
-identifié** (fond anthracite avec légende « Photo à intégrer —
-[description] »).
+**Photos des 11 services — résolu.** Le client a transmis directement dans
+la conversation une photo réelle pour chacun des 11 domaines d'activité
+(reprises de son ancien site, déjà associées aux mêmes catégories).
+Redimensionnées, compressées en WebP et nommées pour le SEO (ex.
+`genie-civil-pose-conduite-tzoumaz-01.webp`) dans `public/images/services/`,
+utilisées à la fois sur les cartes de la page `/services/` et en hero de
+chaque page service (`src/data/services.ts`, champ `heroImage` ;
+composant `src/components/ServiceImage.tsx`). Le point de cadrage
+(`imagePosition`) a été ajusté au cas par cas pour que le bon sujet reste
+visible une fois la photo recadrée en carte (4:3) et en hero (16:9).
+
+Aucune autre photo (hero d'accueil, page Entreprise, page Équipe, pages
+Réalisations) n'a pu être migrée pour le moment (pas d'accès réseau à
+l'ancien site depuis cet environnement, voir §0). Ces zones affichent
+toujours un **placeholder identifié** (fond anthracite avec étiquette
+« Photo à intégrer »).
 
 - Voir `IMAGE_INVENTORY.csv` pour la liste complète des emplacements et des
   légendes attendues.
