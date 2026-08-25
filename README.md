@@ -214,10 +214,12 @@ pour **Netlify Forms** : pas de backend à héberger ni de clé API à gérer.
   `CONTENT_VALIDATION.md`, section 0.
 - **Photographies** : les 11 pages services utilisent désormais de vraies
   photos (transmises par le client), voir `public/images/services/` et
-  `IMAGE_INVENTORY.csv`. Les autres emplacements (hero d'accueil, pages
-  Entreprise, Équipe, Réalisations) affichent encore un placeholder
-  identifié, faute d'images récupérées automatiquement depuis l'ancien
-  site (pour la raison ci-dessus).
+  `IMAGE_INVENTORY.csv`. Le hero de la page d'accueil utilise également une
+  première photo réelle (camion-grue), à titre d'ébauche provisoire en
+  attendant d'autres photos/références annoncées par le client. Les autres
+  emplacements (pages Entreprise, Équipe, Réalisations) affichent encore un
+  placeholder identifié, faute d'images récupérées automatiquement depuis
+  l'ancien site (pour la raison ci-dessus).
 - **Formulaire de contact** : branché sur Netlify Forms (voir section
   dédiée ci-dessous) — ne peut être testé de bout en bout qu'une fois le
   site déployé sur Netlify, voir `CONTENT_VALIDATION.md`, point 11.

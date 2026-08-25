@@ -1,5 +1,5 @@
 old_image_url,original_filename,new_filename,service,project,alt,used
-TODO: VALIDATION CLIENT,TODO,hero-drone-chantier-valais-01.avif,home,,Vue drone d'un chantier Guy Monnet & Fils en Valais,hero home
+FOURNI PAR LE CLIENT (chat) - ébauche provisoire,camion MAN grue (dépôt),hero-camion-guy-monnet-transports-valais-01.webp,home,,Camion-grue Guy Monnet & Fils SA en intervention en Valais,hero home
 FOURNI PAR LE CLIENT (chat),transport (camions au depot),transport-camions-guy-monnet-riddes-01.webp,transport,,Camions Guy Monnet & Fils SA stationnés sous le hangar du dépôt de Riddes,carte + hero /services/transport/
 FOURNI PAR LE CLIENT (chat),terrassement (chantier),terrassement-chantier-valais-01.webp,terrassement,,Pelles mécaniques Guy Monnet & Fils sur un chantier de terrassement en Valais,carte + hero /services/terrassement/
 FOURNI PAR LE CLIENT (chat),genie civil (pose conduite),genie-civil-pose-conduite-tzoumaz-01.webp,genie-civil,,Pose d'une conduite en tranchée sur un chantier de génie civil à La Tzoumaz,carte + hero /services/genie-civil/

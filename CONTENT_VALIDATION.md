@@ -161,11 +161,17 @@ composant `src/components/ServiceImage.tsx`). Le point de cadrage
 (`imagePosition`) a été ajusté au cas par cas pour que le bon sujet reste
 visible une fois la photo recadrée en carte (4:3) et en hero (16:9).
 
-Aucune autre photo (hero d'accueil, page Entreprise, page Équipe, pages
-Réalisations) n'a pu être migrée pour le moment (pas d'accès réseau à
-l'ancien site depuis cet environnement, voir §0). Ces zones affichent
-toujours un **placeholder identifié** (fond anthracite avec étiquette
-« Photo à intégrer »).
+**Hero d'accueil — ébauche provisoire.** Une première photo (camion-grue MAN
+Guy Monnet & Fils SA) transmise par le client est utilisée en hero de la
+page d'accueil, à titre d'ébauche en attendant d'autres
+références/photos annoncées par le client. Cadrage (`object-position`)
+ajusté séparément pour mobile et desktop afin de garder l'avant du camion
+visible dans les deux cas.
+
+Aucune autre photo (page Entreprise, page Équipe, pages Réalisations) n'a
+pu être migrée pour le moment (pas d'accès réseau à l'ancien site depuis
+cet environnement, voir §0). Ces zones affichent toujours un **placeholder
+identifié** (fond anthracite avec étiquette « Photo à intégrer »).
 
 - Voir `IMAGE_INVENTORY.csv` pour la liste complète des emplacements et des
   légendes attendues.

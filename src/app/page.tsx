@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -26,11 +27,13 @@ export default function HomePage() {
       {/* HERO */}
       <section className="relative flex min-h-[420px] items-end overflow-hidden sm:min-h-[560px]">
         <div className="absolute inset-0">
-          <PhotoPlaceholder
-            label="Vue drone d'un chantier Guy Monnet & Fils en Valais"
-            aspect="cinema"
+          <Image
+            src="/images/hero-camion-guy-monnet-transports-valais-01.webp"
+            alt="Camion-grue Guy Monnet & Fils SA en intervention en Valais"
+            fill
             priority
-            className="h-full"
+            sizes="100vw"
+            className="object-cover object-[10%_40%] sm:object-[30%_40%]"
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
