@@ -40,3 +40,33 @@ export function IconInstagram({ className = "h-5 w-5" }: IconProps) {
     </svg>
   );
 }
+
+export function IconPin({ className = "h-5 w-5" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className={className} aria-hidden="true">
+      <path
+        d="M12 21.5s7-6.4 7-12A7 7 0 0 0 5 9.5c0 5.6 7 12 7 12Z"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="12" cy="9.5" r="2.4" />
+    </svg>
+  );
+}
+
+export function IconCalendar({ className = "h-5 w-5" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className={className} aria-hidden="true">
+      <rect x="3.5" y="5" width="17" height="16" rx="1.5" />
+      <path d="M3.5 9.5h17M8 3v3.5M16 3v3.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function IconCheck({ className = "h-5 w-5" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className} aria-hidden="true">
+      <path d="m4.5 12.5 5 5L19.5 7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
