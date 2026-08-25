@@ -173,16 +173,33 @@ d'audience, qui n'étaient pas définis dans le brief de refonte.
 - **Question client : quel hébergeur sera utilisé ? Un outil de mesure
   d'audience (Google Analytics, Plausible, Matomo...) est-il prévu ?**
 
-## 11. Formulaire de contact
+## 11. Formulaire de contact — résolu (Netlify Forms)
 
-Le formulaire de contact prépare actuellement un e-mail pré-rempli
-(`mailto:`) à l'ouverture du client de messagerie du visiteur, faute de
-service d'envoi backend configuré.
+Le formulaire de contact (`src/components/ContactForm.tsx`) est branché sur
+**Netlify Forms** : aucun backend à héberger, aucune clé API à gérer dans
+le code. Fonctionnement :
 
-- **Question client / décision technique : souhaitez-vous un envoi côté
-  serveur (API + service d'e-mail transactionnel) ? Cela nécessite de
-  choisir un prestataire (ex. service SMTP/API) et de fournir les
-  identifiants nécessaires.**
+- Le `<form>` porte les attributs `name="contact"` et `data-netlify="true"`
+  (+ un champ anti-spam `data-netlify-honeypot`). Netlify détecte
+  automatiquement ce formulaire en analysant le HTML généré au build —
+  vérifié : ces attributs sont bien présents dans le HTML statique de
+  `/contact/` produit par `next build`.
+- L'envoi se fait en AJAX (`fetch`) pour rester sur la page, avec un
+  message de confirmation ou d'erreur affiché directement dans le
+  formulaire. Les pièces jointes (photos/PDF/plans) sont transmises dans le
+  même envoi (`multipart/form-data`), dans les limites de Netlify Forms.
+- **Important : ce formulaire ne peut être testé de bout en bout qu'une
+  fois le site déployé sur Netlify.** En local (`npm run dev`/`start`),
+  l'envoi affichera un message de succès sans qu'aucune donnée ne soit
+  réellement enregistrée nulle part — c'est attendu, Netlify Forms n'existe
+  que sur l'infrastructure Netlify.
+- **Action client, après le premier déploiement sur Netlify :**
+  1. Faire un envoi test depuis le site en ligne.
+  2. Vérifier sa réception dans l'onglet **Forms** du tableau de bord
+     Netlify du site.
+  3. Configurer les notifications (e-mail à `guy.monnet@bluewin.ch` par
+     exemple) dans **Site settings → Forms → Form notifications** — cela se
+     fait entièrement dans l'interface Netlify, sans toucher au code.
 
 ## 12. Réalisations futures
 

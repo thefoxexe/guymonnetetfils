@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { company } from "@/data/company";
 
 const projectTypes = [
   "Transport",
@@ -18,33 +17,61 @@ const projectTypes = [
   "Autre",
 ];
 
-// TODO: backend nécessaire pour l'envoi réel du formulaire (API route + service
-// d'e-mail transactionnel). En l'absence de service configuré, le formulaire
-// prépare un e-mail pré-rempli vers l'adresse de contact de l'entreprise.
-export function ContactForm() {
-  const [submitted, setSubmitted] = useState(false);
+type Status = "idle" | "submitting" | "success" | "error";
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+// Formulaire géré par Netlify Forms : détecté au build grâce aux attributs
+// name/data-netlify sur le <form> (Netlify scanne le HTML généré), puis
+// soumis en AJAX ici pour rester sur la page. Les envois (et les pièces
+// jointes) sont consultables dans l'onglet "Forms" du site Netlify ; les
+// notifications par e-mail se configurent aussi là-bas, dans les réglages
+// du site (aucune clé/API à gérer côté code).
+export function ContactForm() {
+  const [status, setStatus] = useState<Status>("idle");
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const lines = [
-      `Nom : ${data.get("name")}`,
-      `Entreprise : ${data.get("company") || "-"}`,
-      `Téléphone : ${data.get("phone")}`,
-      `E-mail : ${data.get("email")}`,
-      `Type de projet : ${data.get("projectType")}`,
-      `Lieu du projet : ${data.get("location") || "-"}`,
-      "",
-      String(data.get("message") || ""),
-    ];
-    const subject = encodeURIComponent(`Demande de devis — ${data.get("projectType")}`);
-    const body = encodeURIComponent(lines.join("\n"));
-    window.location.href = `mailto:${company.email}?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+    const form = event.currentTarget;
+    setStatus("submitting");
+    try {
+      const response = await fetch("/contact/", {
+        method: "POST",
+        body: new FormData(form),
+      });
+      if (!response.ok) throw new Error(`Statut ${response.status}`);
+      setStatus("success");
+      form.reset();
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  if (status === "success") {
+    return (
+      <p role="status" className="border border-line bg-offwhite p-6 text-sm text-ink">
+        Merci, votre demande a bien été envoyée. Nous revenons vers vous dans les meilleurs
+        délais.
+      </p>
+    );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+    <form
+      name="contact"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      encType="multipart/form-data"
+      onSubmit={handleSubmit}
+      className="space-y-6"
+      noValidate
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <p className="hidden">
+        <label>
+          Ne pas remplir ce champ <input name="bot-field" tabIndex={-1} autoComplete="off" />
+        </label>
+      </p>
+
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <Field label="Nom" name="name" required autoComplete="name" />
         <Field label="Entreprise" name="company" autoComplete="organization" />
@@ -97,11 +124,6 @@ export function ContactForm() {
           accept="image/*,.pdf"
           className="focus-ring mt-2 w-full text-sm text-concrete file:mr-4 file:border file:border-ink file:bg-transparent file:px-4 file:py-2 file:text-xs file:font-semibold file:uppercase"
         />
-        <p className="mt-1 text-xs text-concrete">
-          TODO: contenu client nécessaire — les pièces jointes ne sont pas transmises tant
-          qu&apos;un service d&apos;envoi n&apos;est pas configuré ; merci de les joindre à
-          l&apos;e-mail qui s&apos;ouvrira après l&apos;envoi.
-        </p>
       </div>
 
       <label className="flex items-start gap-3 text-sm text-concrete">
@@ -118,19 +140,16 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className="focus-ring inline-flex items-center justify-center bg-accent px-8 py-4 text-sm font-semibold uppercase tracking-wide text-ink hover:bg-accent-dark"
+        disabled={status === "submitting"}
+        className="focus-ring inline-flex items-center justify-center bg-accent px-8 py-4 text-sm font-semibold uppercase tracking-wide text-ink hover:bg-accent-dark disabled:opacity-60"
       >
-        Envoyer ma demande
+        {status === "submitting" ? "Envoi en cours…" : "Envoyer ma demande"}
       </button>
 
-      {submitted ? (
-        <p role="status" className="text-sm text-concrete">
-          Votre messagerie va s&apos;ouvrir avec les informations pré-remplies. Vous pouvez aussi
-          nous joindre directement à{" "}
-          <a href={`mailto:${company.email}`} className="underline hover:text-accent-ink">
-            {company.email}
-          </a>
-          .
+      {status === "error" ? (
+        <p role="alert" className="text-sm text-accent-ink">
+          Une erreur est survenue lors de l&apos;envoi. Merci de réessayer, ou de nous contacter
+          directement par téléphone ou e-mail (coordonnées ci-contre).
         </p>
       ) : null}
     </form>

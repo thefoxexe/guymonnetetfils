@@ -2,13 +2,11 @@ import Link from "next/link";
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
-import { Stats } from "@/components/Stats";
 import { ServiceGrid } from "@/components/ServiceCard";
 import { ProjectGrid } from "@/components/ProjectCard";
 import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
 import { services } from "@/data/services";
 import { projects } from "@/data/projects";
-import { company } from "@/data/company";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -49,28 +47,12 @@ export default function HomePage() {
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Button href="/services/" variant="primary">
-              Découvrir nos services
+              Nos services
             </Button>
             <Button href="/contact/" variant="secondary" className="border-paper text-paper hover:bg-paper hover:text-ink">
-              Parler de votre projet
+              Contactez-nous
             </Button>
           </div>
-          <p className="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-concrete-light/80">
-            Riddes · Valais · Depuis 1980
-          </p>
-        </Container>
-      </section>
-
-      {/* PREUVES */}
-      <section className="py-16">
-        <Container>
-          <Stats
-            items={[
-              { value: "1980", label: "Année de création" },
-              { value: `${company.domainsCount}`, label: "Domaines d'activité" },
-              { value: "Riddes", label: "Implantation actuelle" },
-            ]}
-          />
         </Container>
       </section>
 

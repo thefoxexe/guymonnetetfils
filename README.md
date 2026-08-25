@@ -139,6 +139,28 @@ bas de chaque page. Le seul chemin de conversion mis en avant est le
 numéro de téléphone (header + footer + page contact) et la page
 `/contact/` elle-même, accessible depuis la navigation.
 
+## Formulaire de contact (Netlify Forms)
+
+Le formulaire de `/contact/` (`src/components/ContactForm.tsx`) est conçu
+pour **Netlify Forms** : pas de backend à héberger ni de clé API à gérer.
+
+- Le `<form>` porte `name="contact"` et `data-netlify="true"` : Netlify
+  détecte le formulaire en analysant le HTML statique généré au build (ce
+  HTML est bien statique — la page `/contact/` est prérendue, vérifiable
+  via `npm run build`, elle apparaît en `○ (Static)`).
+- Un champ anti-spam (honeypot, `data-netlify-honeypot="bot-field"`) est
+  inclus.
+- L'envoi se fait en AJAX (`fetch`) avec `FormData` (texte + pièces
+  jointes dans le même envoi), pour rester sur la page et afficher un
+  message de succès ou d'erreur sans rechargement.
+- **Ce formulaire ne peut être vérifié de bout en bout qu'une fois déployé
+  sur Netlify** : en local, l'envoi affichera un succès sans que rien ne
+  soit réellement enregistré (comportement normal du serveur Next.js local,
+  qui répond simplement 200 à toute requête sur une page statique). Après
+  le déploiement, les envois apparaissent dans l'onglet **Forms** du
+  tableau de bord Netlify du site, où les notifications par e-mail se
+  configurent aussi (**Site settings → Forms → Form notifications**).
+
 ## Limites connues de cette itération
 
 - **Crawl de l'ancien site** : cet environnement de développement n'a pas
@@ -151,10 +173,9 @@ numéro de téléphone (header + footer + page contact) et la page
   tous les emplacements photo affichent un placeholder identifié (voir
   `IMAGE_INVENTORY.csv`). Le rendu visuel final dépend de la migration de
   ces images.
-- **Formulaire de contact** : fonctionne aujourd'hui via un e-mail
-  pré-rempli (`mailto:`), en l'absence de service d'envoi backend
-  configuré. Voir `CONTENT_VALIDATION.md`, point 11, pour la décision à
-  prendre côté client.
+- **Formulaire de contact** : branché sur Netlify Forms (voir section
+  dédiée ci-dessous) — ne peut être testé de bout en bout qu'une fois le
+  site déployé sur Netlify, voir `CONTENT_VALIDATION.md`, point 11.
 - **Mesure d'audience** : aucun outil d'analytics n'est installé par
   défaut (aucun outil n'était confirmé dans le brief). Les événements
   recommandés par le cahier des charges (`phone_click`, `email_click`,
