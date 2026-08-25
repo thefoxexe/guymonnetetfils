@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "Site web Guy Monnet & Fils SA - Genie civil, terrassement, transport et construction en Valais",
+  "engines": {
+    "node": ">=18.18.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
