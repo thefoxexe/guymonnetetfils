@@ -1,0 +1,22 @@
+# Redirections des anciennes URLs (site Squarespace) vers la nouvelle
+# architecture. Traitées par Netlify avant le service des fichiers statiques
+# donc en un seul saut (301), sans passer par Next.js. Voir REDIRECTS.md.
+
+/domaines-dactitivs           /services/transport/                301
+/terrassement                 /services/terrassement/             301
+/genie-civil                  /services/genie-civil/              301
+/general-2                    /services/maconnerie/                301
+/amenagements-exterieurs      /services/amenagements-exterieurs/  301
+/demolition                   /services/demolition/               301
+/revalorisation-des-materiaux /services/revalorisation-materiaux/ 301
+/deneigement                  /services/deneigement/              301
+/pelles-araignees             /services/pelles-araignees/         301
+/cours-d-eau                  /services/cours-eau/                301
+/sentiers-pedestres           /services/sentiers-pedestres/       301
+/a-propos                     /entreprise/                        301
+/nos-collaborateurs           /equipe/                            301
+/nouvelle-page                /realisations/torrent-du-lue/       301
+/les-larmes-du-fou            /realisations/les-larmes-du-fou/    301
+/le-sentier-des-sens          /realisations/sentier-des-sens/     301
+/skatepark-riddes             /realisations/skatepark-riddes/     301
+/evnementsvido                /entreprise/                        301

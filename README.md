@@ -6,9 +6,13 @@ transport et construction.
 
 ## Stack technique
 
-- **Next.js 14** (App Router) + **TypeScript** — site statique, généré au
-  build (`output` par défaut : pages statiques/SSG), rapide et sans backend
-  inutile.
+- **Next.js 14** (App Router) + **TypeScript**, en **export statique**
+  (`output: "export"` dans `next.config.js`) : `npm run build` génère un
+  dossier `out/` de fichiers HTML/CSS/JS purement statiques, sans serveur
+  Next.js ni fonctions serverless en production. Le site n'a aucune
+  logique dépendant d'une requête (pas de route API, pas de contenu
+  personnalisé), donc rien ne justifie un serveur applicatif — juste de
+  l'hébergement statique, plus simple et plus robuste à déployer.
 - **Tailwind CSS** — design system (couleurs, typographies, espacements)
   centralisé dans `tailwind.config.ts` et `src/app/globals.css`.
 - Pas de CMS, pas de base de données : le contenu est structuré dans
@@ -33,9 +37,13 @@ Site disponible sur http://localhost:3000.
 ## Build de production
 
 ```bash
-npm run build
-npm run start
+npm run build   # génère le dossier out/ (fichiers statiques)
+npm run start   # sert out/ en local pour prévisualiser (via `serve`)
 ```
+
+`next start` ne fonctionne pas avec `output: "export"` — `npm run start`
+lance donc `serve out` à la place, qui reproduit fidèlement un hébergement
+statique (c'est aussi ce que fait Netlify en production).
 
 ## Vérifications
 
@@ -46,14 +54,49 @@ npm run lint        # ESLint (next/core-web-vitals)
 
 ## Déploiement
 
-Le site est un projet Next.js standard : il peut être déployé sur
-Vercel, ou tout hébergeur supportant Next.js (Node.js). Avant la mise en
-production :
+Le site est déployé sur **Netlify**, en pur export statique — sans le
+runtime Next.js de Netlify (`@netlify/plugin-nextjs`), qui n'est ni
+nécessaire (le site n'a pas de logique serveur) ni compatible avec la
+configuration Netlify Forms utilisée ici (voir « Pourquoi pas le runtime
+Next.js de Netlify » ci-dessous).
+
+Configuration (`netlify.toml`) :
+
+```toml
+[build]
+  command = "npm run build"
+  publish = "out"
+```
+
+Aucun plugin à déclarer. Les redirections vivent dans `public/_redirects`
+(voir `REDIRECTS.md`), copié tel quel dans `out/` au build et lu
+automatiquement par Netlify.
+
+Avant la mise en production :
 
 1. Mettre à jour `company.siteUrl` dans `src/data/company.ts` avec le nom
    de domaine définitif.
 2. Choisir la version canonique du domaine (`www.` ou nu) et forcer HTTPS
    au niveau de l'hébergement/DNS (voir `SEO.md`, section Canonicals).
+
+### Pourquoi pas le runtime Next.js de Netlify
+
+Une première version de ce projet utilisait le runtime Next.js standard de
+Netlify (`@netlify/plugin-nextjs`, avec fonctions serverless). Le build a
+échoué avec cette erreur :
+
+```
+Plugin "@netlify/plugin-nextjs" failed.
+Error: Failed assembling prerendered content for upload.
+@netlify/plugin-nextjs@5 requires migration steps to support Netlify Forms.
+```
+
+Ce runtime a des exigences de migration spécifiques pour que Netlify Forms
+détecte un formulaire sur une page prérendue. Comme ce site est
+**entièrement statique** (aucune page ne dépend d'une requête), la solution
+la plus simple et la plus robuste était de passer en export statique pur
+(`output: "export"`) : Netlify Forms fonctionne alors nativement, sans
+runtime ni migration, en scannant directement le HTML de `out/`.
 3. Vérifier chaque point de `CONTENT_VALIDATION.md` avec le client.
 4. Remplacer les emplacements photo (`PhotoPlaceholder`) par les vraies
    photographies migrées (voir `IMAGE_INVENTORY.csv`).
@@ -145,21 +188,22 @@ Le formulaire de `/contact/` (`src/components/ContactForm.tsx`) est conçu
 pour **Netlify Forms** : pas de backend à héberger ni de clé API à gérer.
 
 - Le `<form>` porte `name="contact"` et `data-netlify="true"` : Netlify
-  détecte le formulaire en analysant le HTML statique généré au build (ce
-  HTML est bien statique — la page `/contact/` est prérendue, vérifiable
-  via `npm run build`, elle apparaît en `○ (Static)`).
+  détecte le formulaire en scannant le HTML statique du dossier `out/`
+  généré par `npm run build` (vérifiable : `grep data-netlify
+  out/contact/index.html`).
 - Un champ anti-spam (honeypot, `data-netlify-honeypot="bot-field"`) est
   inclus.
 - L'envoi se fait en AJAX (`fetch`) avec `FormData` (texte + pièces
   jointes dans le même envoi), pour rester sur la page et afficher un
   message de succès ou d'erreur sans rechargement.
 - **Ce formulaire ne peut être vérifié de bout en bout qu'une fois déployé
-  sur Netlify** : en local, l'envoi affichera un succès sans que rien ne
-  soit réellement enregistré (comportement normal du serveur Next.js local,
-  qui répond simplement 200 à toute requête sur une page statique). Après
-  le déploiement, les envois apparaissent dans l'onglet **Forms** du
-  tableau de bord Netlify du site, où les notifications par e-mail se
-  configurent aussi (**Site settings → Forms → Form notifications**).
+  sur Netlify** : en local (`npm run start`, qui sert `out/` via `serve`),
+  l'envoi affichera un succès sans que rien ne soit réellement enregistré
+  — un serveur de fichiers statiques répond simplement 200 à toute requête
+  sur un fichier existant, POST compris. Après le déploiement, les envois
+  apparaissent dans l'onglet **Forms** du tableau de bord Netlify du site,
+  où les notifications par e-mail se configurent aussi (**Site settings →
+  Forms → Form notifications**).
 
 ## Limites connues de cette itération
 

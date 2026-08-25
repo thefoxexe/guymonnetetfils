@@ -2,33 +2,26 @@
 
 ## Où sont définies les redirections
 
-Les redirections 301 sont implémentées dans `next.config.js` (fonction
-`redirects()`), et documentées de façon lisible dans `redirects.csv`
+Le site est un **export statique** (`output: "export"` dans
+`next.config.js`, voir README.md) : Next.js ne tourne plus comme serveur en
+production, donc les redirections ne peuvent plus être définies dans la
+fonction `redirects()` de `next.config.js` (non supportée en export
+statique). Elles sont à la place définies dans **`public/_redirects`**, au
+format natif Netlify — copié tel quel dans `out/_redirects` au build, et
+lu automatiquement par Netlify avant de servir les fichiers statiques.
+Documentées de façon lisible dans `redirects.csv`
 (colonnes `old_url,new_url,status,reason`).
-
-## Pourquoi `skipTrailingSlashRedirect` + doublon de sources
 
 Le site est configuré avec `trailingSlash: true` (toutes les URLs
 canoniques se terminent par `/`, conformément à l'arborescence demandée :
-`/services/transport/`, `/realisations/torrent-du-lue/`, etc.).
-
-Par défaut, Next.js redirige automatiquement toute URL sans slash final
-vers sa version avec slash **avant** d'évaluer les redirections définies
-dans `redirects()`. Comme les anciennes URLs Squarespace n'ont pas de slash
-final (`/general-2`, `/nouvelle-page`, ...), cela produirait une chaîne
-`301 → 301` (interdite par la règle « aucune chaîne de redirections », voir
-section 90 du cahier des charges).
-
-Pour éviter cette chaîne :
-
-1. `skipTrailingSlashRedirect: true` désactive la redirection automatique
-   de Next.js.
-2. Chaque ancienne URL est déclarée deux fois dans `redirects()` (avec et
-   sans slash final), pointant directement vers la nouvelle URL canonique.
-
-Résultat vérifié (voir Phase 15 de la migration, testé avec `curl`) :
-chaque ancienne URL redirige en **un seul saut (301)** vers sa nouvelle
-URL, qui répond en `200`.
+`/services/transport/`, `/realisations/torrent-du-lue/`, etc.). Comme
+`public/_redirects` est traité par Netlify **avant** que quoi que ce soit
+d'autre n'intervienne, chaque ancienne URL (sans slash final, comme
+`/general-2`) redirige directement vers sa nouvelle URL canonique en un
+seul saut — aucune chaîne `301 → 301` possible ici, contrairement à un
+`redirects()` Next.js combiné à `trailingSlash: true` (piège rencontré et
+documenté dans une version antérieure de ce fichier, avant le passage à
+l'export statique).
 
 ## Table de redirection complète
 
@@ -64,7 +57,7 @@ URL, qui répond en `200`.
   (`https://www.guy-monnet-transports.ch/`) doit être effectué avant la
   bascule en production pour vérifier qu'aucune URL indexée par Google
   n'a été oubliée. Toute URL supplémentaire découverte doit être ajoutée à
-  `redirects.csv` et à `next.config.js`.
+  `redirects.csv` et à `public/_redirects`.
 - **www vs non-www / HTTP vs HTTPS** : à configurer au niveau de
   l'hébergement/DNS final (choisir une seule version canonique — voir
   SEO.md, section Canonicals).

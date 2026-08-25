@@ -193,6 +193,10 @@ le code. Fonctionnement :
   l'envoi affichera un message de succès sans qu'aucune donnée ne soit
   réellement enregistrée nulle part — c'est attendu, Netlify Forms n'existe
   que sur l'infrastructure Netlify.
+- Le site est déployé en export statique (`output: "export"`), sans le
+  runtime Next.js de Netlify — voir README.md, section « Pourquoi pas le
+  runtime Next.js de Netlify » pour le détail de l'erreur de build évitée
+  par ce choix.
 - **Action client, après le premier déploiement sur Netlify :**
   1. Faire un envoi test depuis le site en ligne.
   2. Vérifier sa réception dans l'onglet **Forms** du tableau de bord
