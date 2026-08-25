@@ -12,20 +12,33 @@ site (recherche `TODO:` dans le dépôt), pour rester visible à chaque étape.
 
 ## 0. Important — accès au site existant
 
-L'environnement dans lequel ce site a été développé n'a **pas d'accès réseau
-sortant vers `guy-monnet-transports.ch`** (bloqué par le proxy réseau de
-l'environnement, aussi bien en `curl` qu'en outil de crawl). Il n'a donc pas
-été possible de crawler automatiquement l'ancien site pour en extraire les
-textes et photos directement.
+**Confirmé à deux reprises pendant le développement** : l'environnement dans
+lequel ce site a été développé n'a **aucun accès réseau sortant** en dehors
+d'une liste blanche technique (npm, PyPI, API Anthropic...). Ce n'est pas
+une restriction propre à `guy-monnet-transports.ch` : une requête vers
+`www.google.com` ou `web.archive.org` (Wayback Machine, testé comme
+alternative) est bloquée exactement de la même façon par le proxy réseau de
+l'environnement (`curl`, outil de crawl intégré — même résultat). Il n'a
+donc pas été possible de crawler automatiquement l'ancien site, ni en
+direct ni via une archive, pour en extraire les textes et photos.
 
-Tout le contenu de ce nouveau site provient du texte détaillé fourni dans le
-brief de refonte (qui décrit précisément le contenu de chaque ancienne page).
-**Aucun texte n'a été inventé** au-delà de ce qui a été fourni. Si le client
-dispose d'un accès direct à l'ancien site ou à son export Squarespace, il est
-recommandé de repasser en revue chaque page une dernière fois avant la mise
-en production pour vérifier qu'aucun contenu mineur n'a été oublié dans le
-brief d'origine (voir aussi §9 sur les photos, qui n'ont pas pu être migrées
-pour la même raison).
+Tout le contenu de ce site provient du texte détaillé fourni dans le brief
+de refonte (qui décrit précisément le contenu de chaque ancienne page).
+**Aucun texte n'a été inventé** au-delà de ce qui a été fourni.
+
+**Pour obtenir le contenu réellement crawlé**, une des options suivantes est
+nécessaire côté client :
+
+1. Coller directement le texte de chaque page de l'ancien site dans la
+   conversation (le plus rapide) ;
+2. Exporter les pages en PDF/HTML ou faire des captures d'écran complètes
+   et les transmettre en pièce jointe (les fichiers transmis peuvent être
+   lus directement, contrairement aux URLs) ;
+3. Transmettre un export Squarespace du site si disponible.
+
+Sans l'un de ces trois éléments, le contenu textuel de ce site restera basé
+sur le brief d'origine — précis sur les faits qu'il couvre, mais pas
+garanti exhaustif face au site réel.
 
 ## 1. Adresse
 
@@ -119,16 +132,20 @@ attendant les liens réels.
 
 ## 9. Photos, vidéos et logo
 
-**Logo — résolu.** Le logo officiel a été transmis directement dans la
-conversation et est intégré au site (header, footer, favicon), avec une
-palette de couleurs recalculée par échantillonnage réel des couleurs du
-logo (jaune de marque `#EAB308`, dérivé foncé `#8A5A0A` pour le texte —
-voir `tailwind.config.ts`). Le fichier source original est conservé dans
-`brand-assets/logo-source.jpg` (hors dossier `public/`, non servi par le
-site). **Action client : si un fichier vectoriel (SVG/AI/EPS) ou une version
-haute résolution du logo existe, le transmettre** — il remplacerait
-avantageusement le fichier `public/logo-guy-monnet.png` actuel (recadré et
-compressé à partir de la photo du logo) pour un rendu plus net sur très
+**Logo — résolu.** Le logo officiel complet (avec le bandeau
+« Transports · Terrassements · Génie-civil » et les coordonnées) a été
+transmis directement dans la conversation et est intégré tel quel — sans
+recadrage — au site (header, footer). Le favicon utilise uniquement la
+pelleteuse du logo, recadrée en carré, seule solution lisible à la taille
+d'une icône d'onglet de navigateur. La palette de couleurs est calculée
+par échantillonnage réel des couleurs du logo (jaune de marque `#EAB308`,
+dérivé foncé `#8A5A0A` pour le texte — voir `tailwind.config.ts`). Le
+fichier source original est conservé dans `brand-assets/logo-source.jpg`
+(hors dossier `public/`, non servi par le site). **Action client : si un
+fichier vectoriel (SVG/AI/EPS) ou une version haute résolution du logo
+existe, le transmettre** — il remplacerait avantageusement
+`public/logo-guy-monnet-full.png` (recadré uniquement du fond blanc externe
+et compressé à partir de la photo du logo) pour un rendu plus net sur très
 grands écrans.
 
 Aucune photo de chantier/équipe réelle n'a en revanche pu être migrée

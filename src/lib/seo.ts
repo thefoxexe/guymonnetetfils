@@ -41,7 +41,7 @@ export function organizationJsonLd() {
     "@id": `${company.siteUrl}/#organization`,
     name: company.name,
     url: company.siteUrl,
-    logo: absoluteUrl("/logo-guy-monnet.png"),
+    logo: absoluteUrl("/logo-guy-monnet-full.png"),
     foundingDate: String(company.foundedYear),
     address: {
       "@type": "PostalAddress",
@@ -64,7 +64,7 @@ export function localBusinessJsonLd() {
     "@type": "GeneralContractor",
     "@id": `${company.siteUrl}/#localbusiness`,
     name: company.name,
-    image: absoluteUrl("/logo-guy-monnet.png"),
+    image: absoluteUrl("/logo-guy-monnet-full.png"),
     url: company.siteUrl,
     telephone: company.phone.office,
     email: company.email,

@@ -3,7 +3,6 @@ import { Archivo, Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { StickyMobileActions } from "@/components/StickyMobileActions";
 import { JsonLd } from "@/components/JsonLd";
 import { organizationJsonLd, localBusinessJsonLd, websiteJsonLd, absoluteUrl } from "@/lib/seo";
 import { company } from "@/data/company";
@@ -56,11 +55,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Aller au contenu principal
         </a>
         <Header />
-        <main id="main-content" className="flex-1 pb-16 lg:pb-0">
+        <main id="main-content" className="flex-1">
           {children}
         </main>
         <Footer />
-        <StickyMobileActions />
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={localBusinessJsonLd()} />
         <JsonLd data={websiteJsonLd()} />

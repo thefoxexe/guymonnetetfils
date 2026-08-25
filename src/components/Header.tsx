@@ -56,12 +56,12 @@ export function Header() {
       <div className="container-wide flex h-16 items-center justify-between gap-2 md:h-24 xl:gap-4">
         <Link href="/" className="focus-ring shrink-0">
           <Image
-            src="/logo-guy-monnet.png"
-            alt="Guy Monnet & Fils SA"
-            width={560}
-            height={162}
+            src="/logo-guy-monnet-full.png"
+            alt="Guy Monnet & Fils SA — Transports, Terrassements, Génie-civil"
+            width={900}
+            height={310}
             priority
-            className="h-10 w-auto md:h-12 xl:h-14"
+            className="h-12 w-auto md:h-16 xl:h-20"
           />
         </Link>
 
@@ -99,21 +99,22 @@ export function Header() {
           </nav>
 
           {megaOpen ? (
-            <div className="absolute left-1/2 top-full w-[min(760px,80vw)] -translate-x-1/2 border border-line bg-paper p-8 shadow-xl">
-              <div className="grid grid-cols-3 gap-x-8 gap-y-4">
+            <div className="absolute left-1/2 top-full w-[min(760px,80vw)] -translate-x-1/2 animate-mega-in border border-line border-t-2 border-t-accent bg-paper p-6 shadow-xl">
+              <div className="grid grid-cols-3 gap-x-2 gap-y-1">
                 {services.map((service) => (
                   <Link
                     key={service.slug}
                     href={`/services/${service.slug}/`}
-                    className="focus-ring group block border-b border-transparent pb-1 text-sm text-ink hover:border-accent hover:text-accent-ink"
+                    className="focus-ring group flex items-center gap-2.5 px-3 py-2.5 text-sm text-ink transition-colors duration-150 hover:bg-offwhite hover:text-accent-ink"
                   >
+                    <span className="h-1.5 w-1.5 shrink-0 bg-accent transition-transform duration-150 group-hover:scale-125" />
                     {service.name}
                   </Link>
                 ))}
               </div>
               <Link
                 href="/services/"
-                className="focus-ring mt-6 inline-block text-xs font-semibold uppercase tracking-wide text-accent-ink underline underline-offset-4"
+                className="focus-ring mt-3 inline-block border-t border-line px-3 pt-3 text-xs font-semibold uppercase tracking-wide text-accent-ink underline underline-offset-4"
               >
                 Voir tous les services
               </Link>
@@ -175,13 +176,14 @@ export function Header() {
     */}
     {mobileOpen ? (
       <div id="mobile-nav" className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto bg-paper md:top-24 lg:hidden">
-        <nav aria-label="Navigation mobile" className="container-wide flex flex-col gap-1 py-6">
+        <nav aria-label="Navigation mobile" className="animate-drawer-in container-wide flex flex-col py-4">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="focus-ring border-b border-line py-4 font-display text-2xl font-semibold text-ink"
+              className="focus-ring group flex items-center gap-3 border-b border-line py-4 font-display text-2xl font-semibold text-ink active:text-accent-ink"
             >
+              <span className="h-2 w-2 shrink-0 bg-accent" />
               {link.label}
             </Link>
           ))}

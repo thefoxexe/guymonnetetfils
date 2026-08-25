@@ -10,11 +10,11 @@ export function Footer() {
         <div>
           <div className="inline-block bg-paper p-3">
             <Image
-              src="/logo-guy-monnet.png"
-              alt="Guy Monnet & Fils SA"
-              width={560}
-              height={162}
-              className="h-9 w-auto"
+              src="/logo-guy-monnet-full.png"
+              alt="Guy Monnet & Fils SA — Transports, Terrassements, Génie-civil"
+              width={900}
+              height={310}
+              className="h-12 w-auto"
             />
           </div>
           <p className="mt-4 text-sm leading-relaxed">

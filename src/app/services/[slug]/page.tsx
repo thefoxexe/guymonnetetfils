@@ -4,7 +4,6 @@ import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { CTASection } from "@/components/CTASection";
-import { Button } from "@/components/Button";
 import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
 import { ProjectGrid } from "@/components/ProjectCard";
 import { JsonLd } from "@/components/JsonLd";
@@ -47,9 +46,6 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             <p className="mt-6 max-w-content text-base leading-relaxed text-concrete">
               {service.intro[0]}
             </p>
-            <Button href="/contact/" variant="primary" className="mt-8">
-              Demander un devis
-            </Button>
           </div>
           <PhotoPlaceholder label={service.heroImageLabel} aspect="wide" priority />
         </Container>
