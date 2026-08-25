@@ -172,7 +172,10 @@ export const projects: Project[] = [
     seoTitle: "Skatepark de Riddes : terrassement | Guy Monnet & Fils",
     seoDescription:
       "Terrassement et préparation du terrain du skatepark de Riddes en 2020, en amont du façonnage des courbes par les techniciens de Vertical Technik AG.",
-    heroImageLabel: "Terrassement du skatepark de Riddes",
+    heroImageLabel: "Le skatepark de Riddes, sur le terrain terrassé par Guy Monnet & Fils SA",
+    heroImage: "/images/realisations/skatepark-riddes-vue-aerienne-termine-01.webp",
+    heroImageWidth: 1400,
+    heroImageHeight: 933,
     context: [
       "Les travaux du skatepark de Riddes ont débuté en août 2020, avec l'évacuation des arbres et des souches, puis le terrassement et la préparation du terrain.",
       "Le terrain a ensuite été mis à disposition des techniciens de Vertical Technik AG, spécialisés dans le façonnage des courbes de skatepark.",
@@ -181,6 +184,50 @@ export const projects: Project[] = [
       "Évacuation des arbres et des souches",
       "Terrassement",
       "Préparation du terrain avant intervention de Vertical Technik AG",
+    ],
+    gallery: [
+      {
+        src: "/images/realisations/skatepark-riddes-geotextile-pose-04.webp",
+        width: 1100,
+        height: 825,
+        alt: "Pose du géotextile sur le terrain avant terrassement du skatepark de Riddes",
+      },
+      {
+        src: "/images/realisations/skatepark-riddes-camion-guy-monnet-livraison-05.webp",
+        width: 1100,
+        height: 825,
+        alt: "Camion Guy Monnet & Fils SA livrant des matériaux sur le chantier du skatepark de Riddes",
+      },
+      {
+        src: "/images/realisations/skatepark-riddes-terrassement-faconnage-03.webp",
+        width: 1100,
+        height: 733,
+        alt: "Vue aérienne du terrassement et du façonnage du terrain du skatepark de Riddes",
+      },
+      {
+        src: "/images/realisations/skatepark-riddes-terrassement-compactage-02.webp",
+        width: 1100,
+        height: 733,
+        alt: "Pelles mécaniques et compacteur sur le chantier de terrassement du skatepark de Riddes",
+      },
+      {
+        src: "/images/realisations/skatepark-riddes-compactage-rouleau-06.webp",
+        width: 1100,
+        height: 825,
+        alt: "Compactage au rouleau du terrain du skatepark de Riddes",
+      },
+      {
+        src: "/images/realisations/skatepark-riddes-terrassement-vue-aerienne-07.webp",
+        width: 1100,
+        height: 733,
+        alt: "Vue aérienne du terrain en cours de terrassement pour le skatepark de Riddes",
+      },
+      {
+        src: "/images/realisations/skatepark-riddes-bowl-beton-termine-08.webp",
+        width: 1100,
+        height: 733,
+        alt: "Le bowl en béton du skatepark de Riddes, façonné par Vertical Technik AG",
+      },
     ],
     services: ["terrassement"],
     legacyUrl: "/skatepark-riddes",

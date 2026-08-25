@@ -217,8 +217,8 @@ pour **Netlify Forms** : pas de backend à héberger ni de clé API à gérer.
   `IMAGE_INVENTORY.csv`. Le hero de la page d'accueil utilise également une
   première photo réelle (camion-grue), à titre d'ébauche provisoire en
   attendant d'autres photos/références annoncées par le client. La
-  réalisation Torrent du Lué a aussi ses vraies photos (hero + galerie de 4
-  photos de chantier, `public/images/realisations/`). Les autres
+  réalisations Torrent du Lué et Skatepark de Riddes ont aussi leurs vraies
+  photos (hero + galerie, `public/images/realisations/`). Les autres
   emplacements (pages Entreprise, Équipe, autres pages Réalisations)
   affichent encore un placeholder identifié, faute d'images récupérées
   automatiquement depuis l'ancien site (pour la raison ci-dessus).

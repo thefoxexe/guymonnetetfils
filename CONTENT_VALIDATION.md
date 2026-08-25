@@ -175,6 +175,12 @@ utilisées en hero et en galerie de `/realisations/torrent-du-lue/`
 (`src/data/projects.ts`, champs `heroImage`/`gallery` ; composant
 `src/components/ProjectImage.tsx`, même logique que `ServiceImage`).
 
+**Photos du chantier Skatepark de Riddes — résolu.** Le client a transmis 9
+photos réelles (vue aérienne du skatepark terminé, pose du géotextile,
+terrassement, compactage, camion Guy Monnet & Fils en livraison de
+matériaux), utilisées en hero et galerie (8 photos) de
+`/realisations/skatepark-riddes/`.
+
 Aucune autre photo (page Entreprise, page Équipe, autres pages
 Réalisations) n'a pu être migrée pour le moment (pas d'accès réseau à
 l'ancien site depuis cet environnement, voir §0). Ces zones affichent
