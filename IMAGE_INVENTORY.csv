@@ -1,0 +1,21 @@
+old_image_url,original_filename,new_filename,service,project,alt,used
+TODO: VALIDATION CLIENT,TODO,hero-drone-chantier-valais-01.avif,home,,Vue drone d'un chantier Guy Monnet & Fils en Valais,hero home
+TODO: VALIDATION CLIENT,TODO,transport-camion-tout-terrain-valais-01.avif,transport,,Camion tout-terrain Guy Monnet & Fils sur chantier,hero /services/transport/
+TODO: VALIDATION CLIENT,TODO,terrassement-pelle-mecanique-valais-01.avif,terrassement,,Pelle mécanique sur un chantier de terrassement en Valais,hero /services/terrassement/
+TODO: VALIDATION CLIENT,TODO,genie-civil-pose-conduites-riddes-01.avif,genie-civil,,Chantier de génie civil : pose de conduites en tranchée,hero /services/genie-civil/
+TODO: VALIDATION CLIENT,TODO,maconnerie-coffrage-beton-arme-valais-01.avif,maconnerie,,Coffrage et coulage de béton armé sur un chantier valaisan,hero /services/maconnerie/
+TODO: VALIDATION CLIENT,TODO,amenagement-exterieur-enrochement-pavage-01.avif,amenagements-exterieurs,,Aménagement extérieur avec enrochement et pavage,hero /services/amenagements-exterieurs/
+TODO: VALIDATION CLIENT,TODO,demolition-pelle-mecanique-controlee-01.avif,demolition,,Pelle mécanique lors d'une démolition contrôlée,hero /services/demolition/
+TODO: VALIDATION CLIENT,TODO,revalorisation-criblage-materiaux-riddes-01.avif,revalorisation-materiaux,,Criblage de matériaux au centre de revalorisation de Riddes,hero /services/revalorisation-materiaux/
+TODO: VALIDATION CLIENT,TODO,deneigement-chasse-neige-route-valais-01.avif,deneigement,,Chasse-neige Guy Monnet & Fils sur une route enneigée en Valais,hero /services/deneigement/
+TODO: VALIDATION CLIENT,TODO,pelle-araignee-terrain-pente-valais-01.avif,pelles-araignees,,Pelle araignée en intervention sur un terrain en pente,hero /services/pelles-araignees/
+TODO: VALIDATION CLIENT,TODO,cours-eau-amenagement-chantier-valais-01.avif,cours-eau,,Chantier d'aménagement d'un cours d'eau en Valais,hero /services/cours-eau/
+TODO: VALIDATION CLIENT,TODO,sentier-pedestre-amenage-valais-01.avif,sentiers-pedestres,,Sentier pédestre aménagé en Valais,hero /services/sentiers-pedestres/
+TODO: VALIDATION CLIENT,TODO,genie-civil-torrent-lue-riddes-01.avif,,torrent-du-lue,Chantier du Torrent du Lué : route en réfection et pose de conduites,hero /realisations/torrent-du-lue/
+TODO: VALIDATION CLIENT,TODO,environnement-larmes-du-fou-balavaux-01.avif,,les-larmes-du-fou,Étang pilote en cours de façonnage sur l'alpage de Balavaux,hero /realisations/les-larmes-du-fou/
+TODO: VALIDATION CLIENT,TODO,genie-civil-sentier-des-sens-pont-tzoumaz-01.avif,,sentier-des-sens,Pont en béton apparent sur le Sentier des Sens à La Tzoumaz,hero /realisations/sentier-des-sens/
+TODO: VALIDATION CLIENT,TODO,terrassement-skatepark-riddes-01.avif,,skatepark-riddes,Terrassement du skatepark de Riddes,hero /realisations/skatepark-riddes/
+TODO: VALIDATION CLIENT,TODO,entreprise-guy-monnet-premier-camion-archives-01.avif,,,"Guy Monnet et son premier camion, archives de l'entreprise",hero /entreprise/
+TODO: VALIDATION CLIENT,TODO,entreprise-equipe-depot-riddes-01.avif,,,Équipe Guy Monnet & Fils sur le dépôt de Riddes,section intro entreprise (home + /entreprise/)
+TODO: VALIDATION CLIENT,TODO,equipe-photo-groupe-guy-monnet-fils-01.avif,,,Photo de groupe de l'équipe Guy Monnet & Fils,hero /equipe/
+TODO: VALIDATION CLIENT,TODO,logo-guy-monnet-fils.svg,,,Logo Guy Monnet & Fils SA,header + footer + favicon (actuellement placeholder texte, a remplacer par le logo officiel)

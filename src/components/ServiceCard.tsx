@@ -1,0 +1,33 @@
+import Link from "next/link";
+import type { Service } from "@/data/services";
+import { PhotoPlaceholder } from "./PhotoPlaceholder";
+
+export function ServiceCard({ service }: { service: Service }) {
+  return (
+    <Link
+      href={`/services/${service.slug}/`}
+      className="focus-ring group block border border-line bg-paper transition-colors duration-200 ease-editorial hover:border-ink"
+    >
+      <PhotoPlaceholder label={service.heroImageLabel} aspect="video" />
+      <div className="p-6">
+        <h3 className="font-display text-xl font-semibold text-ink group-hover:text-accent">
+          {service.name}
+        </h3>
+        <p className="mt-2 text-sm leading-relaxed text-concrete">{service.shortDescription}</p>
+        <span className="mt-4 inline-block text-xs font-semibold uppercase tracking-wide text-accent">
+          Découvrir →
+        </span>
+      </div>
+    </Link>
+  );
+}
+
+export function ServiceGrid({ services }: { services: Service[] }) {
+  return (
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((service) => (
+        <ServiceCard key={service.slug} service={service} />
+      ))}
+    </div>
+  );
+}

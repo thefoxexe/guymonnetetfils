@@ -1,0 +1,19 @@
+old_url,new_url,status,reason
+/domaines-dactitivs,/services/transport/,301,Ancienne page transport renommee avec URL descriptive
+/terrassement,/services/terrassement/,301,Migration sous architecture /services/
+/genie-civil,/services/genie-civil/,301,Migration sous architecture /services/
+/general-2,/services/maconnerie/,301,Ancienne URL non descriptive remplacee (page macconnerie)
+/amenagements-exterieurs,/services/amenagements-exterieurs/,301,Migration sous architecture /services/
+/demolition,/services/demolition/,301,Migration sous architecture /services/
+/revalorisation-des-materiaux,/services/revalorisation-materiaux/,301,Migration sous architecture /services/
+/deneigement,/services/deneigement/,301,Migration sous architecture /services/
+/pelles-araignees,/services/pelles-araignees/,301,Migration sous architecture /services/
+/cours-d-eau,/services/cours-eau/,301,Migration sous architecture /services/
+/sentiers-pedestres,/services/sentiers-pedestres/,301,Migration sous architecture /services/ + correction orthographe (sentiers pedestres)
+/a-propos,/entreprise/,301,Renommage de la page entreprise
+/nos-collaborateurs,/equipe/,301,Renommage de la page equipe
+/nouvelle-page,/realisations/torrent-du-lue/,301,Ancienne URL non descriptive remplacee (realisation Torrent du Lue)
+/les-larmes-du-fou,/realisations/les-larmes-du-fou/,301,Migration sous architecture /realisations/
+/le-sentier-des-sens,/realisations/sentier-des-sens/,301,Migration sous architecture /realisations/
+/skatepark-riddes,/realisations/skatepark-riddes/,301,Migration sous architecture /realisations/ (correction: Riddes, pas Riddesc)
+/evnementsvido,/entreprise/,301,Contenu evenements/video integre a la page Entreprise (section Une entreprise une equipe)
