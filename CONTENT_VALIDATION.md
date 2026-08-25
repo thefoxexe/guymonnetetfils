@@ -101,17 +101,18 @@ la route cantonale Riddes–La Tzoumaz pour le compte de l'État du Valais.
   publier que si elles sont contractuellement exactes au moment de la mise
   en ligne.
 
-## 6. Torrent du Lué — volume de GNT 0/22
+## 6. Torrent du Lué — volume de GNT 0/22 — résolu
 
 Contradiction trouvée entre deux pages de l'ancien site :
 
 - La page **Génie civil** indiquait **4 000 m³** de GNT 0/22.
 - La page **projet Torrent du Lué** indiquait **3 500 m³** de GNT 0/22.
 
-Le nouveau site utilise 3 500 m³ (donnée de la page projet, la plus précise)
-et affiche un TODO visible sur la page `/realisations/torrent-du-lue/`.
-
-- **Question client : quel est le chiffre exact — 3 500 m³ ou 4 000 m³ ?**
+**Confirmé par le client** (capture d'écran de la page projet d'origine,
+transmise dans la conversation) : le chiffre exact est **3 500 m³**. Il est
+maintenant affiché comme statistique à part entière sur
+`/realisations/torrent-du-lue/` (plus seulement mentionné dans le texte), et
+le TODO a été retiré de la page.
 
 ## 7. Téléphones et e-mail
 
@@ -168,10 +169,17 @@ références/photos annoncées par le client. Cadrage (`object-position`)
 ajusté séparément pour mobile et desktop afin de garder l'avant du camion
 visible dans les deux cas.
 
-Aucune autre photo (page Entreprise, page Équipe, pages Réalisations) n'a
-pu être migrée pour le moment (pas d'accès réseau à l'ancien site depuis
-cet environnement, voir §0). Ces zones affichent toujours un **placeholder
-identifié** (fond anthracite avec étiquette « Photo à intégrer »).
+**Photos du chantier Torrent du Lué — résolu.** Le client a transmis 5
+photos réelles du chantier (vue aérienne drone + photos de chantier),
+utilisées en hero et en galerie de `/realisations/torrent-du-lue/`
+(`src/data/projects.ts`, champs `heroImage`/`gallery` ; composant
+`src/components/ProjectImage.tsx`, même logique que `ServiceImage`).
+
+Aucune autre photo (page Entreprise, page Équipe, autres pages
+Réalisations) n'a pu être migrée pour le moment (pas d'accès réseau à
+l'ancien site depuis cet environnement, voir §0). Ces zones affichent
+toujours un **placeholder identifié** (fond anthracite avec étiquette
+« Photo à intégrer »).
 
 - Voir `IMAGE_INVENTORY.csv` pour la liste complète des emplacements et des
   légendes attendues.

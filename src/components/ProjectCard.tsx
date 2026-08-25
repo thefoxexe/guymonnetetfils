@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Project } from "@/data/projects";
 import { projectCategoryLabels } from "@/data/projects";
-import { PhotoPlaceholder } from "./PhotoPlaceholder";
+import { ProjectImage } from "./ProjectImage";
 import { Reveal } from "./Reveal";
 
 export function ProjectCard({ project }: { project: Project }) {
@@ -10,7 +10,7 @@ export function ProjectCard({ project }: { project: Project }) {
       href={`/realisations/${project.slug}/`}
       className="focus-ring group block border border-line bg-paper transition-colors duration-200 ease-editorial hover:border-ink"
     >
-      <PhotoPlaceholder label={project.heroImageLabel} aspect="video" />
+      <ProjectImage project={project} aspect="video" />
       <div className="p-6">
         <p className="text-xs font-semibold uppercase tracking-wide text-accent-ink">
           {project.categories.map((c) => projectCategoryLabels[c]).join(" · ")}

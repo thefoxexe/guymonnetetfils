@@ -3,7 +3,8 @@ import Link from "next/link";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Breadcrumb } from "@/components/Breadcrumb";
-import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
+import Image from "next/image";
+import { ProjectImage } from "@/components/ProjectImage";
 import { projects, getProjectBySlug, projectCategoryLabels } from "@/data/projects";
 import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/seo";
@@ -53,7 +54,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             {project.year ? ` · ${project.year}` : ""}
           </p>
           <div className="mt-8">
-            <PhotoPlaceholder label={project.heroImageLabel} aspect="cinema" priority />
+            <ProjectImage project={project} aspect="wide" priority />
           </div>
         </Container>
       </section>
@@ -85,6 +86,29 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           ) : null}
         </Container>
       </section>
+
+      {project.gallery && project.gallery.length > 0 ? (
+        <section className="py-16">
+          <Container>
+            <SectionHeading eyebrow="En images" title="Le chantier en photos" />
+            <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {project.gallery.map((image) => (
+                <div key={image.src} className="relative aspect-[4/3] overflow-hidden bg-anthracite">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    width={image.width}
+                    height={image.height}
+                    loading="lazy"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    className={`h-full w-full object-cover ${image.imagePosition ?? "object-center"}`}
+                  />
+                </div>
+              ))}
+            </div>
+          </Container>
+        </section>
+      ) : null}
 
       {project.stats && project.stats.length > 0 ? (
         <section className="py-16">

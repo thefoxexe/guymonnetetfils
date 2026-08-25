@@ -17,6 +17,14 @@ export const projectCategoryLabels: Record<ProjectCategory, string> = {
   demolition: "Démolition",
 };
 
+export type ProjectGalleryImage = {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  imagePosition?: string;
+};
+
 export type Project = {
   slug: string;
   title: string;
@@ -27,10 +35,14 @@ export type Project = {
   seoTitle: string;
   seoDescription: string;
   heroImageLabel: string;
+  heroImage?: string;
+  heroImageWidth?: number;
+  heroImageHeight?: number;
+  imagePosition?: string;
   context: string[];
   works: string[];
   stats?: ProjectStat[];
-  gallery?: string[];
+  gallery?: ProjectGalleryImage[];
   services: string[]; // slugs
   legacyUrl?: string;
   featured?: boolean;
@@ -49,6 +61,10 @@ export const projects: Project[] = [
     seoDescription:
       "Torrent du Lué à Riddes : réfection complète de route et de réseaux, pose de conduite en fonte, chambres de captage et enrobés, avril à décembre 2025.",
     heroImageLabel: "Chantier du Torrent du Lué : route en réfection et pose de conduites",
+    heroImage: "/images/realisations/torrent-du-lue-chantier-conduite-riddes-01.webp",
+    heroImageWidth: 1289,
+    heroImageHeight: 1961,
+    imagePosition: "object-[center_38%]",
     context: [
       "Le chantier du Torrent du Lué a consisté en la réfection complète de la route et des réseaux souterrains, exécutée d'avril à décembre 2025.",
     ],
@@ -59,22 +75,46 @@ export const projects: Project[] = [
       "Construction de 8 chambres de captage en béton coulé sur place",
       "Pose de 2 chambres brise-énergie",
       "Pose de bordures en granit",
-      "Mise en œuvre de grave non traitée (GNT 0/22)",
+      "Mise en œuvre de 3 500 m³ de grave non traitée (GNT 0/22)",
       "Pose d'enrobé",
     ],
     stats: [
       { value: "905 m", label: "Conduite en fonte verrouillée Ø 800" },
       { value: "780 m", label: "Bordures en granit" },
+      { value: "3 500 m³", label: "Grave non traitée (GNT 0/22)" },
       { value: "8", label: "Chambres de captage en béton coulé sur place" },
       { value: "2", label: "Chambres brise-énergie" },
       { value: "680 t", label: "Enrobé posé" },
     ],
+    gallery: [
+      {
+        src: "/images/realisations/torrent-du-lue-chambre-captage-pose-riddes-02.webp",
+        width: 750,
+        height: 1058,
+        alt: "Pose d'une chambre de captage à la pelle mécanique sur le chantier du Torrent du Lué",
+      },
+      {
+        src: "/images/realisations/torrent-du-lue-tranchee-conduite-riddes-03.webp",
+        width: 750,
+        height: 1063,
+        alt: "Vue aérienne de la tranchée et de la conduite le long de la route du Torrent du Lué",
+      },
+      {
+        src: "/images/realisations/torrent-du-lue-terrassement-route-riddes-04.webp",
+        width: 750,
+        height: 1070,
+        alt: "Pelle mécanique en terrassement sur la route du Torrent du Lué",
+      },
+      {
+        src: "/images/realisations/torrent-du-lue-enrobe-refection-route-riddes-05.webp",
+        width: 750,
+        height: 1094,
+        alt: "Pose de l'enrobé bitumineux lors de la réfection de la route du Torrent du Lué",
+      },
+    ],
     services: ["genie-civil", "terrassement"],
     legacyUrl: "/nouvelle-page",
     featured: true,
-    // La page Génie civil du site existant indique 4 000 m³ de GNT 0/22,
-    // la page projet indique 3 500 m³ de GNT 0/22. Ne pas trancher arbitrairement.
-    todo: "TODO: CLIENT MUST CONFIRM 3500 OR 4000 M3 (volume de GNT 0/22)",
   },
   {
     slug: "les-larmes-du-fou",
