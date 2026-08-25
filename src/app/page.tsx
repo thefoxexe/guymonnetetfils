@@ -25,7 +25,7 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative flex min-h-[420px] items-end overflow-hidden sm:min-h-[560px]">
+      <section className="relative flex min-h-[max(480px,calc(100dvh-5rem))] items-end overflow-hidden md:min-h-[max(560px,calc(100dvh-6rem))]">
         <div className="absolute inset-0">
           <Image
             src="/images/hero-camion-guy-monnet-transports-valais-01.webp"
@@ -33,19 +33,20 @@ export default function HomePage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[10%_40%] sm:object-[30%_40%]"
+            className="object-cover object-[10%_65%] sm:object-[30%_55%]"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
+        <div className="absolute inset-0 bg-ink/35" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/55 to-ink/10" />
         <Container className="relative w-full pb-8 pt-16 text-paper sm:pb-14 sm:pt-24">
           <Reveal delay={0}>
-            <p className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-accent sm:text-sm sm:tracking-[0.25em]">
+            <p className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-accent drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)] sm:text-sm sm:tracking-[0.25em]">
               Construire. Transporter. Aménager.
             </p>
-            <h1 className="mt-3 max-w-3xl font-display text-3xl font-bold leading-[1.1] sm:mt-4 sm:text-5xl sm:leading-[1.05] lg:text-6xl">
+            <h1 className="mt-3 max-w-3xl font-display text-3xl font-bold leading-[1.1] drop-shadow-[0_3px_10px_rgba(0,0,0,0.75)] sm:mt-4 sm:text-5xl sm:leading-[1.05] lg:text-6xl">
               Génie civil, terrassement et transport en Valais
             </h1>
-            <p className="mt-3 max-w-content text-sm leading-relaxed text-concrete-light sm:mt-6 sm:text-base sm:leading-relaxed sm:text-lg">
+            <p className="mt-3 max-w-content text-sm leading-relaxed text-concrete-light drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)] sm:mt-6 sm:text-base sm:leading-relaxed sm:text-lg">
               Depuis 1980, Guy Monnet &amp; Fils SA accompagne particuliers, entreprises et
               collectivités dans leurs projets de construction, d&apos;infrastructures, de
               transport et d&apos;aménagement en Valais.
