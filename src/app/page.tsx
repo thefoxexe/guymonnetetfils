@@ -25,39 +25,40 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative">
-        <PhotoPlaceholder
-          label="Vue drone d'un chantier Guy Monnet & Fils en Valais"
-          aspect="cinema"
-          priority
-          className="min-h-[560px]"
-        />
-        <div className="absolute inset-0 flex items-end bg-gradient-to-t from-ink/80 via-ink/20 to-transparent">
-          <Container className="w-full pb-14 pt-24 text-paper">
-            <p className="font-display text-sm font-semibold uppercase tracking-[0.25em] text-accent">
-              Construire. Transporter. Aménager.
-            </p>
-            <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
-              Génie civil, terrassement et transport en Valais
-            </h1>
-            <p className="mt-6 max-w-content text-base leading-relaxed text-concrete-light sm:text-lg">
-              Depuis 1980, Guy Monnet &amp; Fils SA accompagne particuliers, entreprises et
-              collectivités dans leurs projets de construction, d&apos;infrastructures, de
-              transport et d&apos;aménagement en Valais.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Button href="/services/" variant="primary">
-                Découvrir nos services
-              </Button>
-              <Button href="/contact/" variant="secondary" className="border-paper text-paper hover:bg-paper hover:text-ink">
-                Parler de votre projet
-              </Button>
-            </div>
-            <p className="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-concrete-light/80">
-              Riddes · Valais · Depuis 1980
-            </p>
-          </Container>
+      <section className="relative flex min-h-[560px] items-end overflow-hidden">
+        <div className="absolute inset-0">
+          <PhotoPlaceholder
+            label="Vue drone d'un chantier Guy Monnet & Fils en Valais"
+            aspect="cinema"
+            priority
+            className="h-full"
+          />
         </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
+        <Container className="relative w-full pb-14 pt-24 text-paper">
+          <p className="font-display text-sm font-semibold uppercase tracking-[0.25em] text-accent">
+            Construire. Transporter. Aménager.
+          </p>
+          <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
+            Génie civil, terrassement et transport en Valais
+          </h1>
+          <p className="mt-6 max-w-content text-base leading-relaxed text-concrete-light sm:text-lg">
+            Depuis 1980, Guy Monnet &amp; Fils SA accompagne particuliers, entreprises et
+            collectivités dans leurs projets de construction, d&apos;infrastructures, de
+            transport et d&apos;aménagement en Valais.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Button href="/services/" variant="primary">
+              Découvrir nos services
+            </Button>
+            <Button href="/contact/" variant="secondary" className="border-paper text-paper hover:bg-paper hover:text-ink">
+              Parler de votre projet
+            </Button>
+          </div>
+          <p className="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-concrete-light/80">
+            Riddes · Valais · Depuis 1980
+          </p>
+        </Container>
       </section>
 
       {/* PREUVES */}
