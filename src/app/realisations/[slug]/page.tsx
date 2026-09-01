@@ -62,9 +62,16 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         ]}
       />
 
-      {hasRealHero ? (
-        <section className="relative">
-          <ProjectImage project={project} aspect="wide" priority />
+      {project.heroImage ? (
+        <section className="relative aspect-[16/9] max-h-[60vh] min-h-[260px] w-full overflow-hidden bg-anthracite">
+          <Image
+            src={project.heroImage}
+            alt={project.heroImageLabel}
+            fill
+            priority
+            sizes="100vw"
+            className={`object-cover ${project.imagePosition ?? "object-center"}`}
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/40 to-ink/5" />
           <Container className="absolute inset-x-0 bottom-0 pb-8 sm:pb-12">
             <Reveal>
