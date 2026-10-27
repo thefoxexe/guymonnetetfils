@@ -7,7 +7,9 @@
     "node": ">=18.18.0"
   },
   "scripts": {
+    "predev": "node scripts/photos-manifest.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/photos-manifest.mjs",
     "build": "next build",
     "start": "serve out",
     "lint": "next lint",

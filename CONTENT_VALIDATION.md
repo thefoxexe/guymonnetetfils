@@ -300,3 +300,35 @@ Reste à fournir / trancher par le client :
 - **Équipe** : liste à jour des collaborateurs (via la secrétaire).
 - **Contact** : adresse e-mail du bureau qui recevra les demandes.
 - **Chiffres et détails** des références phares (Padel, etc.).
+
+## 14. Nouvelles références (fiches de référence papier du client)
+
+Créées à partir des fiches de référence imprimées de l'entreprise (période,
+type de travaux, maître d'ouvrage, direction des travaux, montant, descriptif) :
+
+- Station phytosanitaire de Saxon (2025)
+- Chambre de récolte des eaux, commune de Leytron (2024)
+- Parking P+R CFF (2024)
+- Rue des Artisans, étape 2, Riddes (2023)
+- Rue des Artisans, étape 1, Riddes (2022)
+
+À valider :
+
+- **Montants des travaux** : affichés dans la fiche technique comme sur les
+  fiches papier. À retirer si le client préfère ne pas les publier (champ
+  `amount` dans `src/data/projects.ts`).
+- **Parking P+R CFF** : gare ou localité du parking (affiché « Valais »).
+- **Chambre de récolte des eaux** : lieu exact sur la commune de Leytron ;
+  note manuscrite « 4500 projet / 15000 » sur la fiche à expliquer.
+- **Station phytosanitaire** : la fiche indique 150 m³ de béton étanche,
+  le compte rendu de séance parlait de 200 m³. Le site suit la fiche.
+- **Autres fiches visibles sur les photos** mais pas lisibles en entier
+  (station transformatrice, une fiche « Torrent… », une fiche à La
+  Tzoumaz) : à transmettre pour en faire des références.
+
+## 15. Drapeau du Valais
+
+Le drapeau derrière « VS » (accueil) est dessiné en SVG
+(`src/components/ValaisFlag.tsx`) sans accès à la source officielle.
+**À vérifier : disposition des 13 étoiles.** Le plus simple : transmettre le
+fichier officiel du drapeau, qui remplacera ce dessin.

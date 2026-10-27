@@ -12,7 +12,7 @@ type Status = "idle" | "submitting" | "success" | "error";
 // name/data-netlify sur le <form> (Netlify scanne le HTML généré), puis
 // soumis en AJAX ici pour rester sur la page. Les envois sont consultables
 // dans l'onglet "Forms" du site Netlify ; les notifications par e-mail vers
-// l'adresse du bureau (TODO: VALIDATION CLIENT — adresse à confirmer) se
+// l'adresse du bureau (TODO: VALIDATION CLIENT : adresse à confirmer) se
 // configurent aussi là-bas (aucune clé/API à gérer côté code).
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -37,8 +37,7 @@ export function ContactForm() {
   if (status === "success") {
     return (
       <p role="status" className="border-l-4 border-accent bg-offwhite p-6 text-base text-ink">
-        Merci, votre demande a bien été envoyée. Nous revenons vers vous dans les meilleurs
-        délais.
+        Merci, votre message a bien été envoyé. Nous vous répondons rapidement.
       </p>
     );
   }

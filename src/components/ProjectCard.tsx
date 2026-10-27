@@ -1,14 +1,21 @@
 import Link from "next/link";
 import type { Project } from "@/data/projects";
 import { projectCategoryLabels } from "@/data/projects";
-import { ProjectImage } from "./ProjectImage";
+import { Photo } from "./Photo";
+import { slots } from "@/lib/photos";
 import { Reveal } from "./Reveal";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <Link href={`/realisations/${project.slug}/`} className="focus-ring group flex flex-col text-ink">
       <span className="relative block overflow-hidden">
-        <ProjectImage project={project} aspect="video" />
+        <Photo
+          slot={slots.projectCover(project.slug)}
+          label={project.heroImageLabel}
+          aspect="video"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          imageClassName="transition-transform duration-500 ease-editorial group-hover:scale-105"
+        />
         {project.year ? (
           <span className="absolute left-4 top-4 bg-accent px-2.5 py-1.5 font-display text-xs font-extrabold uppercase tracking-[0.1em] text-ink">
             {project.year}

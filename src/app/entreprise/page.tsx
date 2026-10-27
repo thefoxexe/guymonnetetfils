@@ -1,8 +1,10 @@
+import Link from "next/link";
 import { BrandBand, companyBandItems } from "@/components/BrandBand";
 import { Button } from "@/components/Button";
 import { CtaBand } from "@/components/CtaBand";
 import { PageHero } from "@/components/PageHero";
-import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
+import { Photo } from "@/components/Photo";
+import { slots } from "@/lib/photos";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { StatGrid } from "@/components/StatGrid";
@@ -17,27 +19,13 @@ export const metadata = buildMetadata({
   path: "/entreprise/",
 });
 
-const values = [
-  {
-    title: "Expérience",
-    description: "Plus de quatre décennies de présence sur le terrain valaisan.",
-  },
-  {
-    title: "Polyvalence",
-    description: "Plusieurs métiers complémentaires réunis au sein d'une même entreprise.",
-  },
-  {
-    title: "Réactivité",
-    description: "Capacité d'intervention, notamment face aux conditions naturelles et hivernales.",
-  },
-  {
-    title: "Proximité",
-    description: "Entreprise familiale implantée localement, à l'écoute de ses clients.",
-  },
-  {
-    title: "Terrain",
-    description: "Une connaissance fine du contexte et des contraintes du Valais.",
-  },
+// Moyens de l'entreprise, repris des fiches des domaines d'activité.
+const means = [
+  { title: "Camions", description: "Camions tout-terrain, camions-grues de 24 à 28 m, remorque surbaissée et bennes multi-lift.", slug: "transport" },
+  { title: "Pelles", description: "Pelles mécaniques pour le terrassement et pelles araignées pour les fortes pentes.", slug: "pelles-araignees" },
+  { title: "Centre de Riddes", description: "Tri, criblage et revalorisation des matériaux de chantier.", slug: "revalorisation-materiaux" },
+  { title: "Maçons", description: "Équipes de maçonnerie et de béton armé.", slug: "maconnerie" },
+  { title: "Déneigement", description: "Routes communales de Riddes, La Tzoumaz et Isérables, et route cantonale.", slug: "deneigement" },
 ];
 
 export default function EntreprisePage() {
@@ -46,16 +34,24 @@ export default function EntreprisePage() {
       <PageHero
         crumbs={[{ name: "Entreprise", path: "/entreprise/" }]}
         eyebrow="Découvrir l'entreprise"
-        title="Une entreprise familiale ancrée en Valais depuis 1980"
-        intro={company.positioning}
-        aside={<PhotoPlaceholder label="Guy Monnet et son premier camion, archives de l'entreprise" tone="dark" aspect="fill" />}
+        title="Entreprise familiale depuis 1980"
+        intro="Guy Monnet a fondé l'entreprise en 1980 avec un camion. Son fils Frédéric la dirige aujourd'hui, à Riddes."
+        aside={
+          <Photo
+            slot={slots.companyCover}
+            label="Guy Monnet et son premier camion (archives de l'entreprise)"
+            aspect="fill"
+            tone="dark"
+            priority
+          />
+        }
       />
       <BrandBand items={companyBandItems} />
 
       {/* EN CHIFFRES */}
       <section className="bg-offwhite">
         <div className="container-wide py-20 sm:py-24">
-          <SectionHeading index="01" eyebrow="En chiffres" title="Guy Monnet & Fils en bref" />
+          <SectionHeading index="01" eyebrow="Repères" title="En chiffres" />
           <StatGrid
             className="mt-12"
             highlight={3}
@@ -111,27 +107,29 @@ export default function EntreprisePage() {
         </div>
       </section>
 
-      {/* VALEURS — survol jaune aux couleurs du site (séance client) */}
+      {/* MOYENS : survol jaune aux couleurs du site (séance client) */}
       <section className="bg-ink text-paper">
         <div className="container-wide py-20 sm:py-24">
-          <SectionHeading index="03" eyebrow="Nos valeurs" title="Ce qui nous définit" tone="dark" />
+          <SectionHeading index="03" eyebrow="Nos moyens" title="Ce que nous avons" tone="dark" />
           <ul className="mt-12 grid grid-cols-1 border-l border-t border-white/15 sm:grid-cols-2 lg:grid-cols-5">
-            {values.map((value, index) => (
-              <li
-                key={value.title}
-                className="group flex min-h-[220px] flex-col justify-between gap-6 border-b border-r border-white/15 p-7 transition-colors duration-300 ease-editorial hover:bg-accent"
-              >
-                <span className="font-display text-sm font-extrabold text-accent transition-colors group-hover:text-ink">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span>
-                  <span className="stretch-85 block font-display text-[28px] font-extrabold uppercase leading-none transition-colors group-hover:text-ink">
-                    {value.title}
+            {means.map((item, index) => (
+              <li key={item.title} className="border-b border-r border-white/15">
+                <Link
+                  href={`/services/${item.slug}/`}
+                  className="focus-ring group flex h-full min-h-[220px] flex-col justify-between gap-6 p-7 transition-colors duration-300 ease-editorial hover:bg-accent"
+                >
+                  <span className="font-display text-sm font-extrabold text-accent transition-colors group-hover:text-ink">
+                    {String(index + 1).padStart(2, "0")}
                   </span>
-                  <span className="mt-3 block text-[15px] leading-relaxed text-concrete-light transition-colors group-hover:text-ink">
-                    {value.description}
+                  <span>
+                    <span className="stretch-85 block font-display text-[28px] font-extrabold uppercase leading-none transition-colors group-hover:text-ink">
+                      {item.title}
+                    </span>
+                    <span className="mt-3 block text-[15px] leading-relaxed text-concrete-light transition-colors group-hover:text-ink">
+                      {item.description}
+                    </span>
                   </span>
-                </span>
+                </Link>
               </li>
             ))}
           </ul>
@@ -142,14 +140,14 @@ export default function EntreprisePage() {
       <section>
         <div className="container-wide flex flex-wrap gap-14 py-20 sm:py-24">
           <Reveal className="min-w-0 flex-[1_1_420px]">
-            <SectionHeading index="04" eyebrow="Une entreprise, une équipe" title="La vie de l'entreprise" />
+            <SectionHeading index="04" eyebrow="Événements" title="La vie de l'entreprise" />
             <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-steel">
               En 2020, Guy Monnet &amp; Fils SA a fêté ses 40 ans, à l&apos;occasion de
               l&apos;inauguration de son nouveau dépôt de Riddes.
             </p>
             <p className="mt-5 max-w-2xl border-l-4 border-accent bg-offwhite px-4 py-3 text-xs text-accent-ink">
-              TODO: contenu client nécessaire pour enrichir cette section avec d&apos;autres
-              moments marquants de la vie de l&apos;entreprise (photos, événements récents).
+              TODO: contenu client nécessaire pour compléter cette section (photos, événements
+              récents).
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href="/equipe/" variant="dark">
@@ -161,13 +159,13 @@ export default function EntreprisePage() {
             </div>
           </Reveal>
           <div className="grid min-w-0 flex-[1_1_420px] grid-cols-2 gap-3">
-            <PhotoPlaceholder label="Inauguration du dépôt de Riddes, 2020" aspect="square" />
-            <PhotoPlaceholder label="Le dépôt de Riddes aujourd'hui" aspect="square" />
+            <Photo slot={slots.companyDepot2020} label="Inauguration du dépôt de Riddes, 2020" aspect="square" />
+            <Photo slot={slots.companyDepot} label="Le dépôt de Riddes aujourd'hui" aspect="square" />
           </div>
         </div>
       </section>
 
-      <CtaBand title="Travaillons ensemble" kicker="Une entreprise familiale à votre écoute" />
+      <CtaBand title="Vous avez un projet ?" />
     </>
   );
 }

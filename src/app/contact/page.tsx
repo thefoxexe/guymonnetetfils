@@ -24,17 +24,17 @@ export default function ContactPage() {
       <PageHero
         crumbs={[{ name: "Contact", path: "/contact/" }]}
         eyebrow="Contact"
-        title="Parlons de votre projet"
-        intro="Décrivez-nous votre projet, nous revenons vers vous dans les meilleurs délais."
+        title="Contact"
+        intro="Pour une offre ou une question, appelez le bureau ou écrivez-nous avec le formulaire."
       />
       <BrandBand items={[`Bureau ${company.phone.office}`, company.email, `${company.address.postalCode} ${company.address.city}`]} />
 
       <section>
         <div className="container-wide flex flex-wrap gap-14 py-20 sm:py-24 lg:gap-16">
           <div className="min-w-0 flex-[999_1_560px]">
-            <SectionLabel index="01">Votre demande</SectionLabel>
+            <SectionLabel index="01">Formulaire</SectionLabel>
             <h2 className="stretch-85 mt-3 font-display text-[32px] font-extrabold uppercase leading-[0.95] sm:text-[44px]">
-              Formulaire de contact
+              Écrivez-nous
             </h2>
             <div className="mt-10">
               <ContactForm />
@@ -86,8 +86,8 @@ export default function ContactPage() {
               <div>
                 <dt className="text-sm text-mist">Horaires</dt>
                 <dd className="mt-1">
-                  {company.hours.label} · {company.hours.weekdays}
-                  <span className="mt-1 block text-xs text-accent">TODO: VALIDATION CLIENT — horaires à confirmer</span>
+                  {company.hours.label}, {company.hours.weekdays}
+                  <span className="mt-1 block text-xs text-accent">TODO: VALIDATION CLIENT : horaires à confirmer</span>
                 </dd>
               </div>
             </dl>

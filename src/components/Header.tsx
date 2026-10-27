@@ -62,7 +62,7 @@ export function Header() {
         <Link href="/" className="focus-ring shrink-0">
           <Image
             src="/logo-guy-monnet-officiel.png"
-            alt="Guy Monnet & Fils SA — Transports, Terrassements, Génie-civil"
+            alt="Guy Monnet & Fils SA, transports, terrassements, génie civil"
             width={825}
             height={263}
             priority

@@ -1,9 +1,12 @@
 type PhotoPlaceholderProps = {
   label: string;
+  /** Nom de l'emplacement : affiché comme nom de fichier attendu. */
+  slot?: string;
   aspect?: "video" | "square" | "portrait" | "wide" | "cinema" | "fill";
   tone?: "light" | "dark";
+  /** "center" : étiquette au centre ; "corner" : en haut à droite (fonds de hero avec texte par-dessus). */
+  layout?: "center" | "corner";
   className?: string;
-  priority?: boolean;
 };
 
 const aspectClasses: Record<NonNullable<PhotoPlaceholderProps["aspect"]>, string> = {
@@ -16,32 +19,39 @@ const aspectClasses: Record<NonNullable<PhotoPlaceholderProps["aspect"]>, string
 };
 
 /**
- * Emplacement photo « à définir » (décision de la séance client) : hachures
- * bien visibles + description de la photo attendue, pour que le client repère
- * immédiatement où il doit fournir une image. Aucune image stock.
+ * Emplacement photo « à définir » : hachures, description de la photo
+ * attendue et nom du fichier à déposer dans public/photos/ pour la remplacer.
  */
 export function PhotoPlaceholder({
   label,
+  slot,
   aspect = "wide",
   tone = "light",
+  layout = "center",
   className = "",
-  priority = false,
 }: PhotoPlaceholderProps) {
   const isDark = tone === "dark";
+  const tag = (
+    <div className={`flex max-w-xs flex-col gap-2 ${layout === "center" ? "items-center text-center" : "items-end text-right"}`}>
+      <span className="bg-accent px-2.5 py-1 font-display text-[11px] font-extrabold uppercase tracking-[0.12em] text-ink">
+        ■ Photo à définir
+      </span>
+      <span className={`text-[13px] leading-snug ${isDark ? "text-mist" : "text-steel"}`}>{label}</span>
+      {slot ? (
+        <span className={`font-mono text-[11px] ${isDark ? "text-concrete-light/70" : "text-steel/80"}`}>{slot}.jpg</span>
+      ) : null}
+    </div>
+  );
   return (
     <div
       role="img"
       aria-label={`Photo à définir : ${label}`}
-      data-photo-needed={label}
-      data-priority={priority || undefined}
-      className={`${isDark ? "hatch-dark" : "hatch"} relative flex w-full items-center justify-center overflow-hidden p-6 ${aspectClasses[aspect]} ${className}`}
+      data-photo-slot={slot}
+      className={`${isDark ? "hatch-dark" : "hatch"} relative flex w-full overflow-hidden p-6 ${
+        layout === "center" ? "items-center justify-center" : "items-start justify-end"
+      } ${aspectClasses[aspect]} ${className}`}
     >
-      <div className="flex max-w-xs flex-col items-center gap-2 text-center">
-        <span className="bg-accent px-2.5 py-1 font-display text-[11px] font-extrabold uppercase tracking-[0.12em] text-ink">
-          ■ Photo à définir
-        </span>
-        <span className={`text-[13px] leading-snug ${isDark ? "text-mist" : "text-steel"}`}>{label}</span>
-      </div>
+      {tag}
     </div>
   );
 }

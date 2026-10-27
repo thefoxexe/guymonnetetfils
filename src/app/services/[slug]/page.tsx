@@ -1,12 +1,11 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { BrandBand } from "@/components/BrandBand";
 import { Button } from "@/components/Button";
 import { CtaBand } from "@/components/CtaBand";
 import { JsonLd } from "@/components/JsonLd";
-import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
+import { Photo } from "@/components/Photo";
 import { ProjectGrid } from "@/components/ProjectCard";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading, SectionLabel, sectionCounter } from "@/components/SectionHeading";
@@ -14,6 +13,7 @@ import { ServiceCard, serviceNumber } from "@/components/ServiceCard";
 import { services, getServiceBySlug } from "@/data/services";
 import { projects } from "@/data/projects";
 import { buildMetadata, serviceJsonLd } from "@/lib/seo";
+import { slots } from "@/lib/photos";
 
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
@@ -59,21 +59,16 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
   return (
     <>
       {/* 1. HERO PLEIN CADRE */}
-      <section className="relative flex min-h-[560px] items-end overflow-hidden bg-ink text-paper sm:min-h-[680px]">
-        {service.heroImage ? (
-          <Image
-            src={service.heroImage}
-            alt={service.heroImageLabel}
-            fill
-            priority
-            sizes="100vw"
-            className={`object-cover ${service.imagePosition ?? "object-center"}`}
-          />
-        ) : (
-          <div className="absolute inset-0">
-            <PhotoPlaceholder label={service.heroImageLabel} tone="dark" aspect="fill" />
-          </div>
-        )}
+      <section className="relative flex min-h-[520px] items-end overflow-hidden bg-ink text-paper sm:min-h-[600px]">
+        <Photo
+          slot={slots.serviceCover(service.slug)}
+          label={service.heroImageLabel}
+          aspect="fill"
+          tone="dark"
+          layout="corner"
+          priority
+          sizes="100vw"
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-ink/20 via-ink/55 to-ink/95" />
         <div className="container-wide relative flex w-full flex-wrap items-end justify-between gap-10 pb-14 pt-28 sm:pb-20">
           <div className="flex min-w-0 flex-[1_1_560px] flex-col gap-6">
@@ -87,7 +82,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               <span className="self-start bg-accent px-3.5 py-2 font-display text-xs font-extrabold uppercase tracking-[0.14em] text-ink sm:text-[13px]">
                 Domaine d&apos;activité · {serviceNumber(service)} / {String(services.length).padStart(2, "0")}
               </span>
-              <h1 className="stretch-75 font-display text-[56px] font-black uppercase leading-[0.85] [text-wrap:balance] sm:text-[88px] lg:text-[136px]">
+              <h1 className="stretch-75 font-display text-[48px] font-black uppercase leading-[0.88] [text-wrap:balance] sm:text-[72px] lg:text-[100px]">
                 {service.name}
               </h1>
               <p className="max-w-xl text-lg leading-relaxed text-concrete-light sm:text-[21px]">
@@ -117,7 +112,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       <section>
         <div className="container-wide flex flex-wrap gap-14 py-20 sm:py-28 lg:gap-16">
           <Reveal className="flex min-w-0 flex-[999_1_560px] flex-col gap-6">
-            <SectionLabel index={n()}>Notre métier</SectionLabel>
+            <SectionLabel index={n()}>Présentation</SectionLabel>
             {lead ? (
               <p className="stretch-90 font-display text-[26px] font-semibold leading-[1.28] sm:text-[34px]">{lead}</p>
             ) : null}
@@ -165,7 +160,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               href="/contact/"
               className="focus-ring mt-4 flex items-center justify-between bg-accent px-6 py-4 text-[15px] font-bold text-ink transition-colors hover:bg-ink hover:text-paper"
             >
-              Un projet ? Contactez-nous <span aria-hidden="true">→</span>
+              Nous contacter <span aria-hidden="true">→</span>
             </Link>
           </aside>
         </div>
@@ -177,7 +172,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           <SectionHeading
             index={n()}
             eyebrow="Prestations"
-            title="Ce que nous réalisons"
+            title="Ce que nous faisons"
             tone="dark"
             action={<span className="text-[15px] text-mist">{service.prestations.length} prestations</span>}
           />
@@ -237,11 +232,17 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       {/* 6. IMAGES D'ILLUSTRATION (emplacements à définir avec le client) */}
       <section>
         <div className="container-wide py-20 sm:py-24">
-          <SectionHeading index={n()} eyebrow="En images" title={`${service.name} sur le terrain`} />
+          <SectionHeading index={n()} eyebrow="Photos" title={service.name} />
           <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <PhotoPlaceholder label={`${service.name} — photo d'illustration 1`} aspect="video" />
-            <PhotoPlaceholder label={`${service.name} — photo d'illustration 2`} aspect="video" />
-            <PhotoPlaceholder label={`${service.name} — photo d'illustration 3`} aspect="video" />
+            {[1, 2, 3].map((i) => (
+              <Photo
+                key={i}
+                slot={slots.serviceIllustration(service.slug, i)}
+                label={`${service.name}, photo d'illustration ${i}`}
+                aspect="video"
+                sizes="(max-width: 640px) 100vw, 33vw"
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -253,7 +254,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             <SectionHeading
               index={n()}
               eyebrow="Réalisations"
-              title="Nos chantiers en détail"
+              title={`Chantiers en ${service.name.toLowerCase()}`}
               action={
                 <Link href="/realisations/" className="focus-ring text-[15px] font-bold text-accent-ink hover:underline">
                   Toutes les réalisations →
@@ -275,8 +276,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               <SectionHeading
                 index={n()}
                 eyebrow="Références"
-                title="Ils nous ont fait confiance"
-                description={`Une sélection de chantiers réalisés par Guy Monnet & Fils en ${service.name.toLowerCase()}.`}
+                title="Quelques références"
               />
             </div>
             <ul className="grid min-w-0 flex-[999_1_560px] grid-cols-1 content-start gap-x-10 sm:grid-cols-2">
@@ -318,8 +318,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <section>
           <div className="container-wide py-20 sm:py-24">
             <SectionHeading
-              eyebrow="Domaines complémentaires"
-              title="Souvent associés"
+              eyebrow="Voir aussi"
+              title="Domaines liés"
               action={
                 <Link href="/services/" className="focus-ring text-[15px] font-bold text-accent-ink hover:underline">
                   Les {services.length} domaines →
@@ -336,12 +336,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       ) : null}
 
       {/* 10. APPEL À L'ACTION */}
-      <CtaBand
-        variant="dark"
-        image="/images/hero-camion-guy-monnet-transports-valais-01.webp"
-        kicker={`Zone d'intervention : ${service.zoneIntervention}`}
-        title={`Parlons de votre projet de ${service.name.toLowerCase()}`}
-      />
+      <CtaBand variant="dark" kicker={`Zone d'intervention : ${service.zoneIntervention}`} title="Vous avez un projet ?" />
 
       <JsonLd
         data={serviceJsonLd({

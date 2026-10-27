@@ -1,0 +1,4 @@
+Déposez ici les photos du site, nommées d'après leur emplacement
+(ex. domaine-transport-couverture.jpg). La liste complète des noms
+attendus est dans PHOTOS.md, à la racine du projet.
+Formats acceptés : .jpg, .jpeg, .png, .webp, .avif

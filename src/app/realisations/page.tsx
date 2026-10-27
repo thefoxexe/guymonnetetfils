@@ -22,7 +22,7 @@ export default function RealisationsPage() {
         crumbs={[{ name: "Réalisations", path: "/realisations/" }]}
         eyebrow="Réalisations"
         title="Des chantiers qui parlent pour nous"
-        intro="Génie civil, terrassement, maçonnerie et environnement : une sélection de chantiers réalisés par Guy Monnet & Fils en Valais."
+        intro="Une sélection de chantiers réalisés en Valais, avec les chiffres et le détail des travaux."
       />
       <BrandBand items={categories} />
 
@@ -37,7 +37,7 @@ export default function RealisationsPage() {
           <SectionHeading
             eyebrow="À venir"
             title="D'autres chantiers à découvrir prochainement"
-            description="Ces références existent déjà dans nos archives et feront l'objet d'une fiche dédiée dès que les textes, photos et chiffres seront disponibles."
+            description="Fiches en préparation."
             tone="dark"
           />
           <ol className="mt-12 grid grid-cols-1 border-l border-t border-white/15 sm:grid-cols-2 lg:grid-cols-3">
@@ -51,7 +51,7 @@ export default function RealisationsPage() {
         </div>
       </section>
 
-      <CtaBand title="Votre chantier sera peut-être le prochain" kicker="Parlons de votre projet" />
+      <CtaBand title="Vous avez un projet ?" />
     </>
   );
 }

@@ -38,8 +38,8 @@ export const company = {
   // D'anciennes pages mentionnent aussi 06:30–23:00 en semaine et 07:00–23:00 le week-end :
   // TODO: VALIDATION CLIENT — horaires à confirmer avant publication
   hours: {
-    weekdays: "06:30 – 16:00",
-    label: "Lundi – vendredi",
+    weekdays: "de 6 h 30 à 16 h",
+    label: "Du lundi au vendredi",
   },
 
   // Facebook retiré à la demande du client.

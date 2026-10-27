@@ -1,7 +1,7 @@
 import { Reveal } from "./Reveal";
 
 /**
- * Libellé de section numéroté (« 01 — Le contexte ») suivi d'un titre
+ * Libellé de section numéroté (« 01 / Le contexte ») suivi d'un titre
  * condensé en capitales. `action` s'aligne à droite (lien « Tout voir »…).
  */
 export function SectionLabel({
@@ -21,7 +21,7 @@ export function SectionLabel({
         tone === "dark" ? "text-accent" : "text-accent-ink"
       } ${className}`}
     >
-      {index ? `${index} — ` : null}
+      {index ? `${index} / ` : null}
       {children}
     </p>
   );

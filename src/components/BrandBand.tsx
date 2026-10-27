@@ -17,4 +17,4 @@ export function BrandBand({ items }: { items: string[] }) {
   );
 }
 
-export const companyBandItems = ["Transports", "Terrassements", "Génie civil", "Maçonnerie", "Valais depuis 1980"];
+export const companyBandItems = ["Transports", "Terrassements", "Génie civil", "Maçonnerie"];

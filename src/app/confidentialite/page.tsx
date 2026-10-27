@@ -37,7 +37,7 @@ export default function ConfidentialitePage() {
               <p className="mt-2">
                 Le formulaire de contact ouvre votre messagerie avec un message pré-rempli à
                 destination de {company.email}. TODO: contenu client nécessaire si un service
-                d&apos;envoi côté serveur est mis en place ultérieurement — cette section devra
+                d&apos;envoi côté serveur est mis en place ultérieurement : cette section devra
                 alors être complétée avec le nom du prestataire utilisé.
               </p>
             </div>
@@ -45,7 +45,7 @@ export default function ConfidentialitePage() {
             <div>
               <h2 className="font-display text-xl font-extrabold uppercase text-ink">Cookies et mesure d&apos;audience</h2>
               <p className="mt-2">
-                TODO: contenu client nécessaire — cette section doit refléter les outils
+                TODO: contenu client nécessaire. Cette section doit refléter les outils
                 effectivement utilisés (mesure d&apos;audience, cookies) une fois ceux-ci
                 définitivement choisis et configurés.
               </p>

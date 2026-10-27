@@ -1,7 +1,8 @@
 import { BrandBand } from "@/components/BrandBand";
 import { CtaBand } from "@/components/CtaBand";
 import { PageHero } from "@/components/PageHero";
-import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
+import { Photo } from "@/components/Photo";
+import { slots } from "@/lib/photos";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TeamGroupSection } from "@/components/TeamGrid";
@@ -21,9 +22,9 @@ export default function EquipePage() {
       <PageHero
         crumbs={[{ name: "Équipe", path: "/equipe/" }]}
         eyebrow="Notre équipe"
-        title="Une équipe, plusieurs métiers"
-        intro="Direction, machinistes, chauffeurs, chefs d'équipe, maçons et main-d'œuvre en génie civil : c'est cette diversité de métiers, réunie au sein d'une même entreprise familiale, qui permet à Guy Monnet & Fils de mener des chantiers complets."
-        aside={<PhotoPlaceholder label="Photo de l'équipe prise sur le terrain" tone="dark" aspect="fill" />}
+        title="Notre équipe"
+        intro="Les personnes qui travaillent chez Guy Monnet & Fils, classées par métier."
+        aside={<Photo slot={slots.teamCover} label="Photo de l'équipe prise sur le terrain" aspect="fill" tone="dark" priority />}
       />
       <BrandBand items={teamGroups.map((g) => g.label.replace(/ génie civil \/ maçonnerie/, ""))} />
 
@@ -41,7 +42,7 @@ export default function EquipePage() {
             </p>
           </Reveal>
           <div className="min-w-0 flex-[1_1_360px]">
-            <PhotoPlaceholder label="Frédéric Monnet sur un chantier" aspect="video" />
+            <Photo slot={slots.teamDirector} label="Frédéric Monnet sur un chantier" aspect="video" />
           </div>
         </div>
       </section>
@@ -49,7 +50,7 @@ export default function EquipePage() {
       {/* COLLABORATEURS */}
       <section>
         <div className="container-wide py-20 sm:py-24">
-          <SectionHeading index="02" eyebrow="Collaborateurs" title="Les hommes et les femmes du terrain" />
+          <SectionHeading index="02" eyebrow="Collaborateurs" title="Par métier" />
           <div className="mt-12 space-y-14">
             {teamGroups.map((group, index) => (
               <TeamGroupSection key={group.id} group={group} index={index} />
@@ -58,7 +59,7 @@ export default function EquipePage() {
         </div>
       </section>
 
-      <CtaBand title="Notre équipe à votre service" kicker="Un projet en Valais ?" />
+      <CtaBand title="Vous avez un projet ?" />
     </>
   );
 }

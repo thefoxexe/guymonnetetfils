@@ -1,8 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Service } from "@/data/services";
 import { services as allServices } from "@/data/services";
 import { Reveal } from "./Reveal";
+import { Photo } from "./Photo";
+import { slots } from "@/lib/photos";
 
 /** Numéro d'un domaine dans la liste complète (« 03 »). */
 export function serviceNumber(service: Service) {
@@ -22,19 +23,16 @@ export function ServiceCard({ service, tall = false }: { service: Service; tall?
         tall ? "h-[380px] sm:h-[420px]" : "h-[300px] sm:h-[340px]"
       }`}
     >
-      {service.heroImage ? (
-        <Image
-          src={service.heroImage}
-          alt=""
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className={`object-cover transition-transform duration-500 ease-editorial group-hover:scale-105 ${
-            service.imagePosition ?? "object-center"
-          }`}
-        />
-      ) : (
-        <div className="hatch-dark absolute inset-0" />
-      )}
+      <Photo
+        slot={slots.serviceCover(service.slug)}
+        label={service.heroImageLabel}
+        alt=""
+        aspect="fill"
+        tone="dark"
+        layout="corner"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        imageClassName="transition-transform duration-500 ease-editorial group-hover:scale-105"
+      />
       <span className="absolute inset-0 bg-gradient-to-b from-ink/10 via-ink/30 to-ink/90" />
       <span className="absolute left-5 top-5 bg-ink/85 px-2 py-1 font-display text-sm font-extrabold text-accent">
         {serviceNumber(service)}

@@ -40,7 +40,7 @@ export function PageHero({
             ) : null}
             <h1
               className={`stretch-75 max-w-5xl font-display font-black uppercase leading-[0.9] ${
-                size === "lg" ? "text-[48px] sm:text-[72px] lg:text-[96px]" : "text-[40px] sm:text-[56px]"
+                size === "lg" ? "text-[40px] sm:text-[56px] lg:text-[72px]" : "text-[36px] sm:text-[48px]"
               }`}
             >
               {title}

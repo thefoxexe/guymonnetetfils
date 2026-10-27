@@ -15,14 +15,13 @@ export function Footer() {
         <div>
           <Image
             src="/logo-guy-monnet-officiel-transparent.png"
-            alt="Guy Monnet & Fils SA — Transports, Terrassements, Génie-civil"
+            alt="Guy Monnet & Fils SA, transports, terrassements, génie civil"
             width={825}
             height={263}
             className="h-20 w-auto"
           />
           <p className="mt-6 max-w-sm text-sm leading-relaxed">
-            Entreprise familiale valaisanne active depuis 1980 en génie civil, terrassement,
-            transport et construction.
+            Transports, terrassements et génie civil à Riddes depuis 1980.
           </p>
           <div className="mt-6 flex items-center gap-3">
             {company.social.instagram ? (
@@ -117,7 +116,7 @@ export function Footer() {
               </a>
             </p>
             <p className="text-mist">
-              {company.hours.label} · {company.hours.weekdays}
+              {company.hours.label}, {company.hours.weekdays}
             </p>
           </address>
         </div>
@@ -125,7 +124,7 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="container-wide flex flex-col gap-3 py-6 text-xs text-mist sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Guy Monnet &amp; Fils SA — Riddes, Valais</p>
+          <p>© {new Date().getFullYear()} Guy Monnet &amp; Fils SA, Riddes</p>
           <div className="flex flex-wrap gap-x-5 gap-y-2">
             <Link href="/mentions-legales/" className={linkClass}>
               Mentions légales

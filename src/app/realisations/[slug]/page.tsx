@@ -1,16 +1,16 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { BrandBand } from "@/components/BrandBand";
 import { CtaBand } from "@/components/CtaBand";
-import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
+import { Photo } from "@/components/Photo";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading, SectionLabel, sectionCounter } from "@/components/SectionHeading";
 import { StatGrid } from "@/components/StatGrid";
 import { projects, getProjectBySlug, projectCategoryLabels } from "@/data/projects";
 import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/seo";
+import { projectGallery, slots } from "@/lib/photos";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -48,17 +48,19 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   const next = projects[(index + 1) % projects.length]!;
   const mobilizedServices = services.filter((s) => project.services.includes(s.slug));
   const categories = project.categories.map((c) => projectCategoryLabels[c]);
-  const gallery = project.gallery ?? [];
+  const gallery = projectGallery(project.slug);
   const n = sectionCounter();
 
   const bandItems = project.highlights ?? [...categories, project.location, ...(project.year ? [project.year] : [])];
 
+  // Mêmes rubriques que les fiches de référence papier de l'entreprise.
   const facts = [
     { label: "Lieu", value: project.location },
-    { label: "Période", value: project.period ?? project.year },
+    { label: "Période d'exécution", value: project.period ?? project.year },
+    { label: "Type de travaux", value: categories.join(", ") },
     { label: "Maître d'ouvrage", value: project.client },
-    { label: "Mandataire / ingénieur", value: project.engineer },
-    { label: "Domaines", value: mobilizedServices.map((s) => s.name).join(", ") || categories.join(", ") },
+    { label: "Direction des travaux", value: project.engineer },
+    { label: "Montant des travaux", value: project.amount },
   ].filter((fact): fact is { label: string; value: string } => Boolean(fact.value));
 
   return (
@@ -87,7 +89,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                     </span>
                   ))}
                 </div>
-                <h1 className="stretch-75 font-display text-[56px] font-black uppercase leading-[0.88] [text-wrap:balance] sm:text-[80px] lg:text-[104px]">
+                <h1 className="stretch-75 font-display text-[44px] font-black uppercase leading-[0.9] [text-wrap:balance] sm:text-[64px] lg:text-[80px]">
                   {project.title}
                 </h1>
                 <p className="max-w-xl text-lg leading-relaxed text-concrete-light sm:text-xl">{project.summary}</p>
@@ -100,7 +102,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               </div>
               {project.period ?? project.year ? (
                 <div>
-                  <dt className="text-xs uppercase tracking-[0.1em] text-mist">Période</dt>
+                  <dt className="text-xs uppercase tracking-[0.1em] text-mist">Période d&apos;exécution</dt>
                   <dd className="mt-1.5 text-[17px] font-semibold">{project.period ?? project.year}</dd>
                 </div>
               ) : null}
@@ -113,20 +115,14 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             </dl>
           </div>
           <div className="relative -mx-5 min-h-[360px] min-w-0 flex-[1_1_440px] sm:min-h-[480px] md:-mx-10 lg:mx-0 lg:-mr-10 lg:min-h-[600px]">
-            {project.heroImage ? (
-              <Image
-                src={project.heroImage}
-                alt={project.heroImageLabel}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className={`object-cover ${project.imagePosition ?? "object-center"}`}
-              />
-            ) : (
-              <div className="absolute inset-0">
-                <PhotoPlaceholder label={project.heroImageLabel} tone="dark" aspect="fill" />
-              </div>
-            )}
+            <Photo
+              slot={slots.projectCover(project.slug)}
+              label={project.heroImageLabel}
+              aspect="fill"
+              tone="dark"
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
             {project.year ? (
               <span className="absolute bottom-0 left-0 bg-accent px-4 py-3 font-display text-[13px] font-extrabold uppercase tracking-[0.12em] text-ink">
                 Réalisation · {project.year}
@@ -149,7 +145,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               action={
                 project.period ? (
                   <p className="max-w-sm text-[15px] leading-relaxed text-steel">
-                    Quantités mises en œuvre par nos équipes ({project.period.toLowerCase()}).
+                    Quantités mises en œuvre, {project.period.toLowerCase()}.
                   </p>
                 ) : undefined
               }
@@ -205,7 +201,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                 {facts.map((fact, i) => (
                   <div
                     key={fact.label}
-                    className={`flex justify-between gap-4 py-3.5 text-sm ${i < facts.length - 1 ? "border-b border-line" : ""}`}
+                    className={`grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-4 py-3.5 text-sm ${i < facts.length - 1 ? "border-b border-line" : ""}`}
                   >
                     <dt className="text-steel">{fact.label}</dt>
                     <dd className="text-right font-semibold">{fact.value}</dd>
@@ -217,7 +213,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               href="/contact/"
               className="focus-ring mt-4 flex items-center justify-between bg-accent px-6 py-4 text-[15px] font-bold text-ink transition-colors hover:bg-ink hover:text-paper"
             >
-              Un projet similaire ? Contactez-nous <span aria-hidden="true">→</span>
+              Nous contacter <span aria-hidden="true">→</span>
             </Link>
           </aside>
         </div>
@@ -228,8 +224,8 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         <div className="container-wide py-20 sm:py-24">
           <SectionHeading
             index={n()}
-            eyebrow="En images"
-            title="Le chantier, étape par étape"
+            eyebrow="Photos"
+            title="Photos du chantier"
             tone="dark"
             action={
               gallery.length > 0 ? <span className="text-[15px] text-mist">{gallery.length} photos</span> : undefined
@@ -239,35 +235,31 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             <div className="mt-12 grid auto-rows-[240px] grid-cols-1 gap-3 sm:auto-rows-[260px] sm:grid-cols-2 lg:auto-rows-[300px] lg:grid-cols-3">
               {gallery.map((image, i) => (
                 <Reveal
-                  key={image.src}
+                  key={image.slot}
                   delay={(i % 3) * 60}
                   className={`group relative overflow-hidden bg-anthracite ${mosaicSpan(i, gallery.length)}`}
                 >
-                  <figure className="h-full">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      sizes={i === 0 ? "(max-width: 640px) 100vw, 66vw" : "(max-width: 640px) 100vw, 33vw"}
-                      className={`object-cover transition-transform duration-500 ease-editorial group-hover:scale-105 ${
-                        image.imagePosition ?? "object-center"
-                      }`}
-                    />
-                    <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 to-transparent px-5 pb-4 pt-12 text-sm leading-snug">
-                      <span className="line-clamp-2">
-                        <b className="mr-2 font-display text-accent">{String(i + 1).padStart(2, "0")}</b>
-                        {image.alt}
-                      </span>
-                    </figcaption>
-                  </figure>
+                  <Photo
+                    slot={image.slot}
+                    label={`${project.title}, photo ${i + 1}`}
+                    aspect="fill"
+                    sizes={i === 0 ? "(max-width: 640px) 100vw, 66vw" : "(max-width: 640px) 100vw, 33vw"}
+                    imageClassName="transition-transform duration-500 ease-editorial group-hover:scale-105"
+                  />
                 </Reveal>
               ))}
             </div>
           ) : (
             <div className="mt-12 grid grid-cols-1 gap-3 sm:grid-cols-3">
-              <PhotoPlaceholder label={`${project.title} — photo du chantier 1`} tone="dark" aspect="video" />
-              <PhotoPlaceholder label={`${project.title} — photo du chantier 2`} tone="dark" aspect="video" />
-              <PhotoPlaceholder label={`${project.title} — photo du chantier 3`} tone="dark" aspect="video" />
+              {[1, 2, 3].map((n) => (
+                <Photo
+                  key={n}
+                  slot={slots.projectGallery(project.slug, n)}
+                  label={`${project.title}, photo ${n}`}
+                  tone="dark"
+                  aspect="video"
+                />
+              ))}
             </div>
           )}
         </div>
@@ -277,7 +269,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       {mobilizedServices.length > 0 ? (
         <section className="bg-offwhite">
           <div className="container-wide py-20 sm:py-24">
-            <SectionHeading index={n()} eyebrow="Savoir-faire mobilisés" title="Domaines d'activité" />
+            <SectionHeading index={n()} eyebrow="Domaines" title="Domaines concernés" />
             <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
               {mobilizedServices.map((service) => (
                 <Link
@@ -286,19 +278,14 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                   className="focus-ring group flex min-h-[180px] flex-col border border-line bg-paper text-ink transition-colors hover:border-ink sm:flex-row"
                 >
                   <span className="relative h-48 w-full shrink-0 overflow-hidden bg-anthracite sm:h-auto sm:w-[42%]">
-                    {service.heroImage ? (
-                      <Image
-                        src={service.heroImage}
-                        alt=""
-                        fill
-                        sizes="240px"
-                        className={`object-cover transition-transform duration-500 group-hover:scale-105 ${
-                          service.imagePosition ?? "object-center"
-                        }`}
-                      />
-                    ) : (
-                      <span className="hatch-dark absolute inset-0" />
-                    )}
+                    <Photo
+                      slot={slots.serviceCover(service.slug)}
+                      label={service.heroImageLabel}
+                      alt=""
+                      aspect="fill"
+                      tone="dark"
+                      sizes="240px"
+                    />
                   </span>
                   <span className="flex min-w-0 flex-col justify-between gap-4 p-6">
                     <span className="stretch-85 font-display text-[24px] font-extrabold uppercase leading-none">
@@ -320,25 +307,22 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           href={`/realisations/${next.slug}/`}
           className="focus-ring group relative block h-[340px] overflow-hidden bg-ink text-paper sm:h-[420px]"
         >
-          {next.heroImage ? (
-            <Image
-              src={next.heroImage}
-              alt=""
-              fill
-              sizes="100vw"
-              className={`object-cover transition-transform duration-700 ease-editorial group-hover:scale-105 ${
-                next.imagePosition ?? "object-center"
-              }`}
-            />
-          ) : (
-            <span className="hatch-dark absolute inset-0" />
-          )}
+          <Photo
+            slot={slots.projectCover(next.slug)}
+            label={next.heroImageLabel}
+            alt=""
+            aspect="fill"
+            tone="dark"
+            layout="corner"
+            sizes="100vw"
+            imageClassName="transition-transform duration-700 ease-editorial group-hover:scale-105"
+          />
           <span className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/60 to-ink/20" />
           <span className="container-wide relative flex h-full flex-col justify-center gap-4">
             <span className="font-display text-[13px] font-extrabold uppercase tracking-[0.14em] text-accent">
               Réalisation suivante
             </span>
-            <span className="stretch-75 font-display text-[48px] font-black uppercase leading-[0.9] sm:text-[72px] lg:text-[96px]">
+            <span className="stretch-75 font-display text-[40px] font-black uppercase leading-[0.9] sm:text-[56px] lg:text-[72px]">
               {next.title} <span className="inline-block transition-transform duration-300 group-hover:translate-x-2">→</span>
             </span>
             <span className="text-[15px] text-concrete-light">
@@ -350,7 +334,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       ) : null}
 
       {/* 8. APPEL À L'ACTION */}
-      <CtaBand title="Un projet similaire en Valais ?" kicker="Parlons-en" />
+      <CtaBand title="Vous avez un projet ?" />
     </>
   );
 }

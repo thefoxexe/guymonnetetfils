@@ -19,7 +19,7 @@ export default function ServicesPage() {
         crumbs={[{ name: "Services", path: "/services/" }]}
         eyebrow="Nos services"
         title={`${services.length} domaines d'activité`}
-        intro="Une entreprise familiale équipée pour intervenir sur des chantiers de toutes tailles, du transport de matériaux à la création de sentiers."
+        intro="Du transport de matériaux aux sentiers de montagne, voici tout ce que nous faisons."
       />
       <BrandBand items={companyBandItems} />
       <section>
@@ -27,7 +27,7 @@ export default function ServicesPage() {
           <ServiceGrid services={services} />
         </div>
       </section>
-      <CtaBand title="Un projet ? Un seul interlocuteur." kicker="Du transport à la finition" />
+      <CtaBand title="Vous avez un projet ?" />
     </>
   );
 }

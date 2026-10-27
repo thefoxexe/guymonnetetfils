@@ -98,8 +98,8 @@ la plus simple et la plus robuste était de passer en export statique pur
 (`output: "export"`) : Netlify Forms fonctionne alors nativement, sans
 runtime ni migration, en scannant directement le HTML de `out/`.
 3. Vérifier chaque point de `CONTENT_VALIDATION.md` avec le client.
-4. Remplacer les emplacements photo (`PhotoPlaceholder`) par les vraies
-   photographies migrées (voir `IMAGE_INVENTORY.csv`).
+4. Déposer les photos dans `public/photos/` sous les noms listés dans
+   `PHOTOS.md` : elles remplacent automatiquement les emplacements.
 
 ## Structure du projet
 
@@ -146,8 +146,8 @@ dans le contenu du site et listée dans `CONTENT_VALIDATION.md`.
 - `SEO.md` — architecture SEO, metadata, données structurées.
 - `REDIRECTS.md` — explication de la stratégie de migration des URLs.
 - `redirects.csv` — table de redirection 301 complète.
-- `IMAGE_INVENTORY.csv` — inventaire des emplacements photo à compléter
-  avec les images réelles migrées depuis l'ancien site.
+- `PHOTOS.md` : liste de tous les emplacements photo du site, avec le nom
+  de fichier attendu et la photo souhaitée.
 
 ## Marque et couleurs
 
@@ -193,9 +193,12 @@ dérivée du logo.
 - **Heros** : `PageHero` (pages de premier niveau, fond noir), hero photo
   plein cadre pour les domaines, hero scindé texte/photo pour les
   réalisations.
-- **Emplacements photo « à définir »** (`PhotoPlaceholder`) : hachures +
-  étiquette jaune + description de la photo attendue, pour que le client
-  repère où fournir des images (décision de la séance client).
+- **Emplacements photo** (`Photo`, `src/lib/photos.ts`) : chaque photo du
+  site a un emplacement nommé. Tant qu'aucun fichier n'existe, l'emplacement
+  affiche « Photo à définir », la photo attendue et le nom du fichier. Une
+  photo déposée dans `public/photos/` sous ce nom s'affiche au build suivant
+  (le script `scripts/photos-manifest.mjs` tourne avant `dev` et `build`).
+  Liste complète : `PHOTOS.md`.
 - **Survols** : jaune de marque (tuiles valeurs, membres de l'équipe,
   méga-menu, filets jaunes sous les cartes).
 - **Couleurs de texte** : `steel` (#4A4D52) pour le texte courant sur fond
@@ -246,16 +249,9 @@ pour **Netlify Forms** : pas de backend à héberger ni de clé API à gérer.
   proxy réseau). Le contenu de ce site a donc été rédigé à partir du texte
   détaillé du brief de refonte, pas d'un crawl direct — voir
   `CONTENT_VALIDATION.md`, section 0.
-- **Photographies** : les 11 pages services utilisent désormais de vraies
-  photos (transmises par le client), voir `public/images/services/` et
-  `IMAGE_INVENTORY.csv`. Le hero de la page d'accueil utilise également une
-  première photo réelle (camion-grue), à titre d'ébauche provisoire en
-  attendant d'autres photos/références annoncées par le client. La
-  réalisations Torrent du Lué et Skatepark de Riddes ont aussi leurs vraies
-  photos (hero + galerie, `public/images/realisations/`). Les autres
-  emplacements (pages Entreprise, Équipe, autres pages Réalisations)
-  affichent encore un placeholder identifié, faute d'images récupérées
-  automatiquement depuis l'ancien site (pour la raison ci-dessus).
+- **Photographies** : toutes les anciennes images ont été retirées (qualité
+  insuffisante). Le site affiche des emplacements « Photo à définir » en
+  attendant les nouvelles photos, voir `PHOTOS.md`.
 - **Formulaire de contact** : branché sur Netlify Forms (voir section
   dédiée ci-dessous) — ne peut être testé de bout en bout qu'une fois le
   site déployé sur Netlify, voir `CONTENT_VALIDATION.md`, point 11.

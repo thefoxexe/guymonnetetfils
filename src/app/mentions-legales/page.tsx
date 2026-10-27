@@ -29,7 +29,7 @@ export default function MentionsLegalesPage() {
                 {company.address.country}
               </p>
               <p className="mt-2 text-xs text-accent-ink">
-                TODO: vérifier adresse officielle avant mise en production — les anciennes mentions
+                TODO: vérifier adresse officielle avant mise en production. Les anciennes mentions
                 légales indiquaient « {company.address.streetAlternative} » alors que le reste du
                 site indiquait « {company.address.street} ». Une seule version doit être retenue.
               </p>
@@ -46,7 +46,7 @@ export default function MentionsLegalesPage() {
 
             <div>
               <h2 className="font-display text-xl font-extrabold uppercase text-ink">Hébergement</h2>
-              <p className="mt-2">TODO: contenu client nécessaire — informations sur l&apos;hébergeur du site.</p>
+              <p className="mt-2">TODO: contenu client nécessaire : informations sur l&apos;hébergeur du site.</p>
             </div>
 
             <div>

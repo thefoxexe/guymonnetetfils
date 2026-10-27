@@ -1,5 +1,10 @@
 import type { ProjectStat } from "@/data/projects";
 
+type Stat = ProjectStat & {
+  /** Élément décoratif placé juste derrière la valeur (ex. drapeau du Valais derrière « VS »). */
+  backdrop?: React.ReactNode;
+};
+
 /** Sépare « 3 500 m³ » en valeur (3 500) et unité (m³) pour la typographie. */
 function splitValue(value: string) {
   const match = value.match(/^([\d\s'’.,]+)\s*(.*)$/);
@@ -25,7 +30,7 @@ export function StatGrid({
   columns,
   className = "",
 }: {
-  stats: ProjectStat[];
+  stats: Stat[];
   highlight?: number;
   /** Classes de colonnes Tailwind, si le choix automatique ne convient pas. */
   columns?: string;
@@ -44,7 +49,16 @@ export function StatGrid({
               {stat.label}
             </dt>
             <dd className="stretch-75 order-first whitespace-nowrap font-display text-[48px] font-black leading-none text-ink sm:text-[60px]">
-              {number}
+              {stat.backdrop ? (
+                <span className="relative my-2 ml-3 inline-block">
+                  <span className="absolute -inset-x-3 -inset-y-2" aria-hidden="true">
+                    {stat.backdrop}
+                  </span>
+                  <span className="relative [-webkit-text-stroke:6px_#ffffff] [paint-order:stroke_fill]">{number}</span>
+                </span>
+              ) : (
+                number
+              )}
               {unit ? <span className="text-[24px] sm:text-[28px]"> {unit}</span> : null}
             </dd>
           </div>
