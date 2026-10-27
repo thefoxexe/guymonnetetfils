@@ -13,7 +13,7 @@ export function Footer() {
             src="/logo-guy-monnet-officiel-transparent.png"
             alt="Guy Monnet & Fils SA — Transports, Terrassements, Génie-civil"
             width={825}
-            height={258}
+            height={263}
             className="h-20 w-auto"
           />
           <p className="mt-4 text-sm leading-relaxed">
