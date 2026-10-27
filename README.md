@@ -174,15 +174,45 @@ Le fond du site (`paper`, `tailwind.config.ts`) est un blanc pur (#FFFFFF),
 identique au fond du logo, pour qu'aucune bordure ne se voie autour du
 logo dans le header (header en fond plein, sans transparence).
 
+## Direction artistique
+
+Le site entier suit la DA validée à partir des fiches types (maquettes
+« Fiches types Guy Monnet ») : une identité « chantier » directement
+dérivée du logo.
+
+- **Titres** : Archivo en police variable, condensée (`.stretch-75`,
+  `.stretch-85`, `.stretch-90` dans `globals.css`), graisse 800–900, en
+  capitales. Texte courant en Inter.
+- **Bandeau de marque** (`BrandBand`) : le liseré pointillé noir/jaune et
+  le bandeau jaune « ■ MOT-CLÉ ■ MOT-CLÉ » du logo, placé sous chaque hero.
+- **Sections numérotées** (`SectionHeading`, `SectionLabel`) :
+  « 01 — Le contexte », titre condensé ; alternance fond blanc, `offwhite`
+  et `ink` (noir).
+- **Chiffres phares** (`StatGrid`) : grandes valeurs condensées dans une
+  grille à filets noirs, colonnes choisies pour éviter toute case vide.
+- **Heros** : `PageHero` (pages de premier niveau, fond noir), hero photo
+  plein cadre pour les domaines, hero scindé texte/photo pour les
+  réalisations.
+- **Emplacements photo « à définir »** (`PhotoPlaceholder`) : hachures +
+  étiquette jaune + description de la photo attendue, pour que le client
+  repère où fournir des images (décision de la séance client).
+- **Survols** : jaune de marque (tuiles valeurs, membres de l'équipe,
+  méga-menu, filets jaunes sous les cartes).
+- **Couleurs de texte** : `steel` (#4A4D52) pour le texte courant sur fond
+  clair et `mist` (#A9ABB0) sur fond sombre — `concrete` (#7C7C7C) n'a pas
+  un contraste suffisant pour du texte (WCAG AA).
+
+Fiches types : `src/app/services/[slug]/page.tsx` (domaine d'activité) et
+`src/app/realisations/[slug]/page.tsx` (réalisation). Toutes les sections
+sont générées depuis `src/data/` : ajouter un domaine ou une réalisation
+ne demande que des données (les sections sans contenu ne s'affichent pas).
+
 ## Navigation et appels à l'action
 
-À la demande du client, la navigation reste volontairement sobre pour une
-entreprise de chantier : pas de bouton « Demander un devis » dans le
-header (le numéro de téléphone suffit, avec une icône), pas de barre
-d'actions fixe en bas d'écran mobile, pas de section « CTA » répétée en
-bas de chaque page. Le seul chemin de conversion mis en avant est le
-numéro de téléphone (header + footer + page contact) et la page
-`/contact/` elle-même, accessible depuis la navigation.
+Le header garde une navigation sobre avec le numéro du bureau en bouton.
+Chaque page se termine par un bandeau d'appel à l'action (`CtaBand` :
+« Demander une offre » + téléphone), comme sur les fiches types validées.
+Le footer affiche le fixe du bureau et le portable de Frédéric Monnet.
 
 ## Formulaire de contact (Netlify Forms)
 
@@ -195,9 +225,11 @@ pour **Netlify Forms** : pas de backend à héberger ni de clé API à gérer.
   out/contact/index.html`).
 - Un champ anti-spam (honeypot, `data-netlify-honeypot="bot-field"`) est
   inclus.
-- L'envoi se fait en AJAX (`fetch`) avec `FormData` (texte + pièces
-  jointes dans le même envoi), pour rester sur la page et afficher un
-  message de succès ou d'erreur sans rechargement.
+- Champs (décision de la séance client) : nom, entreprise, téléphone,
+  e-mail et message. Le type de projet, le lieu et les pièces jointes ont
+  été retirés.
+- L'envoi se fait en AJAX (`fetch`) avec `FormData`, pour rester sur la
+  page et afficher un message de succès ou d'erreur sans rechargement.
 - **Ce formulaire ne peut être vérifié de bout en bout qu'une fois déployé
   sur Netlify** : en local (`npm run start`, qui sert `out/` via `serve`),
   l'envoi affichera un succès sans que rien ne soit réellement enregistré

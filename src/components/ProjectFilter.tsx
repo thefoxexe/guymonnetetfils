@@ -40,11 +40,11 @@ export function ProjectFilter({ projects }: { projects: Project[] }) {
           />
         ))}
       </div>
-      <div className="mt-10">
+      <div className="mt-12">
         {filtered.length > 0 ? (
           <ProjectGrid projects={filtered} />
         ) : (
-          <p className="text-sm text-concrete">Aucune réalisation dans cette catégorie pour le moment.</p>
+          <p className="text-sm text-steel">Aucune réalisation dans cette catégorie pour le moment.</p>
         )}
       </div>
     </div>
@@ -65,8 +65,8 @@ function FilterButton({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`focus-ring border px-4 py-2 text-xs font-semibold uppercase tracking-wide transition-colors duration-150 ${
-        active ? "border-ink bg-ink text-paper" : "border-line text-ink hover:border-ink"
+      className={`focus-ring min-h-[44px] border-2 px-5 py-2.5 font-display text-sm font-extrabold uppercase tracking-[0.08em] transition-colors duration-150 ${
+        active ? "border-ink bg-accent text-ink" : "border-ink/15 text-ink hover:border-ink"
       }`}
     >
       {label}

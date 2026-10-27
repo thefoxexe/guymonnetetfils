@@ -6,33 +6,35 @@ import { Reveal } from "./Reveal";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <Link
-      href={`/realisations/${project.slug}/`}
-      className="focus-ring group block border border-line bg-paper transition-colors duration-200 ease-editorial hover:border-ink"
-    >
-      <ProjectImage project={project} aspect="video" />
-      <div className="p-6">
-        <p className="text-xs font-semibold uppercase tracking-wide text-accent-ink">
+    <Link href={`/realisations/${project.slug}/`} className="focus-ring group flex flex-col text-ink">
+      <span className="relative block overflow-hidden">
+        <ProjectImage project={project} aspect="video" />
+        {project.year ? (
+          <span className="absolute left-4 top-4 bg-accent px-2.5 py-1.5 font-display text-xs font-extrabold uppercase tracking-[0.1em] text-ink">
+            {project.year}
+          </span>
+        ) : null}
+        <span className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-accent transition-transform duration-300 ease-editorial group-hover:scale-x-100" />
+      </span>
+      <span className="flex flex-col gap-1.5 pt-5">
+        <span className="font-display text-xs font-extrabold uppercase tracking-[0.12em] text-accent-ink">
           {project.categories.map((c) => projectCategoryLabels[c]).join(" · ")}
-        </p>
-        <h3 className="mt-2 font-display text-xl font-semibold text-ink group-hover:text-accent-ink">
-          {project.title}
-        </h3>
-        <p className="mt-1 text-sm text-concrete">
-          {project.location}
-          {project.year ? ` · ${project.year}` : ""}
-        </p>
-        <span className="mt-4 inline-block text-xs font-semibold uppercase tracking-wide text-ink">
-          Découvrir le chantier →
         </span>
-      </div>
+        <span className="stretch-85 font-display text-[26px] font-extrabold uppercase leading-none transition-colors group-hover:text-accent-ink">
+          {project.title}
+        </span>
+        <span className="text-[15px] text-steel">{project.location}</span>
+        <span className="mt-2 text-sm font-bold">
+          Découvrir le chantier <span aria-hidden="true">→</span>
+        </span>
+      </span>
     </Link>
   );
 }
 
 export function ProjectGrid({ projects }: { projects: Project[] }) {
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
       {projects.map((project, index) => (
         <Reveal key={project.slug} delay={(index % 3) * 80}>
           <ProjectCard project={project} />

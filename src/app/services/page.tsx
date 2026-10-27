@@ -1,7 +1,7 @@
-import { Container } from "@/components/Container";
-import { SectionHeading } from "@/components/SectionHeading";
+import { BrandBand, companyBandItems } from "@/components/BrandBand";
+import { CtaBand } from "@/components/CtaBand";
+import { PageHero } from "@/components/PageHero";
 import { ServiceGrid } from "@/components/ServiceCard";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/seo";
 
@@ -15,19 +15,19 @@ export const metadata = buildMetadata({
 export default function ServicesPage() {
   return (
     <>
-      <Breadcrumb items={[{ name: "Services", path: "/services/" }]} />
-      <section className="py-16">
-        <Container>
-          <SectionHeading
-            eyebrow="Nos services"
-            title="11 domaines d'activité en Valais"
-            description="Une entreprise familiale équipée pour intervenir sur des chantiers de toutes tailles, du transport de matériaux à la création de sentiers."
-          />
-          <div className="mt-12">
-            <ServiceGrid services={services} />
-          </div>
-        </Container>
+      <PageHero
+        crumbs={[{ name: "Services", path: "/services/" }]}
+        eyebrow="Nos services"
+        title={`${services.length} domaines d'activité`}
+        intro="Une entreprise familiale équipée pour intervenir sur des chantiers de toutes tailles, du transport de matériaux à la création de sentiers."
+      />
+      <BrandBand items={companyBandItems} />
+      <section>
+        <div className="container-wide py-20 sm:py-24">
+          <ServiceGrid services={services} />
+        </div>
       </section>
+      <CtaBand title="Un projet ? Un seul interlocuteur." kicker="Du transport à la finition" />
     </>
   );
 }

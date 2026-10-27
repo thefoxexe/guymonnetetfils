@@ -84,13 +84,31 @@ body {
   animation: drawer-in 200ms ease-out;
 }
 
-/* Motif graphique discret inspiré des lignes topographiques */
-.topo-lines {
-  background-image: repeating-linear-gradient(
-    0deg,
-    rgba(24, 26, 27, 0.045) 0px,
-    rgba(24, 26, 27, 0.045) 1px,
-    transparent 1px,
-    transparent 34px
-  );
+/*
+ * Direction artistique « chantier » : titres Archivo condensés en capitales,
+ * bandeau jaune à carrés noirs repris du logo, liseré pointillé noir/jaune.
+ */
+.stretch-75 {
+  font-stretch: 75%;
+}
+.stretch-85 {
+  font-stretch: 85%;
+}
+.stretch-90 {
+  font-stretch: 90%;
+}
+
+/* Liseré pointillé du bandeau du logo (fond jaune, tirets noirs). */
+.brand-stripe {
+  height: 8px;
+  background-color: #eab308;
+  background-image: repeating-linear-gradient(90deg, #181a1b 0 14px, transparent 14px 22px);
+}
+
+/* Hachures des emplacements photo « à définir ». */
+.hatch {
+  background-image: repeating-linear-gradient(135deg, #e9e8e4 0 10px, #f4f3f0 10px 20px);
+}
+.hatch-dark {
+  background-image: repeating-linear-gradient(135deg, #23262b 0 10px, #1d2023 10px 20px);
 }

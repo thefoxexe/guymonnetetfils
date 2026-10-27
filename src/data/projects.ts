@@ -30,6 +30,14 @@ export type Project = {
   title: string;
   location: string;
   year?: string;
+  /** Période d'exécution affichée dans la fiche technique (« Avril – décembre 2025 »). */
+  period?: string;
+  /** Maître d'ouvrage, si le client accepte qu'il soit cité. */
+  client?: string;
+  /** Bureau d'ingénieurs / mandataire, si connu. */
+  engineer?: string;
+  /** Mots-clés courts du bandeau jaune sous le hero. */
+  highlights?: string[];
   categories: ProjectCategory[];
   summary: string;
   seoTitle: string;
@@ -55,6 +63,8 @@ export const projects: Project[] = [
     title: "Torrent du Lué",
     location: "Riddes",
     year: "2025",
+    period: "Avril – décembre 2025",
+    highlights: ["Conduite fonte Ø 800", "Réseaux souterrains", "Chambres de captage", "Enrobé"],
     categories: ["genie-civil"],
     summary: "Réfection de route et de réseaux le long du Torrent du Lué.",
     seoTitle: "Torrent du Lué : travaux de génie civil | Guy Monnet & Fils",
@@ -166,6 +176,8 @@ export const projects: Project[] = [
     title: "Skatepark de Riddes",
     location: "Riddes",
     year: "2020",
+    period: "Dès août 2020",
+    highlights: ["Évacuation des souches", "Terrassement", "Préparation du terrain"],
     categories: ["terrassement"],
     summary:
       "Terrassement et préparation du terrain pour le skatepark de Riddes, façonné ensuite par Vertical Technik AG.",
@@ -237,9 +249,13 @@ export const projects: Project[] = [
 // Réalisations mentionnées dans les références du site existant, pour lesquelles
 // une page individuelle pourra être créée plus tard si suffisamment de texte,
 // photos, données et contexte sont disponibles. Ne pas publier de page pauvre.
+// Les fiches détaillées décidées en séance client sont listées en tête.
 export const futureProjects = [
   "Padel de Riddes",
   "Station phytosanitaire de Saxon",
+  "Chantier CFF",
+  "Chambre de récolte d'eau",
+  "Rue des Artisans, étapes 1 et 2",
   "Chalet à La Tzoumaz",
   "Réservoir d'Ovronnaz",
   "Triage forestier de Riddes",

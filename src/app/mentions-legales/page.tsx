@@ -1,5 +1,5 @@
 import { Container } from "@/components/Container";
-import { Breadcrumb } from "@/components/Breadcrumb";
+import { PageHero } from "@/components/PageHero";
 import { company } from "@/data/company";
 import { buildMetadata } from "@/lib/seo";
 
@@ -12,14 +12,13 @@ export const metadata = buildMetadata({
 export default function MentionsLegalesPage() {
   return (
     <>
-      <Breadcrumb items={[{ name: "Mentions légales", path: "/mentions-legales/" }]} />
-      <section className="py-16">
+      <PageHero size="sm" crumbs={[{ name: "Mentions légales", path: "/mentions-legales/" }]} title="Mentions légales" />
+      <section className="py-16 sm:py-20">
         <Container className="max-w-content">
-          <h1 className="font-display text-4xl font-bold text-ink">Mentions légales</h1>
 
-          <div className="mt-10 space-y-8 text-sm leading-relaxed text-concrete">
+          <div className="mt-10 space-y-8 text-sm leading-relaxed text-steel">
             <div>
-              <h2 className="font-display text-lg font-semibold text-ink">Éditeur du site</h2>
+              <h2 className="font-display text-xl font-extrabold uppercase text-ink">Éditeur du site</h2>
               <p className="mt-2">
                 {company.name}
                 <br />
@@ -37,7 +36,7 @@ export default function MentionsLegalesPage() {
             </div>
 
             <div>
-              <h2 className="font-display text-lg font-semibold text-ink">Contact</h2>
+              <h2 className="font-display text-xl font-extrabold uppercase text-ink">Contact</h2>
               <p className="mt-2">
                 Téléphone : {company.phone.office}
                 <br />
@@ -46,12 +45,12 @@ export default function MentionsLegalesPage() {
             </div>
 
             <div>
-              <h2 className="font-display text-lg font-semibold text-ink">Hébergement</h2>
+              <h2 className="font-display text-xl font-extrabold uppercase text-ink">Hébergement</h2>
               <p className="mt-2">TODO: contenu client nécessaire — informations sur l&apos;hébergeur du site.</p>
             </div>
 
             <div>
-              <h2 className="font-display text-lg font-semibold text-ink">Propriété intellectuelle</h2>
+              <h2 className="font-display text-xl font-extrabold uppercase text-ink">Propriété intellectuelle</h2>
               <p className="mt-2">
                 L&apos;ensemble des contenus présents sur ce site (textes, photographies, vidéos,
                 logo) est la propriété de {company.name} ou de ses partenaires, sauf mention
@@ -64,7 +63,7 @@ export default function MentionsLegalesPage() {
             </div>
 
             <div>
-              <h2 className="font-display text-lg font-semibold text-ink">Responsabilité</h2>
+              <h2 className="font-display text-xl font-extrabold uppercase text-ink">Responsabilité</h2>
               <p className="mt-2">
                 {company.name} s&apos;efforce d&apos;assurer l&apos;exactitude des informations
                 diffusées sur ce site, sans garantie d&apos;exhaustivité. L&apos;entreprise ne

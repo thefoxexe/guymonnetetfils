@@ -217,8 +217,8 @@ le code. Fonctionnement :
   `/contact/` produit par `next build`.
 - L'envoi se fait en AJAX (`fetch`) pour rester sur la page, avec un
   message de confirmation ou d'erreur affiché directement dans le
-  formulaire. Les pièces jointes (photos/PDF/plans) sont transmises dans le
-  même envoi (`multipart/form-data`), dans les limites de Netlify Forms.
+  formulaire. Champs : nom, entreprise, téléphone, e-mail, message (type de
+  projet, lieu et pièces jointes retirés en séance client).
 - **Important : ce formulaire ne peut être testé de bout en bout qu'une
   fois le site déployé sur Netlify.** En local (`npm run dev`/`start`),
   l'envoi affichera un message de succès sans qu'aucune donnée ne soit
@@ -240,7 +240,10 @@ le code. Fonctionnement :
 
 Les projets suivants sont mentionnés comme références sur l'ancien site
 mais ne disposent pas aujourd'hui de texte, photos et chiffres suffisants
-pour constituer une page de réalisation à part entière : Padel de Riddes,
+pour constituer une page de réalisation à part entière. Fiches détaillées
+décidées en séance client : Padel de Riddes, Station phytosanitaire de
+Saxon, chantier CFF, chambre de récolte d'eau, Rue des Artisans (étapes 1
+et 2) — le Torrent du Lué a déjà la sienne. Autres références : Padel de Riddes,
 Station phytosanitaire de Saxon, Chalet à La Tzoumaz, Réservoir d'Ovronnaz,
 Triage forestier de Riddes, Nouvelle école de Riddes, Résidence T-Resort
 (La Tzoumaz), Chemin du Milieu (Riddes), Réservoir des Prarions
@@ -249,3 +252,51 @@ Leytron.
 
 - **Action client : pour chacun de ces projets, transmettre photos, dates et
   détails techniques si une page dédiée est souhaitée.**
+
+## 13. Décisions de la séance client (revue de maquette)
+
+Appliqué dans le site :
+
+- DA « fiches types » étendue à tout le site (voir README, « Direction
+  artistique »).
+- Fiche type identique pour chaque domaine : photo, titre, texte,
+  prestations, images d'illustration (emplacements « à définir »),
+  références en titres seuls, réalisations liées.
+- Page Réalisations filtrable par catégorie, accroche « Des chantiers qui
+  parlent pour nous », bloc « D'autres chantiers à découvrir
+  prochainement ».
+- Transport : camions-grues « de 24 à 28 mètres » (un de 24 m, un de 28 m).
+- Pelles araignées : texte développé (équipe dédiée depuis de nombreuses
+  années, tout type de terrain, fortes pentes).
+- Revalorisation des matériaux : texte avec angle écologique et mention du
+  site agréé, contrôlé et mis aux normes.
+- Entreprise : survol jaune aux couleurs du site.
+- Contact : champ « type de projet » supprimé ; fixe du bureau et portable
+  de Frédéric Monnet affichés (footer + page contact).
+- Favicon créée à partir du logo (pelleteuse).
+
+Reste à fournir / trancher par le client :
+
+- **Photos** : transport (camion en grand, format carré, en couverture ;
+  remplacer la première photo par la deuxième), terrassement (gros chantier
+  d'Isérables), Padel, chalet, revalorisation (nouvelle photo), démolition,
+  déneigement (photos + vidéo), sentier pédestre (photos de grimpe), images
+  d'illustration pour chaque domaine, équipe (de préférence sur le terrain).
+- **Images actuelles** : la séance prévoyait de remplacer toutes les images
+  actuelles par des emplacements « à définir ». Les photos réelles des
+  domaines et des chantiers (Torrent du Lué, skatepark) sont pour l'instant
+  conservées ; à confirmer image par image.
+- **Revalorisation** : nom exact de l'agrément / de la certification du site.
+- **Maçonnerie** : références à revoir — conserver Padel (150 m³ de béton),
+  station phytosanitaire (200 m³), chalet et pont en béton ; trancher pour
+  le hangar pour véhicules de chantier et le réservoir « Brunard » (nom
+  incertain).
+- **Aménagements extérieurs** : mur en pierre sèche en première image,
+  reprendre l'idée du tableau fait avec Fred, ajouter des photos.
+- **Terrassement** : ajouts de références possibles (Isérables).
+- **Déneigement** : vidéo via YouTube en lecture automatique ou reel
+  Instagram de Drone Valley ?
+- **Transport** : texte complémentaire sous la liste des véhicules ?
+- **Équipe** : liste à jour des collaborateurs (via la secrétaire).
+- **Contact** : adresse e-mail du bureau qui recevra les demandes.
+- **Chiffres et détails** des références phares (Padel, etc.).

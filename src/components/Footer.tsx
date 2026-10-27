@@ -4,10 +4,14 @@ import { company } from "@/data/company";
 import { services } from "@/data/services";
 import { IconInstagram, IconMail } from "./icons";
 
+const titleClass = "font-display text-sm font-extrabold uppercase tracking-[0.14em] text-accent";
+const linkClass = "focus-ring hover:text-accent";
+
 export function Footer() {
   return (
-    <footer className="border-t border-line bg-ink text-concrete-light">
-      <div className="container-wide grid grid-cols-1 gap-10 py-16 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="bg-ink text-concrete-light">
+      <div className="brand-stripe" aria-hidden="true" />
+      <div className="container-wide grid grid-cols-1 gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_0.8fr_1.1fr]">
         <div>
           <Image
             src="/logo-guy-monnet-officiel-transparent.png"
@@ -16,7 +20,7 @@ export function Footer() {
             height={263}
             className="h-20 w-auto"
           />
-          <p className="mt-4 text-sm leading-relaxed">
+          <p className="mt-6 max-w-sm text-sm leading-relaxed">
             Entreprise familiale valaisanne active depuis 1980 en génie civil, terrassement,
             transport et construction.
           </p>
@@ -27,27 +31,27 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Guy Monnet & Fils SA sur Instagram"
-                className="focus-ring flex h-9 w-9 items-center justify-center border border-white/20 text-concrete-light hover:border-accent hover:text-accent"
+                className="focus-ring flex h-11 w-11 items-center justify-center border border-white/25 text-concrete-light transition-colors hover:border-accent hover:bg-accent hover:text-ink"
               >
-                <IconInstagram className="h-4 w-4" />
+                <IconInstagram className="h-5 w-5" />
               </a>
             ) : null}
             <a
               href={`mailto:${company.email}`}
               aria-label={`Envoyer un e-mail à ${company.email}`}
-              className="focus-ring flex h-9 w-9 items-center justify-center border border-white/20 text-concrete-light hover:border-accent hover:text-accent"
+              className="focus-ring flex h-11 w-11 items-center justify-center border border-white/25 text-concrete-light transition-colors hover:border-accent hover:bg-accent hover:text-ink"
             >
-              <IconMail className="h-4 w-4" />
+              <IconMail className="h-5 w-5" />
             </a>
           </div>
         </div>
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-paper">Services</p>
-          <ul className="mt-4 space-y-2 text-sm">
+          <p className={titleClass}>Domaines d&apos;activité</p>
+          <ul className="mt-5 space-y-2 text-sm">
             {services.map((service) => (
               <li key={service.slug}>
-                <Link href={`/services/${service.slug}/`} className="focus-ring hover:text-accent">
+                <Link href={`/services/${service.slug}/`} className={linkClass}>
                   {service.name}
                 </Link>
               </li>
@@ -56,25 +60,25 @@ export function Footer() {
         </div>
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-paper">Entreprise</p>
-          <ul className="mt-4 space-y-2 text-sm">
+          <p className={titleClass}>Entreprise</p>
+          <ul className="mt-5 space-y-2 text-sm">
             <li>
-              <Link href="/entreprise/" className="focus-ring hover:text-accent">
-                Notre histoire
+              <Link href="/entreprise/" className={linkClass}>
+                Découvrir l&apos;entreprise
               </Link>
             </li>
             <li>
-              <Link href="/realisations/" className="focus-ring hover:text-accent">
+              <Link href="/realisations/" className={linkClass}>
                 Réalisations
               </Link>
             </li>
             <li>
-              <Link href="/equipe/" className="focus-ring hover:text-accent">
+              <Link href="/equipe/" className={linkClass}>
                 Équipe
               </Link>
             </li>
             <li>
-              <Link href="/contact/" className="focus-ring hover:text-accent">
+              <Link href="/contact/" className={linkClass}>
                 Contact
               </Link>
             </li>
@@ -82,40 +86,51 @@ export function Footer() {
         </div>
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-paper">Contact</p>
-          <address className="mt-4 space-y-2 text-sm not-italic">
+          <p className={titleClass}>Contact</p>
+          <address className="mt-5 space-y-4 text-sm not-italic">
             <p>
               {company.address.street}
               <br />
               {company.address.postalCode} {company.address.city}, {company.address.region}
             </p>
+            <dl className="space-y-2">
+              <div className="flex flex-wrap justify-between gap-x-4 border-b border-white/10 pb-2">
+                <dt className="text-mist">Bureau</dt>
+                <dd>
+                  <a href={company.phone.officeHref} className={`${linkClass} font-semibold text-paper`}>
+                    {company.phone.office}
+                  </a>
+                </dd>
+              </div>
+              <div className="flex flex-wrap justify-between gap-x-4 border-b border-white/10 pb-2">
+                <dt className="text-mist">Frédéric Monnet</dt>
+                <dd>
+                  <a href={company.phone.fredericHref} className={`${linkClass} font-semibold text-paper`}>
+                    {company.phone.frederic}
+                  </a>
+                </dd>
+              </div>
+            </dl>
             <p>
-              <a href={company.phone.officeHref} className="focus-ring hover:text-accent">
-                {company.phone.office}
-              </a>
-            </p>
-            <p>
-              <a href={`mailto:${company.email}`} className="focus-ring hover:text-accent">
+              <a href={`mailto:${company.email}`} className={linkClass}>
                 {company.email}
               </a>
             </p>
-            <p className="text-concrete">
-              {company.hours.label}
-              <br />
-              {company.hours.weekdays}
+            <p className="text-mist">
+              {company.hours.label} · {company.hours.weekdays}
             </p>
           </address>
         </div>
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container-wide flex flex-col gap-3 py-6 text-xs text-concrete sm:flex-row sm:items-center sm:justify-between">
+        <div className="container-wide flex flex-col gap-3 py-6 text-xs text-mist sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Guy Monnet &amp; Fils SA — Riddes, Valais</p>
-          <div className="flex flex-wrap gap-4">
-            <Link href="/mentions-legales/" className="focus-ring hover:text-accent">
+          <div className="flex flex-wrap gap-x-5 gap-y-2">
+            <Link href="/mentions-legales/" className={linkClass}>
               Mentions légales
             </Link>
-            <Link href="/confidentialite/" className="focus-ring hover:text-accent">
+            <Link href="/confidentialite/" className={linkClass}>
               Confidentialité
             </Link>
             <span>
@@ -124,21 +139,16 @@ export function Footer() {
                 href="https://dronevalais-production.ch/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="focus-ring hover:text-accent"
+                className={linkClass}
               >
                 {company.photoCredit}
               </a>
             </span>
           </div>
         </div>
-        <div className="container-wide border-t border-white/10 py-4 text-center text-xs text-concrete">
+        <div className="container-wide border-t border-white/10 py-4 text-center text-xs text-mist">
           Réalisé avec ❤️ par{" "}
-          <a
-            href="https://webalp.ch/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="focus-ring hover:text-accent"
-          >
+          <a href="https://webalp.ch/" target="_blank" rel="noopener noreferrer" className={linkClass}>
             WebAlp.ch
           </a>
         </div>

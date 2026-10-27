@@ -2,29 +2,18 @@
 
 import { useState } from "react";
 
-const projectTypes = [
-  "Transport",
-  "Terrassement",
-  "Génie civil",
-  "Maçonnerie",
-  "Aménagement extérieur",
-  "Démolition",
-  "Revalorisation",
-  "Déneigement",
-  "Pelle araignée",
-  "Cours d'eau",
-  "Sentier",
-  "Autre",
-];
+const labelClass = "block font-display text-[13px] font-extrabold uppercase tracking-[0.1em] text-ink";
+const inputClass =
+  "focus-ring mt-2 w-full border-2 border-line bg-paper px-4 py-3.5 text-base text-ink transition-colors focus:border-ink";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 // Formulaire géré par Netlify Forms : détecté au build grâce aux attributs
 // name/data-netlify sur le <form> (Netlify scanne le HTML généré), puis
-// soumis en AJAX ici pour rester sur la page. Les envois (et les pièces
-// jointes) sont consultables dans l'onglet "Forms" du site Netlify ; les
-// notifications par e-mail se configurent aussi là-bas, dans les réglages
-// du site (aucune clé/API à gérer côté code).
+// soumis en AJAX ici pour rester sur la page. Les envois sont consultables
+// dans l'onglet "Forms" du site Netlify ; les notifications par e-mail vers
+// l'adresse du bureau (TODO: VALIDATION CLIENT — adresse à confirmer) se
+// configurent aussi là-bas (aucune clé/API à gérer côté code).
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
 
@@ -47,7 +36,7 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <p role="status" className="border border-line bg-offwhite p-6 text-sm text-ink">
+      <p role="status" className="border-l-4 border-accent bg-offwhite p-6 text-base text-ink">
         Merci, votre demande a bien été envoyée. Nous revenons vers vous dans les meilleurs
         délais.
       </p>
@@ -60,7 +49,6 @@ export function ContactForm() {
       method="POST"
       data-netlify="true"
       data-netlify-honeypot="bot-field"
-      encType="multipart/form-data"
       onSubmit={handleSubmit}
       className="space-y-6"
       noValidate
@@ -80,27 +68,7 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="projectType" className="block text-sm font-semibold text-ink">
-          Type de projet <span className="text-accent-ink">*</span>
-        </label>
-        <select
-          id="projectType"
-          name="projectType"
-          required
-          className="focus-ring mt-2 w-full border border-line bg-paper px-4 py-3 text-sm text-ink"
-        >
-          {projectTypes.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <Field label="Lieu du projet" name="location" />
-
-      <div>
-        <label htmlFor="message" className="block text-sm font-semibold text-ink">
+        <label htmlFor="message" className={labelClass}>
           Message <span className="text-accent-ink">*</span>
         </label>
         <textarea
@@ -108,25 +76,11 @@ export function ContactForm() {
           name="message"
           required
           rows={6}
-          className="focus-ring mt-2 w-full border border-line bg-paper px-4 py-3 text-sm text-ink"
+          className={inputClass}
         />
       </div>
 
-      <div>
-        <label htmlFor="attachments" className="block text-sm font-semibold text-ink">
-          Photos, PDF ou plans (facultatif)
-        </label>
-        <input
-          id="attachments"
-          name="attachments"
-          type="file"
-          multiple
-          accept="image/*,.pdf"
-          className="focus-ring mt-2 w-full text-sm text-concrete file:mr-4 file:border file:border-ink file:bg-transparent file:px-4 file:py-2 file:text-xs file:font-semibold file:uppercase"
-        />
-      </div>
-
-      <label className="flex items-start gap-3 text-sm text-concrete">
+      <label className="flex items-start gap-3 text-sm text-steel">
         <input type="checkbox" required className="focus-ring mt-1 h-4 w-4 border-line" />
         <span>
           J&apos;accepte que mes données soient utilisées pour traiter ma demande, conformément à
@@ -141,7 +95,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="focus-ring inline-flex items-center justify-center bg-accent px-8 py-4 text-sm font-semibold uppercase tracking-wide text-ink hover:bg-accent-dark disabled:opacity-60"
+        className="focus-ring inline-flex items-center justify-center gap-3 bg-accent px-8 py-4 text-[15px] font-bold text-ink transition-colors hover:bg-ink hover:text-paper disabled:opacity-60"
       >
         {status === "submitting" ? "Envoi en cours…" : "Envoyer ma demande"}
       </button>
@@ -171,7 +125,7 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={name} className="block text-sm font-semibold text-ink">
+      <label htmlFor={name} className={labelClass}>
         {label} {required ? <span className="text-accent-ink">*</span> : null}
       </label>
       <input
@@ -180,7 +134,7 @@ function Field({
         type={type}
         required={required}
         autoComplete={autoComplete}
-        className="focus-ring mt-2 w-full border border-line bg-paper px-4 py-3 text-sm text-ink"
+        className={inputClass}
       />
     </div>
   );

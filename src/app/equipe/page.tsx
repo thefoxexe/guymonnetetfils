@@ -1,7 +1,9 @@
-import { Container } from "@/components/Container";
-import { SectionHeading } from "@/components/SectionHeading";
-import { Breadcrumb } from "@/components/Breadcrumb";
+import { BrandBand } from "@/components/BrandBand";
+import { CtaBand } from "@/components/CtaBand";
+import { PageHero } from "@/components/PageHero";
 import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
+import { Reveal } from "@/components/Reveal";
+import { SectionHeading } from "@/components/SectionHeading";
 import { TeamGroupSection } from "@/components/TeamGrid";
 import { direction, teamGroups } from "@/data/team";
 import { buildMetadata } from "@/lib/seo";
@@ -16,46 +18,47 @@ export const metadata = buildMetadata({
 export default function EquipePage() {
   return (
     <>
-      <Breadcrumb items={[{ name: "Équipe", path: "/equipe/" }]} />
+      <PageHero
+        crumbs={[{ name: "Équipe", path: "/equipe/" }]}
+        eyebrow="Notre équipe"
+        title="Une équipe, plusieurs métiers"
+        intro="Direction, machinistes, chauffeurs, chefs d'équipe, maçons et main-d'œuvre en génie civil : c'est cette diversité de métiers, réunie au sein d'une même entreprise familiale, qui permet à Guy Monnet & Fils de mener des chantiers complets."
+        aside={<PhotoPlaceholder label="Photo de l'équipe prise sur le terrain" tone="dark" aspect="fill" />}
+      />
+      <BrandBand items={teamGroups.map((g) => g.label.replace(/ génie civil \/ maçonnerie/, ""))} />
 
-      <section className="py-16">
-        <Container className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
-          <div>
-            <h1 className="font-display text-4xl font-bold leading-[1.05] text-ink sm:text-5xl">
-              Une équipe, plusieurs métiers
-            </h1>
-            <p className="mt-6 max-w-content text-base leading-relaxed text-concrete">
-              Direction, machinistes, chauffeurs, chefs d&apos;équipe, maçons et main-d&apos;œuvre
-              en génie civil : c&apos;est cette diversité de métiers, réunie au sein d&apos;une
-              même entreprise familiale, qui permet à Guy Monnet &amp; Fils de mener des
-              chantiers complets.
+      {/* DIRECTION */}
+      <section className="bg-offwhite">
+        <div className="container-wide flex flex-wrap items-center gap-12 py-20 sm:py-24">
+          <Reveal className="min-w-0 flex-[1_1_480px]">
+            <SectionHeading index="01" eyebrow="Direction" title={direction.name} />
+            <p className="mt-3 font-display text-sm font-extrabold uppercase tracking-[0.12em] text-accent-ink">
+              {direction.role}
             </p>
+            <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-steel">
+              Guy Monnet reste actif au sein de l&apos;entreprise qu&apos;il a fondée en 1980. Son
+              fils, Frédéric Monnet, en assure aujourd&apos;hui la direction générale.
+            </p>
+          </Reveal>
+          <div className="min-w-0 flex-[1_1_360px]">
+            <PhotoPlaceholder label="Frédéric Monnet sur un chantier" aspect="video" />
           </div>
-          <PhotoPlaceholder label="Photo de groupe de l'équipe Guy Monnet & Fils" aspect="wide" priority />
-        </Container>
+        </div>
       </section>
 
-      <section className="bg-offwhite py-16">
-        <Container>
-          <SectionHeading eyebrow="Direction" title={direction.name} />
-          <p className="mt-2 text-sm font-semibold uppercase tracking-wide text-accent-ink">
-            {direction.role}
-          </p>
-          <p className="mt-4 max-w-content text-base leading-relaxed text-concrete">
-            Guy Monnet reste actif au sein de l&apos;entreprise qu&apos;il a fondée en 1980. Son
-            fils, Frédéric Monnet, en assure aujourd&apos;hui la direction générale.
-          </p>
-        </Container>
+      {/* COLLABORATEURS */}
+      <section>
+        <div className="container-wide py-20 sm:py-24">
+          <SectionHeading index="02" eyebrow="Collaborateurs" title="Les hommes et les femmes du terrain" />
+          <div className="mt-12 space-y-14">
+            {teamGroups.map((group, index) => (
+              <TeamGroupSection key={group.id} group={group} index={index} />
+            ))}
+          </div>
+        </div>
       </section>
 
-      <section className="py-16">
-        <Container className="space-y-14">
-          {teamGroups.map((group) => (
-            <TeamGroupSection key={group.id} group={group} />
-          ))}
-        </Container>
-      </section>
-
+      <CtaBand title="Notre équipe à votre service" kicker="Un projet en Valais ?" />
     </>
   );
 }

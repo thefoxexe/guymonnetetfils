@@ -7,16 +7,18 @@ import { JsonLd } from "@/components/JsonLd";
 import { organizationJsonLd, localBusinessJsonLd, websiteJsonLd, absoluteUrl } from "@/lib/seo";
 import { company } from "@/data/company";
 
+// Archivo en police variable : graisse et largeur (axe wdth) réglables, ce qui
+// permet les titres condensés de la DA (classes `.stretch-*` dans globals.css).
 const displayFont = Archivo({
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  axes: ["wdth"],
   variable: "--font-display",
   display: "swap",
 });
 
 const bodyFont = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-body",
   display: "swap",
 });

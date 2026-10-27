@@ -3,35 +3,43 @@ import Link from "next/link";
 type ButtonProps = {
   href: string;
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "ghost";
+  /**
+   * primary : jaune de marque (fonds clairs ou sombres)
+   * dark : noir (sur les bandeaux jaunes)
+   * outline / outline-light : contour noir (fond clair) ou blanc (fond sombre)
+   * ghost : lien souligné jaune
+   */
+  variant?: "primary" | "dark" | "outline" | "outline-light" | "ghost";
   className?: string;
   external?: boolean;
 };
 
 const base =
-  "focus-ring inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold uppercase tracking-wide transition-colors duration-200 ease-editorial";
+  "focus-ring inline-flex items-center justify-center gap-2 px-7 py-4 text-[15px] font-bold transition-colors duration-200 ease-editorial";
 
 const variants: Record<NonNullable<ButtonProps["variant"]>, string> = {
   primary: "bg-accent text-ink hover:bg-accent-dark",
-  secondary: "border border-ink text-ink hover:bg-ink hover:text-paper",
-  ghost: "text-ink underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-ink",
+  dark: "bg-ink text-paper hover:bg-anthracite",
+  outline: "border-2 border-ink px-[26px] py-[14px] text-ink hover:bg-ink hover:text-paper",
+  "outline-light": "border-2 border-paper px-[26px] py-[14px] text-paper hover:bg-paper hover:text-ink",
+  ghost: "px-0 py-1 text-ink underline decoration-accent decoration-[3px] underline-offset-[6px] hover:text-accent-ink",
 };
 
 export function Button({ href, children, variant = "primary", className = "", external }: ButtonProps) {
-  if (external) {
+  const classes = `${base} ${variants[variant]} ${className}`;
+  if (external || href.startsWith("tel:") || href.startsWith("mailto:")) {
     return (
       <a
         href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`${base} ${variants[variant]} ${className}`}
+        className={classes}
+        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
         {children}
       </a>
     );
   }
   return (
-    <Link href={href} className={`${base} ${variants[variant]} ${className}`}>
+    <Link href={href} className={classes}>
       {children}
     </Link>
   );

@@ -1,14 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
+import { BrandBand, companyBandItems } from "@/components/BrandBand";
 import { Button } from "@/components/Button";
-import { Container } from "@/components/Container";
-import { SectionHeading } from "@/components/SectionHeading";
-import { ServiceGrid } from "@/components/ServiceCard";
+import { CtaBand } from "@/components/CtaBand";
 import { ProjectGrid } from "@/components/ProjectCard";
-import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
+import { ProjectImage } from "@/components/ProjectImage";
 import { Reveal } from "@/components/Reveal";
+import { SectionHeading, SectionLabel } from "@/components/SectionHeading";
+import { ServiceGrid } from "@/components/ServiceCard";
+import { StatGrid } from "@/components/StatGrid";
+import { company } from "@/data/company";
 import { services } from "@/data/services";
-import { projects } from "@/data/projects";
+import { projects, projectCategoryLabels } from "@/data/projects";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -18,6 +21,21 @@ export const metadata = buildMetadata({
   path: "/",
 });
 
+const localities = [
+  "Riddes",
+  "Isérables",
+  "La Tzoumaz",
+  "Leytron",
+  "Ardon",
+  "Nendaz",
+  "Saxon",
+  "Chamoson",
+  "Saillon",
+  "Sion",
+  "Ovronnaz",
+  "Pont-de-la-Morge",
+];
+
 export default function HomePage() {
   const featuredProject = projects.find((p) => p.featured) ?? projects[0]!;
   const otherProjects = projects.filter((p) => p.slug !== featuredProject.slug);
@@ -25,159 +43,195 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative flex min-h-[max(480px,calc(100dvh-5rem))] items-end overflow-hidden md:min-h-[max(560px,calc(100dvh-6rem))]">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/hero-camion-guy-monnet-transports-valais-01.webp"
-            alt="Camion-grue Guy Monnet & Fils SA en intervention en Valais"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[10%_65%] sm:object-[30%_55%]"
-          />
-        </div>
-        <div className="absolute inset-0 bg-ink/35" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/55 to-ink/10" />
-        <Container className="relative w-full pb-8 pt-16 text-paper sm:pb-14 sm:pt-24">
-          <Reveal delay={0}>
-            <p className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-accent drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)] sm:text-sm sm:tracking-[0.25em]">
-              Construire. Transporter. Aménager.
-            </p>
-            <h1 className="mt-3 max-w-3xl font-display text-3xl font-bold leading-[1.1] drop-shadow-[0_3px_10px_rgba(0,0,0,0.75)] sm:mt-4 sm:text-5xl sm:leading-[1.05] lg:text-6xl">
-              Génie civil, terrassement et transport en Valais
+      <section className="relative flex min-h-[max(560px,calc(100dvh-5rem))] items-end overflow-hidden bg-ink text-paper md:min-h-[max(620px,calc(100dvh-6rem))]">
+        <Image
+          src="/images/hero-camion-guy-monnet-transports-valais-01.webp"
+          alt="Camion-grue Guy Monnet & Fils SA en intervention en Valais"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[10%_65%] sm:object-[30%_55%]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-ink/10" />
+        <div className="container-wide relative w-full pb-12 pt-24 sm:pb-20">
+          <Reveal className="flex flex-col gap-6">
+            <span className="self-start bg-accent px-3.5 py-2 font-display text-xs font-extrabold uppercase tracking-[0.14em] text-ink sm:text-[13px]">
+              Construire · Transporter · Aménager
+            </span>
+            <h1 className="stretch-75 max-w-5xl font-display text-[52px] font-black uppercase leading-[0.86] sm:text-[88px] lg:text-[120px]">
+              Génie civil, terrassement &amp; transport en Valais
             </h1>
-            <p className="mt-3 max-w-content text-sm leading-relaxed text-concrete-light drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)] sm:mt-6 sm:text-base sm:leading-relaxed sm:text-lg">
+            <p className="max-w-2xl text-lg leading-relaxed text-concrete-light sm:text-xl">
               Depuis 1980, Guy Monnet &amp; Fils SA accompagne particuliers, entreprises et
               collectivités dans leurs projets de construction, d&apos;infrastructures, de
               transport et d&apos;aménagement en Valais.
             </p>
-            <div className="mt-5 flex flex-wrap gap-3 sm:mt-8 sm:gap-4">
-              <Button href="/services/" variant="primary" className="px-5 py-3 text-xs sm:px-6 sm:py-3.5 sm:text-sm">
-                Nos services
-              </Button>
-              <Button
-                href="/contact/"
-                variant="secondary"
-                className="border-paper px-5 py-3 text-xs text-paper hover:bg-paper hover:text-ink sm:px-6 sm:py-3.5 sm:text-sm"
-              >
-                Contactez-nous
+            <div className="flex flex-wrap gap-3">
+              <Button href="/services/">Nos domaines d&apos;activité</Button>
+              <Button href="/contact/" variant="outline-light">
+                Demander une offre
               </Button>
             </div>
           </Reveal>
-        </Container>
+        </div>
       </section>
 
-      {/* INTRO ENTREPRISE */}
-      <section className="py-16">
-        <Container className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-          <div>
-            <SectionHeading eyebrow="Depuis 1980" title="Une entreprise familiale au service de vos projets" />
-            <p className="mt-6 max-w-content text-base leading-relaxed text-concrete">
+      <BrandBand items={companyBandItems} />
+
+      {/* L'ENTREPRISE EN BREF */}
+      <section>
+        <div className="container-wide flex flex-wrap gap-14 py-20 sm:py-28 lg:gap-16">
+          <Reveal className="flex min-w-0 flex-[999_1_520px] flex-col gap-6">
+            <SectionLabel index="01">Depuis 1980</SectionLabel>
+            <p className="stretch-90 font-display text-[26px] font-semibold leading-[1.28] sm:text-[34px]">
               De l&apos;achat d&apos;un premier camion par Guy Monnet en 1980 à une entreprise
-              familiale active dans le transport, le génie civil et la construction, Guy Monnet
-              &amp; Fils SA a grandi au rythme des chantiers valaisans. Basée à Riddes et
-              historiquement implantée à Isérables, l&apos;entreprise intervient sur des projets
-              privés et publics dans toute la région.
+              familiale active dans le transport, le génie civil et la construction.
             </p>
-            <p className="mt-4 max-w-content text-base leading-relaxed text-concrete">
-              Grâce à une équipe expérimentée et à un parc de machines et véhicules adaptés aux
-              travaux les plus variés, elle est en mesure d&apos;intervenir aussi bien sur des
-              chantiers traditionnels que sur des terrains complexes. Disponibilité, efficacité
-              et proximité restent au centre de sa manière de travailler.
+            <p className="max-w-3xl text-[17px] leading-[1.7] text-steel sm:text-lg">
+              Basée à Riddes et historiquement implantée à Isérables, l&apos;entreprise intervient
+              sur des projets privés et publics dans toute la région. Grâce à une équipe
+              expérimentée et à un parc de machines et véhicules adaptés aux travaux les plus
+              variés, elle intervient aussi bien sur des chantiers traditionnels que sur des
+              terrains complexes. Disponibilité, efficacité et proximité restent au centre de sa
+              manière de travailler.
             </p>
-            <Button href="/entreprise/" variant="ghost" className="mt-6 px-0">
-              Découvrir l&apos;entreprise
-            </Button>
+            <div>
+              <Button href="/entreprise/" variant="ghost">
+                Découvrir l&apos;entreprise
+              </Button>
+            </div>
+          </Reveal>
+          <div className="min-w-0 flex-[1_1_380px] self-start">
+            <StatGrid
+              columns="grid-cols-2"
+              highlight={3}
+              stats={[
+                { value: String(company.foundedYear), label: "Premier camion de Guy Monnet" },
+                { value: String(company.incorporatedYear), label: "Création de Guy Monnet & Fils SA" },
+                { value: String(company.domainsCount), label: "Domaines d'activité" },
+                { value: "VS", label: "Riddes, Isérables, La Tzoumaz et tout le Valais" },
+              ]}
+            />
           </div>
-          <PhotoPlaceholder label="Équipe Guy Monnet & Fils sur le dépôt de Riddes" aspect="square" />
-        </Container>
+        </div>
       </section>
 
-      {/* SERVICES */}
-      <section className="bg-offwhite py-16">
-        <Container>
+      {/* DOMAINES D'ACTIVITÉ */}
+      <section className="bg-offwhite">
+        <div className="container-wide py-20 sm:py-24">
           <SectionHeading
+            index="02"
             eyebrow="Nos savoir-faire"
-            title="11 domaines d'activité, une seule entreprise"
+            title={`${services.length} domaines d'activité, une seule entreprise`}
             description="Du transport de matériaux à la création de sentiers, Guy Monnet & Fils réunit les métiers nécessaires à la réalisation de chantiers complets en Valais."
           />
           <div className="mt-12">
             <ServiceGrid services={services} />
           </div>
-        </Container>
+        </div>
       </section>
 
-      {/* PROJET PHARE */}
-      <section className="py-16">
-        <Container>
-          <SectionHeading eyebrow="Chantier phare" title="Des chantiers qui parlent pour nous" />
-          <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
-            <PhotoPlaceholder label={featuredProject.heroImageLabel} aspect="wide" />
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-accent-ink">
-                {featuredProject.location} · {featuredProject.year}
+      {/* CHANTIER PHARE */}
+      <section className="bg-ink text-paper">
+        <div className="container-wide py-20 sm:py-24">
+          <SectionHeading
+            index="03"
+            eyebrow="Chantier phare"
+            title="Des chantiers qui parlent pour nous"
+            tone="dark"
+            action={
+              <Link href="/realisations/" className="focus-ring text-[15px] font-bold text-accent hover:underline">
+                Toutes les réalisations →
+              </Link>
+            }
+          />
+          <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:gap-14">
+            <Link href={`/realisations/${featuredProject.slug}/`} className="focus-ring group relative block overflow-hidden">
+              <ProjectImage project={featuredProject} aspect="video" />
+              {featuredProject.year ? (
+                <span className="absolute bottom-0 left-0 bg-accent px-4 py-3 font-display text-[13px] font-extrabold uppercase tracking-[0.12em] text-ink">
+                  Réalisation · {featuredProject.year}
+                </span>
+              ) : null}
+            </Link>
+            <Reveal className="flex flex-col gap-5">
+              <p className="font-display text-xs font-extrabold uppercase tracking-[0.12em] text-accent">
+                {featuredProject.categories.map((c) => projectCategoryLabels[c]).join(" · ")} · {featuredProject.location}
               </p>
-              <h3 className="mt-2 font-display text-3xl font-bold text-ink">
+              <h3 className="stretch-75 font-display text-[52px] font-black uppercase leading-[0.9] sm:text-[72px]">
                 {featuredProject.title}
               </h3>
-              <p className="mt-4 max-w-content text-base leading-relaxed text-concrete">
-                {featuredProject.summary}
-              </p>
+              <p className="max-w-xl text-lg leading-relaxed text-concrete-light">{featuredProject.summary}</p>
               {featuredProject.stats ? (
-                <div className="mt-6 grid grid-cols-2 gap-4">
+                <dl className="mt-2 grid grid-cols-2 gap-px border border-white/15 bg-white/15">
                   {featuredProject.stats.slice(0, 4).map((stat) => (
-                    <div key={stat.label}>
-                      <p className="font-display text-2xl font-bold text-ink">{stat.value}</p>
-                      <p className="text-xs text-concrete">{stat.label}</p>
+                    <div key={stat.label} className="flex flex-col gap-1.5 bg-ink p-5">
+                      <dt className="text-[13px] leading-snug text-mist">{stat.label}</dt>
+                      <dd className="stretch-75 order-first font-display text-[36px] font-black leading-none text-paper">
+                        {stat.value}
+                      </dd>
                     </div>
                   ))}
-                </div>
+                </dl>
               ) : null}
-              <Button href={`/realisations/${featuredProject.slug}/`} variant="primary" className="mt-8">
-                Découvrir le chantier
-              </Button>
-            </div>
+              <div className="mt-2">
+                <Button href={`/realisations/${featuredProject.slug}/`}>Découvrir le chantier</Button>
+              </div>
+            </Reveal>
           </div>
-
-          <div className="mt-16">
-            <ProjectGrid projects={otherProjects} />
-          </div>
-        </Container>
+        </div>
       </section>
 
-      {/* ZONE D'INTERVENTION */}
-      <section className="bg-offwhite py-16">
-        <Container className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-          <div>
+      {/* AUTRES RÉALISATIONS */}
+      {otherProjects.length > 0 ? (
+        <section>
+          <div className="container-wide py-20 sm:py-24">
+            <SectionHeading index="04" eyebrow="Réalisations" title="D'autres chantiers" />
+            <div className="mt-12">
+              <ProjectGrid projects={otherProjects} />
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {/* ZONE D'INTERVENTION + ÉQUIPE */}
+      <section className="bg-offwhite">
+        <div className="container-wide flex flex-wrap gap-14 py-20 sm:py-24 lg:gap-16">
+          <div className="min-w-0 flex-[999_1_560px]">
             <SectionHeading
+              index="05"
               eyebrow="Zone d'intervention"
               title="Ancrés à Riddes, actifs dans tout le Valais"
+              description="Nos équipes interviennent depuis Riddes sur l'ensemble du territoire valaisan. Quelques communes où nous avons déjà travaillé :"
             />
-            <p className="mt-6 max-w-content text-base leading-relaxed text-concrete">
-              Nos équipes interviennent depuis Riddes sur l&apos;ensemble du territoire valaisan,
-              avec des références à La Tzoumaz, Isérables, Leytron, Ardon, Nendaz, Saxon,
-              Chamoson, Saillon, Sion, Ovronnaz et Pont-de-la-Morge.
-            </p>
-            <Link
-              href="/realisations/"
-              className="focus-ring mt-6 inline-block text-xs font-semibold uppercase tracking-wide text-accent-ink underline underline-offset-4"
-            >
-              Voir nos réalisations
-            </Link>
+            <ul className="mt-8 flex flex-wrap gap-2">
+              {localities.map((place) => (
+                <li
+                  key={place}
+                  className="border-2 border-ink/15 bg-paper px-4 py-2 font-display text-sm font-extrabold uppercase tracking-[0.06em]"
+                >
+                  {place}
+                </li>
+              ))}
+            </ul>
           </div>
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-ink">Équipe</p>
-            <p className="mt-3 max-w-content text-base leading-relaxed text-concrete">
+          <Reveal className="flex min-w-0 flex-[1_1_320px] flex-col justify-between gap-6 self-start bg-ink p-8 text-paper">
+            <p className="font-display text-sm font-extrabold uppercase tracking-[0.14em] text-accent">L&apos;équipe</p>
+            <p className="stretch-85 font-display text-[30px] font-extrabold uppercase leading-[0.95]">
+              Une équipe, plusieurs métiers
+            </p>
+            <p className="text-[15px] leading-relaxed text-concrete-light">
               Direction, machinistes, chauffeurs, chefs d&apos;équipe, maçons : une équipe qui
               réunit les métiers nécessaires à la réalisation de chantiers complets.
             </p>
-            <Button href="/equipe/" variant="ghost" className="mt-4 px-0">
-              Rencontrer l&apos;équipe
-            </Button>
-          </div>
-        </Container>
+            <div>
+              <Button href="/equipe/">Rencontrer l&apos;équipe</Button>
+            </div>
+          </Reveal>
+        </div>
       </section>
 
+      <CtaBand title="Un projet de chantier en Valais ?" kicker="Parlons-en" />
     </>
   );
 }

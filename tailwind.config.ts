@@ -12,6 +12,11 @@ const config: Config = {
         ink: "#181a1b",
         anthracite: "#23262b",
         concrete: "#7c7c7c",
+        // Gris foncé pour le texte courant sur fond clair (contraste AA,
+        // contrairement à `concrete` réservé aux éléments décoratifs).
+        steel: "#4a4d52",
+        // Gris clair pour le texte secondaire sur fond sombre (ink).
+        mist: "#a9abb0",
         "concrete-light": "#d9dade",
         offwhite: "#f4f3f0",
         // Blanc pur, identique au fond du logo officiel (échantillonné dans

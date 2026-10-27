@@ -1,26 +1,25 @@
-import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
 
 export default function NotFound() {
   return (
-    <section className="flex min-h-[60vh] items-center py-20">
-      <Container className="max-w-content">
-        <p className="text-xs font-semibold uppercase tracking-wide text-accent-ink">404</p>
-        <h1 className="mt-4 font-display text-4xl font-bold text-ink sm:text-5xl">
+    <section className="bg-ink text-paper">
+      <div className="container-wide flex min-h-[60vh] flex-col justify-center gap-6 py-20">
+        <span className="self-start bg-accent px-3 py-1.5 font-display text-xs font-extrabold uppercase tracking-[0.12em] text-ink">
+          Erreur 404
+        </span>
+        <h1 className="stretch-75 max-w-4xl font-display text-[52px] font-black uppercase leading-[0.9] sm:text-[88px]">
           Cette route ne mène nulle part.
         </h1>
-        <p className="mt-4 text-base leading-relaxed text-concrete">
+        <p className="max-w-xl text-lg leading-relaxed text-concrete-light">
           La page demandée n&apos;existe plus ou a été déplacée.
         </p>
-        <div className="mt-8 flex flex-wrap gap-4">
-          <Button href="/" variant="primary">
-            Retour à l&apos;accueil
-          </Button>
-          <Button href="/realisations/" variant="secondary">
+        <div className="flex flex-wrap gap-3">
+          <Button href="/">Retour à l&apos;accueil</Button>
+          <Button href="/realisations/" variant="outline-light">
             Voir nos réalisations
           </Button>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

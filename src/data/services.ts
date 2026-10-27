@@ -9,6 +9,8 @@ export type Service = {
   slug: string;
   name: string;
   shortDescription: string;
+  /** Mots-clés courts du bandeau jaune sous le hero (« ■ Routes ■ Réseaux… »). */
+  bandItems: string[];
   seoTitle: string;
   seoDescription: string;
   heroImageLabel: string;
@@ -50,9 +52,10 @@ export const services: Service[] = [
     name: "Transport",
     shortDescription:
       "Transport de matériaux et solutions adaptées aux besoins des chantiers.",
+    bandItems: ["Camions tout-terrain", "Camions-grues 24 à 28 m", "Remorque surbaissée", "Bennes multi-lift 10 à 40 m³"],
     seoTitle: "Transport de matériaux & camion-grue en Valais | Guy Monnet",
     seoDescription:
-      "Transport de matériaux de chantier en Valais : camions tout-terrain, camions-grues jusqu'à 24 m de portée et bennes multi-lift. Entreprise basée à Riddes.",
+      "Transport de matériaux de chantier en Valais : camions tout-terrain, camions-grues de 24 à 28 m de portée et bennes multi-lift. Entreprise basée à Riddes.",
     heroImageLabel: "Camions Guy Monnet & Fils SA stationnés sous le hangar du dépôt de Riddes",
     heroImage: "/images/services/transport-camions-guy-monnet-riddes-01.webp",
     heroImageWidth: 1400,
@@ -70,7 +73,7 @@ export const services: Service[] = [
     savoirFaireTitle: "Notre parc de véhicules",
     savoirFaire: [
       "7 camions tout-terrain pour le transport de matériaux de chantier",
-      "2 camions-grues, portée maximale annoncée : 24 mètres",
+      "2 camions-grues, de 24 à 28 mètres de portée (un de 24 m, un de 28 m)",
       "1 camion-remorque surbaissée",
       "Camions multi-lift avec bennes de 10 à 40 m³",
     ],
@@ -82,6 +85,7 @@ export const services: Service[] = [
     name: "Terrassement",
     shortDescription:
       "Préparation des terrains et travaux de terrassement pour bâtiments et infrastructures.",
+    bandItems: ["Préparation de terrain", "Bâtiments", "Infrastructures", "Privés & collectivités"],
     seoTitle: "Terrassement en Valais | Guy Monnet & Fils SA",
     seoDescription:
       "Entreprise de terrassement en Valais depuis 1980 : préparation de terrains pour bâtiments et infrastructures, clients privés et collectivités publiques.",
@@ -120,6 +124,7 @@ export const services: Service[] = [
     name: "Génie civil",
     shortDescription:
       "Routes, réseaux, conduites et infrastructures publiques ou privées.",
+    bandItems: ["Routes", "Réseaux enterrés", "Conduites", "Ouvrages en béton", "Collectivités"],
     seoTitle: "Entreprise de génie civil en Valais | Guy Monnet & Fils",
     seoDescription:
       "Entreprise de génie civil à Riddes : routes, réseaux, conduites et infrastructures pour collectivités et maîtres d'ouvrage privés en Valais.",
@@ -169,6 +174,7 @@ export const services: Service[] = [
     name: "Maçonnerie",
     shortDescription:
       "Construction en béton armé, chalets, annexes, garages et ouvrages spécifiques.",
+    bandItems: ["Chalets", "Rénovations", "Annexes & garages", "Béton armé"],
     seoTitle: "Maçonnerie & béton armé en Valais | Guy Monnet & Fils",
     seoDescription:
       "Maçonnerie et construction béton armé en Valais : chalets, rénovations, annexes, garages et ouvrages spécifiques réalisés par Guy Monnet & Fils.",
@@ -227,6 +233,7 @@ export const services: Service[] = [
     name: "Aménagements extérieurs",
     shortDescription:
       "Murs, enrochements, pavage, bordures, goudronnage et aménagements.",
+    bandItems: ["Murs en pierre", "Enrochements", "Pavés & bordures", "Goudronnage"],
     seoTitle: "Aménagements extérieurs en Valais | Guy Monnet & Fils",
     seoDescription:
       "Aménagements extérieurs en Valais : murs, enrochements, pavage, bordures et goudronnage, avec fourniture de terre végétale par Guy Monnet & Fils.",
@@ -256,6 +263,7 @@ export const services: Service[] = [
     name: "Démolition",
     shortDescription:
       "Démolition, évacuation, tri et traitement des matériaux.",
+    bandItems: ["Démolition", "Tri", "Évacuation", "Revalorisation"],
     seoTitle: "Entreprise de démolition en Valais | Guy Monnet & Fils",
     seoDescription:
       "Démolition, tri et évacuation de matériaux en Valais. Les matériaux valorisables sont dirigés vers le centre de revalorisation de Guy Monnet & Fils à Riddes.",
@@ -292,6 +300,7 @@ export const services: Service[] = [
     name: "Revalorisation des matériaux",
     shortDescription:
       "Tri, criblage et réutilisation des matériaux dans le centre de Riddes.",
+    bandItems: ["Tri", "Criblage", "Réutilisation", "Économie circulaire"],
     seoTitle: "Revalorisation des matériaux à Riddes | Guy Monnet & Fils",
     seoDescription:
       "Guy Monnet & Fils exploite un centre de tri, criblage et revalorisation des matériaux de chantier à Riddes, dans une logique d'économie circulaire.",
@@ -301,7 +310,8 @@ export const services: Service[] = [
     heroImageHeight: 933,
     intro: [
       "Guy Monnet & Fils exploite son propre centre de revalorisation des matériaux à Riddes. Les matériaux adaptés peuvent y être triés, criblés et transformés afin d'être réutilisés dans les activités de l'entreprise ou proposés à nouveau comme matériaux de construction.",
-      "Cette démarche s'inscrit dans une logique d'économie circulaire, en limitant l'utilisation de nouvelles ressources lorsque des matériaux existants peuvent être correctement revalorisés.",
+      "Cette démarche s'inscrit dans une logique d'économie circulaire : chaque mètre cube de terre, de pierre ou de gravier revalorisé, c'est autant de ressources naturelles qui ne sont pas extraites, et autant de matériaux qui ne finissent pas en décharge. Les trajets sont aussi réduits, puisque les matériaux sont traités au plus près des chantiers de la région.",
+      "Le centre de Riddes est un site agréé, contrôlé et mis aux normes. TODO: VALIDATION CLIENT — indiquer le nom exact de l'agrément ou de la certification du site.",
     ],
     prestations: ["Tri des matériaux", "Criblage", "Revalorisation et réutilisation", "Revente de matériaux"],
     savoirFaireTitle: "Donner une seconde vie aux matériaux de construction",
@@ -314,6 +324,7 @@ export const services: Service[] = [
     name: "Déneigement",
     shortDescription:
       "Déneigement professionnel pour collectivités, routes et particuliers.",
+    bandItems: ["Routes communales", "Route cantonale", "Particuliers"],
     seoTitle: "Déneigement à Riddes & La Tzoumaz | Guy Monnet & Fils",
     seoDescription:
       "Guy Monnet & Fils assure le déneigement des communes de Riddes, La Tzoumaz et Isérables ainsi que des interventions pour les particuliers en Valais.",
@@ -338,6 +349,7 @@ export const services: Service[] = [
     slug: "pelles-araignees",
     name: "Pelles araignées",
     shortDescription: "Travaux dans les terrains difficiles et fortes pentes.",
+    bandItems: ["Fortes pentes", "Terrains difficiles", "Montagne"],
     seoTitle: "Travaux avec pelle araignée en Valais | Guy Monnet & Fils",
     seoDescription:
       "Guy Monnet & Fils utilise des pelles araignées pour intervenir en terrain difficile, en forte pente ou sur des zones d'accès compliqué en Valais.",
@@ -346,8 +358,9 @@ export const services: Service[] = [
     heroImageWidth: 1401,
     heroImageHeight: 1121,
     intro: [
-      "Guy Monnet & Fils utilise des pelles araignées depuis de nombreuses années pour travailler dans des terrains difficiles, en forte pente ou sur des zones à l'accès compliqué.",
-      "Ce type de machine permet d'intervenir sur des chantiers inaccessibles aux engins de terrassement classiques, notamment en montagne.",
+      "Guy Monnet & Fils dispose depuis de nombreuses années d'une équipe de pelle araignée, rompue au travail sur tout type de terrain, y compris les fortes pentes et les zones à l'accès compliqué.",
+      "Ce type de machine permet d'intervenir sur des chantiers inaccessibles aux engins de terrassement classiques, notamment en montagne, en bordure de cours d'eau ou dans les talus raides.",
+      "Associée au savoir-faire de nos machinistes, la pelle araignée permet de travailler avec précision là où le terrain ne laisse aucune marge d'erreur.",
     ],
     prestations: [
       "Terrassement en forte pente",
@@ -363,6 +376,7 @@ export const services: Service[] = [
     name: "Cours d'eau",
     shortDescription:
       "Aménagement et sécurisation de cours d'eau et berges.",
+    bandItems: ["Berges", "Dangers naturels", "Interventions en rivière"],
     seoTitle: "Travaux et aménagement de cours d'eau en Valais | Guy Monnet",
     seoDescription:
       "Guy Monnet & Fils participe à des projets pluridisciplinaires d'aménagement de cours d'eau en Valais, entre protection contre les dangers naturels et ingénierie.",
@@ -391,6 +405,7 @@ export const services: Service[] = [
     slug: "sentiers-pedestres",
     name: "Sentiers pédestres",
     shortDescription: "Création, rénovation et sécurisation de sentiers.",
+    bandItems: ["Création", "Rénovation", "Sécurisation"],
     seoTitle: "Création & rénovation de sentiers en Valais | Guy Monnet",
     seoDescription:
       "Guy Monnet & Fils crée, rénove et sécurise des sentiers pédestres en Valais, notamment le Sentier des Sens à La Tzoumaz.",

@@ -1,7 +1,11 @@
-import { Container } from "@/components/Container";
-import { SectionHeading } from "@/components/SectionHeading";
-import { Breadcrumb } from "@/components/Breadcrumb";
+import { BrandBand, companyBandItems } from "@/components/BrandBand";
+import { Button } from "@/components/Button";
+import { CtaBand } from "@/components/CtaBand";
+import { PageHero } from "@/components/PageHero";
 import { PhotoPlaceholder } from "@/components/PhotoPlaceholder";
+import { Reveal } from "@/components/Reveal";
+import { SectionHeading } from "@/components/SectionHeading";
+import { StatGrid } from "@/components/StatGrid";
 import { Timeline } from "@/components/Timeline";
 import { company } from "@/data/company";
 import { buildMetadata } from "@/lib/seo";
@@ -39,26 +43,37 @@ const values = [
 export default function EntreprisePage() {
   return (
     <>
-      <Breadcrumb items={[{ name: "Entreprise", path: "/entreprise/" }]} />
+      <PageHero
+        crumbs={[{ name: "Entreprise", path: "/entreprise/" }]}
+        eyebrow="Découvrir l'entreprise"
+        title="Une entreprise familiale ancrée en Valais depuis 1980"
+        intro={company.positioning}
+        aside={<PhotoPlaceholder label="Guy Monnet et son premier camion, archives de l'entreprise" tone="dark" aspect="fill" />}
+      />
+      <BrandBand items={companyBandItems} />
 
-      <section className="py-16">
-        <Container className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
-          <div>
-            <h1 className="font-display text-4xl font-bold leading-[1.05] text-ink sm:text-5xl">
-              Une entreprise familiale ancrée en Valais depuis 1980
-            </h1>
-            <p className="mt-6 max-w-content text-base leading-relaxed text-concrete">
-              {company.positioning}
-            </p>
-          </div>
-          <PhotoPlaceholder label="Guy Monnet et son premier camion, archives de l'entreprise" aspect="wide" priority />
-        </Container>
+      {/* EN CHIFFRES */}
+      <section className="bg-offwhite">
+        <div className="container-wide py-20 sm:py-24">
+          <SectionHeading index="01" eyebrow="En chiffres" title="Guy Monnet & Fils en bref" />
+          <StatGrid
+            className="mt-12"
+            highlight={3}
+            stats={[
+              { value: String(company.foundedYear), label: "Achat du premier camion par Guy Monnet" },
+              { value: String(company.incorporatedYear), label: "Création de Guy Monnet & Fils SA" },
+              { value: String(company.domainsCount), label: "Domaines d'activité" },
+              { value: "40 ans", label: "Fêtés en 2020 avec l'inauguration du dépôt de Riddes" },
+            ]}
+          />
+        </div>
       </section>
 
-      <section className="bg-offwhite py-16">
-        <Container>
-          <SectionHeading eyebrow="Notre histoire" title="De 1980 à aujourd'hui" />
-          <div className="mt-12 max-w-3xl">
+      {/* HISTOIRE */}
+      <section>
+        <div className="container-wide py-20 sm:py-28">
+          <SectionHeading index="02" eyebrow="Notre histoire" title="De 1980 à aujourd'hui" />
+          <div className="mt-12">
             <Timeline
               steps={[
                 {
@@ -93,35 +108,66 @@ export default function EntreprisePage() {
               ]}
             />
           </div>
-        </Container>
+        </div>
       </section>
 
-      <section className="py-16">
-        <Container>
-          <SectionHeading eyebrow="Nos valeurs" title="Ce qui nous définit" />
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {values.map((value) => (
-              <div key={value.title} className="border border-line bg-paper p-6">
-                <h3 className="font-display text-lg font-semibold text-ink">{value.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-concrete">{value.description}</p>
-              </div>
+      {/* VALEURS — survol jaune aux couleurs du site (séance client) */}
+      <section className="bg-ink text-paper">
+        <div className="container-wide py-20 sm:py-24">
+          <SectionHeading index="03" eyebrow="Nos valeurs" title="Ce qui nous définit" tone="dark" />
+          <ul className="mt-12 grid grid-cols-1 border-l border-t border-white/15 sm:grid-cols-2 lg:grid-cols-5">
+            {values.map((value, index) => (
+              <li
+                key={value.title}
+                className="group flex min-h-[220px] flex-col justify-between gap-6 border-b border-r border-white/15 p-7 transition-colors duration-300 ease-editorial hover:bg-accent"
+              >
+                <span className="font-display text-sm font-extrabold text-accent transition-colors group-hover:text-ink">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span>
+                  <span className="stretch-85 block font-display text-[28px] font-extrabold uppercase leading-none transition-colors group-hover:text-ink">
+                    {value.title}
+                  </span>
+                  <span className="mt-3 block text-[15px] leading-relaxed text-concrete-light transition-colors group-hover:text-ink">
+                    {value.description}
+                  </span>
+                </span>
+              </li>
             ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* VIE DE L'ENTREPRISE */}
+      <section>
+        <div className="container-wide flex flex-wrap gap-14 py-20 sm:py-24">
+          <Reveal className="min-w-0 flex-[1_1_420px]">
+            <SectionHeading index="04" eyebrow="Une entreprise, une équipe" title="La vie de l'entreprise" />
+            <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-steel">
+              En 2020, Guy Monnet &amp; Fils SA a fêté ses 40 ans, à l&apos;occasion de
+              l&apos;inauguration de son nouveau dépôt de Riddes.
+            </p>
+            <p className="mt-5 max-w-2xl border-l-4 border-accent bg-offwhite px-4 py-3 text-xs text-accent-ink">
+              TODO: contenu client nécessaire pour enrichir cette section avec d&apos;autres
+              moments marquants de la vie de l&apos;entreprise (photos, événements récents).
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href="/equipe/" variant="dark">
+                Rencontrer l&apos;équipe
+              </Button>
+              <Button href="/realisations/" variant="outline">
+                Nos réalisations
+              </Button>
+            </div>
+          </Reveal>
+          <div className="grid min-w-0 flex-[1_1_420px] grid-cols-2 gap-3">
+            <PhotoPlaceholder label="Inauguration du dépôt de Riddes, 2020" aspect="square" />
+            <PhotoPlaceholder label="Le dépôt de Riddes aujourd'hui" aspect="square" />
           </div>
-        </Container>
+        </div>
       </section>
 
-      <section className="bg-offwhite py-16">
-        <Container>
-          <SectionHeading eyebrow="Une entreprise, une équipe" title="La vie de l'entreprise" />
-          <p className="mt-4 max-w-content text-base leading-relaxed text-concrete">
-            En 2020, Guy Monnet &amp; Fils SA a fêté ses 40 ans, à l&apos;occasion de
-            l&apos;inauguration de son nouveau dépôt de Riddes. TODO: contenu client nécessaire
-            pour enrichir cette section avec d&apos;autres moments marquants de la vie de
-            l&apos;entreprise (photos, événements récents).
-          </p>
-        </Container>
-      </section>
-
+      <CtaBand title="Travaillons ensemble" kicker="Une entreprise familiale à votre écoute" />
     </>
   );
 }
