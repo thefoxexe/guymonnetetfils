@@ -10,11 +10,11 @@ export function Footer() {
       <div className="container-wide grid grid-cols-1 gap-10 py-16 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <Image
-            src="/logo-guy-monnet-transparent.png"
+            src="/logo-guy-monnet-officiel-transparent.png"
             alt="Guy Monnet & Fils SA — Transports, Terrassements, Génie-civil"
-            width={900}
-            height={310}
-            className="h-14 w-auto"
+            width={825}
+            height={258}
+            className="h-20 w-auto"
           />
           <p className="mt-4 text-sm leading-relaxed">
             Entreprise familiale valaisanne active depuis 1980 en génie civil, terrassement,

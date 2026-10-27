@@ -136,7 +136,7 @@ footer.
 ## 9. Photos, vidéos et logo
 
 **Logo — résolu.** Le logo officiel complet (avec le bandeau
-« Transports · Terrassements · Génie-civil » et les coordonnées) a été
+« Transports · Terrassements · Génie-civil ») a été
 transmis directement dans la conversation et est intégré tel quel — sans
 recadrage — au site (header, footer). Le favicon utilise uniquement la
 pelleteuse du logo, recadrée en carré, seule solution lisible à la taille
@@ -147,9 +147,9 @@ fichier source original est conservé dans `brand-assets/logo-source.jpg`
 (hors dossier `public/`, non servi par le site). **Action client : si un
 fichier vectoriel (SVG/AI/EPS) ou une version haute résolution du logo
 existe, le transmettre** — il remplacerait avantageusement
-`public/logo-guy-monnet-full.png` (recadré uniquement du fond blanc externe
-et compressé à partir de la photo du logo) pour un rendu plus net sur très
-grands écrans.
+`public/logo-guy-monnet-officiel.png` (825 × 258 px, issu du fichier
+officiel `logo_guy_Monnet_.bmp` transmis par le client) pour un rendu plus
+net sur très grands écrans.
 
 **Photos des 11 services — résolu.** Le client a transmis directement dans
 la conversation une photo réelle pour chacun des 11 domaines d'activité

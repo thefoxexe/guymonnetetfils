@@ -57,10 +57,10 @@ export function Header() {
       <div className="container-wide flex h-20 items-center justify-between gap-2 md:h-24 xl:gap-4">
         <Link href="/" className="focus-ring shrink-0">
           <Image
-            src="/logo-guy-monnet-full.png"
+            src="/logo-guy-monnet-officiel.png"
             alt="Guy Monnet & Fils SA — Transports, Terrassements, Génie-civil"
-            width={900}
-            height={310}
+            width={825}
+            height={258}
             priority
             className="h-14 w-auto md:h-16 xl:h-20"
           />

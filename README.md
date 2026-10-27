@@ -152,11 +152,13 @@ dans le contenu du site et listée dans `CONTENT_VALIDATION.md`.
 ## Marque et couleurs
 
 Le header et le footer utilisent le logo officiel complet transmis par le
-client (`public/logo-guy-monnet-full.png`, non recadré — uniquement le
-fond blanc externe est retiré). Le favicon utilise uniquement la pelleteuse
-du logo (`public/favicon-32.png`, `favicon-64.png`, `apple-touch-icon.png`),
-seule version lisible à la taille d'une icône d'onglet. Le fichier source
-original est conservé dans `brand-assets/logo-source.jpg`. La palette
+client (`public/logo-guy-monnet-officiel.png` sur fond blanc pour le header,
+`public/logo-guy-monnet-officiel-transparent.png` détouré pour le footer
+sombre). Le favicon utilise la pelleteuse officielle seule (`public/favicon.ico`,
+`icon-32.png`, `icon-64.png`, `icon-192.png`, `apple-icon-180.png`), seule
+version lisible à la taille d'une icône d'onglet. Les fichiers sources
+officiels sont conservés dans `brand-assets/` (`logo-officiel-source.png`,
+`pelleteuse-source.webp`). La palette
 (`tailwind.config.ts`) est
 calculée par échantillonnage réel des couleurs du logo : jaune de marque
 `accent` (#EAB308) pour les fonds/boutons/bordures, et un dérivé foncé
