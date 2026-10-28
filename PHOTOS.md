@@ -19,17 +19,17 @@ jusqu'à 12 photos par chantier (`-1` à `-12`), affichées dans l'ordre.
 
 | Fichier | Où | Photo attendue |
 |---|---|---|
-| `accueil-couverture` | Accueil, grande image du haut | Un camion ou une machine Guy Monnet & Fils sur un chantier |
+| `accueil-couverture` | Accueil, photo de fond de l'en-tête | Un camion ou une machine Guy Monnet & Fils sur un chantier |
 | `entreprise-couverture` | Entreprise, en-tête | Guy Monnet et son premier camion (archives) |
 | `entreprise-inauguration-depot-2020` | Entreprise, vie de l'entreprise | Inauguration du dépôt de Riddes, 2020 |
 | `entreprise-depot-riddes` | Entreprise, vie de l'entreprise | Le dépôt de Riddes aujourd'hui |
 | `equipe-couverture` | Équipe, en-tête | L'équipe, photo prise sur le terrain |
-| `equipe-frederic-monnet` | Équipe, direction | Frédéric Monnet sur un chantier |
+| `equipe-frederic-monnet` | Équipe, direction | Portrait de Frédéric Monnet (affiché en petit, rond) |
 
 ## Domaines d'activité
 
-Pour chaque domaine : une photo de couverture (utilisée en en-tête de la
-fiche et sur les tuiles) et trois photos d'illustration.
+Pour chaque domaine : une photo de couverture (fond de l'en-tête de la
+fiche et tuiles) et jusqu'à 8 photos pour le carrousel (`-1` à `-8`).
 
 | Domaine | Couverture | Illustrations | Photo de couverture attendue |
 |---|---|---|---|

@@ -4,8 +4,11 @@ type PhotoPlaceholderProps = {
   slot?: string;
   aspect?: "video" | "square" | "portrait" | "wide" | "cinema" | "fill";
   tone?: "light" | "dark";
-  /** "center" : étiquette au centre ; "corner" : en haut à droite (fonds de hero avec texte par-dessus). */
-  layout?: "center" | "corner";
+  /**
+   * "center" : étiquette au centre ; "corner" : en haut à droite ;
+   * "badge" : petite étiquette en bas à droite (photo de fond avec texte par-dessus).
+   */
+  layout?: "center" | "corner" | "badge";
   className?: string;
 };
 
@@ -31,6 +34,21 @@ export function PhotoPlaceholder({
   className = "",
 }: PhotoPlaceholderProps) {
   const isDark = tone === "dark";
+  if (layout === "badge") {
+    return (
+      <div
+        role="img"
+        aria-label={`Photo à définir : ${label}`}
+        data-photo-slot={slot}
+        className={`${isDark ? "hatch-dark" : "hatch"} relative w-full overflow-hidden ${aspectClasses[aspect]} ${className}`}
+      >
+        <span className="absolute bottom-3 right-3 z-10 flex items-center gap-2 bg-accent px-2 py-1 font-display text-[10px] font-extrabold uppercase tracking-[0.1em] text-ink sm:bottom-4 sm:right-4">
+          ■ Photo à définir
+          {slot ? <span className="font-mono font-normal normal-case tracking-normal">{slot}.jpg</span> : null}
+        </span>
+      </div>
+    );
+  }
   const tag = (
     <div className={`flex max-w-xs flex-col gap-2 ${layout === "center" ? "items-center text-center" : "items-end text-right"}`}>
       <span className="bg-accent px-2.5 py-1 font-display text-[11px] font-extrabold uppercase tracking-[0.12em] text-ink">

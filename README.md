@@ -185,16 +185,17 @@ dérivée du logo.
   capitales. Texte courant en Inter.
 - **Bandeau de marque** (`BrandBand`) : le liseré pointillé noir/jaune et
   le bandeau jaune « ■ MOT-CLÉ ■ MOT-CLÉ » du logo, placé sous chaque hero.
-- **Sections numérotées** (`SectionHeading`, `SectionLabel`) :
-  « 01 — Le contexte », titre condensé ; alternance fond blanc, `offwhite`
-  et `ink` (noir).
+- **Titres de section** (`SectionHeading`) : court filet jaune puis titre
+  condensé, sans numérotation ; alternance fond blanc et `offwhite`.
+- **Animations** : apparition progressive au scroll (`Reveal`) et chiffres
+  qui montent de 0 à leur valeur (`CountUp`) ; désactivées si l'appareil
+  demande de réduire les animations.
 - **Chiffres phares** (`StatGrid`) : grandes valeurs condensées dans une
   grille à filets noirs, colonnes choisies pour éviter toute case vide.
 - **Site lumineux** : fonds blanc et crème, jaune pour les appels à
   l'action ; seuls le header (bouton téléphone) et le footer restent noirs.
-- **Heros** : `PageHero` sur toutes les pages, texte et boutons à gauche,
-  photo à droite. Sur téléphone, le texte et les boutons passent avant la
-  photo pour être visibles sans faire défiler.
+- **Heros** : `PageHero` sur toutes les pages, photo en fond plein cadre
+  sous un voile clair, texte et boutons par-dessus.
 - **Emplacements photo** (`Photo`, `src/lib/photos.ts`) : chaque photo du
   site a un emplacement nommé. Tant qu'aucun fichier n'existe, l'emplacement
   affiche « Photo à définir », la photo attendue et le nom du fichier. Une
@@ -206,6 +207,12 @@ dérivée du logo.
 - **Couleurs de texte** : `steel` (#4A4D52) pour le texte courant sur fond
   clair et `mist` (#A9ABB0) sur fond sombre — `concrete` (#7C7C7C) n'a pas
   un contraste suffisant pour du texte (WCAG AA).
+
+**Classement des réalisations** : chaque réalisation est classée par ses
+domaines d'activité (`services` dans `src/data/projects.ts`, le principal en
+premier) ; c'est ce classement qu'utilise le filtre de la page Réalisations.
+**Avant d'ajouter une réalisation, demander au client dans quel(s)
+domaine(s) la classer.**
 
 Fiches types : `src/app/services/[slug]/page.tsx` (domaine d'activité) et
 `src/app/realisations/[slug]/page.tsx` (réalisation). Toutes les sections

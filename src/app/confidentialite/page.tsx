@@ -1,66 +1,45 @@
-import { Container } from "@/components/Container";
 import { PageHero } from "@/components/PageHero";
 import { company } from "@/data/company";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Politique de confidentialité | Guy Monnet & Fils SA",
-  description: "Politique de confidentialité et protection des données du site de Guy Monnet & Fils SA.",
+  title: "Confidentialité | Guy Monnet & Fils SA",
+  description: "Protection des données sur le site de Guy Monnet & Fils SA.",
   path: "/confidentialite/",
 });
 
 export default function ConfidentialitePage() {
   return (
     <>
-      <PageHero size="sm" crumbs={[{ name: "Confidentialité", path: "/confidentialite/" }]} title="Politique de confidentialité" />
-      <section className="py-16 sm:py-20">
-        <Container className="max-w-content">
-          <p className="text-base leading-relaxed text-steel">
-            {company.name} traite les données personnelles collectées sur ce site conformément à
-            la loi fédérale suisse sur la protection des données (LPD) et, lorsque applicable, au
-            règlement général sur la protection des données (RGPD).
-          </p>
-
-          <div className="mt-10 space-y-8 text-sm leading-relaxed text-steel">
-            <div>
-              <h2 className="font-display text-xl font-extrabold uppercase text-ink">Données collectées</h2>
-              <p className="mt-2">
-                Lorsque vous utilisez le formulaire de contact, les informations suivantes peuvent
-                être transmises à {company.name} : nom, entreprise, téléphone, e-mail et
-                message. Ces
-                données sont utilisées exclusivement pour traiter votre demande.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="font-display text-xl font-extrabold uppercase text-ink">Formulaire de contact</h2>
-              <p className="mt-2">
-                Le formulaire de contact ouvre votre messagerie avec un message pré-rempli à
-                destination de {company.email}. TODO: contenu client nécessaire si un service
-                d&apos;envoi côté serveur est mis en place ultérieurement : cette section devra
-                alors être complétée avec le nom du prestataire utilisé.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="font-display text-xl font-extrabold uppercase text-ink">Cookies et mesure d&apos;audience</h2>
-              <p className="mt-2">
-                TODO: contenu client nécessaire. Cette section doit refléter les outils
-                effectivement utilisés (mesure d&apos;audience, cookies) une fois ceux-ci
-                définitivement choisis et configurés.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="font-display text-xl font-extrabold uppercase text-ink">Vos droits</h2>
-              <p className="mt-2">
-                Conformément à la LPD, vous disposez d&apos;un droit d&apos;accès, de rectification
-                et de suppression des données vous concernant. Pour exercer ce droit, contactez-nous
-                à {company.email}.
-              </p>
-            </div>
+      <PageHero size="sm" crumbs={[{ name: "Confidentialité", path: "/confidentialite/" }]} title="Confidentialité" />
+      <section>
+        <div className="container-wide max-w-3xl space-y-8 py-12 text-[15px] leading-relaxed text-steel sm:py-16">
+          <div>
+            <h2 className="font-display text-lg font-extrabold uppercase text-ink">En bref</h2>
+            <p className="mt-2">
+              Ce site présente simplement notre entreprise. Il n&apos;utilise ni cookies de suivi,
+              ni outil de statistiques, ni publicité.
+            </p>
           </div>
-        </Container>
+          <div>
+            <h2 className="font-display text-lg font-extrabold uppercase text-ink">Formulaire de contact</h2>
+            <p className="mt-2">
+              Les informations envoyées par le formulaire (nom, entreprise, téléphone, e-mail,
+              message) servent uniquement à répondre à votre demande. Elles ne sont ni vendues ni
+              transmises à des tiers.
+            </p>
+          </div>
+          <div>
+            <h2 className="font-display text-lg font-extrabold uppercase text-ink">Vos données</h2>
+            <p className="mt-2">
+              Pour consulter ou supprimer vos données, écrivez-nous à{" "}
+              <a href={`mailto:${company.email}`} className="font-semibold text-ink underline hover:text-accent-ink">
+                {company.email}
+              </a>
+              .
+            </p>
+          </div>
+        </div>
       </section>
     </>
   );

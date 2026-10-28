@@ -114,15 +114,13 @@ export function Header() {
           {megaOpen ? (
             <div className="absolute left-1/2 top-full w-[min(820px,82vw)] -translate-x-1/2 animate-mega-in border-t-4 border-accent bg-paper shadow-2xl">
               <div className="grid grid-cols-3 gap-px bg-line p-px">
-                {services.map((service, index) => (
+                {services.map((service) => (
                   <Link
                     key={service.slug}
                     href={`/services/${service.slug}/`}
-                    className="focus-ring group flex items-baseline gap-3 bg-paper px-4 py-3.5 text-ink transition-colors duration-150 hover:bg-accent"
+                    className="focus-ring group flex items-center gap-3 bg-paper px-4 py-3.5 text-ink transition-colors duration-150 hover:bg-accent"
                   >
-                    <span className="font-display text-xs font-extrabold text-accent-ink group-hover:text-ink">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
+                    <span className="h-2 w-2 shrink-0 bg-accent group-hover:bg-ink" aria-hidden="true" />
                     <span className="font-display text-[15px] font-bold uppercase">{service.name}</span>
                   </Link>
                 ))}
@@ -186,15 +184,13 @@ export function Header() {
     {mobileOpen ? (
       <div id="mobile-nav" className="fixed inset-x-0 top-20 bottom-0 z-40 overflow-y-auto bg-paper md:top-24 lg:hidden">
         <nav aria-label="Navigation mobile" className="animate-drawer-in container-wide flex flex-col py-4">
-          {navLinks.map((link, index) => (
+          {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="focus-ring group flex items-baseline gap-4 border-b border-line py-4 text-ink active:text-accent-ink"
+              className="focus-ring group flex items-center gap-4 border-b border-line py-4 text-ink active:text-accent-ink"
             >
-              <span className="font-display text-sm font-extrabold text-accent-ink">
-                {String(index + 1).padStart(2, "0")}
-              </span>
+              <span className="h-2.5 w-2.5 shrink-0 bg-accent" aria-hidden="true" />
               <span className="stretch-85 font-display text-[32px] font-black uppercase leading-none">{link.label}</span>
             </Link>
           ))}

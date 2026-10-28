@@ -1,22 +1,5 @@
 export type ProjectStat = { value: string; label: string };
 
-export type ProjectCategory =
-  | "genie-civil"
-  | "terrassement"
-  | "maconnerie"
-  | "amenagement"
-  | "environnement"
-  | "demolition";
-
-export const projectCategoryLabels: Record<ProjectCategory, string> = {
-  "genie-civil": "Génie civil",
-  terrassement: "Terrassement",
-  maconnerie: "Maçonnerie",
-  amenagement: "Aménagement",
-  environnement: "Environnement",
-  demolition: "Démolition",
-};
-
 export type Project = {
   slug: string;
   title: string;
@@ -32,7 +15,6 @@ export type Project = {
   amount?: string;
   /** Mots-clés courts du bandeau jaune sous le hero. */
   highlights?: string[];
-  categories: ProjectCategory[];
   summary: string;
   seoTitle: string;
   seoDescription: string;
@@ -41,7 +23,11 @@ export type Project = {
   context: string[];
   works: string[];
   stats?: ProjectStat[];
-  services: string[]; // slugs
+  /**
+   * Domaines d'activité (slugs de src/data/services.ts), le principal en premier.
+   * Ils classent la réalisation dans le filtre de la page Réalisations.
+   */
+  services: string[];
   legacyUrl?: string;
   featured?: boolean;
   todo?: string;
@@ -55,7 +41,6 @@ export const projects: Project[] = [
     year: "2025",
     period: "Avril à décembre 2025",
     highlights: ["Conduite fonte Ø 800", "Réseaux souterrains", "Chambres de captage", "Enrobé"],
-    categories: ["genie-civil"],
     summary: "Réfection de route et de réseaux le long du Torrent du Lué.",
     seoTitle: "Torrent du Lué : travaux de génie civil | Guy Monnet & Fils",
     seoDescription:
@@ -96,7 +81,6 @@ export const projects: Project[] = [
     engineer: "BTI",
     amount: "380'000 CHF",
     highlights: ["Radiers", "Béton étanche", "Acier d'armature", "Aménagements extérieurs"],
-    categories: ["terrassement", "maconnerie", "amenagement"],
     summary: "Terrassement, radiers et murettes en béton étanche, puis aménagements extérieurs.",
     seoTitle: "Station phytosanitaire de Saxon | Guy Monnet & Fils",
     seoDescription:
@@ -130,7 +114,6 @@ export const projects: Project[] = [
     engineer: "Hollinger",
     amount: "940'000 CHF",
     highlights: ["Minage du rocher", "Béton héliporté", "Conduite fonte Ø 400", "Eau potable"],
-    categories: ["terrassement", "maconnerie", "genie-civil"],
     summary: "Chambre de captage en montagne, 600 m de conduite d'eau potable et minage du rocher.",
     seoTitle: "Chambre de récolte des eaux, Leytron | Guy Monnet & Fils",
     seoDescription:
@@ -166,7 +149,6 @@ export const projects: Project[] = [
     engineer: "Sollertia",
     amount: "180'000 CHF",
     highlights: ["Enrobés", "Grave non gélive", "Bassin d'infiltration", "Bordures"],
-    categories: ["genie-civil"],
     summary: "Réfection complète d'un parking P+R : fondation, canalisations, bassin d'infiltration et enrobés.",
     seoTitle: "Parking P+R CFF : génie civil | Guy Monnet & Fils",
     seoDescription:
@@ -201,7 +183,6 @@ export const projects: Project[] = [
     engineer: "BTI",
     amount: "700'000 CHF",
     highlights: ["Eaux usées et claires", "Eau potable", "Swisscom", "Giratoires et îlots"],
-    categories: ["genie-civil"],
     summary: "Deuxième étape de la réfection des infrastructures de la rue des Artisans, giratoires et îlots compris.",
     seoTitle: "Rue des Artisans, étape 2, Riddes | Guy Monnet & Fils",
     seoDescription:
@@ -231,7 +212,6 @@ export const projects: Project[] = [
     engineer: "BTI",
     amount: "650'000 CHF",
     highlights: ["Eau potable", "Électricité", "Chauffage à distance", "Chaussée"],
-    categories: ["genie-civil"],
     summary: "Réfection complète des réseaux souterrains et de la chaussée de la rue des Artisans.",
     seoTitle: "Rue des Artisans, étape 1, Riddes | Guy Monnet & Fils",
     seoDescription:
@@ -259,7 +239,6 @@ export const projects: Project[] = [
     slug: "les-larmes-du-fou",
     title: "Les Larmes du Fou",
     location: "Alpage de Balavaux, commune d'Isérables",
-    categories: ["environnement", "genie-civil"],
     summary:
       "Création d'un étang pilote pour la biodiversité alpine, dans le cadre du projet ACCLIMaé mené par la HEPIA Genève / HES-SO.",
     seoTitle: "Les Larmes du Fou : génie civil environnemental | Guy Monnet",
@@ -282,7 +261,6 @@ export const projects: Project[] = [
     slug: "sentier-des-sens",
     title: "Sentier des Sens",
     location: "La Tzoumaz",
-    categories: ["genie-civil", "maconnerie", "amenagement"],
     summary:
       "Travaux de génie civil et de maçonnerie pour l'aménagement du Sentier des Sens, à proximité du Bisse de Saxon.",
     seoTitle: "Sentier des Sens à La Tzoumaz : travaux réalisés | Guy Monnet",
@@ -307,7 +285,6 @@ export const projects: Project[] = [
     year: "2020",
     period: "Dès août 2020",
     highlights: ["Évacuation des souches", "Terrassement", "Préparation du terrain"],
-    categories: ["terrassement"],
     summary:
       "Terrassement et préparation du terrain pour le skatepark de Riddes, façonné ensuite par Vertical Technik AG.",
     seoTitle: "Skatepark de Riddes : terrassement | Guy Monnet & Fils",

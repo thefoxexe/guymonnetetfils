@@ -1,11 +1,12 @@
 import { Breadcrumb, type Crumb } from "./Breadcrumb";
+import { Photo } from "./Photo";
 import { Reveal } from "./Reveal";
 
 /**
- * Hero clair commun à toutes les pages : fil d'Ariane, étiquette jaune,
- * titre condensé, introduction, boutons et, en option, une photo à droite.
- * Sur téléphone, le texte et les boutons passent avant la photo pour être
- * visibles sans faire défiler.
+ * Hero commun à toutes les pages : fil d'Ariane, étiquette jaune, titre
+ * condensé, introduction et boutons. Avec `background`, la photo occupe tout
+ * le fond (plein cadre, responsive) sous un voile clair qui garde le texte
+ * lisible et le site lumineux.
  */
 export function PageHero({
   crumbs,
@@ -15,30 +16,39 @@ export function PageHero({
   intro,
   actions,
   meta,
-  aside,
+  background,
   size = "lg",
 }: {
   crumbs?: Crumb[];
   eyebrow?: string;
-  /** Étiquettes affichées à la place de `eyebrow` (catégories d'une réalisation…). */
+  /** Étiquettes affichées à la place de `eyebrow` (domaines d'une réalisation…). */
   tags?: React.ReactNode;
   title: React.ReactNode;
   intro?: React.ReactNode;
   actions?: React.ReactNode;
   /** Informations clés sous le texte (lieu, période…). */
   meta?: React.ReactNode;
-  /** Visuel à droite (photo ou emplacement photo), positionné en `fill`. */
-  aside?: React.ReactNode;
+  /** Photo de fond : emplacement photo nommé (voir src/lib/photos.ts). */
+  background?: { slot: string; label: string };
   size?: "lg" | "sm";
 }) {
   return (
-    <section className="border-b border-line bg-offwhite">
-      <div
-        className={`container-wide grid grid-cols-1 gap-8 py-8 sm:py-12 lg:gap-14 ${
-          aside ? "lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-stretch lg:py-14" : "lg:py-16"
-        }`}
-      >
-        <div className="flex min-w-0 flex-col justify-center gap-5">
+    <section
+      className={`relative overflow-hidden border-b border-line bg-offwhite ${
+        background ? "flex min-h-[460px] items-center sm:min-h-[520px] lg:min-h-[600px]" : ""
+      }`}
+    >
+      {background ? (
+        <>
+          <Photo slot={background.slot} label={background.label} aspect="fill" layout="badge" priority sizes="100vw" />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-offwhite/80 lg:bg-transparent lg:bg-gradient-to-r lg:from-offwhite lg:via-offwhite/85 lg:to-offwhite/0"
+          />
+        </>
+      ) : null}
+      <div className={`container-wide relative w-full py-8 sm:py-12 ${background ? "pb-14 lg:py-16" : "lg:py-16"}`}>
+        <div className="flex max-w-2xl flex-col gap-5">
           {crumbs ? <Breadcrumb items={crumbs} tone="light" /> : null}
           <Reveal className="flex flex-col gap-5">
             {tags ?? (eyebrow ? (
@@ -53,16 +63,11 @@ export function PageHero({
             >
               {title}
             </h1>
-            {intro ? <div className="max-w-xl text-base leading-relaxed text-steel sm:text-lg">{intro}</div> : null}
+            {intro ? <div className="max-w-xl text-base leading-relaxed text-ink/80 sm:text-lg">{intro}</div> : null}
             {actions ? <div className="flex flex-wrap gap-3 pt-1">{actions}</div> : null}
             {meta ? <div className="pt-2">{meta}</div> : null}
           </Reveal>
         </div>
-        {aside ? (
-          <div className="relative aspect-[4/3] w-full overflow-hidden lg:aspect-auto lg:min-h-[440px]">
-            {aside}
-          </div>
-        ) : null}
       </div>
     </section>
   );

@@ -5,9 +5,10 @@ import { CtaBand } from "@/components/CtaBand";
 import { Photo } from "@/components/Photo";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
-import { SectionHeading, SectionLabel, sectionCounter } from "@/components/SectionHeading";
+import { SectionHeading, SectionLabel } from "@/components/SectionHeading";
 import { StatGrid } from "@/components/StatGrid";
-import { projects, getProjectBySlug, projectCategoryLabels } from "@/data/projects";
+import { projects, getProjectBySlug } from "@/data/projects";
+import { projectDomains } from "@/lib/domains";
 import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/seo";
 import { projectGallery, slots } from "@/lib/photos";
@@ -46,10 +47,9 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
   const index = projects.findIndex((p) => p.slug === project.slug);
   const next = projects[(index + 1) % projects.length]!;
-  const mobilizedServices = services.filter((s) => project.services.includes(s.slug));
-  const categories = project.categories.map((c) => projectCategoryLabels[c]);
+  const mobilizedServices = projectDomains(project);
+  const categories = mobilizedServices.map((s) => s.name);
   const gallery = projectGallery(project.slug);
-  const n = sectionCounter();
 
   const bandItems = project.highlights ?? [...categories, project.location, ...(project.year ? [project.year] : [])];
 
@@ -101,22 +101,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             ) : null}
           </dl>
         }
-        aside={
-          <>
-            <Photo
-              slot={slots.projectCover(project.slug)}
-              label={project.heroImageLabel}
-              aspect="fill"
-              priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-            {project.year ? (
-              <span className="absolute bottom-0 left-0 bg-accent px-3 py-2 font-display text-xs font-extrabold uppercase tracking-[0.12em] text-ink">
-                Réalisation · {project.year}
-              </span>
-            ) : null}
-          </>
-        }
+        background={{ slot: slots.projectCover(project.slug), label: project.heroImageLabel }}
       />
 
       {/* 2. BANDEAU DE MARQUE */}
@@ -127,7 +112,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         <section>
           <div className="container-wide py-14 sm:py-20 lg:py-24">
             <SectionHeading
-              eyebrow="Le chantier en chiffres"
               title="Chiffres phares"
               action={
                 project.period ? (
@@ -147,7 +131,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         <div className="container-wide flex flex-wrap gap-10 py-14 sm:gap-14 sm:py-20 lg:gap-16 lg:py-28">
           <div className="flex min-w-0 flex-[999_1_560px] flex-col gap-10 sm:gap-14">
             <Reveal className="flex flex-col gap-5">
-              <SectionLabel index={n()}>Le contexte</SectionLabel>
+              <SectionLabel>Le contexte</SectionLabel>
               {project.context.map((paragraph, i) =>
                 i === 0 ? (
                   <p key={i} className="stretch-90 font-display text-[21px] font-semibold leading-[1.3] sm:text-[28px]">
@@ -161,15 +145,13 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               )}
             </Reveal>
             <Reveal className="flex flex-col gap-6">
-              <SectionLabel index={n()}>Travaux réalisés</SectionLabel>
+              <SectionLabel>Travaux réalisés</SectionLabel>
               <ol className="grid grid-cols-1 gap-x-10 md:grid-cols-2">
                 {project.works.map((work, i) => (
-                  <li key={work} className="flex gap-4 border-t border-ink/10 py-3 text-[15px] leading-relaxed sm:py-4 sm:text-base">
-                    <span className="min-w-[28px] font-display font-extrabold text-accent-ink">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
+                  <Reveal as="li" key={work} delay={(i % 4) * 70} className="flex gap-4 border-t border-ink/10 py-3 text-[15px] leading-relaxed sm:py-4 sm:text-base">
+                    <span className="mt-2 h-2 w-2 shrink-0 bg-accent" aria-hidden="true" />
                     {work}
-                  </li>
+                  </Reveal>
                 ))}
               </ol>
               {project.todo ? (
@@ -209,7 +191,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       {/* 5. GALERIE */}
       <section>
         <div className="container-wide py-14 sm:py-20 lg:py-24">
-          <SectionHeading index={n()} eyebrow="Photos" title="Photos du chantier" />
+          <SectionHeading title="Photos du chantier" />
           {gallery.length > 0 ? (
             <div className="mt-8 sm:mt-12 grid auto-rows-[240px] grid-cols-1 gap-3 sm:auto-rows-[260px] sm:grid-cols-2 lg:auto-rows-[300px] lg:grid-cols-3">
               {gallery.map((image, i) => (
@@ -247,7 +229,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       {mobilizedServices.length > 0 ? (
         <section className="bg-offwhite">
           <div className="container-wide py-14 sm:py-20 lg:py-24">
-            <SectionHeading index={n()} eyebrow="Domaines" title="Domaines concernés" />
+            <SectionHeading title="Domaines concernés" />
             <div className="mt-8 sm:mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
               {mobilizedServices.map((service) => (
                 <Link

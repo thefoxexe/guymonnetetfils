@@ -36,21 +36,14 @@ export default function EntreprisePage() {
         eyebrow="Découvrir l'entreprise"
         title="Entreprise familiale depuis 1980"
         intro="Guy Monnet a fondé l'entreprise en 1980 avec un camion. Son fils Frédéric la dirige aujourd'hui, à Riddes."
-        aside={
-          <Photo
-            slot={slots.companyCover}
-            label="Guy Monnet et son premier camion (archives de l'entreprise)"
-            aspect="fill"
-            priority
-          />
-        }
+        background={{ slot: slots.companyCover, label: "Guy Monnet et son premier camion (archives de l'entreprise)" }}
       />
       <BrandBand items={companyBandItems} />
 
       {/* EN CHIFFRES */}
       <section className="bg-offwhite">
         <div className="container-wide py-14 sm:py-20 lg:py-24">
-          <SectionHeading index="01" eyebrow="Repères" title="En chiffres" />
+          <SectionHeading title="En chiffres" />
           <StatGrid
             className="mt-8 sm:mt-12"
             highlight={3}
@@ -67,7 +60,7 @@ export default function EntreprisePage() {
       {/* HISTOIRE */}
       <section>
         <div className="container-wide py-14 sm:py-20 lg:py-28">
-          <SectionHeading index="02" eyebrow="Notre histoire" title="De 1980 à aujourd'hui" />
+          <SectionHeading title="De 1980 à aujourd'hui" />
           <div className="mt-8 sm:mt-12">
             <Timeline
               steps={[
@@ -78,7 +71,7 @@ export default function EntreprisePage() {
                     "Guy Monnet achète son premier camion et se lance dans le transport de matériaux en Valais.",
                 },
                 {
-                  year: "Développement",
+                  year: "Ensuite",
                   title: "Transport → terrassement → génie civil → construction",
                   description:
                     "L'entreprise développe progressivement le terrassement, le génie civil, la construction et d'autres domaines complémentaires.",
@@ -109,17 +102,15 @@ export default function EntreprisePage() {
       {/* MOYENS : survol jaune aux couleurs du site (séance client) */}
       <section className="bg-offwhite">
         <div className="container-wide py-14 sm:py-20 lg:py-24">
-          <SectionHeading index="03" eyebrow="Nos moyens" title="Ce que nous avons" />
+          <SectionHeading title="Ce que nous avons" />
           <ul className="mt-8 sm:mt-12 grid grid-cols-1 border-l border-t border-line bg-paper sm:grid-cols-2 lg:grid-cols-5">
-            {means.map((item, index) => (
-              <li key={item.title} className="border-b border-r border-line">
+            {means.map((item, i) => (
+              <Reveal as="li" key={item.title} delay={i * 80} className="border-b border-r border-line">
                 <Link
                   href={`/services/${item.slug}/`}
                   className="focus-ring group flex h-full flex-col justify-between gap-4 p-5 transition-colors sm:min-h-[200px] sm:p-7 duration-300 ease-editorial hover:bg-accent"
                 >
-                  <span className="font-display text-sm font-extrabold text-accent-ink transition-colors group-hover:text-ink">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+                  <span className="h-1 w-10 bg-accent transition-colors group-hover:bg-ink" aria-hidden="true" />
                   <span>
                     <span className="stretch-85 block font-display text-[24px] font-extrabold uppercase leading-none sm:text-[28px]">
                       {item.title}
@@ -129,7 +120,7 @@ export default function EntreprisePage() {
                     </span>
                   </span>
                 </Link>
-              </li>
+              </Reveal>
             ))}
           </ul>
         </div>
@@ -139,7 +130,7 @@ export default function EntreprisePage() {
       <section>
         <div className="container-wide flex flex-wrap gap-14 py-14 sm:py-20 lg:py-24">
           <Reveal className="min-w-0 flex-[1_1_420px]">
-            <SectionHeading index="04" eyebrow="Événements" title="La vie de l'entreprise" />
+            <SectionHeading title="La vie de l'entreprise" />
             <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-steel">
               En 2020, Guy Monnet &amp; Fils SA a fêté ses 40 ans, à l&apos;occasion de
               l&apos;inauguration de son nouveau dépôt de Riddes.

@@ -1,71 +1,55 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { Project, ProjectCategory } from "@/data/projects";
-import { projectCategoryLabels } from "@/data/projects";
+import type { Project } from "@/data/projects";
+import { services } from "@/data/services";
 import { ProjectGrid } from "./ProjectCard";
 
-const filterOrder: ProjectCategory[] = [
-  "genie-civil",
-  "terrassement",
-  "maconnerie",
-  "amenagement",
-  "environnement",
-  "demolition",
-];
-
+/** Filtre des réalisations par domaine d'activité (`project.services`). */
 export function ProjectFilter({ projects }: { projects: Project[] }) {
-  const [active, setActive] = useState<ProjectCategory | "tous">("tous");
+  const [active, setActive] = useState<string>("tous");
 
   const available = useMemo(
-    () => filterOrder.filter((cat) => projects.some((p) => p.categories.includes(cat))),
+    () => services.filter((service) => projects.some((p) => p.services.includes(service.slug))),
     [projects]
   );
 
   const filtered = useMemo(
-    () => (active === "tous" ? projects : projects.filter((p) => p.categories.includes(active))),
+    () => (active === "tous" ? projects : projects.filter((p) => p.services.includes(active))),
     [active, projects]
   );
 
   return (
     <div>
-      <div className="flex flex-wrap gap-2" role="group" aria-label="Filtrer les réalisations par catégorie">
+      <div className="flex flex-wrap gap-2" role="group" aria-label="Filtrer les réalisations par domaine">
         <FilterButton label="Tous" active={active === "tous"} onClick={() => setActive("tous")} />
-        {available.map((cat) => (
+        {available.map((service) => (
           <FilterButton
-            key={cat}
-            label={projectCategoryLabels[cat]}
-            active={active === cat}
-            onClick={() => setActive(cat)}
+            key={service.slug}
+            label={service.name}
+            active={active === service.slug}
+            onClick={() => setActive(service.slug)}
           />
         ))}
       </div>
-      <div className="mt-12">
+      <div className="mt-10 sm:mt-12">
         {filtered.length > 0 ? (
-          <ProjectGrid projects={filtered} />
+          <ProjectGrid key={active} projects={filtered} />
         ) : (
-          <p className="text-sm text-steel">Aucune réalisation dans cette catégorie pour le moment.</p>
+          <p className="text-sm text-steel">Aucune réalisation dans ce domaine pour le moment.</p>
         )}
       </div>
     </div>
   );
 }
 
-function FilterButton({
-  label,
-  active,
-  onClick,
-}: {
-  label: string;
-  active: boolean;
-  onClick: () => void;
-}) {
+function FilterButton({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
   return (
     <button
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`focus-ring min-h-[44px] border-2 px-5 py-2.5 font-display text-sm font-extrabold uppercase tracking-[0.08em] transition-colors duration-150 ${
+      className={`focus-ring min-h-[44px] border-2 px-4 py-2 font-display text-[13px] font-extrabold uppercase tracking-[0.06em] transition-colors duration-150 sm:px-5 sm:text-sm ${
         active ? "border-ink bg-accent text-ink" : "border-ink/15 text-ink hover:border-ink"
       }`}
     >

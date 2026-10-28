@@ -32,7 +32,7 @@ export function Photo({
   alt?: string;
   aspect?: keyof typeof aspectClasses;
   tone?: "light" | "dark";
-  layout?: "center" | "corner";
+  layout?: "center" | "corner" | "badge";
   priority?: boolean;
   sizes?: string;
   className?: string;

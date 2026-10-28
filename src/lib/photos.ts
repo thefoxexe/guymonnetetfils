@@ -16,6 +16,8 @@ export function photoSrc(slot: string): string | undefined {
 
 /** Nombre maximal de photos de galerie par réalisation. */
 export const MAX_GALLERY_PHOTOS = 12;
+/** Nombre maximal de photos d'illustration par domaine (carrousel). */
+export const MAX_SERVICE_PHOTOS = 8;
 
 export const slots = {
   homeCover: "accueil-couverture",
@@ -39,4 +41,16 @@ export function projectGallery(slug: string): { slot: string; src: string }[] {
     if (src) found.push({ slot, src });
   }
   return found;
+}
+
+/**
+ * Emplacements du carrousel d'un domaine : les photos présentes
+ * (domaine-<slug>-1, -2…), complétées par des emplacements vides pour en
+ * afficher au moins trois.
+ */
+export function serviceIllustrations(slug: string): string[] {
+  const all = Array.from({ length: MAX_SERVICE_PHOTOS }, (_, i) => slots.serviceIllustration(slug, i + 1));
+  const present = all.filter((slot) => photoSrc(slot));
+  const missing = all.filter((slot) => !photoSrc(slot));
+  return [...present, ...missing.slice(0, Math.max(0, 3 - present.length))];
 }

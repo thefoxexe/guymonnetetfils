@@ -32,7 +32,7 @@ export default function ContactPage() {
       <section>
         <div className="container-wide flex flex-wrap gap-14 py-14 sm:py-20 lg:py-24 lg:gap-16">
           <div className="min-w-0 flex-[999_1_560px]">
-            <SectionLabel index="01">Formulaire</SectionLabel>
+            <SectionLabel>Formulaire</SectionLabel>
             <h2 className="stretch-85 mt-3 font-display text-[32px] font-extrabold uppercase leading-[0.95] sm:text-[44px]">
               Écrivez-nous
             </h2>

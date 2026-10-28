@@ -6,13 +6,14 @@ import { Photo } from "@/components/Photo";
 import { ProjectGrid } from "@/components/ProjectCard";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
+import { CountUp } from "@/components/CountUp";
 import { SectionHeading, SectionLabel } from "@/components/SectionHeading";
 import { ServiceGrid } from "@/components/ServiceCard";
 import { StatGrid } from "@/components/StatGrid";
-import { ValaisFlag } from "@/components/ValaisFlag";
 import { company } from "@/data/company";
 import { services } from "@/data/services";
-import { projects, projectCategoryLabels } from "@/data/projects";
+import { projects } from "@/data/projects";
+import { projectDomainNames } from "@/lib/domains";
 import { slots } from "@/lib/photos";
 import { buildMetadata } from "@/lib/seo";
 
@@ -57,15 +58,10 @@ export default function HomePage() {
             </Button>
           </>
         }
-        aside={
-          <Photo
-            slot={slots.homeCover}
-            label="Grande photo d'accueil : un camion ou une machine Guy Monnet & Fils sur un chantier"
-            aspect="fill"
-            priority
-            sizes="(max-width: 1024px) 100vw, 50vw"
-          />
-        }
+        background={{
+          slot: slots.homeCover,
+          label: "Grande photo d'accueil : un camion ou une machine Guy Monnet & Fils sur un chantier",
+        }}
       />
 
       <BrandBand items={companyBandItems} />
@@ -74,7 +70,7 @@ export default function HomePage() {
       <section>
         <div className="container-wide flex flex-wrap gap-8 py-14 sm:gap-14 sm:py-20 lg:gap-16 lg:py-28">
           <Reveal className="flex min-w-0 flex-[999_1_520px] flex-col gap-5">
-            <SectionLabel index="01">L&apos;entreprise</SectionLabel>
+            <SectionLabel>L&apos;entreprise</SectionLabel>
             <p className="stretch-90 font-display text-[21px] font-semibold leading-[1.3] sm:text-[28px]">
               En 1980, Guy Monnet achète son premier camion. Aujourd&apos;hui, l&apos;entreprise
               familiale fait du transport, du terrassement, du génie civil et de la maçonnerie.
@@ -93,11 +89,7 @@ export default function HomePage() {
                 { value: String(company.foundedYear), label: "Premier camion de Guy Monnet" },
                 { value: String(company.incorporatedYear), label: "Création de Guy Monnet & Fils SA" },
                 { value: String(company.domainsCount), label: "Domaines d'activité" },
-                {
-                  value: "VS",
-                  label: "Riddes et tout le Valais",
-                  backdrop: <ValaisFlag className="h-full w-full" />,
-                },
+                { value: "VS", label: "Riddes et tout le Valais" },
               ]}
             />
           </div>
@@ -107,7 +99,7 @@ export default function HomePage() {
       {/* DOMAINES D'ACTIVITÉ */}
       <section className="bg-offwhite">
         <div className="container-wide py-14 sm:py-20 lg:py-24">
-          <SectionHeading index="02" eyebrow="Domaines d'activité" title={`Nos ${services.length} domaines d'activité`} />
+          <SectionHeading title={`Nos ${services.length} domaines d'activité`} />
           <div className="mt-8 sm:mt-12">
             <ServiceGrid services={services} />
           </div>
@@ -118,8 +110,6 @@ export default function HomePage() {
       <section>
         <div className="container-wide py-14 sm:py-20 lg:py-24">
           <SectionHeading
-            index="03"
-            eyebrow="Réalisations"
             title="Des chantiers qui parlent pour nous"
             action={
               <Link href="/realisations/" className="focus-ring text-[15px] font-bold text-accent-ink hover:underline">
@@ -142,7 +132,7 @@ export default function HomePage() {
             </Link>
             <Reveal className="flex flex-col gap-5">
               <p className="font-display text-xs font-extrabold uppercase tracking-[0.12em] text-accent-ink">
-                {featuredProject.categories.map((c) => projectCategoryLabels[c]).join(" · ")} · {featuredProject.location}
+                {projectDomainNames(featuredProject).join(" · ")} · {featuredProject.location}
               </p>
               <h3 className="stretch-75 font-display text-[34px] font-black uppercase leading-[0.9] sm:text-[48px]">
                 {featuredProject.title}
@@ -154,7 +144,7 @@ export default function HomePage() {
                     <div key={stat.label} className="flex flex-col gap-1.5 bg-paper p-4 sm:p-5">
                       <dt className="text-[13px] leading-snug text-steel">{stat.label}</dt>
                       <dd className="stretch-75 order-first font-display text-[28px] font-black leading-none text-ink sm:text-[34px]">
-                        {stat.value}
+                        <CountUp value={stat.value} />
                       </dd>
                     </div>
                   ))}
@@ -172,7 +162,7 @@ export default function HomePage() {
       {otherProjects.length > 0 ? (
         <section className="bg-offwhite">
           <div className="container-wide py-14 sm:py-20 lg:py-24">
-            <SectionHeading index="04" eyebrow="Réalisations" title="Autres chantiers" />
+            <SectionHeading title="Autres chantiers" />
             <div className="mt-8 sm:mt-12">
               <ProjectGrid projects={otherProjects} />
             </div>
@@ -185,8 +175,6 @@ export default function HomePage() {
         <div className="container-wide flex flex-wrap gap-10 py-14 sm:py-20 lg:py-24 lg:gap-16">
           <div className="min-w-0 flex-[999_1_560px]">
             <SectionHeading
-              index="05"
-              eyebrow="Zone d'intervention"
               title="Où nous travaillons"
               description="Depuis Riddes, dans tout le Valais. Par exemple :"
             />

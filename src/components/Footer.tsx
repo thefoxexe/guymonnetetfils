@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { company } from "@/data/company";
 import { services } from "@/data/services";
-import { IconInstagram, IconMail } from "./icons";
+import { IconInstagram, IconMail, IconPhone } from "./icons";
 
 const titleClass = "font-display text-sm font-extrabold uppercase tracking-[0.14em] text-accent";
 const linkClass = "focus-ring hover:text-accent";
@@ -14,7 +14,7 @@ export function Footer() {
       <div className="container-wide grid grid-cols-1 gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_0.8fr_1.1fr]">
         <div>
           <Image
-            src="/logo-guy-monnet-officiel-transparent.png"
+            src="/logo-guy-monnet-footer.png"
             alt="Guy Monnet & Fils SA, transports, terrassements, génie civil"
             width={825}
             height={263}
@@ -24,13 +24,20 @@ export function Footer() {
             Transports, terrassements et génie civil à Riddes depuis 1980.
           </p>
           <div className="mt-6 flex items-center gap-3">
+            <a
+              href={company.phone.officeHref}
+              aria-label={`Appeler le bureau au ${company.phone.office}`}
+              className="focus-ring flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-concrete-light transition-colors hover:border-accent hover:bg-accent hover:text-ink"
+            >
+              <IconPhone className="h-5 w-5" />
+            </a>
             {company.social.instagram ? (
               <a
                 href={company.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Guy Monnet & Fils SA sur Instagram"
-                className="focus-ring flex h-11 w-11 items-center justify-center border border-white/25 text-concrete-light transition-colors hover:border-accent hover:bg-accent hover:text-ink"
+                className="focus-ring flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-concrete-light transition-colors hover:border-accent hover:bg-accent hover:text-ink"
               >
                 <IconInstagram className="h-5 w-5" />
               </a>
@@ -38,7 +45,7 @@ export function Footer() {
             <a
               href={`mailto:${company.email}`}
               aria-label={`Envoyer un e-mail à ${company.email}`}
-              className="focus-ring flex h-11 w-11 items-center justify-center border border-white/25 text-concrete-light transition-colors hover:border-accent hover:bg-accent hover:text-ink"
+              className="focus-ring flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-concrete-light transition-colors hover:border-accent hover:bg-accent hover:text-ink"
             >
               <IconMail className="h-5 w-5" />
             </a>
@@ -145,8 +152,8 @@ export function Footer() {
             </span>
           </div>
         </div>
-        <div className="container-wide border-t border-white/10 py-4 text-center text-xs text-mist">
-          Réalisé avec ❤️ par{" "}
+        <div className="container-wide pb-5 text-center text-[11px] text-mist">
+          Powered by{" "}
           <a href="https://webalp.ch/" target="_blank" rel="noopener noreferrer" className={linkClass}>
             WebAlp.ch
           </a>

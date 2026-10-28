@@ -325,10 +325,3 @@ type de travaux, maître d'ouvrage, direction des travaux, montant, descriptif) 
 - **Autres fiches visibles sur les photos** mais pas lisibles en entier
   (station transformatrice, une fiche « Torrent… », une fiche à La
   Tzoumaz) : à transmettre pour en faire des références.
-
-## 15. Drapeau du Valais
-
-Le drapeau derrière « VS » (accueil) est dessiné en SVG
-(`src/components/ValaisFlag.tsx`) sans accès à la source officielle.
-**À vérifier : disposition des 13 étoiles.** Le plus simple : transmettre le
-fichier officiel du drapeau, qui remplacera ce dessin.

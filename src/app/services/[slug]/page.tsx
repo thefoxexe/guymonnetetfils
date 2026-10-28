@@ -8,12 +8,14 @@ import { Photo } from "@/components/Photo";
 import { ProjectGrid } from "@/components/ProjectCard";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
-import { SectionHeading, SectionLabel, sectionCounter } from "@/components/SectionHeading";
-import { ServiceCard, serviceNumber } from "@/components/ServiceCard";
+import { CountUp } from "@/components/CountUp";
+import { SectionHeading, SectionLabel } from "@/components/SectionHeading";
+import { Carousel } from "@/components/Carousel";
+import { ServiceCard } from "@/components/ServiceCard";
 import { services, getServiceBySlug } from "@/data/services";
 import { projects } from "@/data/projects";
 import { buildMetadata, serviceJsonLd } from "@/lib/seo";
-import { slots } from "@/lib/photos";
+import { serviceIllustrations, slots } from "@/lib/photos";
 
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
@@ -48,7 +50,6 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
   const relatedServices = services.filter((s) => service.relatedServices.includes(s.slug));
   const [lead, ...body] = service.intro.filter((p) => !isTodo(p));
   const todos = service.intro.filter(isTodo);
-  const n = sectionCounter();
 
   // Alternance blanc / crème des sections présentes après « Prestations » (crème).
   const optional = [
@@ -74,7 +75,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           { name: "Services", path: "/services/" },
           { name: service.name, path: `/services/${service.slug}/` },
         ]}
-        eyebrow={`Domaine d'activité · ${serviceNumber(service)} / ${String(services.length).padStart(2, "0")}`}
+        eyebrow="Domaine d'activité"
         title={service.name}
         intro={service.shortDescription}
         actions={
@@ -91,15 +92,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             ) : null}
           </>
         }
-        aside={
-          <Photo
-            slot={slots.serviceCover(service.slug)}
-            label={service.heroImageLabel}
-            aspect="fill"
-            priority
-            sizes="(max-width: 1024px) 100vw, 50vw"
-          />
-        }
+        background={{ slot: slots.serviceCover(service.slug), label: service.heroImageLabel }}
       />
 
       {/* 2. BANDEAU DE MARQUE */}
@@ -109,7 +102,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       <section>
         <div className="container-wide flex flex-wrap gap-8 py-14 sm:gap-14 sm:py-20 lg:gap-16 lg:py-28">
           <Reveal className="flex min-w-0 flex-[999_1_560px] flex-col gap-5">
-            <SectionLabel index={n()}>Présentation</SectionLabel>
+            <SectionLabel>Présentation</SectionLabel>
             {lead ? (
               <p className="stretch-90 font-display text-[21px] font-semibold leading-[1.3] sm:text-[28px]">{lead}</p>
             ) : null}
@@ -127,28 +120,12 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           <aside className="min-w-0 flex-[1_1_300px] self-start">
             <div className="border-2 border-ink">
               <p className="flex items-center justify-between bg-ink px-5 py-3.5 font-display text-sm font-extrabold uppercase tracking-[0.12em] text-paper">
-                En bref
+                Zone d&apos;intervention
                 <span className="h-3.5 w-3.5 bg-accent" aria-hidden="true" />
               </p>
               <dl className="px-5 py-1">
-                <div className="flex justify-between gap-4 border-b border-line py-3.5 text-sm">
-                  <dt className="text-steel">Prestations</dt>
-                  <dd className="font-semibold">{service.prestations.length}</dd>
-                </div>
-                {service.references?.length ? (
-                  <div className="flex justify-between gap-4 border-b border-line py-3.5 text-sm">
-                    <dt className="text-steel">Références</dt>
-                    <dd className="font-semibold">{service.references.length}</dd>
-                  </div>
-                ) : null}
-                {relatedProjects.length ? (
-                  <div className="flex justify-between gap-4 border-b border-line py-3.5 text-sm">
-                    <dt className="text-steel">Chantiers détaillés</dt>
-                    <dd className="font-semibold">{relatedProjects.length}</dd>
-                  </div>
-                ) : null}
-                <div className="flex flex-col gap-1 py-3.5 text-sm">
-                  <dt className="text-steel">Zone d&apos;intervention</dt>
+                <div className="py-3.5 text-sm">
+                  <dt className="sr-only">Zone d&apos;intervention</dt>
                   <dd className="font-semibold leading-snug">{service.zoneIntervention}</dd>
                 </div>
               </dl>
@@ -166,13 +143,17 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       {/* 4. PRESTATIONS */}
       <section className="bg-offwhite">
         <div className="container-wide py-14 sm:py-20 lg:py-24">
-          <SectionHeading index={n()} eyebrow="Prestations" title="Ce que nous faisons" />
-          <ul className="mt-8 grid grid-cols-1 border-l border-t border-line bg-paper sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
+          <SectionHeading title="Ce que nous faisons" align="center" />
+          <ul className="mx-auto mt-8 flex max-w-5xl flex-wrap justify-center gap-2.5 sm:mt-12 sm:gap-3">
             {service.prestations.map((item, index) => (
-              <li key={item} className="flex items-baseline gap-4 border-b border-r border-line px-4 py-3.5 transition-colors hover:bg-accent sm:min-h-[120px] sm:flex-col sm:items-start sm:justify-between sm:gap-5 sm:p-6">
-                <span className="font-display text-sm font-extrabold text-accent-ink">{String(index + 1).padStart(2, "0")}</span>
-                <span className="font-display text-[17px] font-bold leading-tight sm:text-[20px]">{item}</span>
-              </li>
+              <Reveal
+                as="li"
+                key={item}
+                delay={(index % 6) * 50}
+                className="border-2 border-ink bg-paper px-4 py-2.5 text-center font-display text-[15px] font-bold leading-tight transition-colors hover:bg-accent sm:px-5 sm:py-3 sm:text-[17px]"
+              >
+                {item}
+              </Reveal>
             ))}
           </ul>
         </div>
@@ -182,18 +163,23 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       {service.savoirFaire ? (
         <section className={bg("savoir")}>
           <div className="container-wide py-14 sm:py-20 lg:py-24">
-            <SectionHeading index={n()} eyebrow="Savoir-faire & moyens" title={service.savoirFaireTitle ?? "Nos moyens"} />
+            <SectionHeading title={service.savoirFaireTitle ?? "Nos moyens"} />
             {process ? (
-              <ol className="mt-8 sm:mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+              <ol className="mt-8 flex flex-wrap items-center gap-3 sm:mt-12">
                 {process.map((step, index) => (
-                  <li
-                    key={step}
-                    className={`flex flex-col gap-3 border-t-4 pt-6 ${index === process.length - 1 ? "border-accent" : "border-ink"}`}
-                  >
-                    <span className="stretch-75 font-display text-[52px] font-black leading-none text-accent-ink">
-                      {String(index + 1).padStart(2, "0")}
+                  <li key={step} className="flex items-center gap-3">
+                    <span
+                      className={`px-4 py-3 font-display text-base font-extrabold uppercase sm:text-lg ${
+                        index === process.length - 1 ? "bg-accent text-ink" : "bg-ink text-paper"
+                      }`}
+                    >
+                      {step}
                     </span>
-                    <span className="font-display text-xl font-extrabold uppercase">{step}</span>
+                    {index < process.length - 1 ? (
+                      <span className="font-bold text-accent-ink" aria-hidden="true">
+                        →
+                      </span>
+                    ) : null}
                   </li>
                 ))}
               </ol>
@@ -205,7 +191,9 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                     <li key={item} className="flex flex-col gap-2 bg-paper px-4 py-5 sm:gap-3 sm:px-6 sm:py-7">
                       {split ? (
                         <>
-                          <span className="stretch-75 font-display text-[40px] font-black leading-none sm:text-[56px]">{split.value}</span>
+                          <span className="stretch-75 font-display text-[40px] font-black leading-none sm:text-[56px]">
+                            <CountUp value={split.value} />
+                          </span>
                           <span className="text-[15px] leading-snug text-steel">{split.label}</span>
                         </>
                       ) : (
@@ -223,17 +211,19 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       {/* 6. IMAGES D'ILLUSTRATION (emplacements à définir avec le client) */}
       <section className={bg("photos")}>
         <div className="container-wide py-14 sm:py-20 lg:py-24">
-          <SectionHeading index={n()} eyebrow="Photos" title={service.name} />
-          <div className="mt-8 sm:mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
-            {[1, 2, 3].map((i) => (
-              <Photo
-                key={i}
-                slot={slots.serviceIllustration(service.slug, i)}
-                label={`${service.name}, photo d'illustration ${i}`}
-                aspect="video"
-                sizes="(max-width: 640px) 100vw, 33vw"
-              />
-            ))}
+          <SectionHeading title="En photos" />
+          <div className="mt-8 sm:mt-12">
+            <Carousel label={`Photos : ${service.name}`}>
+              {serviceIllustrations(service.slug).map((slot, i) => (
+                <Photo
+                  key={slot}
+                  slot={slot}
+                  label={`${service.name}, photo ${i + 1}`}
+                  aspect="video"
+                  sizes="(max-width: 640px) 85vw, (max-width: 1024px) 48vw, 32vw"
+                />
+              ))}
+            </Carousel>
           </div>
         </div>
       </section>
@@ -243,8 +233,6 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <section id="realisations" className={`scroll-mt-28 ${bg("realisations")}`}>
           <div className="container-wide py-14 sm:py-20 lg:py-24">
             <SectionHeading
-              index={n()}
-              eyebrow="Réalisations"
               title={`Chantiers en ${service.name.toLowerCase()}`}
               action={
                 <Link href="/realisations/" className="focus-ring text-[15px] font-bold text-accent-ink hover:underline">
@@ -265,13 +253,11 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           <div className="container-wide flex flex-wrap gap-14 py-14 sm:py-20 lg:py-24">
             <div className="min-w-0 flex-[1_1_300px]">
               <SectionHeading
-                index={n()}
-                eyebrow="Références"
                 title="Quelques références"
               />
             </div>
             <ul className="grid min-w-0 flex-[999_1_560px] grid-cols-1 content-start gap-x-10 sm:grid-cols-2">
-              {service.references.map((ref) => {
+              {service.references.map((ref, i) => {
                 const content = (
                   <>
                     <span className="font-display text-[17px] font-bold leading-snug">
@@ -284,7 +270,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                   </>
                 );
                 return (
-                  <li key={`${ref.label}-${ref.location}`} className="border-t border-ink/15">
+                  <Reveal as="li" key={`${ref.label}-${ref.location}`} delay={(i % 4) * 60} className="border-t border-ink/15">
                     {ref.projectSlug ? (
                       <Link
                         href={`/realisations/${ref.projectSlug}/`}
@@ -296,7 +282,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                     ) : (
                       <span className="flex flex-col gap-1 py-4">{content}</span>
                     )}
-                  </li>
+                  </Reveal>
                 );
               })}
             </ul>
@@ -309,7 +295,6 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <section className={bg("lies")}>
           <div className="container-wide py-14 sm:py-20 lg:py-24">
             <SectionHeading
-              eyebrow="Voir aussi"
               title="Domaines liés"
               action={
                 <Link href="/services/" className="focus-ring text-[15px] font-bold text-accent-ink hover:underline">

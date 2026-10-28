@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Project } from "@/data/projects";
-import { projectCategoryLabels } from "@/data/projects";
+import { projectDomainNames } from "@/lib/domains";
 import { Photo } from "./Photo";
 import { slots } from "@/lib/photos";
 import { Reveal } from "./Reveal";
@@ -25,7 +25,7 @@ export function ProjectCard({ project }: { project: Project }) {
       </span>
       <span className="flex flex-col gap-1.5 pt-5">
         <span className="font-display text-xs font-extrabold uppercase tracking-[0.12em] text-accent-ink">
-          {project.categories.map((c) => projectCategoryLabels[c]).join(" · ")}
+          {projectDomainNames(project).join(" · ")}
         </span>
         <span className="stretch-85 font-display text-[26px] font-extrabold uppercase leading-none transition-colors group-hover:text-accent-ink">
           {project.title}

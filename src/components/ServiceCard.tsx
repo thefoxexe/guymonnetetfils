@@ -1,17 +1,11 @@
 import Link from "next/link";
 import type { Service } from "@/data/services";
-import { services as allServices } from "@/data/services";
 import { Reveal } from "./Reveal";
 import { Photo, hasPhoto } from "./Photo";
 import { slots } from "@/lib/photos";
 
-/** Numéro d'un domaine dans la liste complète (« 03 »). */
-export function serviceNumber(service: Service) {
-  return String(allServices.findIndex((s) => s.slug === service.slug) + 1).padStart(2, "0");
-}
-
 /**
- * Tuile d'un domaine d'activité : numéro, nom en capitales, courte
+ * Tuile d'un domaine d'activité : nom en capitales, courte
  * description et carré jaune fléché ; filet jaune en pied de tuile au survol.
  */
 export function ServiceCard({ service }: { service: Service }) {
@@ -46,9 +40,6 @@ export function ServiceCard({ service }: { service: Service }) {
           </span>
         </span>
       )}
-      <span className="absolute left-4 top-4 bg-ink px-2 py-1 font-display text-sm font-extrabold text-accent sm:left-5 sm:top-5">
-        {serviceNumber(service)}
-      </span>
       <span className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 sm:inset-x-5 sm:bottom-5">
         <span>
           <span className="stretch-85 block font-display text-[24px] font-extrabold uppercase leading-none sm:text-[28px]">
