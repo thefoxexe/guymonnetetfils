@@ -7,7 +7,7 @@ export function BrandBand({ items }: { items: string[] }) {
     <div aria-hidden="true">
       <div className="brand-stripe" />
       <div className="bg-accent">
-        <div className="container-wide flex flex-wrap gap-x-9 gap-y-2 py-4 font-display text-[13px] font-extrabold uppercase tracking-[0.08em] text-ink sm:text-[15px]">
+        <div className="container-wide flex flex-wrap gap-x-6 gap-y-1.5 py-3 font-display text-xs font-extrabold uppercase tracking-[0.08em] text-ink sm:gap-x-9 sm:py-4 sm:text-[15px]">
           {items.map((item) => (
             <span key={item}>■ {item}</span>
           ))}

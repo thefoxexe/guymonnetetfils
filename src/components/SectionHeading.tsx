@@ -56,14 +56,14 @@ export function SectionHeading({
         </SectionLabel>
       ) : null}
       <Tag
-        className={`stretch-85 mt-3 font-display text-[32px] font-extrabold uppercase leading-[0.95] sm:text-[44px] ${
+        className={`stretch-85 mt-3 font-display text-[28px] font-extrabold uppercase leading-[0.95] sm:text-[36px] lg:text-[44px] ${
           isDark ? "text-paper" : "text-ink"
         }`}
       >
         {title}
       </Tag>
       {description ? (
-        <p className={`mt-5 text-base leading-relaxed sm:text-[17px] ${isDark ? "text-mist" : "text-steel"}`}>
+        <p className={`mt-4 text-base leading-relaxed sm:text-[17px] ${isDark ? "text-mist" : "text-steel"}`}>
           {description}
         </p>
       ) : null}

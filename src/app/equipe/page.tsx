@@ -24,13 +24,13 @@ export default function EquipePage() {
         eyebrow="Notre équipe"
         title="Notre équipe"
         intro="Les personnes qui travaillent chez Guy Monnet & Fils, classées par métier."
-        aside={<Photo slot={slots.teamCover} label="Photo de l'équipe prise sur le terrain" aspect="fill" tone="dark" priority />}
+        aside={<Photo slot={slots.teamCover} label="Photo de l'équipe prise sur le terrain" aspect="fill" priority />}
       />
       <BrandBand items={teamGroups.map((g) => g.label.replace(/ génie civil \/ maçonnerie/, ""))} />
 
       {/* DIRECTION */}
       <section className="bg-offwhite">
-        <div className="container-wide flex flex-wrap items-center gap-12 py-20 sm:py-24">
+        <div className="container-wide flex flex-wrap items-center gap-12 py-14 sm:py-20 lg:py-24">
           <Reveal className="min-w-0 flex-[1_1_480px]">
             <SectionHeading index="01" eyebrow="Direction" title={direction.name} />
             <p className="mt-3 font-display text-sm font-extrabold uppercase tracking-[0.12em] text-accent-ink">
@@ -49,9 +49,9 @@ export default function EquipePage() {
 
       {/* COLLABORATEURS */}
       <section>
-        <div className="container-wide py-20 sm:py-24">
+        <div className="container-wide py-14 sm:py-20 lg:py-24">
           <SectionHeading index="02" eyebrow="Collaborateurs" title="Par métier" />
-          <div className="mt-12 space-y-14">
+          <div className="mt-8 sm:mt-12 space-y-14">
             {teamGroups.map((group, index) => (
               <TeamGroupSection key={group.id} group={group} index={index} />
             ))}

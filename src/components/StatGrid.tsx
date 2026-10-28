@@ -43,23 +43,23 @@ export function StatGrid({
         return (
           <div
             key={stat.label}
-            className={`flex flex-col gap-2.5 px-6 py-7 sm:px-7 sm:py-8 ${index === highlight ? "bg-accent" : "bg-paper"}`}
+            className={`flex flex-col gap-2 px-4 py-5 sm:gap-2.5 sm:px-6 sm:py-7 ${index === highlight ? "bg-accent" : "bg-paper"}`}
           >
-            <dt className={`text-sm leading-snug ${index === highlight ? "text-ink" : "text-steel"}`}>
+            <dt className={`text-[13px] leading-snug sm:text-sm ${index === highlight ? "text-ink" : "text-steel"}`}>
               {stat.label}
             </dt>
-            <dd className="stretch-75 order-first whitespace-nowrap font-display text-[48px] font-black leading-none text-ink sm:text-[60px]">
+            <dd className="stretch-75 order-first whitespace-nowrap font-display text-[34px] font-black leading-none text-ink sm:text-[48px] lg:text-[56px]">
               {stat.backdrop ? (
-                <span className="relative my-2 ml-3 inline-block">
-                  <span className="absolute -inset-x-3 -inset-y-2" aria-hidden="true">
+                <span className="relative my-1.5 ml-2.5 inline-block">
+                  <span className="absolute -inset-x-2.5 -inset-y-1.5" aria-hidden="true">
                     {stat.backdrop}
                   </span>
-                  <span className="relative [-webkit-text-stroke:6px_#ffffff] [paint-order:stroke_fill]">{number}</span>
+                  <span className="relative [-webkit-text-stroke:5px_#ffffff] [paint-order:stroke_fill]">{number}</span>
                 </span>
               ) : (
                 number
               )}
-              {unit ? <span className="text-[24px] sm:text-[28px]"> {unit}</span> : null}
+              {unit ? <span className="text-[18px] sm:text-[24px]"> {unit}</span> : null}
             </dd>
           </div>
         );

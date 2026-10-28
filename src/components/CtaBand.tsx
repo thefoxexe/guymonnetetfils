@@ -17,7 +17,7 @@ export function CtaBand({
   const isDark = variant === "dark";
   return (
     <section className={`relative overflow-hidden ${isDark ? "bg-ink text-paper" : "bg-accent text-ink"}`}>
-      <div className="container-wide relative flex flex-wrap items-center justify-between gap-8 py-16 sm:py-20">
+      <div className="container-wide relative flex flex-wrap items-center justify-between gap-6 py-12 sm:gap-8 sm:py-16">
         <div className="flex max-w-3xl flex-col gap-4">
           {kicker ? (
             <p
@@ -28,7 +28,7 @@ export function CtaBand({
               {kicker}
             </p>
           ) : null}
-          <h2 className="stretch-85 font-display text-[32px] font-black uppercase leading-[0.95] sm:text-[44px]">
+          <h2 className="stretch-85 font-display text-[28px] font-black uppercase leading-[0.95] sm:text-[40px]">
             {title}
           </h2>
         </div>

@@ -41,7 +41,6 @@ export default function EntreprisePage() {
             slot={slots.companyCover}
             label="Guy Monnet et son premier camion (archives de l'entreprise)"
             aspect="fill"
-            tone="dark"
             priority
           />
         }
@@ -50,10 +49,10 @@ export default function EntreprisePage() {
 
       {/* EN CHIFFRES */}
       <section className="bg-offwhite">
-        <div className="container-wide py-20 sm:py-24">
+        <div className="container-wide py-14 sm:py-20 lg:py-24">
           <SectionHeading index="01" eyebrow="Repères" title="En chiffres" />
           <StatGrid
-            className="mt-12"
+            className="mt-8 sm:mt-12"
             highlight={3}
             stats={[
               { value: String(company.foundedYear), label: "Achat du premier camion par Guy Monnet" },
@@ -67,9 +66,9 @@ export default function EntreprisePage() {
 
       {/* HISTOIRE */}
       <section>
-        <div className="container-wide py-20 sm:py-28">
+        <div className="container-wide py-14 sm:py-20 lg:py-28">
           <SectionHeading index="02" eyebrow="Notre histoire" title="De 1980 à aujourd'hui" />
-          <div className="mt-12">
+          <div className="mt-8 sm:mt-12">
             <Timeline
               steps={[
                 {
@@ -108,24 +107,24 @@ export default function EntreprisePage() {
       </section>
 
       {/* MOYENS : survol jaune aux couleurs du site (séance client) */}
-      <section className="bg-ink text-paper">
-        <div className="container-wide py-20 sm:py-24">
-          <SectionHeading index="03" eyebrow="Nos moyens" title="Ce que nous avons" tone="dark" />
-          <ul className="mt-12 grid grid-cols-1 border-l border-t border-white/15 sm:grid-cols-2 lg:grid-cols-5">
+      <section className="bg-offwhite">
+        <div className="container-wide py-14 sm:py-20 lg:py-24">
+          <SectionHeading index="03" eyebrow="Nos moyens" title="Ce que nous avons" />
+          <ul className="mt-8 sm:mt-12 grid grid-cols-1 border-l border-t border-line bg-paper sm:grid-cols-2 lg:grid-cols-5">
             {means.map((item, index) => (
-              <li key={item.title} className="border-b border-r border-white/15">
+              <li key={item.title} className="border-b border-r border-line">
                 <Link
                   href={`/services/${item.slug}/`}
-                  className="focus-ring group flex h-full min-h-[220px] flex-col justify-between gap-6 p-7 transition-colors duration-300 ease-editorial hover:bg-accent"
+                  className="focus-ring group flex h-full flex-col justify-between gap-4 p-5 transition-colors sm:min-h-[200px] sm:p-7 duration-300 ease-editorial hover:bg-accent"
                 >
-                  <span className="font-display text-sm font-extrabold text-accent transition-colors group-hover:text-ink">
+                  <span className="font-display text-sm font-extrabold text-accent-ink transition-colors group-hover:text-ink">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <span>
-                    <span className="stretch-85 block font-display text-[28px] font-extrabold uppercase leading-none transition-colors group-hover:text-ink">
+                    <span className="stretch-85 block font-display text-[24px] font-extrabold uppercase leading-none sm:text-[28px]">
                       {item.title}
                     </span>
-                    <span className="mt-3 block text-[15px] leading-relaxed text-concrete-light transition-colors group-hover:text-ink">
+                    <span className="mt-2 block text-[15px] leading-relaxed text-steel transition-colors group-hover:text-ink">
                       {item.description}
                     </span>
                   </span>
@@ -138,7 +137,7 @@ export default function EntreprisePage() {
 
       {/* VIE DE L'ENTREPRISE */}
       <section>
-        <div className="container-wide flex flex-wrap gap-14 py-20 sm:py-24">
+        <div className="container-wide flex flex-wrap gap-14 py-14 sm:py-20 lg:py-24">
           <Reveal className="min-w-0 flex-[1_1_420px]">
             <SectionHeading index="04" eyebrow="Événements" title="La vie de l'entreprise" />
             <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-steel">

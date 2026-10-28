@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { BrandBand } from "@/components/BrandBand";
 import { CtaBand } from "@/components/CtaBand";
 import { Photo } from "@/components/Photo";
+import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading, SectionLabel, sectionCounter } from "@/components/SectionHeading";
 import { StatGrid } from "@/components/StatGrid";
@@ -66,79 +66,66 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   return (
     <>
       {/* 1. HERO */}
-      <section className="bg-ink text-paper">
-        <div className="container-wide flex flex-wrap items-stretch">
-          <div className="flex min-w-0 flex-[1_1_520px] flex-col justify-between gap-12 py-14 sm:py-20 lg:pr-14">
-            <div className="flex flex-col gap-7">
-              <Breadcrumb
-                items={[
-                  { name: "Réalisations", path: "/realisations/" },
-                  { name: project.title, path: `/realisations/${project.slug}/` },
-                ]}
-              />
-              <Reveal className="flex flex-col gap-7">
-                <div className="flex flex-wrap gap-2">
-                  {categories.map((label, i) => (
-                    <span
-                      key={label}
-                      className={`px-3 py-1.5 font-display text-xs font-extrabold uppercase tracking-[0.1em] ${
-                        i === 0 ? "bg-accent text-ink" : "border border-white/30 text-paper"
-                      }`}
-                    >
-                      {label}
-                    </span>
-                  ))}
-                </div>
-                <h1 className="stretch-75 font-display text-[44px] font-black uppercase leading-[0.9] [text-wrap:balance] sm:text-[64px] lg:text-[80px]">
-                  {project.title}
-                </h1>
-                <p className="max-w-xl text-lg leading-relaxed text-concrete-light sm:text-xl">{project.summary}</p>
-              </Reveal>
-            </div>
-            <dl className="grid grid-cols-2 gap-6 border-t border-white/15 pt-7 sm:grid-cols-3">
-              <div>
-                <dt className="text-xs uppercase tracking-[0.1em] text-mist">Lieu</dt>
-                <dd className="mt-1.5 text-[17px] font-semibold">{project.location}</dd>
-              </div>
-              {project.period ?? project.year ? (
-                <div>
-                  <dt className="text-xs uppercase tracking-[0.1em] text-mist">Période d&apos;exécution</dt>
-                  <dd className="mt-1.5 text-[17px] font-semibold">{project.period ?? project.year}</dd>
-                </div>
-              ) : null}
-              {project.client ? (
-                <div>
-                  <dt className="text-xs uppercase tracking-[0.1em] text-mist">Maître d&apos;ouvrage</dt>
-                  <dd className="mt-1.5 text-[17px] font-semibold">{project.client}</dd>
-                </div>
-              ) : null}
-            </dl>
+      <PageHero
+        crumbs={[
+          { name: "Réalisations", path: "/realisations/" },
+          { name: project.title, path: `/realisations/${project.slug}/` },
+        ]}
+        tags={
+          <div className="flex flex-wrap gap-2">
+            {categories.map((label, i) => (
+              <span
+                key={label}
+                className={`px-2.5 py-1 font-display text-[11px] font-extrabold uppercase tracking-[0.1em] sm:text-xs ${
+                  i === 0 ? "bg-accent text-ink" : "border border-ink/25 text-ink"
+                }`}
+              >
+                {label}
+              </span>
+            ))}
           </div>
-          <div className="relative -mx-5 min-h-[360px] min-w-0 flex-[1_1_440px] sm:min-h-[480px] md:-mx-10 lg:mx-0 lg:-mr-10 lg:min-h-[600px]">
+        }
+        title={project.title}
+        intro={project.summary}
+        meta={
+          <dl className="flex flex-wrap gap-x-8 gap-y-3 border-t border-ink/15 pt-4">
+            <div>
+              <dt className="text-[11px] uppercase tracking-[0.1em] text-steel">Lieu</dt>
+              <dd className="mt-1 font-semibold">{project.location}</dd>
+            </div>
+            {project.period ?? project.year ? (
+              <div>
+                <dt className="text-[11px] uppercase tracking-[0.1em] text-steel">Période</dt>
+                <dd className="mt-1 font-semibold">{project.period ?? project.year}</dd>
+              </div>
+            ) : null}
+          </dl>
+        }
+        aside={
+          <>
             <Photo
               slot={slots.projectCover(project.slug)}
               label={project.heroImageLabel}
               aspect="fill"
-              tone="dark"
               priority
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
             {project.year ? (
-              <span className="absolute bottom-0 left-0 bg-accent px-4 py-3 font-display text-[13px] font-extrabold uppercase tracking-[0.12em] text-ink">
+              <span className="absolute bottom-0 left-0 bg-accent px-3 py-2 font-display text-xs font-extrabold uppercase tracking-[0.12em] text-ink">
                 Réalisation · {project.year}
               </span>
             ) : null}
-          </div>
-        </div>
-      </section>
+          </>
+        }
+      />
 
       {/* 2. BANDEAU DE MARQUE */}
       <BrandBand items={bandItems} />
 
       {/* 3. CHIFFRES PHARES */}
       {project.stats && project.stats.length > 0 ? (
-        <section className="bg-offwhite">
-          <div className="container-wide py-20 sm:py-24">
+        <section>
+          <div className="container-wide py-14 sm:py-20 lg:py-24">
             <SectionHeading
               eyebrow="Le chantier en chiffres"
               title="Chiffres phares"
@@ -150,20 +137,20 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                 ) : undefined
               }
             />
-            <StatGrid stats={project.stats} className="mt-12" />
+            <StatGrid stats={project.stats} className="mt-8 sm:mt-12" />
           </div>
         </section>
       ) : null}
 
       {/* 4. CONTEXTE + TRAVAUX + FICHE TECHNIQUE */}
-      <section>
-        <div className="container-wide flex flex-wrap gap-14 py-20 sm:py-28 lg:gap-16">
-          <div className="flex min-w-0 flex-[999_1_560px] flex-col gap-14">
+      <section className="bg-offwhite">
+        <div className="container-wide flex flex-wrap gap-10 py-14 sm:gap-14 sm:py-20 lg:gap-16 lg:py-28">
+          <div className="flex min-w-0 flex-[999_1_560px] flex-col gap-10 sm:gap-14">
             <Reveal className="flex flex-col gap-5">
               <SectionLabel index={n()}>Le contexte</SectionLabel>
               {project.context.map((paragraph, i) =>
                 i === 0 ? (
-                  <p key={i} className="stretch-90 font-display text-[24px] font-semibold leading-[1.3] sm:text-[32px]">
+                  <p key={i} className="stretch-90 font-display text-[21px] font-semibold leading-[1.3] sm:text-[28px]">
                     {paragraph}
                   </p>
                 ) : (
@@ -177,7 +164,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               <SectionLabel index={n()}>Travaux réalisés</SectionLabel>
               <ol className="grid grid-cols-1 gap-x-10 md:grid-cols-2">
                 {project.works.map((work, i) => (
-                  <li key={work} className="flex gap-4 border-t border-line py-4 text-base leading-relaxed">
+                  <li key={work} className="flex gap-4 border-t border-ink/10 py-3 text-[15px] leading-relaxed sm:py-4 sm:text-base">
                     <span className="min-w-[28px] font-display font-extrabold text-accent-ink">
                       {String(i + 1).padStart(2, "0")}
                     </span>
@@ -186,18 +173,18 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                 ))}
               </ol>
               {project.todo ? (
-                <p className="border-l-4 border-accent bg-offwhite px-4 py-3 text-xs text-accent-ink">{project.todo}</p>
+                <p className="border-l-4 border-accent bg-paper px-4 py-3 text-xs text-accent-ink">{project.todo}</p>
               ) : null}
             </Reveal>
           </div>
 
-          <aside className="min-w-0 flex-[1_1_320px] self-start lg:sticky lg:top-32">
-            <div className="border-2 border-ink">
-              <p className="flex items-center justify-between bg-ink px-6 py-4 font-display text-sm font-extrabold uppercase tracking-[0.12em] text-paper">
+          <aside className="min-w-0 flex-[1_1_300px] self-start lg:sticky lg:top-32">
+            <div className="border-2 border-ink bg-paper">
+              <p className="flex items-center justify-between bg-ink px-5 py-3.5 font-display text-sm font-extrabold uppercase tracking-[0.12em] text-paper">
                 Fiche technique
                 <span className="h-3.5 w-3.5 bg-accent" aria-hidden="true" />
               </p>
-              <dl className="px-6 py-2">
+              <dl className="px-5 py-1">
                 {facts.map((fact, i) => (
                   <div
                     key={fact.label}
@@ -220,19 +207,11 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       </section>
 
       {/* 5. GALERIE */}
-      <section className="bg-ink text-paper">
-        <div className="container-wide py-20 sm:py-24">
-          <SectionHeading
-            index={n()}
-            eyebrow="Photos"
-            title="Photos du chantier"
-            tone="dark"
-            action={
-              gallery.length > 0 ? <span className="text-[15px] text-mist">{gallery.length} photos</span> : undefined
-            }
-          />
+      <section>
+        <div className="container-wide py-14 sm:py-20 lg:py-24">
+          <SectionHeading index={n()} eyebrow="Photos" title="Photos du chantier" />
           {gallery.length > 0 ? (
-            <div className="mt-12 grid auto-rows-[240px] grid-cols-1 gap-3 sm:auto-rows-[260px] sm:grid-cols-2 lg:auto-rows-[300px] lg:grid-cols-3">
+            <div className="mt-8 sm:mt-12 grid auto-rows-[240px] grid-cols-1 gap-3 sm:auto-rows-[260px] sm:grid-cols-2 lg:auto-rows-[300px] lg:grid-cols-3">
               {gallery.map((image, i) => (
                 <Reveal
                   key={image.slot}
@@ -250,13 +229,12 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               ))}
             </div>
           ) : (
-            <div className="mt-12 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <div className="mt-8 sm:mt-12 grid grid-cols-1 gap-3 sm:grid-cols-3">
               {[1, 2, 3].map((n) => (
                 <Photo
                   key={n}
                   slot={slots.projectGallery(project.slug, n)}
                   label={`${project.title}, photo ${n}`}
-                  tone="dark"
                   aspect="video"
                 />
               ))}
@@ -268,26 +246,25 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       {/* 6. DOMAINES MOBILISÉS */}
       {mobilizedServices.length > 0 ? (
         <section className="bg-offwhite">
-          <div className="container-wide py-20 sm:py-24">
+          <div className="container-wide py-14 sm:py-20 lg:py-24">
             <SectionHeading index={n()} eyebrow="Domaines" title="Domaines concernés" />
-            <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-8 sm:mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
               {mobilizedServices.map((service) => (
                 <Link
                   key={service.slug}
                   href={`/services/${service.slug}/`}
-                  className="focus-ring group flex min-h-[180px] flex-col border border-line bg-paper text-ink transition-colors hover:border-ink sm:flex-row"
+                  className="focus-ring group flex flex-col border border-line bg-paper text-ink transition-colors hover:border-ink sm:min-h-[180px] sm:flex-row"
                 >
-                  <span className="relative h-48 w-full shrink-0 overflow-hidden bg-anthracite sm:h-auto sm:w-[42%]">
+                  <span className="relative h-40 w-full shrink-0 overflow-hidden sm:h-auto sm:w-[42%]">
                     <Photo
                       slot={slots.serviceCover(service.slug)}
                       label={service.heroImageLabel}
                       alt=""
                       aspect="fill"
-                      tone="dark"
                       sizes="240px"
                     />
                   </span>
-                  <span className="flex min-w-0 flex-col justify-between gap-4 p-6">
+                  <span className="flex min-w-0 flex-col justify-between gap-3 p-5 sm:p-6">
                     <span className="stretch-85 font-display text-[24px] font-extrabold uppercase leading-none">
                       {service.name}
                     </span>
@@ -303,31 +280,30 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
       {/* 7. RÉALISATION SUIVANTE */}
       {next.slug !== project.slug ? (
-        <Link
-          href={`/realisations/${next.slug}/`}
-          className="focus-ring group relative block h-[340px] overflow-hidden bg-ink text-paper sm:h-[420px]"
-        >
-          <Photo
-            slot={slots.projectCover(next.slug)}
-            label={next.heroImageLabel}
-            alt=""
-            aspect="fill"
-            tone="dark"
-            layout="corner"
-            sizes="100vw"
-            imageClassName="transition-transform duration-700 ease-editorial group-hover:scale-105"
-          />
-          <span className="absolute inset-0 bg-gradient-to-r from-ink/95 via-ink/60 to-ink/20" />
-          <span className="container-wide relative flex h-full flex-col justify-center gap-4">
-            <span className="font-display text-[13px] font-extrabold uppercase tracking-[0.14em] text-accent">
-              Réalisation suivante
+        <Link href={`/realisations/${next.slug}/`} className="focus-ring group block border-t border-line bg-paper text-ink">
+          <span className="container-wide grid grid-cols-1 items-center gap-6 py-10 sm:grid-cols-[minmax(0,1fr)_280px] sm:py-14">
+            <span className="flex flex-col gap-3">
+              <span className="font-display text-[13px] font-extrabold uppercase tracking-[0.14em] text-accent-ink">
+                Réalisation suivante
+              </span>
+              <span className="stretch-75 font-display text-[32px] font-black uppercase leading-[0.92] sm:text-[48px]">
+                {next.title}{" "}
+                <span className="inline-block text-accent-ink transition-transform duration-300 group-hover:translate-x-2">→</span>
+              </span>
+              <span className="text-[15px] text-steel">
+                {next.location}
+                {next.year ? ` · ${next.year}` : ""}
+              </span>
             </span>
-            <span className="stretch-75 font-display text-[40px] font-black uppercase leading-[0.9] sm:text-[56px] lg:text-[72px]">
-              {next.title} <span className="inline-block transition-transform duration-300 group-hover:translate-x-2">→</span>
-            </span>
-            <span className="text-[15px] text-concrete-light">
-              {next.categories.map((c) => projectCategoryLabels[c]).join(" · ")} · {next.location}
-              {next.year ? ` · ${next.year}` : ""}
+            <span className="relative hidden aspect-[4/3] overflow-hidden sm:block">
+              <Photo
+                slot={slots.projectCover(next.slug)}
+                label={next.heroImageLabel}
+                alt=""
+                aspect="fill"
+                sizes="280px"
+                imageClassName="transition-transform duration-500 ease-editorial group-hover:scale-105"
+              />
             </span>
           </span>
         </Link>

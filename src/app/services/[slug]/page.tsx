@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Breadcrumb } from "@/components/Breadcrumb";
 import { BrandBand } from "@/components/BrandBand";
 import { Button } from "@/components/Button";
 import { CtaBand } from "@/components/CtaBand";
 import { JsonLd } from "@/components/JsonLd";
 import { Photo } from "@/components/Photo";
 import { ProjectGrid } from "@/components/ProjectCard";
+import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading, SectionLabel, sectionCounter } from "@/components/SectionHeading";
 import { ServiceCard, serviceNumber } from "@/components/ServiceCard";
@@ -50,6 +50,16 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
   const todos = service.intro.filter(isTodo);
   const n = sectionCounter();
 
+  // Alternance blanc / crème des sections présentes après « Prestations » (crème).
+  const optional = [
+    service.savoirFaire ? "savoir" : null,
+    "photos",
+    relatedProjects.length > 0 ? "realisations" : null,
+    service.references?.length ? "references" : null,
+    relatedServices.length > 0 ? "lies" : null,
+  ].filter(Boolean) as string[];
+  const bg = (key: string) => (optional.indexOf(key) % 2 === 0 ? "" : "bg-offwhite");
+
   // Un unique élément « A → B → C » est présenté comme un processus en étapes.
   const process =
     service.savoirFaire?.length === 1 && service.savoirFaire[0]!.includes("→")
@@ -58,63 +68,50 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
   return (
     <>
-      {/* 1. HERO PLEIN CADRE */}
-      <section className="relative flex min-h-[520px] items-end overflow-hidden bg-ink text-paper sm:min-h-[600px]">
-        <Photo
-          slot={slots.serviceCover(service.slug)}
-          label={service.heroImageLabel}
-          aspect="fill"
-          tone="dark"
-          layout="corner"
-          priority
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/20 via-ink/55 to-ink/95" />
-        <div className="container-wide relative flex w-full flex-wrap items-end justify-between gap-10 pb-14 pt-28 sm:pb-20">
-          <div className="flex min-w-0 flex-[1_1_560px] flex-col gap-6">
-            <Breadcrumb
-              items={[
-                { name: "Services", path: "/services/" },
-                { name: service.name, path: `/services/${service.slug}/` },
-              ]}
-            />
-            <Reveal className="flex flex-col gap-6">
-              <span className="self-start bg-accent px-3.5 py-2 font-display text-xs font-extrabold uppercase tracking-[0.14em] text-ink sm:text-[13px]">
-                Domaine d&apos;activité · {serviceNumber(service)} / {String(services.length).padStart(2, "0")}
-              </span>
-              <h1 className="stretch-75 font-display text-[48px] font-black uppercase leading-[0.88] [text-wrap:balance] sm:text-[72px] lg:text-[100px]">
-                {service.name}
-              </h1>
-              <p className="max-w-xl text-lg leading-relaxed text-concrete-light sm:text-[21px]">
-                {service.shortDescription}
-              </p>
-            </Reveal>
-          </div>
-          <div className="flex flex-wrap gap-3">
+      {/* 1. HERO */}
+      <PageHero
+        crumbs={[
+          { name: "Services", path: "/services/" },
+          { name: service.name, path: `/services/${service.slug}/` },
+        ]}
+        eyebrow={`Domaine d'activité · ${serviceNumber(service)} / ${String(services.length).padStart(2, "0")}`}
+        title={service.name}
+        intro={service.shortDescription}
+        actions={
+          <>
             <Button href="/contact/">Demander une offre</Button>
             {relatedProjects.length > 0 ? (
-              <Button href="#realisations" variant="outline-light">
-                Voir les réalisations
+              <Button href="#realisations" variant="outline">
+                Réalisations
               </Button>
             ) : service.references?.length ? (
-              <Button href="#references" variant="outline-light">
-                Nos références
+              <Button href="#references" variant="outline">
+                Références
               </Button>
             ) : null}
-          </div>
-        </div>
-      </section>
+          </>
+        }
+        aside={
+          <Photo
+            slot={slots.serviceCover(service.slug)}
+            label={service.heroImageLabel}
+            aspect="fill"
+            priority
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
+        }
+      />
 
       {/* 2. BANDEAU DE MARQUE */}
       <BrandBand items={service.bandItems} />
 
       {/* 3. INTRO + EN BREF */}
       <section>
-        <div className="container-wide flex flex-wrap gap-14 py-20 sm:py-28 lg:gap-16">
-          <Reveal className="flex min-w-0 flex-[999_1_560px] flex-col gap-6">
+        <div className="container-wide flex flex-wrap gap-8 py-14 sm:gap-14 sm:py-20 lg:gap-16 lg:py-28">
+          <Reveal className="flex min-w-0 flex-[999_1_560px] flex-col gap-5">
             <SectionLabel index={n()}>Présentation</SectionLabel>
             {lead ? (
-              <p className="stretch-90 font-display text-[26px] font-semibold leading-[1.28] sm:text-[34px]">{lead}</p>
+              <p className="stretch-90 font-display text-[21px] font-semibold leading-[1.3] sm:text-[28px]">{lead}</p>
             ) : null}
             {body.map((paragraph) => (
               <p key={paragraph} className="max-w-3xl text-[17px] leading-[1.7] text-steel sm:text-lg">
@@ -127,13 +124,13 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               </p>
             ))}
           </Reveal>
-          <aside className="min-w-0 flex-[1_1_320px] self-start">
+          <aside className="min-w-0 flex-[1_1_300px] self-start">
             <div className="border-2 border-ink">
-              <p className="flex items-center justify-between bg-ink px-6 py-4 font-display text-sm font-extrabold uppercase tracking-[0.12em] text-paper">
+              <p className="flex items-center justify-between bg-ink px-5 py-3.5 font-display text-sm font-extrabold uppercase tracking-[0.12em] text-paper">
                 En bref
                 <span className="h-3.5 w-3.5 bg-accent" aria-hidden="true" />
               </p>
-              <dl className="px-6 py-2">
+              <dl className="px-5 py-1">
                 <div className="flex justify-between gap-4 border-b border-line py-3.5 text-sm">
                   <dt className="text-steel">Prestations</dt>
                   <dd className="font-semibold">{service.prestations.length}</dd>
@@ -167,20 +164,14 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       </section>
 
       {/* 4. PRESTATIONS */}
-      <section className="bg-ink text-paper">
-        <div className="container-wide py-20 sm:py-24">
-          <SectionHeading
-            index={n()}
-            eyebrow="Prestations"
-            title="Ce que nous faisons"
-            tone="dark"
-            action={<span className="text-[15px] text-mist">{service.prestations.length} prestations</span>}
-          />
-          <ul className="mt-12 grid grid-cols-1 border-l border-t border-white/15 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="bg-offwhite">
+        <div className="container-wide py-14 sm:py-20 lg:py-24">
+          <SectionHeading index={n()} eyebrow="Prestations" title="Ce que nous faisons" />
+          <ul className="mt-8 grid grid-cols-1 border-l border-t border-line bg-paper sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
             {service.prestations.map((item, index) => (
-              <li key={item} className="flex items-baseline gap-4 border-b border-r border-white/15 p-5 transition-colors hover:bg-anthracite sm:min-h-[132px] sm:flex-col sm:items-start sm:justify-between sm:gap-5 sm:p-6">
-                <span className="font-display text-sm font-extrabold text-accent">{String(index + 1).padStart(2, "0")}</span>
-                <span className="font-display text-[19px] font-bold leading-tight sm:text-[21px]">{item}</span>
+              <li key={item} className="flex items-baseline gap-4 border-b border-r border-line px-4 py-3.5 transition-colors hover:bg-accent sm:min-h-[120px] sm:flex-col sm:items-start sm:justify-between sm:gap-5 sm:p-6">
+                <span className="font-display text-sm font-extrabold text-accent-ink">{String(index + 1).padStart(2, "0")}</span>
+                <span className="font-display text-[17px] font-bold leading-tight sm:text-[20px]">{item}</span>
               </li>
             ))}
           </ul>
@@ -189,11 +180,11 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
       {/* 5. MOYENS / PROCESSUS */}
       {service.savoirFaire ? (
-        <section className="bg-offwhite">
-          <div className="container-wide py-20 sm:py-24">
+        <section className={bg("savoir")}>
+          <div className="container-wide py-14 sm:py-20 lg:py-24">
             <SectionHeading index={n()} eyebrow="Savoir-faire & moyens" title={service.savoirFaireTitle ?? "Nos moyens"} />
             {process ? (
-              <ol className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+              <ol className="mt-8 sm:mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
                 {process.map((step, index) => (
                   <li
                     key={step}
@@ -207,14 +198,14 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 ))}
               </ol>
             ) : (
-              <ul className="mt-12 grid grid-cols-1 gap-[2px] border-2 border-ink bg-ink sm:grid-cols-2 lg:grid-cols-4">
+              <ul className="mt-8 sm:mt-12 grid grid-cols-1 gap-[2px] border-2 border-ink bg-ink sm:grid-cols-2 lg:grid-cols-4">
                 {service.savoirFaire.map((item) => {
                   const split = splitLeadingNumber(item);
                   return (
-                    <li key={item} className="flex flex-col gap-3 bg-paper px-6 py-7">
+                    <li key={item} className="flex flex-col gap-2 bg-paper px-4 py-5 sm:gap-3 sm:px-6 sm:py-7">
                       {split ? (
                         <>
-                          <span className="stretch-75 font-display text-[60px] font-black leading-none">{split.value}</span>
+                          <span className="stretch-75 font-display text-[40px] font-black leading-none sm:text-[56px]">{split.value}</span>
                           <span className="text-[15px] leading-snug text-steel">{split.label}</span>
                         </>
                       ) : (
@@ -230,10 +221,10 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       ) : null}
 
       {/* 6. IMAGES D'ILLUSTRATION (emplacements à définir avec le client) */}
-      <section>
-        <div className="container-wide py-20 sm:py-24">
+      <section className={bg("photos")}>
+        <div className="container-wide py-14 sm:py-20 lg:py-24">
           <SectionHeading index={n()} eyebrow="Photos" title={service.name} />
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="mt-8 sm:mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
             {[1, 2, 3].map((i) => (
               <Photo
                 key={i}
@@ -249,8 +240,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
       {/* 7. RÉALISATIONS LIÉES */}
       {relatedProjects.length > 0 ? (
-        <section id="realisations" className="scroll-mt-28 border-t border-line">
-          <div className="container-wide py-20 sm:py-24">
+        <section id="realisations" className={`scroll-mt-28 ${bg("realisations")}`}>
+          <div className="container-wide py-14 sm:py-20 lg:py-24">
             <SectionHeading
               index={n()}
               eyebrow="Réalisations"
@@ -261,7 +252,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 </Link>
               }
             />
-            <div className="mt-12">
+            <div className="mt-8 sm:mt-12">
               <ProjectGrid projects={relatedProjects} />
             </div>
           </div>
@@ -270,8 +261,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
       {/* 8. RÉFÉRENCES (titres seuls) */}
       {service.references && service.references.length > 0 ? (
-        <section id="references" className="scroll-mt-28 bg-offwhite">
-          <div className="container-wide flex flex-wrap gap-14 py-20 sm:py-24">
+        <section id="references" className={`scroll-mt-28 ${bg("references")}`}>
+          <div className="container-wide flex flex-wrap gap-14 py-14 sm:py-20 lg:py-24">
             <div className="min-w-0 flex-[1_1_300px]">
               <SectionHeading
                 index={n()}
@@ -315,8 +306,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
       {/* 9. DOMAINES ASSOCIÉS */}
       {relatedServices.length > 0 ? (
-        <section>
-          <div className="container-wide py-20 sm:py-24">
+        <section className={bg("lies")}>
+          <div className="container-wide py-14 sm:py-20 lg:py-24">
             <SectionHeading
               eyebrow="Voir aussi"
               title="Domaines liés"
@@ -326,7 +317,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 </Link>
               }
             />
-            <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+            <div className="mt-8 sm:mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
               {relatedServices.map((related) => (
                 <ServiceCard key={related.slug} service={related} />
               ))}
@@ -336,7 +327,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       ) : null}
 
       {/* 10. APPEL À L'ACTION */}
-      <CtaBand variant="dark" kicker={`Zone d'intervention : ${service.zoneIntervention}`} title="Vous avez un projet ?" />
+      <CtaBand kicker={`Zone d'intervention : ${service.zoneIntervention}`} title="Vous avez un projet ?" />
 
       <JsonLd
         data={serviceJsonLd({

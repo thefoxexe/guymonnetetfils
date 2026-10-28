@@ -30,7 +30,7 @@ export default function ContactPage() {
       <BrandBand items={[`Bureau ${company.phone.office}`, company.email, `${company.address.postalCode} ${company.address.city}`]} />
 
       <section>
-        <div className="container-wide flex flex-wrap gap-14 py-20 sm:py-24 lg:gap-16">
+        <div className="container-wide flex flex-wrap gap-14 py-14 sm:py-20 lg:py-24 lg:gap-16">
           <div className="min-w-0 flex-[999_1_560px]">
             <SectionLabel index="01">Formulaire</SectionLabel>
             <h2 className="stretch-85 mt-3 font-display text-[32px] font-extrabold uppercase leading-[0.95] sm:text-[44px]">
@@ -41,18 +41,18 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <aside className="min-w-0 flex-[1_1_340px] self-start bg-ink text-paper lg:sticky lg:top-32">
-            <p className="flex items-center justify-between px-7 pb-2 pt-7 font-display text-sm font-extrabold uppercase tracking-[0.14em] text-accent">
+          <aside className="min-w-0 flex-[1_1_320px] self-start border-2 border-ink bg-paper lg:sticky lg:top-32">
+            <p className="flex items-center justify-between bg-ink px-5 py-3.5 font-display text-sm font-extrabold uppercase tracking-[0.12em] text-paper">
               Nous joindre
               <span className="h-3.5 w-3.5 bg-accent" aria-hidden="true" />
             </p>
-            <ul className="px-7">
+            <ul className="px-5">
               {phones.map((phone) => (
-                <li key={phone.label} className="border-b border-white/15 py-4">
+                <li key={phone.label} className="border-b border-line py-4">
                   <a href={phone.href} className="focus-ring group flex items-center justify-between gap-4">
                     <span>
-                      <span className="block text-sm text-mist">{phone.label}</span>
-                      <span className="stretch-85 mt-1 block font-display text-[28px] font-extrabold leading-none group-hover:text-accent">
+                      <span className="block text-sm text-steel">{phone.label}</span>
+                      <span className="stretch-85 mt-1 block font-display text-[26px] font-extrabold leading-none group-hover:text-accent-ink">
                         {phone.number}
                       </span>
                     </span>
@@ -63,31 +63,31 @@ export default function ContactPage() {
                 </li>
               ))}
             </ul>
-            <dl className="space-y-5 px-7 py-6 text-[15px]">
+            <dl className="space-y-4 px-5 py-5 text-[15px]">
               <div>
-                <dt className="text-sm text-mist">E-mail</dt>
+                <dt className="text-sm text-steel">E-mail</dt>
                 <dd className="mt-1">
-                  <a href={`mailto:${company.email}`} className="focus-ring font-semibold hover:text-accent">
+                  <a href={`mailto:${company.email}`} className="focus-ring font-semibold hover:text-accent-ink">
                     {company.email}
                   </a>
                 </dd>
               </div>
               <div>
-                <dt className="text-sm text-mist">Adresse</dt>
+                <dt className="text-sm text-steel">Adresse</dt>
                 <dd className="mt-1 not-italic">
                   {company.name}
                   <br />
                   {company.address.street}
                   <br />
                   {company.address.postalCode} {company.address.city}, {company.address.region}
-                  <span className="mt-1 block text-xs text-accent">TODO: vérifier adresse officielle avant mise en production</span>
+                  <span className="mt-1 block text-xs text-accent-ink">TODO: vérifier adresse officielle avant mise en production</span>
                 </dd>
               </div>
               <div>
-                <dt className="text-sm text-mist">Horaires</dt>
+                <dt className="text-sm text-steel">Horaires</dt>
                 <dd className="mt-1">
                   {company.hours.label}, {company.hours.weekdays}
-                  <span className="mt-1 block text-xs text-accent">TODO: VALIDATION CLIENT : horaires à confirmer</span>
+                  <span className="mt-1 block text-xs text-accent-ink">TODO: VALIDATION CLIENT : horaires à confirmer</span>
                 </dd>
               </div>
             </dl>
@@ -97,7 +97,7 @@ export default function ContactPage() {
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="focus-ring flex items-center justify-between bg-accent px-7 py-4 text-[15px] font-bold text-ink transition-colors hover:bg-paper"
+              className="focus-ring flex items-center justify-between bg-accent px-5 py-4 text-[15px] font-bold text-ink transition-colors hover:bg-ink hover:text-paper"
             >
               Voir l&apos;itinéraire <span aria-hidden="true">→</span>
             </a>

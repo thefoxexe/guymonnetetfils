@@ -190,9 +190,11 @@ dérivée du logo.
   et `ink` (noir).
 - **Chiffres phares** (`StatGrid`) : grandes valeurs condensées dans une
   grille à filets noirs, colonnes choisies pour éviter toute case vide.
-- **Heros** : `PageHero` (pages de premier niveau, fond noir), hero photo
-  plein cadre pour les domaines, hero scindé texte/photo pour les
-  réalisations.
+- **Site lumineux** : fonds blanc et crème, jaune pour les appels à
+  l'action ; seuls le header (bouton téléphone) et le footer restent noirs.
+- **Heros** : `PageHero` sur toutes les pages, texte et boutons à gauche,
+  photo à droite. Sur téléphone, le texte et les boutons passent avant la
+  photo pour être visibles sans faire défiler.
 - **Emplacements photo** (`Photo`, `src/lib/photos.ts`) : chaque photo du
   site a un emplacement nommé. Tant qu'aucun fichier n'existe, l'emplacement
   affiche « Photo à définir », la photo attendue et le nom du fichier. Une

@@ -27,24 +27,23 @@ export default function RealisationsPage() {
       <BrandBand items={categories} />
 
       <section>
-        <div className="container-wide py-20 sm:py-24">
+        <div className="container-wide py-14 sm:py-20 lg:py-24">
           <ProjectFilter projects={projects} />
         </div>
       </section>
 
-      <section className="bg-ink text-paper">
-        <div className="container-wide py-20 sm:py-24">
+      <section className="bg-offwhite">
+        <div className="container-wide py-14 sm:py-20 lg:py-24">
           <SectionHeading
             eyebrow="À venir"
             title="D'autres chantiers à découvrir prochainement"
             description="Fiches en préparation."
-            tone="dark"
           />
-          <ol className="mt-12 grid grid-cols-1 border-l border-t border-white/15 sm:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-8 sm:mt-12 grid grid-cols-1 border-l border-t border-line bg-paper sm:grid-cols-2 lg:grid-cols-3">
             {futureProjects.map((name, index) => (
-              <li key={name} className="flex items-baseline gap-4 border-b border-r border-white/15 px-6 py-5">
-                <span className="font-display text-sm font-extrabold text-accent">{String(index + 1).padStart(2, "0")}</span>
-                <span className="font-display text-lg font-bold">{name}</span>
+              <li key={name} className="flex items-baseline gap-4 border-b border-r border-line px-4 py-3.5 sm:px-6 sm:py-5">
+                <span className="font-display text-sm font-extrabold text-accent-ink">{String(index + 1).padStart(2, "0")}</span>
+                <span className="font-display text-base font-bold sm:text-lg">{name}</span>
               </li>
             ))}
           </ol>

@@ -23,7 +23,7 @@ export default function ServicesPage() {
       />
       <BrandBand items={companyBandItems} />
       <section>
-        <div className="container-wide py-20 sm:py-24">
+        <div className="container-wide py-14 sm:py-20 lg:py-24">
           <ServiceGrid services={services} />
         </div>
       </section>
