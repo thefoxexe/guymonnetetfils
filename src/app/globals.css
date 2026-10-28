@@ -112,3 +112,26 @@ body {
 .hatch-dark {
   background-image: repeating-linear-gradient(135deg, #23262b 0 10px, #1d2023 10px 20px);
 }
+
+/* Hero sur vraie photo : boutons contour en blanc. */
+.hero-dark .btn-outline {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+.hero-dark .btn-outline:hover {
+  background-color: #ffffff;
+  color: #181a1b;
+}
+
+/* Léger zoom lent de la photo de fond du hero à l'arrivée sur la page. */
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.hero-zoom {
+  animation: hero-zoom 2.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}

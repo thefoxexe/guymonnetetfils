@@ -61,6 +61,7 @@ export default function HomePage() {
         background={{
           slot: slots.homeCover,
           label: "Grande photo d'accueil : un camion ou une machine Guy Monnet & Fils sur un chantier",
+          position: "object-[center_62%]",
         }}
       />
 

@@ -20,7 +20,7 @@ const base =
 const variants: Record<NonNullable<ButtonProps["variant"]>, string> = {
   primary: "bg-accent text-ink hover:bg-accent-dark",
   dark: "bg-ink text-paper hover:bg-anthracite",
-  outline: "border-2 border-ink text-ink hover:bg-ink hover:text-paper",
+  outline: "btn-outline border-2 border-ink text-ink hover:bg-ink hover:text-paper",
   "outline-light": "border-2 border-paper text-paper hover:bg-paper hover:text-ink",
   ghost: "!min-h-0 !px-0 !py-1 text-ink underline decoration-accent decoration-[3px] underline-offset-[6px] hover:text-accent-ink",
 };
