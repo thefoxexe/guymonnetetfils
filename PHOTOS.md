@@ -50,10 +50,10 @@ fiche et tuiles) et jusqu'à 8 photos pour le carrousel (`-1` à `-8`).
 
 ## Vidéos
 
-Les vidéos des pages Déneigement, Terrassement et Terrain de football
-d'Isérables viennent d'Instagram. Instagram ne permet pas la lecture
-automatique : pour qu'une vidéo se lance toute seule (sans le son, en boucle),
-déposer le fichier vidéo sous le nom de son emplacement :
+Les vidéos sont hébergées sur le site (pas de lecteur Instagram, pour ne pas
+afficher son interface). Elles se lancent toutes seules sans le son, en
+boucle, quand elles arrivent à l'écran ; un petit bouton active le son.
+Tant que le fichier manque, l'emplacement affiche « Vidéo à définir ».
 
 | Fichier | Page |
 |---|---|

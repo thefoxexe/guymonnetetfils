@@ -22,7 +22,10 @@ export type Project = {
   heroImageLabel: string;
   /** Cadrage de la photo de couverture dans l'en-tête (classe Tailwind object-position). */
   coverPosition?: string;
-  /** Vidéo du chantier (reel Instagram ; un fichier chantier-<slug>-video.mp4 la remplace et se lit tout seul). */
+  /**
+   * Vidéo du chantier : le fichier chantier-<slug>-video.mp4 (public/photos/) ;
+   * `instagram` indique le reel d'origine, pour retrouver le fichier.
+   */
   video?: { instagram: string; title: string };
   context: string[];
   works: string[];

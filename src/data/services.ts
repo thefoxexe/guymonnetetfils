@@ -23,7 +23,10 @@ export type Service = {
   referencesNote?: string;
   relatedServices: string[];
   relatedProjects?: string[];
-  /** Vidéo mise en avant sur la fiche (reel Instagram, chargé seulement au clic). */
+  /**
+   * Vidéo de la fiche : le fichier domaine-<slug>-video.mp4 (public/photos/) ;
+   * `instagram` indique le reel d'origine, pour retrouver le fichier.
+   */
   video?: { instagram: string; title: string };
   zoneIntervention: string;
 };

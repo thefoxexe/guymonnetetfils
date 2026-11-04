@@ -5,7 +5,7 @@ import { Button } from "@/components/Button";
 import { CtaBand } from "@/components/CtaBand";
 import { JsonLd } from "@/components/JsonLd";
 import { Photo } from "@/components/Photo";
-import { InstagramVideo } from "@/components/InstagramVideo";
+import { SiteVideo } from "@/components/SiteVideo";
 import { ProjectGrid } from "@/components/ProjectCard";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
@@ -147,11 +147,11 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </div>
           {service.video ? (
             <Reveal delay={120}>
-              <InstagramVideo
-                url={service.video.instagram}
-                title={service.video.title}
+              <SiteVideo
                 file={videoSrc(slots.serviceVideo(service.slug))}
                 poster={photoSrc(slots.serviceVideo(service.slug))}
+                slot={slots.serviceVideo(service.slug)}
+                title={service.video.title}
               />
             </Reveal>
           ) : (
