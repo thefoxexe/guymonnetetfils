@@ -2,15 +2,17 @@ import manifest from "@/data/photos-manifest.json";
 
 /**
  * Emplacements photo du site. Chaque emplacement a un nom fixe ; une photo
- * déposée dans `public/photos/` sous ce nom (extension libre : .jpg, .png,
- * .webp, .avif) s'affiche automatiquement au build suivant. Sans photo,
+ * déposée dans `public/photos/` sous ce nom, à la racine ou dans un
+ * sous-dossier (extension libre : .jpg, .png, .webp, .avif), s'affiche
+ * automatiquement au build suivant. Sans photo,
  * l'emplacement affiche « Photo à définir » avec le nom de fichier attendu.
  * Liste complète des emplacements : PHOTOS.md.
  */
 const files = manifest as string[];
 
 export function photoSrc(slot: string): string | undefined {
-  const file = files.find((name) => name.replace(/\.[^.]+$/, "") === slot);
+  // Le fichier peut être rangé dans un sous-dossier : seul son nom compte.
+  const file = files.find((path) => path.replace(/^.*\//, "").replace(/\.[^.]+$/, "") === slot);
   return file ? `/photos/${file}` : undefined;
 }
 

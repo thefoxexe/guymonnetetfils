@@ -20,6 +20,8 @@ export type Project = {
   seoDescription: string;
   /** Photo de couverture attendue (texte de l'emplacement « Photo à définir » et texte alternatif). */
   heroImageLabel: string;
+  /** Cadrage de la photo de couverture dans l'en-tête (classe Tailwind object-position). */
+  coverPosition?: string;
   context: string[];
   works: string[];
   stats?: ProjectStat[];
@@ -85,6 +87,7 @@ export const projects: Project[] = [
     seoDescription:
       "Terrain de football d'Isérables : travaux de terrassement et d'enrochement réalisés par Guy Monnet & Fils SA.",
     heroImageLabel: "Vue d'ensemble du chantier du terrain de football d'Isérables",
+    coverPosition: "object-[center_58%]",
     context: ["? Description du chantier à compléter."],
     works: ["Terrassement : ?", "Enrochement : ?", "? Autres travaux à compléter"],
     stats: [

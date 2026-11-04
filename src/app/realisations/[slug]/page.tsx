@@ -77,7 +77,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               <span
                 key={label}
                 className={`px-2.5 py-1 font-display text-[11px] font-extrabold uppercase tracking-[0.1em] sm:text-xs ${
-                  i === 0 ? "bg-accent text-ink" : "border border-ink/25 text-ink"
+                  i === 0 ? "bg-accent text-ink" : "border border-ink/25 text-ink [.hero-dark_&]:border-white/50 [.hero-dark_&]:text-paper"
                 }`}
               >
                 {label}
@@ -88,20 +88,20 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         title={project.title}
         intro={project.summary}
         meta={
-          <dl className="flex flex-wrap gap-x-8 gap-y-3 border-t border-ink/15 pt-4">
+          <dl className="flex flex-wrap gap-x-8 gap-y-3 border-t border-ink/15 pt-4 [.hero-dark_&]:border-white/25 [.hero-dark_&]:text-paper">
             <div>
-              <dt className="text-[11px] uppercase tracking-[0.1em] text-steel">Lieu</dt>
+              <dt className="text-[11px] uppercase tracking-[0.1em] text-steel [.hero-dark_&]:text-mist">Lieu</dt>
               <dd className="mt-1 font-semibold">{project.location}</dd>
             </div>
             {project.period ?? project.year ? (
               <div>
-                <dt className="text-[11px] uppercase tracking-[0.1em] text-steel">Période</dt>
+                <dt className="text-[11px] uppercase tracking-[0.1em] text-steel [.hero-dark_&]:text-mist">Période</dt>
                 <dd className="mt-1 font-semibold">{project.period ?? project.year}</dd>
               </div>
             ) : null}
           </dl>
         }
-        background={{ slot: slots.projectCover(project.slug), label: project.heroImageLabel }}
+        background={{ slot: slots.projectCover(project.slug), label: project.heroImageLabel, position: project.coverPosition }}
       />
 
       {/* 2. BANDEAU DE MARQUE */}

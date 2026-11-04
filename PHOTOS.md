@@ -7,7 +7,10 @@ emplacement affiche « Photo à définir » avec le nom du fichier attendu.
 
 1. Nommer la photo exactement comme l'emplacement ci-dessous (l'extension
    est libre : `.jpg`, `.jpeg`, `.png`, `.webp` ou `.avif`).
-2. La déposer dans `public/photos/`.
+2. La déposer dans `public/photos/`, de préférence dans un sous-dossier par
+   chantier ou par page (par exemple
+   `public/photos/chantier-terrain-de-football-iserables/`). Seul le nom du
+   fichier compte, le dossier sert à garder les photos rangées.
 3. Relancer `npm run build` (ou laisser Netlify redéployer) : la photo
    remplace automatiquement l'emplacement. Aucun code à modifier.
 
