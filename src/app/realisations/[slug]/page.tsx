@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { BrandBand } from "@/components/BrandBand";
 import { CtaBand } from "@/components/CtaBand";
+import { Gallery } from "@/components/Gallery";
 import { Photo } from "@/components/Photo";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
@@ -25,20 +26,6 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
     description: project.seoDescription,
     path: `/realisations/${project.slug}/`,
   });
-}
-
-/**
- * Mosaïque : la première photo occupe 2×2 cases, les suivantes 1 case. La
- * dernière s'élargit si besoin pour que la dernière ligne soit toujours pleine
- * (grille de 2 colonnes en tablette, 3 en desktop).
- */
-function mosaicSpan(index: number, count: number) {
-  if (index === 0) return count === 1 ? "sm:col-span-2 lg:col-span-3" : "sm:col-span-2 sm:row-span-2";
-  if (index !== count - 1) return "";
-  const sm = (count - 1) % 2 === 1 ? "sm:col-span-2" : "";
-  const leftover = (count - 3) % 3;
-  const lg = count === 2 ? "lg:col-span-1" : leftover === 1 ? "lg:col-span-3" : leftover === 2 ? "lg:col-span-2" : "lg:col-span-1";
-  return `${sm} ${lg}`;
 }
 
 export default function ProjectPage({ params }: { params: { slug: string } }) {
@@ -193,22 +180,11 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         <div className="container-wide py-14 sm:py-20 lg:py-24">
           <SectionHeading title="Photos du chantier" />
           {gallery.length > 0 ? (
-            <div className="mt-8 sm:mt-12 grid auto-rows-[240px] grid-cols-1 gap-3 sm:auto-rows-[260px] sm:grid-cols-2 lg:auto-rows-[300px] lg:grid-cols-3">
-              {gallery.map((image, i) => (
-                <Reveal
-                  key={image.slot}
-                  delay={(i % 3) * 60}
-                  className={`group relative overflow-hidden bg-anthracite ${mosaicSpan(i, gallery.length)}`}
-                >
-                  <Photo
-                    slot={image.slot}
-                    label={`${project.title}, photo ${i + 1}`}
-                    aspect="fill"
-                    sizes={i === 0 ? "(max-width: 640px) 100vw, 66vw" : "(max-width: 640px) 100vw, 33vw"}
-                    imageClassName="transition-transform duration-500 ease-editorial group-hover:scale-105"
-                  />
-                </Reveal>
-              ))}
+            <div className="mt-8 sm:mt-12">
+              <Gallery
+                title={project.title}
+                images={gallery.map((image, i) => ({ src: image.src, alt: `${project.title}, photo ${i + 1}` }))}
+              />
             </div>
           ) : (
             <div className="mt-8 sm:mt-12 grid grid-cols-1 gap-3 sm:grid-cols-3">
