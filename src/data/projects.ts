@@ -22,11 +22,6 @@ export type Project = {
   heroImageLabel: string;
   /** Cadrage de la photo de couverture dans l'en-tête (classe Tailwind object-position). */
   coverPosition?: string;
-  /**
-   * Vidéo du chantier : le fichier chantier-<slug>-video.mp4 (public/photos/) ;
-   * `instagram` indique le reel d'origine, pour retrouver le fichier.
-   */
-  video?: { instagram: string; title: string };
   context: string[];
   works: string[];
   stats?: ProjectStat[];
@@ -93,10 +88,6 @@ export const projects: Project[] = [
       "Terrain de football d'Isérables : travaux de terrassement et d'enrochement réalisés par Guy Monnet & Fils SA.",
     heroImageLabel: "Vue d'ensemble du chantier du terrain de football d'Isérables",
     coverPosition: "object-[center_58%]",
-    video: {
-      instagram: "https://www.instagram.com/p/DZEyoYxtkxW/",
-      title: "Le chantier du terrain de football d'Isérables en vidéo",
-    },
     context: ["? Description du chantier à compléter."],
     works: ["Terrassement : ?", "Enrochement : ?", "? Autres travaux à compléter"],
     stats: [

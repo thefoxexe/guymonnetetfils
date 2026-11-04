@@ -12,8 +12,7 @@ import { projects, getProjectBySlug } from "@/data/projects";
 import { projectDomains } from "@/lib/domains";
 import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/seo";
-import { photoSrc, projectGallery, slots, videoSrc } from "@/lib/photos";
-import { SiteVideo } from "@/components/SiteVideo";
+import { projectGallery, slots } from "@/lib/photos";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -201,21 +200,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           )}
         </div>
       </section>
-
-      {/* VIDÉO DU CHANTIER : seule, au milieu de l'écran */}
-      {project.video ? (
-        <section>
-          <div className="container-wide flex justify-center pb-14 sm:pb-20 lg:pb-24">
-            <SiteVideo
-              variant="feature"
-              file={videoSrc(slots.projectVideo(project.slug))}
-              poster={photoSrc(slots.projectVideo(project.slug))}
-              slot={slots.projectVideo(project.slug)}
-              title={project.video.title}
-            />
-          </div>
-        </section>
-      ) : null}
 
       {/* 6. DOMAINES MOBILISÉS */}
       {mobilizedServices.length > 0 ? (

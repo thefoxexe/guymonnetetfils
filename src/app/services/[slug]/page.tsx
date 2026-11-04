@@ -5,7 +5,6 @@ import { Button } from "@/components/Button";
 import { CtaBand } from "@/components/CtaBand";
 import { JsonLd } from "@/components/JsonLd";
 import { Photo } from "@/components/Photo";
-import { SiteVideo } from "@/components/SiteVideo";
 import { ProjectGrid } from "@/components/ProjectCard";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
@@ -16,7 +15,7 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { services, getServiceBySlug } from "@/data/services";
 import { projects } from "@/data/projects";
 import { buildMetadata, serviceJsonLd } from "@/lib/seo";
-import { photoSrc, serviceIllustrations, slots, videoSrc } from "@/lib/photos";
+import { serviceIllustrations, slots } from "@/lib/photos";
 
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
@@ -68,10 +67,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       ? service.savoirFaire[0]!.split("→").map((step) => step.trim())
       : null;
 
-  // Zone d'intervention et contact : sous le texte quand il y a une vidéo à
-  // droite, sinon dans la colonne de droite.
   const zone = (
-    <div className={`grid max-w-3xl grid-cols-1 gap-4 ${service.video ? "sm:grid-cols-[minmax(0,1fr)_auto] sm:items-stretch" : ""}`}>
+    <div className="grid grid-cols-1 gap-4">
       <div className="border-2 border-ink">
         <p className="flex items-center justify-between bg-ink px-5 py-3.5 font-display text-sm font-extrabold uppercase tracking-[0.12em] text-paper">
           Zone d&apos;intervention
@@ -119,13 +116,9 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       {/* 2. BANDEAU DE MARQUE */}
       <BrandBand items={service.bandItems} />
 
-      {/* 3. INTRO + ZONE D'INTERVENTION (+ VIDÉO) */}
+      {/* 3. INTRO + ZONE D'INTERVENTION */}
       <section>
-        <div
-          className={`container-wide grid grid-cols-1 gap-10 py-14 sm:py-20 lg:gap-16 lg:py-28 ${
-            service.video ? "lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start" : "lg:grid-cols-[minmax(0,1fr)_340px]"
-          }`}
-        >
+        <div className="container-wide grid grid-cols-1 gap-10 py-14 sm:py-20 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-16 lg:py-28">
           <div className="flex min-w-0 flex-col gap-10">
             <Reveal className="flex flex-col gap-5">
               <SectionLabel>Présentation</SectionLabel>
@@ -143,20 +136,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 </p>
               ))}
             </Reveal>
-            {service.video ? zone : null}
           </div>
-          {service.video ? (
-            <Reveal delay={120}>
-              <SiteVideo
-                file={videoSrc(slots.serviceVideo(service.slug))}
-                poster={photoSrc(slots.serviceVideo(service.slug))}
-                slot={slots.serviceVideo(service.slug)}
-                title={service.video.title}
-              />
-            </Reveal>
-          ) : (
-            <aside className="min-w-0 self-start">{zone}</aside>
-          )}
+          <aside className="min-w-0 self-start">{zone}</aside>
         </div>
       </section>
 

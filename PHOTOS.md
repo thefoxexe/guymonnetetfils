@@ -48,22 +48,6 @@ fiche et tuiles) et jusqu'à 8 photos pour le carrousel (`-1` à `-8`).
 | Cours d'eau | `domaine-cours-eau-couverture` | `domaine-cours-eau-1` à `-3` | Aménagement de berges ou ouvrage en rivière |
 | Sentiers pédestres | `domaine-sentiers-pedestres-couverture` | `domaine-sentiers-pedestres-1` à `-3` | Sentier pédestre en montagne |
 
-## Vidéos
-
-Les vidéos sont hébergées sur le site (pas de lecteur Instagram, pour ne pas
-afficher son interface). Elles se lancent toutes seules sans le son, en
-boucle, quand elles arrivent à l'écran ; un petit bouton active le son.
-Tant que le fichier manque, l'emplacement affiche « Vidéo à définir ».
-
-| Fichier | Page |
-|---|---|
-| `domaine-deneigement-video.mp4` | Déneigement |
-| `domaine-terrassement-video.mp4` | Terrassement |
-| `chantier-terrain-de-football-iserables-video.mp4` | Terrain de football d'Isérables |
-
-Format conseillé : vertical 9:16, 720 × 1280, MP4 (H.264), 20 à 30 secondes,
-moins de 5 Mo. Une image du même nom (`.jpg`) sert d'aperçu avant la lecture.
-
 ## Réalisations
 
 Pour chaque chantier : une photo de couverture et une galerie

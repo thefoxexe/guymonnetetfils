@@ -23,11 +23,6 @@ export type Service = {
   referencesNote?: string;
   relatedServices: string[];
   relatedProjects?: string[];
-  /**
-   * Vidéo de la fiche : le fichier domaine-<slug>-video.mp4 (public/photos/) ;
-   * `instagram` indique le reel d'origine, pour retrouver le fichier.
-   */
-  video?: { instagram: string; title: string };
   zoneIntervention: string;
 };
 
@@ -97,10 +92,6 @@ export const services: Service[] = [
       "Terrassement pour collectivités publiques et clients privés",
       "Évacuation et gestion des matériaux de terrassement",
     ],
-    video: {
-      instagram: "https://www.instagram.com/reel/DWQqyUhjQXA/",
-      title: "Terrassement avec Guy Monnet & Fils",
-    },
     references: [
       { label: "Terrain de football d'Isérables", location: "Isérables", projectSlug: "terrain-de-football-iserables" },
       { label: "Lotissement Matin St-Laurent", location: "La Tzoumaz" },
@@ -334,10 +325,6 @@ export const services: Service[] = [
       "Déneigement de la route cantonale de Riddes à La Tzoumaz",
       "Déneigement pour particuliers",
     ],
-    video: {
-      instagram: "https://www.instagram.com/p/DRiJXzpjQdV/",
-      title: "Déneigement avec Guy Monnet & Fils",
-    },
     relatedServices: ["transport", "terrassement"],
     zoneIntervention: "Riddes, La Tzoumaz, Isérables et la route cantonale de Riddes à La Tzoumaz.",
   },

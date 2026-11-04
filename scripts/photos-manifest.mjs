@@ -10,8 +10,7 @@ import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dir = join(root, "public", "photos");
-// Photos et vidéos (une vidéo MP4/WebM se lit automatiquement, sans le son).
-const extensions = /\.(webp|jpe?g|png|avif|mp4|webm)$/i;
+const extensions = /\.(webp|jpe?g|png|avif)$/i;
 
 // Chemins relatifs à public/photos/, avec « / » comme séparateur.
 function list(folder, prefix = "") {
@@ -25,4 +24,4 @@ function list(folder, prefix = "") {
 const files = existsSync(dir) ? list(dir).sort() : [];
 
 writeFileSync(join(root, "src", "data", "photos-manifest.json"), JSON.stringify(files, null, 2) + "\n");
-console.log(`photos-manifest : ${files.length} fichier(s) trouvé(s) dans public/photos/`);
+console.log(`photos-manifest : ${files.length} photo(s) trouvée(s) dans public/photos/`);
