@@ -72,7 +72,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       {/* 1. HERO */}
       <PageHero
         crumbs={[
-          { name: "Services", path: "/services/" },
+          { name: "Prestations", path: "/services/" },
           { name: service.name, path: `/services/${service.slug}/` },
         ]}
         eyebrow="Domaine d'activité"

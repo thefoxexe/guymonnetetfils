@@ -93,6 +93,7 @@ export const services: Service[] = [
       "Évacuation et gestion des matériaux de terrassement",
     ],
     references: [
+      { label: "Terrain de football d'Isérables", location: "Isérables", projectSlug: "terrain-de-football-iserables" },
       { label: "Lotissement Matin St-Laurent", location: "La Tzoumaz" },
       { label: "Immeuble Les Cigalines", location: "Riddes", note: "référence ASE SA" },
       { label: "Immeuble Artemis", location: "Ardon", note: "référence ASE SA" },
@@ -105,7 +106,7 @@ export const services: Service[] = [
       { label: "Immeuble Le Chardon Bleu", location: "Nendaz" },
     ],
     relatedServices: ["genie-civil", "transport", "amenagements-exterieurs"],
-    relatedProjects: ["station-phytosanitaire-saxon", "chambre-recolte-des-eaux-leytron", "skatepark-riddes"],
+    relatedProjects: ["terrain-de-football-iserables", "station-phytosanitaire-saxon", "chambre-recolte-des-eaux-leytron", "skatepark-riddes"],
     zoneIntervention: "Riddes, La Tzoumaz, Isérables, Leytron, Ardon, Nendaz et le reste du Valais.",
   },
   {
@@ -246,7 +247,7 @@ export const services: Service[] = [
       "Fourniture et pose de terre végétale",
     ],
     relatedServices: ["terrassement", "revalorisation-materiaux", "maconnerie"],
-    relatedProjects: ["station-phytosanitaire-saxon"],
+    relatedProjects: ["terrain-de-football-iserables", "station-phytosanitaire-saxon"],
     zoneIntervention: "Riddes et l'ensemble du Valais.",
   },
   {

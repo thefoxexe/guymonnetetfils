@@ -3,14 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { company } from "@/data/company";
-import { services } from "@/data/services";
 import { IconMail, IconPhone } from "./icons";
 
 const navLinks = [
   { label: "Entreprise", href: "/entreprise/" },
-  { label: "Services", href: "/services/", hasMega: true },
+  { label: "Prestations", href: "/services/" },
   { label: "Réalisations", href: "/realisations/" },
   { label: "Équipe", href: "/equipe/" },
   { label: "Contact", href: "/contact/" },
@@ -19,12 +18,9 @@ const navLinks = [
 export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [megaOpen, setMegaOpen] = useState(false);
-  const megaWrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMobileOpen(false);
-    setMegaOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -38,7 +34,6 @@ export function Header() {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setMobileOpen(false);
-        setMegaOpen(false);
       }
     }
     window.addEventListener("keydown", onKeyDown);
@@ -47,12 +42,6 @@ export function Header() {
 
   function isActive(href: string) {
     return pathname === href || pathname.startsWith(href);
-  }
-
-  function handleMegaBlur(event: React.FocusEvent<HTMLDivElement>) {
-    if (!megaWrapRef.current?.contains(event.relatedTarget as Node)) {
-      setMegaOpen(false);
-    }
   }
 
   return (
@@ -70,70 +59,22 @@ export function Header() {
           />
         </Link>
 
-        <div
-          ref={megaWrapRef}
-          className="relative hidden lg:block"
-          onMouseEnter={() => setMegaOpen(true)}
-          onMouseLeave={() => setMegaOpen(false)}
-          onBlur={handleMegaBlur}
-        >
-          <nav aria-label="Navigation principale" className="flex items-center">
-            {navLinks.map((link) =>
-              link.hasMega ? (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  aria-expanded={megaOpen}
-                  aria-haspopup="true"
-                  onFocus={() => setMegaOpen(true)}
-                  className={`focus-ring relative whitespace-nowrap px-2.5 py-2 text-sm font-semibold uppercase tracking-[0.06em] hover:text-accent-ink xl:px-4 ${
-                    isActive(link.href)
-                      ? "text-accent-ink after:absolute after:inset-x-2.5 after:-bottom-0.5 after:h-[3px] after:bg-accent xl:after:inset-x-4"
-                      : "text-ink"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onFocus={() => setMegaOpen(false)}
-                  className={`focus-ring relative whitespace-nowrap px-2.5 py-2 text-sm font-semibold uppercase tracking-[0.06em] hover:text-accent-ink xl:px-4 ${
-                    isActive(link.href)
-                      ? "text-accent-ink after:absolute after:inset-x-2.5 after:-bottom-0.5 after:h-[3px] after:bg-accent xl:after:inset-x-4"
-                      : "text-ink"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              )
-            )}
-          </nav>
-
-          {megaOpen ? (
-            <div className="absolute left-1/2 top-full w-[min(820px,82vw)] -translate-x-1/2 animate-mega-in border-t-4 border-accent bg-paper shadow-2xl">
-              <div className="grid grid-cols-3 gap-px bg-line p-px">
-                {services.map((service) => (
-                  <Link
-                    key={service.slug}
-                    href={`/services/${service.slug}/`}
-                    className="focus-ring group flex items-center gap-3 bg-paper px-4 py-3.5 text-ink transition-colors duration-150 hover:bg-accent"
-                  >
-                    <span className="h-2 w-2 shrink-0 bg-accent group-hover:bg-ink" aria-hidden="true" />
-                    <span className="font-display text-[15px] font-bold uppercase">{service.name}</span>
-                  </Link>
-                ))}
-                <Link
-                  href="/services/"
-                  className="focus-ring flex items-center justify-between gap-3 bg-ink px-4 py-3.5 font-display text-[15px] font-bold uppercase text-paper hover:bg-anthracite"
-                >
-                  Tous les domaines <span aria-hidden="true" className="text-accent">→</span>
-                </Link>
-              </div>
-            </div>
-          ) : null}
-        </div>
+        <nav aria-label="Navigation principale" className="hidden items-center lg:flex">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              aria-current={isActive(link.href) ? "page" : undefined}
+              className={`focus-ring relative whitespace-nowrap px-2.5 py-2 text-sm font-semibold uppercase tracking-[0.06em] transition-colors hover:text-accent-ink xl:px-4 ${
+                isActive(link.href)
+                  ? "text-accent-ink after:absolute after:inset-x-2.5 after:-bottom-0.5 after:h-[3px] after:bg-accent xl:after:inset-x-4"
+                  : "text-ink"
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
 
         <div className="hidden shrink-0 lg:flex">
           <a

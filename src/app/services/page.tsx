@@ -6,7 +6,7 @@ import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Nos services | Guy Monnet & Fils SA",
+  title: "Nos prestations | Guy Monnet & Fils SA",
   description:
     "11 domaines d'activité : transport, terrassement, génie civil, maçonnerie, aménagements extérieurs, démolition et plus, par Guy Monnet & Fils en Valais.",
   path: "/services/",
@@ -16,8 +16,8 @@ export default function ServicesPage() {
   return (
     <>
       <PageHero
-        crumbs={[{ name: "Services", path: "/services/" }]}
-        eyebrow="Nos services"
+        crumbs={[{ name: "Prestations", path: "/services/" }]}
+        eyebrow="Nos prestations"
         title={`${services.length} domaines d'activité`}
         intro="Du transport de matériaux aux sentiers de montagne, voici tout ce que nous faisons."
       />

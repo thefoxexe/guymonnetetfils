@@ -114,7 +114,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             <SectionHeading
               title="Chiffres phares"
               action={
-                project.period ? (
+                project.period && project.period !== "?" ? (
                   <p className="max-w-sm text-[15px] leading-relaxed text-steel">
                     Quantités mises en œuvre, {project.period.toLowerCase()}.
                   </p>
