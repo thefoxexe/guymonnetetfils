@@ -110,7 +110,6 @@ export default function EntreprisePage() {
                   href={`/services/${item.slug}/`}
                   className="focus-ring group flex h-full flex-col justify-between gap-4 p-5 transition-colors sm:min-h-[200px] sm:p-7 duration-300 ease-editorial hover:bg-accent"
                 >
-                  <span className="h-1 w-10 bg-accent transition-colors group-hover:bg-ink" aria-hidden="true" />
                   <span>
                     <span className="stretch-85 block font-display text-[24px] font-extrabold uppercase leading-none sm:text-[28px]">
                       {item.title}

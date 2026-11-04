@@ -12,7 +12,8 @@ import { projects, getProjectBySlug } from "@/data/projects";
 import { projectDomains } from "@/lib/domains";
 import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/seo";
-import { projectGallery, slots } from "@/lib/photos";
+import { photoSrc, projectGallery, slots, videoSrc } from "@/lib/photos";
+import { InstagramVideo } from "@/components/InstagramVideo";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -147,30 +148,42 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             </Reveal>
           </div>
 
-          <aside className="min-w-0 flex-[1_1_300px] self-start lg:sticky lg:top-32">
-            <div className="border-2 border-ink bg-paper">
-              <p className="flex items-center justify-between bg-ink px-5 py-3.5 font-display text-sm font-extrabold uppercase tracking-[0.12em] text-paper">
-                Fiche technique
-                <span className="h-3.5 w-3.5 bg-accent" aria-hidden="true" />
-              </p>
-              <dl className="px-5 py-1">
-                {facts.map((fact, i) => (
-                  <div
-                    key={fact.label}
-                    className={`grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-4 py-3.5 text-sm ${i < facts.length - 1 ? "border-b border-line" : ""}`}
-                  >
-                    <dt className="text-steel">{fact.label}</dt>
-                    <dd className="text-right font-semibold">{fact.value}</dd>
-                  </div>
-                ))}
-              </dl>
+          <aside className={`flex min-w-0 flex-[1_1_300px] flex-col gap-6 self-start ${project.video ? "" : "lg:sticky lg:top-32"}`}>
+            {project.video ? (
+              <Reveal delay={120}>
+                <InstagramVideo
+                  url={project.video.instagram}
+                  title={project.video.title}
+                  file={videoSrc(slots.projectVideo(project.slug))}
+                  poster={photoSrc(slots.projectVideo(project.slug))}
+                />
+              </Reveal>
+            ) : null}
+            <div>
+              <div className="border-2 border-ink bg-paper">
+                <p className="flex items-center justify-between bg-ink px-5 py-3.5 font-display text-sm font-extrabold uppercase tracking-[0.12em] text-paper">
+                  Fiche technique
+                  <span className="h-3.5 w-3.5 bg-accent" aria-hidden="true" />
+                </p>
+                <dl className="px-5 py-1">
+                  {facts.map((fact, i) => (
+                    <div
+                      key={fact.label}
+                      className={`grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-4 py-3.5 text-sm ${i < facts.length - 1 ? "border-b border-line" : ""}`}
+                    >
+                      <dt className="text-steel">{fact.label}</dt>
+                      <dd className="text-right font-semibold">{fact.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+              <Link
+                href="/contact/"
+                className="focus-ring mt-4 flex items-center justify-between bg-accent px-6 py-4 text-[15px] font-bold text-ink transition-colors hover:bg-ink hover:text-paper"
+              >
+                Nous contacter <span aria-hidden="true">→</span>
+              </Link>
             </div>
-            <Link
-              href="/contact/"
-              className="focus-ring mt-4 flex items-center justify-between bg-accent px-6 py-4 text-[15px] font-bold text-ink transition-colors hover:bg-ink hover:text-paper"
-            >
-              Nous contacter <span aria-hidden="true">→</span>
-            </Link>
           </aside>
         </div>
       </section>

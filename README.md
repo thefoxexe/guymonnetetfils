@@ -185,8 +185,8 @@ dérivée du logo.
   capitales. Texte courant en Inter.
 - **Bandeau de marque** (`BrandBand`) : le liseré pointillé noir/jaune et
   le bandeau jaune « ■ MOT-CLÉ ■ MOT-CLÉ » du logo, placé sous chaque hero.
-- **Titres de section** (`SectionHeading`) : court filet jaune puis titre
-  condensé, sans numérotation ; alternance fond blanc et `offwhite`.
+- **Titres de section** (`SectionHeading`) : titre condensé, sans
+  numérotation ni décoration ; alternance fond blanc et `offwhite`.
 - **Animations** : apparition progressive au scroll (`Reveal`) et chiffres
   qui montent de 0 à leur valeur (`CountUp`) ; désactivées si l'appareil
   demande de réduire les animations.

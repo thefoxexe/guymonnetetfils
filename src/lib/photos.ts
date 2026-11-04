@@ -10,10 +10,22 @@ import manifest from "@/data/photos-manifest.json";
  */
 const files = manifest as string[];
 
-export function photoSrc(slot: string): string | undefined {
-  // Le fichier peut être rangé dans un sous-dossier : seul son nom compte.
-  const file = files.find((path) => path.replace(/^.*\//, "").replace(/\.[^.]+$/, "") === slot);
+const imageExt = /\.(webp|jpe?g|png|avif)$/i;
+const videoExt = /\.(mp4|webm)$/i;
+
+// Le fichier peut être rangé dans un sous-dossier : seul son nom compte.
+function find(slot: string, ext: RegExp): string | undefined {
+  const file = files.find((path) => ext.test(path) && path.replace(/^.*\//, "").replace(/\.[^.]+$/, "") === slot);
   return file ? `/photos/${file}` : undefined;
+}
+
+export function photoSrc(slot: string): string | undefined {
+  return find(slot, imageExt);
+}
+
+/** Vidéo déposée sous le nom de l'emplacement (.mp4 ou .webm), lue automatiquement sans le son. */
+export function videoSrc(slot: string): string | undefined {
+  return find(slot, videoExt);
 }
 
 /** Nombre maximal de photos de galerie par réalisation. */
@@ -30,7 +42,8 @@ export const slots = {
   teamDirector: "equipe-frederic-monnet",
   serviceCover: (slug: string) => `domaine-${slug}-couverture`,
   serviceIllustration: (slug: string, n: number) => `domaine-${slug}-${n}`,
-  serviceVideoPoster: (slug: string) => `domaine-${slug}-video`,
+  serviceVideo: (slug: string) => `domaine-${slug}-video`,
+  projectVideo: (slug: string) => `chantier-${slug}-video`,
   projectCover: (slug: string) => `chantier-${slug}-couverture`,
   projectGallery: (slug: string, n: number) => `chantier-${slug}-${n}`,
 };

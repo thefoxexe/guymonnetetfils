@@ -4,7 +4,7 @@ import { BrandBand } from "@/components/BrandBand";
 import { Button } from "@/components/Button";
 import { CtaBand } from "@/components/CtaBand";
 import { JsonLd } from "@/components/JsonLd";
-import { Photo, hasPhoto } from "@/components/Photo";
+import { Photo } from "@/components/Photo";
 import { InstagramVideo } from "@/components/InstagramVideo";
 import { ProjectGrid } from "@/components/ProjectCard";
 import { PageHero } from "@/components/PageHero";
@@ -16,7 +16,7 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { services, getServiceBySlug } from "@/data/services";
 import { projects } from "@/data/projects";
 import { buildMetadata, serviceJsonLd } from "@/lib/seo";
-import { serviceIllustrations, slots } from "@/lib/photos";
+import { photoSrc, serviceIllustrations, slots, videoSrc } from "@/lib/photos";
 
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
@@ -68,6 +68,26 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       ? service.savoirFaire[0]!.split("→").map((step) => step.trim())
       : null;
 
+  // Zone d'intervention et contact : sous le texte quand il y a une vidéo à
+  // droite, sinon dans la colonne de droite.
+  const zone = (
+    <div className={`grid max-w-3xl grid-cols-1 gap-4 ${service.video ? "sm:grid-cols-[minmax(0,1fr)_auto] sm:items-stretch" : ""}`}>
+      <div className="border-2 border-ink">
+        <p className="flex items-center justify-between bg-ink px-5 py-3.5 font-display text-sm font-extrabold uppercase tracking-[0.12em] text-paper">
+          Zone d&apos;intervention
+          <span className="h-3.5 w-3.5 bg-accent" aria-hidden="true" />
+        </p>
+        <p className="px-5 py-4 text-sm font-semibold leading-snug">{service.zoneIntervention}</p>
+      </div>
+      <Link
+        href="/contact/"
+        className="focus-ring flex items-center justify-between gap-6 bg-accent px-6 py-4 text-[15px] font-bold text-ink transition-colors hover:bg-ink hover:text-paper"
+      >
+        Nous contacter <span aria-hidden="true">→</span>
+      </Link>
+    </div>
+  );
+
   return (
     <>
       {/* 1. HERO */}
@@ -99,77 +119,46 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       {/* 2. BANDEAU DE MARQUE */}
       <BrandBand items={service.bandItems} />
 
-      {/* 3. INTRO + EN BREF */}
+      {/* 3. INTRO + ZONE D'INTERVENTION (+ VIDÉO) */}
       <section>
-        <div className="container-wide flex flex-wrap gap-8 py-14 sm:gap-14 sm:py-20 lg:gap-16 lg:py-28">
-          <Reveal className="flex min-w-0 flex-[999_1_560px] flex-col gap-5">
-            <SectionLabel>Présentation</SectionLabel>
-            {lead ? (
-              <p className="stretch-90 font-display text-[21px] font-semibold leading-[1.3] sm:text-[28px]">{lead}</p>
-            ) : null}
-            {body.map((paragraph) => (
-              <p key={paragraph} className="max-w-3xl text-[17px] leading-[1.7] text-steel sm:text-lg">
-                {paragraph}
-              </p>
-            ))}
-            {todos.map((todo) => (
-              <p key={todo} className="max-w-3xl border-l-4 border-accent bg-offwhite px-4 py-3 text-xs text-accent-ink">
-                {todo}
-              </p>
-            ))}
-          </Reveal>
-          <aside className="min-w-0 flex-[1_1_300px] self-start">
-            <div className="border-2 border-ink">
-              <p className="flex items-center justify-between bg-ink px-5 py-3.5 font-display text-sm font-extrabold uppercase tracking-[0.12em] text-paper">
-                Zone d&apos;intervention
-                <span className="h-3.5 w-3.5 bg-accent" aria-hidden="true" />
-              </p>
-              <dl className="px-5 py-1">
-                <div className="py-3.5 text-sm">
-                  <dt className="sr-only">Zone d&apos;intervention</dt>
-                  <dd className="font-semibold leading-snug">{service.zoneIntervention}</dd>
-                </div>
-              </dl>
-            </div>
-            <Link
-              href="/contact/"
-              className="focus-ring mt-4 flex items-center justify-between bg-accent px-6 py-4 text-[15px] font-bold text-ink transition-colors hover:bg-ink hover:text-paper"
-            >
-              Nous contacter <span aria-hidden="true">→</span>
-            </Link>
-          </aside>
-        </div>
-      </section>
-
-      {/* VIDÉO (optionnelle) */}
-      {service.video ? (
-        <section className="bg-ink text-paper">
-          <div className="container-wide grid grid-cols-1 items-center gap-10 py-14 sm:py-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-16 lg:py-24">
+        <div
+          className={`container-wide grid grid-cols-1 gap-10 py-14 sm:py-20 lg:gap-16 lg:py-28 ${
+            service.video ? "lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start" : "lg:grid-cols-[minmax(0,1fr)_340px]"
+          }`}
+        >
+          <div className="flex min-w-0 flex-col gap-10">
             <Reveal className="flex flex-col gap-5">
-              <SectionHeading title="En vidéo" tone="dark" />
-              <p className="max-w-xl text-lg leading-relaxed text-concrete-light">{service.video.text}</p>
-              <p className="text-sm text-mist">La vidéo se charge depuis Instagram quand vous la lancez.</p>
+              <SectionLabel>Présentation</SectionLabel>
+              {lead ? (
+                <p className="stretch-90 font-display text-[21px] font-semibold leading-[1.3] sm:text-[28px]">{lead}</p>
+              ) : null}
+              {body.map((paragraph) => (
+                <p key={paragraph} className="max-w-3xl text-[17px] leading-[1.7] text-steel sm:text-lg">
+                  {paragraph}
+                </p>
+              ))}
+              {todos.map((todo) => (
+                <p key={todo} className="max-w-3xl border-l-4 border-accent bg-offwhite px-4 py-3 text-xs text-accent-ink">
+                  {todo}
+                </p>
+              ))}
             </Reveal>
+            {service.video ? zone : null}
+          </div>
+          {service.video ? (
             <Reveal delay={120}>
               <InstagramVideo
                 url={service.video.instagram}
                 title={service.video.title}
-                poster={
-                  hasPhoto(slots.serviceVideoPoster(service.slug)) ? (
-                    <Photo
-                      slot={slots.serviceVideoPoster(service.slug)}
-                      label={service.video.title}
-                      alt=""
-                      aspect="fill"
-                      sizes="360px"
-                    />
-                  ) : undefined
-                }
+                file={videoSrc(slots.serviceVideo(service.slug))}
+                poster={photoSrc(slots.serviceVideo(service.slug))}
               />
             </Reveal>
-          </div>
-        </section>
-      ) : null}
+          ) : (
+            <aside className="min-w-0 self-start">{zone}</aside>
+          )}
+        </div>
+      </section>
 
       {/* 4. PRESTATIONS */}
       <section className="bg-offwhite">

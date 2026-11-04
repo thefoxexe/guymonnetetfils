@@ -48,9 +48,21 @@ fiche et tuiles) et jusqu'à 8 photos pour le carrousel (`-1` à `-8`).
 | Cours d'eau | `domaine-cours-eau-couverture` | `domaine-cours-eau-1` à `-3` | Aménagement de berges ou ouvrage en rivière |
 | Sentiers pédestres | `domaine-sentiers-pedestres-couverture` | `domaine-sentiers-pedestres-1` à `-3` | Sentier pédestre en montagne |
 
-Déneigement : la vidéo Instagram peut avoir une image d'aperçu,
-`domaine-deneigement-video` (format vertical 9:16, par exemple une capture du
-reel). Sans elle, la carte vidéo affiche le fond de marque.
+## Vidéos
+
+Les vidéos des pages Déneigement, Terrassement et Terrain de football
+d'Isérables viennent d'Instagram. Instagram ne permet pas la lecture
+automatique : pour qu'une vidéo se lance toute seule (sans le son, en boucle),
+déposer le fichier vidéo sous le nom de son emplacement :
+
+| Fichier | Page |
+|---|---|
+| `domaine-deneigement-video.mp4` | Déneigement |
+| `domaine-terrassement-video.mp4` | Terrassement |
+| `chantier-terrain-de-football-iserables-video.mp4` | Terrain de football d'Isérables |
+
+Format conseillé : vertical 9:16, 720 × 1280, MP4 (H.264), 20 à 30 secondes,
+moins de 5 Mo. Une image du même nom (`.jpg`) sert d'aperçu avant la lecture.
 
 ## Réalisations
 

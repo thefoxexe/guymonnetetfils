@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /** « https://www.instagram.com/p/ABC/ » ou « …/reel/ABC/ » → adresse d'intégration officielle. */
 function embedUrl(url: string) {
@@ -9,59 +9,96 @@ function embedUrl(url: string) {
 }
 
 /**
- * Vidéo Instagram intégrée sans alourdir la page : on affiche d'abord une
- * carte au format téléphone (affiche facultative + bouton lecture) ; le
- * lecteur Instagram n'est chargé qu'au clic. Rien n'est demandé à Instagram
- * avant que le visiteur lance la vidéo.
+ * Vidéo au format téléphone, chargée seulement quand elle arrive à l'écran.
+ * - Avec un fichier vidéo (`file`, déposé dans public/photos/) : lecture
+ *   automatique, sans le son, en boucle ; pause quand elle sort de l'écran.
+ * - Sinon : le lecteur Instagram se charge tout seul (Instagram n'autorise
+ *   pas la lecture automatique de ses vidéos intégrées).
  */
 export function InstagramVideo({
   url,
   title,
+  file,
   poster,
 }: {
   url: string;
   title: string;
-  /** Visuel affiché avant la lecture (slot photo), sinon fond de marque. */
-  poster?: React.ReactNode;
+  file?: string;
+  /** Image affichée avant le chargement (adresse d'une photo). */
+  poster?: string;
 }) {
-  const [playing, setPlaying] = useState(false);
+  const box = useRef<HTMLDivElement>(null);
+  const video = useRef<HTMLVideoElement>(null);
+  const [visible, setVisible] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const src = embedUrl(url);
 
+  useEffect(() => {
+    const el = box.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      setLoaded(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const isVisible = Boolean(entry?.isIntersecting);
+        setVisible(isVisible);
+        if (isVisible) setLoaded(true);
+      },
+      { rootMargin: "200px 0px", threshold: 0.25 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Fichier vidéo : lecture quand visible, pause sinon (et jamais si l'appareil
+  // demande de réduire les animations).
+  useEffect(() => {
+    const el = video.current;
+    if (!el) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (visible && !reduce) el.play().catch(() => undefined);
+    else el.pause();
+  }, [visible, loaded]);
+
   return (
-    <div className="mx-auto w-full max-w-[260px] sm:max-w-[340px]">
-      <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[28px] border-[6px] border-anthracite bg-ink shadow-2xl ring-1 ring-white/15">
-        {playing && src ? (
+    <div className="mx-auto w-full max-w-[280px] sm:max-w-[320px]">
+      <div
+        ref={box}
+        className="relative aspect-[9/16] w-full overflow-hidden rounded-[28px] border-[6px] border-ink bg-ink shadow-xl"
+      >
+        {loaded && file ? (
+          <video
+            ref={video}
+            src={file}
+            poster={poster}
+            muted
+            loop
+            playsInline
+            controls
+            preload="metadata"
+            aria-label={title}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        ) : loaded && src ? (
           <iframe
             src={src}
             title={title}
+            loading="lazy"
             className="absolute inset-0 h-full w-full bg-paper"
             allow="autoplay; encrypted-media; picture-in-picture; clipboard-write"
             allowFullScreen
           />
         ) : (
-          <button
-            type="button"
-            onClick={() => setPlaying(true)}
-            className="focus-ring group absolute inset-0 flex h-full w-full flex-col items-center justify-center text-paper"
-            aria-label={`Lire la vidéo : ${title}`}
-          >
-            {poster ? <span className="absolute inset-0">{poster}</span> : <span className="hatch-dark absolute inset-0" />}
-            <span className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-ink/10" />
-            <span className="relative flex h-20 w-20 items-center justify-center rounded-full bg-accent text-ink shadow-xl transition-transform duration-300 group-hover:scale-110">
-              <svg viewBox="0 0 24 24" className="ml-1 h-9 w-9" fill="currentColor" aria-hidden="true">
-                <path d="M8 5.5v13l11-6.5-11-6.5Z" />
-              </svg>
-            </span>
-            <span className="relative mt-5 font-display text-lg font-extrabold uppercase">Voir la vidéo</span>
-            <span className="relative mt-1 text-sm text-concrete-light">Reel Instagram</span>
-          </button>
+          <div className="hatch-dark absolute inset-0" aria-hidden="true" />
         )}
       </div>
       <a
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        className="focus-ring mt-4 block text-center text-sm font-bold text-accent hover:underline"
+        className="focus-ring mt-3 block text-center text-sm font-bold text-accent-ink hover:underline"
       >
         Voir sur Instagram →
       </a>

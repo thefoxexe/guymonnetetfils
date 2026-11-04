@@ -11,7 +11,7 @@ export function SectionLabel({ children, className = "" }: { children: React.Rea
 }
 
 /**
- * Titre de section : court filet jaune puis titre condensé en capitales.
+ * Titre de section condensé en capitales.
  * `action` s'aligne à droite (lien « Tout voir »…).
  */
 export function SectionHeading({
@@ -33,12 +33,8 @@ export function SectionHeading({
   const isDark = tone === "dark";
   const heading = (
     <div className={align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
-      <span
-        aria-hidden="true"
-        className={`block h-1 w-12 bg-accent ${align === "center" ? "mx-auto" : ""}`}
-      />
       <Tag
-        className={`stretch-85 mt-4 font-display text-[28px] font-extrabold uppercase leading-[0.95] sm:text-[36px] lg:text-[44px] ${
+        className={`stretch-85 font-display text-[28px] font-extrabold uppercase leading-[0.95] sm:text-[36px] lg:text-[44px] ${
           isDark ? "text-paper" : "text-ink"
         }`}
       >
