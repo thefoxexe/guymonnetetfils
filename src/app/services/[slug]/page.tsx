@@ -4,7 +4,8 @@ import { BrandBand } from "@/components/BrandBand";
 import { Button } from "@/components/Button";
 import { CtaBand } from "@/components/CtaBand";
 import { JsonLd } from "@/components/JsonLd";
-import { Photo } from "@/components/Photo";
+import { Photo, hasPhoto } from "@/components/Photo";
+import { InstagramVideo } from "@/components/InstagramVideo";
 import { ProjectGrid } from "@/components/ProjectCard";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
@@ -139,6 +140,36 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </aside>
         </div>
       </section>
+
+      {/* VIDÉO (optionnelle) */}
+      {service.video ? (
+        <section className="bg-ink text-paper">
+          <div className="container-wide grid grid-cols-1 items-center gap-10 py-14 sm:py-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-16 lg:py-24">
+            <Reveal className="flex flex-col gap-5">
+              <SectionHeading title="En vidéo" tone="dark" />
+              <p className="max-w-xl text-lg leading-relaxed text-concrete-light">{service.video.text}</p>
+              <p className="text-sm text-mist">La vidéo se charge depuis Instagram quand vous la lancez.</p>
+            </Reveal>
+            <Reveal delay={120}>
+              <InstagramVideo
+                url={service.video.instagram}
+                title={service.video.title}
+                poster={
+                  hasPhoto(slots.serviceVideoPoster(service.slug)) ? (
+                    <Photo
+                      slot={slots.serviceVideoPoster(service.slug)}
+                      label={service.video.title}
+                      alt=""
+                      aspect="fill"
+                      sizes="360px"
+                    />
+                  ) : undefined
+                }
+              />
+            </Reveal>
+          </div>
+        </section>
+      ) : null}
 
       {/* 4. PRESTATIONS */}
       <section className="bg-offwhite">

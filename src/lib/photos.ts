@@ -30,6 +30,7 @@ export const slots = {
   teamDirector: "equipe-frederic-monnet",
   serviceCover: (slug: string) => `domaine-${slug}-couverture`,
   serviceIllustration: (slug: string, n: number) => `domaine-${slug}-${n}`,
+  serviceVideoPoster: (slug: string) => `domaine-${slug}-video`,
   projectCover: (slug: string) => `chantier-${slug}-couverture`,
   projectGallery: (slug: string, n: number) => `chantier-${slug}-${n}`,
 };

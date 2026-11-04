@@ -23,6 +23,8 @@ export type Service = {
   referencesNote?: string;
   relatedServices: string[];
   relatedProjects?: string[];
+  /** Vidéo mise en avant sur la fiche (reel Instagram, chargé seulement au clic). */
+  video?: { instagram: string; title: string; text: string };
   zoneIntervention: string;
 };
 
@@ -325,6 +327,11 @@ export const services: Service[] = [
       "Déneigement de la route cantonale de Riddes à La Tzoumaz",
       "Déneigement pour particuliers",
     ],
+    video: {
+      instagram: "https://www.instagram.com/p/DRiJXzpjQdV/",
+      title: "Déneigement avec Guy Monnet & Fils",
+      text: "Nos machines en action pendant l'hiver, en vidéo.",
+    },
     relatedServices: ["transport", "terrassement"],
     zoneIntervention: "Riddes, La Tzoumaz, Isérables et la route cantonale de Riddes à La Tzoumaz.",
   },

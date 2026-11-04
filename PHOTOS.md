@@ -48,6 +48,10 @@ fiche et tuiles) et jusqu'à 8 photos pour le carrousel (`-1` à `-8`).
 | Cours d'eau | `domaine-cours-eau-couverture` | `domaine-cours-eau-1` à `-3` | Aménagement de berges ou ouvrage en rivière |
 | Sentiers pédestres | `domaine-sentiers-pedestres-couverture` | `domaine-sentiers-pedestres-1` à `-3` | Sentier pédestre en montagne |
 
+Déneigement : la vidéo Instagram peut avoir une image d'aperçu,
+`domaine-deneigement-video` (format vertical 9:16, par exemple une capture du
+reel). Sans elle, la carte vidéo affiche le fond de marque.
+
 ## Réalisations
 
 Pour chaque chantier : une photo de couverture et une galerie

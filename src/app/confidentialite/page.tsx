@@ -20,6 +20,10 @@ export default function ConfidentialitePage() {
               Ce site présente simplement notre entreprise. Il n&apos;utilise ni cookies de suivi,
               ni outil de statistiques, ni publicité.
             </p>
+            <p className="mt-2">
+              La vidéo de la page Déneigement est hébergée par Instagram. Elle ne se charge que si
+              vous la lancez ; Instagram peut alors déposer ses propres cookies.
+            </p>
           </div>
           <div>
             <h2 className="font-display text-lg font-extrabold uppercase text-ink">Formulaire de contact</h2>
