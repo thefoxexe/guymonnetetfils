@@ -121,3 +121,53 @@ body {
 .hero-zoom {
   animation: hero-zoom 2.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+/* Carte du Valais : le contour se dessine, puis le reste apparaît. */
+.valais-map .valais-map-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.valais-map .valais-map-fade,
+.valais-map .valais-map-pin {
+  opacity: 0;
+}
+.valais-map .valais-map-pin {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.valais-map.is-shown .valais-map-draw {
+  transition: stroke-dashoffset 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  stroke-dashoffset: 0;
+}
+.valais-map.is-shown .valais-map-fade {
+  transition: opacity 0.8s ease 0.9s;
+  opacity: 1;
+}
+.valais-map.is-shown .valais-map-pin {
+  animation: valais-pin 0.6s cubic-bezier(0.22, 1, 0.36, 1) 1.5s both;
+}
+.valais-map.is-shown .valais-map-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: valais-pulse 2.2s ease-out 2.1s infinite;
+}
+@keyframes valais-pin {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes valais-pulse {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
