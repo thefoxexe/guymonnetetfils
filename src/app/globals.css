@@ -171,3 +171,14 @@ body {
     opacity: 0;
   }
 }
+.valais-map-link {
+  cursor: pointer;
+}
+.valais-map-link:hover .valais-map-hint,
+.valais-map-link:focus-visible .valais-map-hint {
+  text-decoration: underline;
+}
+.valais-map-link:focus-visible {
+  outline: 3px solid #181a1b;
+  outline-offset: 4px;
+}

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { valaisMap, valaisPlaces } from "@/data/valais-map";
+import { depotDirectionsUrl } from "@/data/company";
 
 // Étiquette au-dessus du point, ou décalée pour ne pas toucher le contour.
 const others: { name: string; dx: number; dy: number; anchor: "start" | "middle" | "end" }[] = [
@@ -15,7 +16,8 @@ const others: { name: string; dx: number; dy: number; anchor: "start" | "middle"
 /**
  * Carte dessinée du Valais (contours officiels) avec Riddes mis en avant.
  * À l'arrivée à l'écran, le contour se dessine puis le point de Riddes
- * apparaît. Variante claire (canton hachuré) ou sombre (canton jaune).
+ * apparaît ; un clic sur Riddes ouvre l'itinéraire Google Maps vers le dépôt.
+ * Variante claire (canton hachuré) ou sombre (canton jaune).
  */
 export function ValaisMap({ tone = "light" }: { tone?: "light" | "dark" }) {
   const ref = useRef<SVGSVGElement>(null);
@@ -103,7 +105,14 @@ export function ValaisMap({ tone = "light" }: { tone?: "light" | "dark" }) {
         );
       })}
 
-      {/* Riddes */}
+      {/* Riddes : lien vers l'itinéraire */}
+      <a
+        href={depotDirectionsUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Riddes : itinéraire vers notre dépôt dans Google Maps"
+        className="valais-map-link"
+      >
       <g className="valais-map-pin">
         <circle cx={rx} cy={ry} r="18" fill="none" stroke={dark ? "#ffffff" : "#EAB308"} strokeWidth="3" className="valais-map-pulse" />
         <rect x={rx - 11} y={ry - 11} width="22" height="22" fill={dark ? "#181a1b" : "#EAB308"} stroke={dark ? "#ffffff" : "#181a1b"} strokeWidth="3" />
@@ -121,7 +130,19 @@ export function ValaisMap({ tone = "light" }: { tone?: "light" | "dark" }) {
         >
           RIDDES
         </text>
+        <text
+          x={rx}
+          y={ry + 140}
+          textAnchor="middle"
+          className="font-body valais-map-hint"
+          fontSize="18"
+          fontWeight="700"
+          fill={dark ? "#ffffff" : "#8A5A0A"}
+        >
+          Itinéraire →
+        </text>
       </g>
+      </a>
     </svg>
   );
 }

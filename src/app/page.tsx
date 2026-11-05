@@ -10,7 +10,8 @@ import { CountUp } from "@/components/CountUp";
 import { SectionHeading, SectionLabel } from "@/components/SectionHeading";
 import { ServiceGrid } from "@/components/ServiceCard";
 import { StatGrid } from "@/components/StatGrid";
-import { company } from "@/data/company";
+import { ValaisMap } from "@/components/ValaisMap";
+import { company, depotDirectionsUrl } from "@/data/company";
 import { services } from "@/data/services";
 import { projects } from "@/data/projects";
 import { projectDomainNames } from "@/lib/domains";
@@ -23,21 +24,6 @@ export const metadata = buildMetadata({
     "Entreprise familiale valaisanne depuis 1980 : génie civil, terrassement, transport, maçonnerie et aménagements extérieurs à Riddes et dans tout le Valais.",
   path: "/",
 });
-
-const localities = [
-  "Riddes",
-  "Isérables",
-  "La Tzoumaz",
-  "Leytron",
-  "Saxon",
-  "Ardon",
-  "Nendaz",
-  "Chamoson",
-  "Saillon",
-  "Sion",
-  "Ovronnaz",
-  "Pont-de-la-Morge",
-];
 
 export default function HomePage() {
   const featuredProject = projects.find((p) => p.featured) ?? projects[0]!;
@@ -171,36 +157,25 @@ export default function HomePage() {
         </section>
       ) : null}
 
-      {/* ZONE D'INTERVENTION + ÉQUIPE */}
-      <section>
-        <div className="container-wide flex flex-wrap gap-10 py-14 sm:py-20 lg:py-24 lg:gap-16">
-          <div className="min-w-0 flex-[999_1_560px]">
-            <SectionHeading
-              title="Où nous travaillons"
-              description="Depuis Riddes, dans tout le Valais. Par exemple :"
-            />
-            <ul className="mt-6 flex flex-wrap gap-2">
-              {localities.map((place) => (
-                <li
-                  key={place}
-                  className="border-2 border-ink/15 bg-paper px-3 py-1.5 font-display text-xs font-extrabold uppercase tracking-[0.06em] sm:px-4 sm:py-2 sm:text-sm"
-                >
-                  {place}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <Reveal className="flex min-w-0 flex-[1_1_300px] flex-col justify-between gap-4 self-start bg-accent p-6 text-ink sm:p-8">
-            <p className="stretch-85 font-display text-[28px] font-extrabold uppercase leading-[0.95]">Notre équipe</p>
-            <p className="text-[15px] leading-relaxed">
-              Machinistes, chauffeurs, chefs d&apos;équipe, maçons et ouvriers de génie civil.
+      {/* LE DÉPÔT : CARTE DU VALAIS */}
+      <section className="overflow-hidden">
+        <div className="container-wide grid grid-cols-1 items-center gap-10 py-14 sm:py-20 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16 lg:py-24">
+          <Reveal className="flex flex-col gap-5">
+            <SectionHeading title="Au cœur du Valais" />
+            <p className="max-w-md text-lg leading-relaxed text-steel">
+              Notre dépôt est à Riddes. De là, nos équipes et nos machines rejoignent les chantiers
+              de tout le canton.
             </p>
-            <div>
-              <Button href="/equipe/" variant="dark">
-                Voir l&apos;équipe
+            <div className="flex flex-wrap gap-3">
+              <Button href={depotDirectionsUrl} external variant="dark">
+                Itinéraire vers le dépôt
+              </Button>
+              <Button href="/contact/" variant="outline">
+                Nous contacter
               </Button>
             </div>
           </Reveal>
+          <ValaisMap />
         </div>
       </section>
 

@@ -3,7 +3,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { PageHero } from "@/components/PageHero";
 import { SectionLabel } from "@/components/SectionHeading";
 import { IconPhone } from "@/components/icons";
-import { company } from "@/data/company";
+import { company, depotDirectionsUrl } from "@/data/company";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -92,9 +92,7 @@ export default function ContactPage() {
               </div>
             </dl>
             <a
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                `${company.address.street}, ${company.address.postalCode} ${company.address.city}`
-              )}`}
+              href={depotDirectionsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="focus-ring flex items-center justify-between bg-accent px-5 py-4 text-[15px] font-bold text-ink transition-colors hover:bg-ink hover:text-paper"

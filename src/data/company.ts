@@ -61,4 +61,9 @@ export const company = {
   siteUrl: "https://www.guy-monnet-fils.ch",
 };
 
+/** Itinéraire Google Maps vers le dépôt (adresse officielle de l'entreprise). */
+export const depotDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+  `${company.name}, ${company.address.street}, ${company.address.postalCode} ${company.address.city}`
+)}`;
+
 export type Company = typeof company;
