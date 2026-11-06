@@ -79,6 +79,7 @@ export const projects: Project[] = [
     slug: "terrain-de-football-iserables",
     title: "Terrain de football d'Isérables",
     location: "Isérables",
+    year: "2026",
     period: "?",
     client: "?",
     engineer: "?",
