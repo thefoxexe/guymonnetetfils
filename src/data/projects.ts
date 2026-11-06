@@ -99,6 +99,35 @@ export const projects: Project[] = [
     todo: "TODO: VALIDATION CLIENT : fiche à compléter (période, maître d'ouvrage, direction des travaux, montant, chiffres, description) et domaines à confirmer.",
   },
   {
+    slug: "padel-riddes",
+    title: "Padel de Riddes",
+    location: "Riddes",
+    year: "2024",
+    period: "?",
+    client: "?",
+    engineer: "?",
+    amount: "?",
+    highlights: ["Terrassement", "Béton armé", "150 m³ de béton", "20 t d'armatures"],
+    summary: "Terrassement et dalle en béton armé pour les terrains de padel de Riddes.",
+    seoTitle: "Padel de Riddes : terrassement et béton armé | Guy Monnet & Fils",
+    seoDescription:
+      "Padel de Riddes : terrassement et dalle en béton armé taloché, 150 m³ de béton et 20 tonnes d'armatures, réalisés par Guy Monnet & Fils SA.",
+    heroImageLabel: "Bétonnage de la dalle du padel de Riddes",
+    context: ["? Description du chantier à compléter."],
+    works: [
+      "Terrassement et préparation du terrain",
+      "Mise en place de la grave et compactage",
+      "Pose des armatures",
+      "Bétonnage de la dalle à la pompe, béton armé taloché propre",
+    ],
+    stats: [
+      { value: "150 m³", label: "Béton armé taloché propre" },
+      { value: "20 t", label: "Armatures" },
+    ],
+    services: ["maconnerie", "terrassement"],
+    todo: "TODO: VALIDATION CLIENT : période exacte (photos d'avril 2024), maître d'ouvrage, direction des travaux, montant et description à compléter ; domaines à confirmer.",
+  },
+  {
     slug: "station-phytosanitaire-saxon",
     title: "Station phytosanitaire de Saxon",
     location: "Saxon",
@@ -336,7 +365,6 @@ export const projects: Project[] = [
 // une page individuelle pourra être créée plus tard si suffisamment de texte,
 // photos, données et contexte sont disponibles. Ne pas publier de page pauvre.
 export const futureProjects = [
-  "Padel de Riddes",
   "Chalet à La Tzoumaz",
   "Réservoir d'Ovronnaz",
   "Triage forestier de Riddes",

@@ -106,7 +106,7 @@ export const services: Service[] = [
       { label: "Immeuble Le Chardon Bleu", location: "Nendaz" },
     ],
     relatedServices: ["genie-civil", "transport", "amenagements-exterieurs"],
-    relatedProjects: ["terrain-de-football-iserables", "station-phytosanitaire-saxon", "chambre-recolte-des-eaux-leytron", "skatepark-riddes"],
+    relatedProjects: ["terrain-de-football-iserables", "padel-riddes", "station-phytosanitaire-saxon", "chambre-recolte-des-eaux-leytron", "skatepark-riddes"],
     zoneIntervention: "Riddes, La Tzoumaz, Isérables, Leytron, Ardon, Nendaz et le reste du Valais.",
   },
   {
@@ -185,6 +185,7 @@ export const services: Service[] = [
         label: "Padel de Riddes",
         location: "Riddes",
         note: "150 m³ de béton armé taloché propre, 20 t d'armatures",
+        projectSlug: "padel-riddes",
       },
       {
         label: "Station phytosanitaire de Saxon",
@@ -219,7 +220,7 @@ export const services: Service[] = [
       { label: "Garage", location: "La Tzoumaz", note: "garage en béton armé pour un client" },
     ],
     relatedServices: ["genie-civil", "amenagements-exterieurs"],
-    relatedProjects: ["station-phytosanitaire-saxon", "chambre-recolte-des-eaux-leytron", "sentier-des-sens"],
+    relatedProjects: ["padel-riddes", "station-phytosanitaire-saxon", "chambre-recolte-des-eaux-leytron", "sentier-des-sens"],
     zoneIntervention: "Riddes, Saxon, La Tzoumaz, Ovronnaz et l'ensemble du Valais.",
   },
   {
