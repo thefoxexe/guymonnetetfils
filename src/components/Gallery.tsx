@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Reveal } from "./Reveal";
 
-export type GalleryImage = { src: string; alt: string };
+/** `position` : cadrage de la miniature (classe Tailwind object-position). */
+export type GalleryImage = { src: string; alt: string; position?: string };
 
 /**
  * Mosaïque : la première photo occupe 2×2 cases, les suivantes 1 case. La
@@ -98,7 +99,7 @@ export function Gallery({ images, title }: { images: GalleryImage[]; title: stri
                 alt=""
                 fill
                 sizes={i === 0 ? "(max-width: 640px) 100vw, 66vw" : "(max-width: 640px) 100vw, 33vw"}
-                className="object-cover transition-transform duration-500 ease-editorial group-hover:scale-105"
+                className={`object-cover transition-transform duration-500 ease-editorial group-hover:scale-105 ${image.position ?? "object-center"}`}
               />
               <span
                 aria-hidden="true"

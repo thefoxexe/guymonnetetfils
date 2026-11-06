@@ -57,6 +57,8 @@ Pour chaque chantier : une photo de couverture et une galerie
 |---|---|---|---|
 | Terrain de football d'Isérables | `chantier-terrain-de-football-iserables-couverture` | `chantier-terrain-de-football-iserables-1` à `-12` | Vue d'ensemble du chantier du terrain de football d'Isérables |
 | Padel de Riddes | `chantier-padel-riddes-couverture` | `chantier-padel-riddes-1` à `-12` | Bétonnage de la dalle du padel |
+| Chalet à La Tzoumaz | `chantier-chalet-la-tzoumaz-couverture` | `chantier-chalet-la-tzoumaz-1` à `-12` | Bétonnage du chalet au coucher du soleil |
+| Chambre de captage d'Ovronnaz | `chantier-chambre-captage-ovronnaz-couverture` | `chantier-chambre-captage-ovronnaz-1` à `-12` | La fouille dans la vallée |
 | Torrent du Lué | `chantier-torrent-du-lue-couverture` | `chantier-torrent-du-lue-1` à `-12` | Vue d'ensemble du chantier du Torrent du Lué |
 | Station phytosanitaire de Saxon | `chantier-station-phytosanitaire-saxon-couverture` | `chantier-station-phytosanitaire-saxon-1` à `-12` | Bétonnage des radiers de la station phytosanitaire |
 | Chambre de récolte des eaux | `chantier-chambre-recolte-des-eaux-leytron-couverture` | `chantier-chambre-recolte-des-eaux-leytron-1` à `-12` | Construction de la chambre de captage en montagne |

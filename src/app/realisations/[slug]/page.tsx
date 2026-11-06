@@ -183,7 +183,11 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             <div className="mt-8 sm:mt-12">
               <Gallery
                 title={project.title}
-                images={gallery.map((image, i) => ({ src: image.src, alt: `${project.title}, photo ${i + 1}` }))}
+                images={gallery.map((image, i) => ({
+                  src: image.src,
+                  alt: `${project.title}, photo ${i + 1}`,
+                  position: project.galleryFocus?.[i + 1],
+                }))}
               />
             </div>
           ) : (

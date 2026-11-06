@@ -22,6 +22,8 @@ export type Project = {
   heroImageLabel: string;
   /** Cadrage de la photo de couverture dans l'en-tête (classe Tailwind object-position). */
   coverPosition?: string;
+  /** Cadrage de certaines miniatures de la galerie : numéro de la photo → classe object-position. */
+  galleryFocus?: Record<number, string>;
   context: string[];
   works: string[];
   stats?: ProjectStat[];
@@ -97,6 +99,66 @@ export const projects: Project[] = [
     ],
     services: ["terrassement", "amenagements-exterieurs"],
     todo: "TODO: VALIDATION CLIENT : fiche à compléter (période, maître d'ouvrage, direction des travaux, montant, chiffres, description) et domaines à confirmer.",
+  },
+  {
+    slug: "chalet-la-tzoumaz",
+    title: "Chalet à La Tzoumaz",
+    location: "La Tzoumaz",
+    year: "2025",
+    period: "?",
+    client: "?",
+    engineer: "?",
+    amount: "?",
+    highlights: ["Terrassement", "Radier", "Murs en béton armé", "Escaliers en béton"],
+    summary: "Terrassement et gros œuvre en béton armé d'un chalet à La Tzoumaz, jusqu'aux escaliers extérieurs.",
+    seoTitle: "Chalet à La Tzoumaz : terrassement et maçonnerie | Guy Monnet & Fils",
+    seoDescription:
+      "Chalet à La Tzoumaz : terrassement, radier, murs et dalles en béton armé et escaliers extérieurs, réalisés par Guy Monnet & Fils SA.",
+    heroImageLabel: "Bétonnage du chalet au coucher du soleil, à La Tzoumaz",
+    context: ["? Description du chantier à compléter."],
+    works: [
+      "Terrassement et préparation du terrain",
+      "Radier en béton",
+      "Coffrage et bétonnage des murs en béton armé",
+      "Armatures et bétonnage de la dalle à la pompe",
+      "Escaliers extérieurs en béton",
+    ],
+    stats: [
+      { value: "? m³", label: "Béton coulé sur place" },
+      { value: "? t", label: "Acier d'armature" },
+    ],
+    services: ["maconnerie", "terrassement"],
+    todo: "TODO: VALIDATION CLIENT : période (photos de 2025), maître d'ouvrage, direction des travaux, montant, chiffres et description à compléter.",
+  },
+  {
+    slug: "chambre-captage-ovronnaz",
+    title: "Chambre de captage d'Ovronnaz",
+    location: "Ovronnaz",
+    year: "2024",
+    period: "?",
+    client: "?",
+    engineer: "?",
+    amount: "?",
+    highlights: ["Chambre de captage", "Béton héliporté", "Fouille de 800 m", "Pelle araignée"],
+    summary: "Chambre de captage en béton armé en montagne, bétonnée à l'hélicoptère, et fouille de 800 m pour la conduite.",
+    seoTitle: "Chambre de captage d'Ovronnaz : maçonnerie et génie civil | Guy Monnet & Fils",
+    seoDescription:
+      "Chambre de captage à Ovronnaz : chambre en béton armé bétonnée à l'hélicoptère, fouille de 800 m et pose de conduite en montagne, par Guy Monnet & Fils SA.",
+    heroImageLabel: "La fouille de la conduite dans la vallée, au-dessus d'Ovronnaz",
+    galleryFocus: { 6: "object-[center_12%]", 7: "object-[center_70%]" },
+    context: ["? Description du chantier à compléter."],
+    works: [
+      "Terrassement à la pelle araignée en terrain de montagne",
+      "Coffrage et armatures de la chambre de captage",
+      "Bétonnage à l'hélicoptère",
+      "Fouille de 800 m de long et pose de la conduite",
+    ],
+    stats: [
+      { value: "800 m", label: "Fouille pour la conduite" },
+      { value: "? m³", label: "Béton héliporté" },
+    ],
+    services: ["maconnerie", "genie-civil", "pelles-araignees"],
+    todo: "TODO: VALIDATION CLIENT : période (photos de juillet et août 2024), maître d'ouvrage, direction des travaux, montant, chiffres et description à compléter ; domaines à confirmer.",
   },
   {
     slug: "padel-riddes",
@@ -365,7 +427,6 @@ export const projects: Project[] = [
 // une page individuelle pourra être créée plus tard si suffisamment de texte,
 // photos, données et contexte sont disponibles. Ne pas publier de page pauvre.
 export const futureProjects = [
-  "Chalet à La Tzoumaz",
   "Réservoir d'Ovronnaz",
   "Triage forestier de Riddes",
   "Nouvelle école de Riddes",

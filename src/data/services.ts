@@ -106,7 +106,7 @@ export const services: Service[] = [
       { label: "Immeuble Le Chardon Bleu", location: "Nendaz" },
     ],
     relatedServices: ["genie-civil", "transport", "amenagements-exterieurs"],
-    relatedProjects: ["terrain-de-football-iserables", "padel-riddes", "station-phytosanitaire-saxon", "chambre-recolte-des-eaux-leytron", "skatepark-riddes"],
+    relatedProjects: ["terrain-de-football-iserables", "chalet-la-tzoumaz", "padel-riddes", "station-phytosanitaire-saxon", "chambre-recolte-des-eaux-leytron", "skatepark-riddes"],
     zoneIntervention: "Riddes, La Tzoumaz, Isérables, Leytron, Ardon, Nendaz et le reste du Valais.",
   },
   {
@@ -156,7 +156,7 @@ export const services: Service[] = [
       { label: "Chambre de récolte des eaux", location: "Commune de Leytron", projectSlug: "chambre-recolte-des-eaux-leytron" },
     ],
     relatedServices: ["terrassement", "cours-eau", "sentiers-pedestres"],
-    relatedProjects: ["torrent-du-lue", "rue-des-artisans-etape-2", "rue-des-artisans-etape-1", "cff-parking-p-r", "chambre-recolte-des-eaux-leytron", "sentier-des-sens"],
+    relatedProjects: ["torrent-du-lue", "chambre-captage-ovronnaz", "rue-des-artisans-etape-2", "rue-des-artisans-etape-1", "cff-parking-p-r", "chambre-recolte-des-eaux-leytron", "sentier-des-sens"],
     zoneIntervention: "Riddes, Isérables, La Tzoumaz et l'ensemble du Valais.",
   },
   {
@@ -220,7 +220,7 @@ export const services: Service[] = [
       { label: "Garage", location: "La Tzoumaz", note: "garage en béton armé pour un client" },
     ],
     relatedServices: ["genie-civil", "amenagements-exterieurs"],
-    relatedProjects: ["padel-riddes", "station-phytosanitaire-saxon", "chambre-recolte-des-eaux-leytron", "sentier-des-sens"],
+    relatedProjects: ["chalet-la-tzoumaz", "chambre-captage-ovronnaz", "padel-riddes", "station-phytosanitaire-saxon", "chambre-recolte-des-eaux-leytron", "sentier-des-sens"],
     zoneIntervention: "Riddes, Saxon, La Tzoumaz, Ovronnaz et l'ensemble du Valais.",
   },
   {
@@ -348,7 +348,7 @@ export const services: Service[] = [
       "Travaux en zone de montagne",
     ],
     relatedServices: ["terrassement", "cours-eau", "genie-civil"],
-    relatedProjects: ["les-larmes-du-fou"],
+    relatedProjects: ["chambre-captage-ovronnaz", "les-larmes-du-fou"],
     zoneIntervention: "Zones de montagne et terrains difficiles du Valais.",
   },
   {
