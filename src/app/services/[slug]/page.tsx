@@ -11,11 +11,12 @@ import { Reveal } from "@/components/Reveal";
 import { CountUp } from "@/components/CountUp";
 import { SectionHeading, SectionLabel } from "@/components/SectionHeading";
 import { Carousel } from "@/components/Carousel";
+import { Gallery } from "@/components/Gallery";
 import { ServiceCard } from "@/components/ServiceCard";
 import { services, getServiceBySlug } from "@/data/services";
 import { projects } from "@/data/projects";
 import { buildMetadata, serviceJsonLd } from "@/lib/seo";
-import { serviceIllustrations, slots } from "@/lib/photos";
+import { photoSrc, serviceIllustrations, slots } from "@/lib/photos";
 
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
@@ -59,6 +60,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
     service.references?.length ? "references" : null,
     relatedServices.length > 0 ? "lies" : null,
   ].filter(Boolean) as string[];
+  // Photos d'illustration présentes : mosaïque avec plein écran ; sinon carrousel d'emplacements.
+  const illustrations = serviceIllustrations(service.slug).map(photoSrc).filter((src): src is string => Boolean(src));
   const bg = (key: string) => (optional.indexOf(key) % 2 === 0 ? "" : "bg-offwhite");
 
   // Un unique élément « A → B → C » est présenté comme un processus en étapes.
@@ -214,17 +217,24 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <div className="container-wide py-14 sm:py-20 lg:py-24">
           <SectionHeading title="En photos" />
           <div className="mt-8 sm:mt-12">
-            <Carousel label={`Photos : ${service.name}`}>
-              {serviceIllustrations(service.slug).map((slot, i) => (
-                <Photo
-                  key={slot}
-                  slot={slot}
-                  label={`${service.name}, photo ${i + 1}`}
-                  aspect="video"
-                  sizes="(max-width: 640px) 85vw, (max-width: 1024px) 48vw, 32vw"
-                />
-              ))}
-            </Carousel>
+            {illustrations.length > 0 ? (
+              <Gallery
+                title={service.name}
+                images={illustrations.map((src, i) => ({ src, alt: `${service.name}, photo ${i + 1}` }))}
+              />
+            ) : (
+              <Carousel label={`Photos : ${service.name}`}>
+                {serviceIllustrations(service.slug).map((slot, i) => (
+                  <Photo
+                    key={slot}
+                    slot={slot}
+                    label={`${service.name}, photo ${i + 1}`}
+                    aspect="video"
+                    sizes="(max-width: 640px) 85vw, (max-width: 1024px) 48vw, 32vw"
+                  />
+                ))}
+              </Carousel>
+            )}
           </div>
         </div>
       </section>

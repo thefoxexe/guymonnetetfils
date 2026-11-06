@@ -19,7 +19,7 @@ export function photoSrc(slot: string): string | undefined {
 /** Nombre maximal de photos de galerie par réalisation. */
 export const MAX_GALLERY_PHOTOS = 12;
 /** Nombre maximal de photos d'illustration par domaine (carrousel). */
-export const MAX_SERVICE_PHOTOS = 8;
+export const MAX_SERVICE_PHOTOS = 12;
 
 export const slots = {
   homeCover: "accueil-couverture",

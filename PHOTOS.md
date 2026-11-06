@@ -32,7 +32,7 @@ jusqu'à 12 photos par chantier (`-1` à `-12`), affichées dans l'ordre.
 ## Domaines d'activité
 
 Pour chaque domaine : une photo de couverture (fond de l'en-tête de la
-fiche et tuiles) et jusqu'à 8 photos pour le carrousel (`-1` à `-8`).
+fiche et tuiles) et jusqu'à 12 photos (`-1` à `-12`), affichées en mosaïque avec plein écran.
 
 | Domaine | Couverture | Illustrations | Photo de couverture attendue |
 |---|---|---|---|
