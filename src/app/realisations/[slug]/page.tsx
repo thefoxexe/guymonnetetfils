@@ -12,7 +12,7 @@ import { projects, getProjectBySlug } from "@/data/projects";
 import { projectDomains } from "@/lib/domains";
 import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/seo";
-import { projectGallery, slots } from "@/lib/photos";
+import { photoSrc, projectGallery, slots } from "@/lib/photos";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -36,7 +36,12 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   const next = projects[(index + 1) % projects.length]!;
   const mobilizedServices = projectDomains(project);
   const categories = mobilizedServices.map((s) => s.name);
-  const gallery = projectGallery(project.slug);
+  // La photo de l'en-tête est aussi reprise à la fin de la galerie.
+  const coverSrc = photoSrc(slots.projectCover(project.slug));
+  const gallery = [
+    ...projectGallery(project.slug),
+    ...(coverSrc ? [{ slot: slots.projectCover(project.slug), src: coverSrc }] : []),
+  ];
 
   const bandItems = project.highlights ?? [...categories, project.location, ...(project.year ? [project.year] : [])];
 

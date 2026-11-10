@@ -15,9 +15,17 @@ export type GalleryImage = { src: string; alt: string; position?: string };
 function mosaicSpan(index: number, count: number) {
   if (index === 0) return count === 1 ? "sm:col-span-2 lg:col-span-3" : "sm:col-span-2 sm:row-span-2";
   if (index !== count - 1) return "";
-  const sm = (count - 1) % 2 === 1 ? "sm:col-span-2" : "";
+  // Seule sur sa ligne : pleine largeur et deux rangées de haut, pour garder un format paysage.
+  const sm = (count - 1) % 2 === 1 ? "sm:col-span-2 sm:row-span-2" : "";
   const leftover = (count - 3) % 3;
-  const lg = count === 2 ? "lg:col-span-1" : leftover === 1 ? "lg:col-span-3" : leftover === 2 ? "lg:col-span-2" : "lg:col-span-1";
+  const lg =
+    count === 2
+      ? "lg:col-span-1 lg:row-span-1"
+      : leftover === 1
+        ? "lg:col-span-3 lg:row-span-2"
+        : leftover === 2
+          ? "lg:col-span-2 lg:row-span-1"
+          : "lg:col-span-1 lg:row-span-1";
   return `${sm} ${lg}`;
 }
 

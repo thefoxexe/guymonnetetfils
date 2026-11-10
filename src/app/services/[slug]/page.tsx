@@ -61,7 +61,12 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
     relatedServices.length > 0 ? "lies" : null,
   ].filter(Boolean) as string[];
   // Photos d'illustration présentes : mosaïque avec plein écran ; sinon carrousel d'emplacements.
-  const illustrations = serviceIllustrations(service.slug).map(photoSrc).filter((src): src is string => Boolean(src));
+  // La photo de l'en-tête est aussi reprise à la fin de la galerie.
+  const coverSrc = photoSrc(slots.serviceCover(service.slug));
+  const illustrations = [
+    ...serviceIllustrations(service.slug).map(photoSrc),
+    coverSrc,
+  ].filter((src): src is string => Boolean(src));
   const bg = (key: string) => (optional.indexOf(key) % 2 === 0 ? "" : "bg-offwhite");
 
   // Un unique élément « A → B → C » est présenté comme un processus en étapes.
