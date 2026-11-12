@@ -34,6 +34,23 @@ export const slots = {
   projectGallery: (slug: string, n: number) => `chantier-${slug}-${n}`,
 };
 
+/**
+ * Photos verticales où l'on voit une personne au travail : affichées en
+ * grand dans les galeries (deux rangées de haut).
+ */
+const TALL_PHOTOS = new Set([
+  "domaine-maconnerie-1",
+  "domaine-maconnerie-2",
+  "domaine-amenagements-exterieurs-9",
+  "domaine-amenagements-exterieurs-10",
+  "domaine-pelles-araignees-2",
+  "domaine-genie-civil-17",
+]);
+
+export function isTallPhoto(slot: string): boolean {
+  return TALL_PHOTOS.has(slot);
+}
+
 /** Photos de galerie présentes pour une réalisation (chantier-<slug>-1, -2…). */
 export function projectGallery(slug: string): { slot: string; src: string }[] {
   const found: { slot: string; src: string }[] = [];

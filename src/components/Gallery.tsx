@@ -4,29 +4,96 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Reveal } from "./Reveal";
 
-/** `position` : cadrage de la miniature (classe Tailwind object-position). */
-export type GalleryImage = { src: string; alt: string; position?: string };
+/**
+ * `position` : cadrage de la miniature (classe Tailwind object-position).
+ * `tall` : photo verticale mise en avant (personne au travail…), sur deux rangées de haut.
+ */
+export type GalleryImage = { src: string; alt: string; position?: string; tall?: boolean };
+
+type Cell = { col: number; row: number; w: number; h: number };
+
+/** Place les photos dans l'ordre donné et renvoie les cases et le nombre de trous. */
+function packOnce(images: GalleryImage[], order: number[], cols: number): { cells: Cell[]; holes: number } {
+  const grid: boolean[][] = [];
+  const used = (r: number, c: number) => Boolean(grid[r]?.[c]);
+  const free = (r: number, c: number, w: number, h: number) => {
+    if (c + w > cols) return false;
+    for (let y = r; y < r + h; y++) for (let x = c; x < c + w; x++) if (used(y, x)) return false;
+    return true;
+  };
+  const mark = (cell: Cell) => {
+    for (let y = cell.row; y < cell.row + cell.h; y++) {
+      grid[y] ??= Array(cols).fill(false);
+      for (let x = cell.col; x < cell.col + cell.w; x++) grid[y]![x] = true;
+    }
+  };
+  const cells: Cell[] = Array(images.length);
+  for (const i of order) {
+    const big = i === 0;
+    const w = big ? Math.min(2, cols) : 1;
+    const h = big || images[i]!.tall ? 2 : 1;
+    search: for (let r = 0; ; r++) {
+      for (let c = 0; c < cols; c++) {
+        if (free(r, c, w, h)) {
+          cells[i] = { col: c, row: r, w, h };
+          mark(cells[i]!);
+          break search;
+        }
+      }
+    }
+  }
+
+  // Dernière rangée incomplète : une photo seule s'étale sur toute la largeur ;
+  // sinon on prolonge vers le bas les photos du dessus, puis on élargit la
+  // dernière photo de la rangée jusqu'au bord.
+  const last = grid.length - 1;
+  const inLast = cells.filter((c) => c.row === last && c.h === 1);
+  if (inLast.length === 1 && grid[last]!.filter(Boolean).length === 1) {
+    Object.assign(inLast[0]!, { col: 0, w: cols, h: 2 });
+    return { cells, holes: 0 };
+  }
+  for (let c = 0; c < cols; c++) {
+    if (used(last, c) || last === 0) continue;
+    const above = cells.find((k) => k.row + k.h === last && k.h === 1 && k.col <= c && c < k.col + k.w);
+    if (above && Array.from({ length: above.w }, (_, x) => !used(last, above.col + x)).every(Boolean)) {
+      above.h = 2;
+      mark(above);
+    }
+  }
+  for (const cell of cells.filter((k) => k.row + k.h - 1 === last)) {
+    let end = cell.col + cell.w;
+    while (end < cols && Array.from({ length: cell.h }, (_, y) => !used(cell.row + y, end)).every(Boolean)) end++;
+    if (end > cell.col + cell.w) {
+      cell.w = end - cell.col;
+      mark(cell);
+    }
+  }
+  const holes = grid.reduce((n, row) => n + row.filter((x) => !x).length, 0);
+  return { cells, holes };
+}
 
 /**
- * Mosaïque : la première photo occupe 2×2 cases, les suivantes 1 case. La
- * dernière s'élargit si besoin pour que la dernière ligne soit toujours pleine
- * (grille de 2 colonnes en tablette, 3 en desktop).
+ * Mosaïque de `cols` colonnes : la première photo en grand (2×2), les photos
+ * `tall` sur deux rangées, les autres sur une case, sans trou. Si l'ordre
+ * d'origine laisse des trous, on avance ou recule une photo haute de
+ * quelques places pour que tout s'emboîte.
  */
-function mosaicSpan(index: number, count: number) {
-  if (index === 0) return count === 1 ? "sm:col-span-2 lg:col-span-3" : "sm:col-span-2 sm:row-span-2";
-  if (index !== count - 1) return "";
-  // Seule sur sa ligne : pleine largeur et deux rangées de haut, pour garder un format paysage.
-  const sm = (count - 1) % 2 === 1 ? "sm:col-span-2 sm:row-span-2" : "";
-  const leftover = (count - 3) % 3;
-  const lg =
-    count === 2
-      ? "lg:col-span-1 lg:row-span-1"
-      : leftover === 1
-        ? "lg:col-span-3 lg:row-span-2"
-        : leftover === 2
-          ? "lg:col-span-2 lg:row-span-1"
-          : "lg:col-span-1 lg:row-span-1";
-  return `${sm} ${lg}`;
+function pack(images: GalleryImage[], cols: number): Cell[] {
+  if (images.length === 1) return [{ col: 0, row: 0, w: cols, h: 2 }];
+  const base = images.map((_, i) => i);
+  let best = { ...packOnce(images, base, cols), moved: 0 };
+  for (const t of base.filter((i) => i > 0 && images[i]!.tall)) {
+    for (let p = 1; p < images.length && best.holes > 0; p++) {
+      const order = base.filter((i) => i !== t);
+      order.splice(p, 0, t);
+      const result = packOnce(images, order, cols);
+      const moved = Math.abs(p - t);
+      if (result.holes < best.holes || (result.holes === best.holes && moved < best.moved)) {
+        best = { ...result, moved };
+      }
+    }
+  }
+  return best.cells;
 }
 
 /**
@@ -88,6 +155,9 @@ export function Gallery({ images, title }: { images: GalleryImage[]; title: stri
     setCurrent(Math.round(el.scrollLeft / el.clientWidth));
   }
 
+  const sm = pack(images, 2);
+  const lg = pack(images, 3);
+
   const arrow =
     "focus-ring absolute top-1/2 z-10 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-paper/90 text-xl font-bold text-ink transition-colors hover:bg-accent disabled:opacity-30 sm:flex";
 
@@ -95,7 +165,19 @@ export function Gallery({ images, title }: { images: GalleryImage[]; title: stri
     <>
       <div className="grid auto-rows-[240px] grid-cols-1 gap-3 sm:auto-rows-[260px] sm:grid-cols-2 lg:auto-rows-[300px] lg:grid-cols-3">
         {images.map((image, i) => (
-          <Reveal key={image.src} delay={(i % 3) * 60} className={`relative overflow-hidden bg-anthracite ${mosaicSpan(i, images.length)}`}>
+          <Reveal
+            key={image.src}
+            delay={(i % 3) * 60}
+            style={{
+              ["--sm-col" as string]: `${sm[i]!.col + 1} / span ${sm[i]!.w}`,
+              ["--sm-row" as string]: `${sm[i]!.row + 1} / span ${sm[i]!.h}`,
+              ["--lg-col" as string]: `${lg[i]!.col + 1} / span ${lg[i]!.w}`,
+              ["--lg-row" as string]: `${lg[i]!.row + 1} / span ${lg[i]!.h}`,
+            }}
+            className={`relative overflow-hidden bg-anthracite sm:[grid-column:var(--sm-col)] sm:[grid-row:var(--sm-row)] lg:[grid-column:var(--lg-col)] lg:[grid-row:var(--lg-row)] ${
+              image.tall ? "max-sm:row-span-2" : ""
+            }`}
+          >
             <button
               type="button"
               onClick={(event) => show(i, event)}

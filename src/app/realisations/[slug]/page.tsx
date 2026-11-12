@@ -12,7 +12,7 @@ import { projects, getProjectBySlug } from "@/data/projects";
 import { projectDomains } from "@/lib/domains";
 import { services } from "@/data/services";
 import { buildMetadata } from "@/lib/seo";
-import { photoSrc, projectGallery, slots } from "@/lib/photos";
+import { isTallPhoto, photoSrc, projectGallery, slots } from "@/lib/photos";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -192,6 +192,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                   src: image.src,
                   alt: `${project.title}, photo ${i + 1}`,
                   position: project.galleryFocus?.[i + 1],
+                  tall: isTallPhoto(image.slot),
                 }))}
               />
             </div>

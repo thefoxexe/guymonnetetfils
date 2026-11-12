@@ -16,7 +16,7 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { services, getServiceBySlug } from "@/data/services";
 import { projects } from "@/data/projects";
 import { buildMetadata, serviceJsonLd } from "@/lib/seo";
-import { photoSrc, serviceIllustrations, slots } from "@/lib/photos";
+import { isTallPhoto, photoSrc, serviceIllustrations, slots } from "@/lib/photos";
 
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
@@ -63,10 +63,9 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
   // Photos d'illustration présentes : mosaïque avec plein écran ; sinon carrousel d'emplacements.
   // La photo de l'en-tête est aussi reprise à la fin de la galerie.
   const coverSrc = photoSrc(slots.serviceCover(service.slug));
-  const illustrations = [
-    ...serviceIllustrations(service.slug).map(photoSrc),
-    coverSrc,
-  ].filter((src): src is string => Boolean(src));
+  const illustrations = [...serviceIllustrations(service.slug), slots.serviceCover(service.slug)]
+    .map((slot) => ({ slot, src: photoSrc(slot) }))
+    .filter((photo): photo is { slot: string; src: string } => Boolean(photo.src));
   const bg = (key: string) => (optional.indexOf(key) % 2 === 0 ? "" : "bg-offwhite");
 
   // Un unique élément « A → B → C » est présenté comme un processus en étapes.
@@ -225,7 +224,11 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             {illustrations.length > 0 ? (
               <Gallery
                 title={service.name}
-                images={illustrations.map((src, i) => ({ src, alt: `${service.name}, photo ${i + 1}` }))}
+                images={illustrations.map(({ slot, src }, i) => ({
+                  src,
+                  alt: `${service.name}, photo ${i + 1}`,
+                  tall: isTallPhoto(slot),
+                }))}
               />
             ) : (
               <Carousel label={`Photos : ${service.name}`}>
