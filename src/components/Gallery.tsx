@@ -13,7 +13,12 @@ export type GalleryImage = { src: string; alt: string; position?: string; tall?:
 type Cell = { col: number; row: number; w: number; h: number };
 
 /** Place les photos dans l'ordre donné et renvoie les cases et le nombre de trous. */
-function packOnce(images: GalleryImage[], order: number[], cols: number): { cells: Cell[]; holes: number } {
+function packOnce(
+  images: GalleryImage[],
+  order: number[],
+  cols: number,
+  withBig: boolean
+): { cells: Cell[]; holes: number } {
   const grid: boolean[][] = [];
   const used = (r: number, c: number) => Boolean(grid[r]?.[c]);
   const free = (r: number, c: number, w: number, h: number) => {
@@ -27,9 +32,12 @@ function packOnce(images: GalleryImage[], order: number[], cols: number): { cell
       for (let x = cell.col; x < cell.col + cell.w; x++) grid[y]![x] = true;
     }
   };
+  // La grande case (2×2, paysage) va à la première photo qui n'est pas
+  // verticale : une photo de personne y serait coupée.
+  const bigIndex = withBig ? images.findIndex((image) => !image.tall) : -1;
   const cells: Cell[] = Array(images.length);
   for (const i of order) {
-    const big = i === 0;
+    const big = i === bigIndex;
     const w = big ? Math.min(2, cols) : 1;
     const h = big || images[i]!.tall ? 2 : 1;
     search: for (let r = 0; ; r++) {
@@ -47,7 +55,7 @@ function packOnce(images: GalleryImage[], order: number[], cols: number): { cell
   // sinon on prolonge vers le bas les photos du dessus, puis on élargit la
   // dernière photo de la rangée jusqu'au bord.
   const last = grid.length - 1;
-  const inLast = cells.filter((c) => c.row === last && c.h === 1);
+  const inLast = cells.filter((c, i) => c.row === last && c.h === 1 && !images[i]!.tall);
   if (inLast.length === 1 && grid[last]!.filter(Boolean).length === 1) {
     Object.assign(inLast[0]!, { col: 0, w: cols, h: 2 });
     return { cells, holes: 0 };
@@ -60,7 +68,8 @@ function packOnce(images: GalleryImage[], order: number[], cols: number): { cell
       mark(above);
     }
   }
-  for (const cell of cells.filter((k) => k.row + k.h - 1 === last)) {
+  // Une photo verticale n'est jamais élargie, pour ne pas la recadrer.
+  for (const cell of cells.filter((k, i) => k.row + k.h - 1 === last && !images[i]!.tall)) {
     let end = cell.col + cell.w;
     while (end < cols && Array.from({ length: cell.h }, (_, y) => !used(cell.row + y, end)).every(Boolean)) end++;
     if (end > cell.col + cell.w) {
@@ -81,15 +90,23 @@ function packOnce(images: GalleryImage[], order: number[], cols: number): { cell
 function pack(images: GalleryImage[], cols: number): Cell[] {
   if (images.length === 1) return [{ col: 0, row: 0, w: cols, h: 2 }];
   const base = images.map((_, i) => i);
-  let best = { ...packOnce(images, base, cols), moved: 0 };
-  for (const t of base.filter((i) => i > 0 && images[i]!.tall)) {
-    for (let p = 1; p < images.length && best.holes > 0; p++) {
-      const order = base.filter((i) => i !== t);
-      order.splice(p, 0, t);
-      const result = packOnce(images, order, cols);
-      const moved = Math.abs(p - t);
-      if (result.holes < best.holes || (result.holes === best.holes && moved < best.moved)) {
-        best = { ...result, moved };
+  let best = { cells: [] as Cell[], holes: Infinity, cost: Infinity };
+  // Sans grande case en dernier recours (cost +100) : utile quand il y a
+  // surtout des photos verticales.
+  for (const withBig of [true, false]) {
+    const orders: { order: number[]; moved: number }[] = [{ order: base, moved: 0 }];
+    for (const t of base.filter((i) => images[i]!.tall)) {
+      for (let p = 0; p < images.length; p++) {
+        const order = base.filter((i) => i !== t);
+        order.splice(p, 0, t);
+        orders.push({ order, moved: Math.abs(p - t) });
+      }
+    }
+    for (const { order, moved } of orders) {
+      const result = packOnce(images, order, cols, withBig);
+      const cost = moved + (withBig ? 0 : 100);
+      if (result.holes < best.holes || (result.holes === best.holes && cost < best.cost)) {
+        best = { ...result, cost };
       }
     }
   }
@@ -189,7 +206,7 @@ export function Gallery({ images, title }: { images: GalleryImage[]; title: stri
                 alt=""
                 fill
                 sizes={i === 0 ? "(max-width: 640px) 100vw, 66vw" : "(max-width: 640px) 100vw, 33vw"}
-                className={`object-cover transition-transform duration-500 ease-editorial group-hover:scale-105 ${image.position ?? "object-center"}`}
+                className={`object-cover transition-transform duration-500 ease-editorial group-hover:scale-105 ${image.position ?? (image.tall ? "object-[center_30%]" : "object-center")}`}
               />
               <span
                 aria-hidden="true"
